@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sniffles the Cat - Anti-Iowa Cult</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'SF Pro Display', 'Comic Neue', Arial, sans-serif;
+    color: #1d1d1f;
+    background: linear-gradient(120deg, #f5f5f7 0%, #e5e5ea 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  header {
+    background: none;
+    text-align: center;
+    padding: 3rem 1rem 1.5rem 1rem;
+    border-bottom: none;
+    box-shadow: none;
+    position: relative;
+    z-index: 2;
+  }
+  header h1 {
+    font-family: 'SF Pro Display', 'Orbitron', Arial, sans-serif;
+    font-size: 3em;
+    margin: 0;
+    letter-spacing: 0.01em;
+    color: #1d1d1f;
+    font-weight: 700;
+    text-shadow: none;
+  }
+  nav {
+    background: none;
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    padding: 1.2rem 0;
+    font-size: 1.2em;
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    box-shadow: none;
+  }
+  nav a {
+    color: #1d1d1f;
+    text-decoration: none;
+    font-weight: 600;
+    font-family: 'SF Pro Display', Arial, sans-serif;
+    transition: color 0.2s;
+    padding: 0.2em 0.5em;
+    border-radius: 8px;
+  }
+  nav a:hover {
+    background: #e5e5ea;
+    color: #0071e3;
+  }
+  #pointless-clock-container {
+    background: #fff;
+    border-radius: 40px;
+    box-shadow: 0 8px 32px #0001;
+    padding: 3em 2em;
+    margin-top: 3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3em;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #lizzo img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    box-shadow: 0 4px 24px #0002;
+    border: 2px solid #e5e5ea;
+    background: #fff;
+    object-fit: cover;
+    transition: box-shadow 0.3s;
+  }
+  #lizzo img:hover {
+    box-shadow: 0 8px 32px #0071e3;
+  }
+  #lizzo span {
+    color: #1d1d1f;
+    font-family: 'SF Pro Display', Arial, sans-serif;
+    font-size: 1.3em;
+    font-weight: 600;
+    margin-top: 0.7em;
+    letter-spacing: 0.02em;
+  }
+  #pointless-clock {
+    background: #f5f5f7;
+    border-radius: 50%;
+    box-shadow: 0 4px 32px #0001;
+    border: 2px solid #e5e5ea;
+  }
+  #pointless-clock-container .tesla-logo-overlay {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 70px;
+    height: 70px;
+    pointer-events: none;
+    opacity: 0.97;
+    filter: drop-shadow(0 2px 8px #0002);
+  }
+  section {
+    background: #fff;
+    border-radius: 32px;
+    box-shadow: 0 4px 32px #0001;
+    padding: 2.5rem 2rem;
+    max-width: 700px;
+    margin: 3em auto;
+    position: relative;
+    z-index: 2;
+  }
+  h2 {
+    font-family: 'SF Pro Display', 'Orbitron', Arial, sans-serif;
+    color: #1d1d1f;
+    font-size: 2em;
+    margin-bottom: 1em;
+    font-weight: 700;
+    text-shadow: none;
+  }
+  .character {
+    background: #f5f5f7;
+    border-left: 8px solid #0071e3;
+    margin: 1.5em 0;
+    padding: 1em 2em;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px #0001;
+    font-size: 1.1em;
+    color: #1d1d1f;
+  }
+  .character h3 {
+    color: #0071e3;
+    margin-top: 0;
+    font-family: 'SF Pro Display', Arial, sans-serif;
+    font-weight: 700;
+    text-shadow: none;
+  }
+  .back-btn {
+    background: #0071e3;
+    color: #fff;
+    border: none;
+    padding: 0.7em 2em;
+    border-radius: 12px;
+    font-size: 1.1em;
+    cursor: pointer;
+    margin-top: 1.5em;
+    box-shadow: 0 2px 16px #0071e388;
+    transition: background 0.2s, box-shadow 0.2s;
+    font-family: 'SF Pro Display', Arial, sans-serif;
+    font-weight: 600;
+  }
+  .back-btn:hover {
+    background: #005bb5;
+    box-shadow: 0 4px 32px #0071e388;
+  }
+  footer {
+    background: #f5f5f7;
+    color: #1d1d1f;
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 4rem;
+    font-size: 1.1em;
+    border-top: 4px solid #e5e5ea;
+    box-shadow: 0 -8px 32px #0001;
+    position: relative;
+    z-index: 2;
+  }
+  .eco {
+    position: fixed;
+    bottom: 12px;
+    right: 18px;
+    background: #0071e3;
+    color: #fff;
+    font-weight: bold;
+    padding: 0.7em 1.2em;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px #0071e388;
+    font-size: 1.1em;
+    z-index: 99;
+    letter-spacing: 0.05em;
+    font-family: 'SF Pro Display', Arial, sans-serif;
+  }
+  @media (max-width: 900px) {
+    #pointless-clock-container, section {
+      flex-direction: column;
+      gap: 2em;
+      padding: 2em 1em;
+      max-width: 98vw;
+    }
+    header h1 { font-size: 2em; }
+    h2 { font-size: 1.3em; }
+  }
+  /* Keep your keyframes for Lizzo and clock explosion */
+  @keyframes lizzo-dance {
+    0%   { transform: scale(1) rotate(0deg); }
+    10%  { transform: scale(1.1) rotate(-10deg); }
+    20%  { transform: scale(1.2) rotate(10deg); }
+    30%  { transform: scale(1.1) rotate(-10deg); }
+    40%  { transform: scale(1.2) rotate(10deg); }
+    50%  { transform: scale(1) rotate(0deg); }
+    60%  { transform: scale(1.1) rotate(10deg); }
+    70%  { transform: scale(1.2) rotate(-10deg); }
+    80%  { transform: scale(1.1) rotate(10deg); }
+    90%  { transform: scale(1.2) rotate(-10deg); }
+    100% { transform: scale(1) rotate(0deg); }
+  }
+  @keyframes clock-explode {
+    0%   { transform: scale(1) rotate(0deg); filter: blur(0); }
+    10%  { transform: scale(1.2) rotate(30deg); filter: blur(2px); }
+    20%  { transform: scale(1.5) rotate(-30deg); filter: blur(4px); }
+    40%  { transform: scale(2) rotate(360deg); filter: blur(8px); }
+    60%  { transform: scale(1.2) rotate(-360deg); filter: blur(2px); }
+    80%  { transform: scale(1) rotate(0deg); filter: blur(0); }
+    100% { transform: scale(1) rotate(0deg); filter: blur(0); }
+  }
+  @keyframes clock-pulse {
+    0%, 100% { box-shadow: 0 2px 32px #ff00cc88, 0 0 32px #1bffff88; }
+    50% { box-shadow: 0 0 64px #ff00cc, 0 0 64px #1bffff; }
+  }
+  @keyframes sparkle-move {
+    0% { opacity: 1; transform: scale(1) translateY(0); }
+    50% { opacity: 0.7; transform: scale(1.2) translateY(-10px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  #pointless-clock {
+    animation: clock-pulse 2.5s infinite;
+    /* ...existing styles... */
+  }
+  .sparkle {
+    animation: sparkle-move 2s infinite;
+    filter: drop-shadow(0 0 8px #fff);
+  }
+  #lizzo img {
+    animation: lizzo-dance 1.2s infinite cubic-bezier(.68,-0.55,.27,1.55);
+    filter: drop-shadow(0 0 16px #ff00cc) drop-shadow(0 0 8px #ffff00);
+    border: 3px solid #ff00cc;
+  }
+  #lizzo span {
+    text-shadow: 0 0 8px #ff00cc, 0 0 4px #ffff00;
+    letter-spacing: 0.08em;
+  }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Sniffles the Cat</h1>
+  </header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="evidence.html">Evidence</a>
+    <a href="members.html">Members</a>
+    <a href="drama.html">Cult Drama</a>
+    <a href="sniffles.html">Sniffles</a>
+    <a href="linda.html">Linda</a>
+    <a href="mrs-sniffles.html">Mrs. Sniffles</a>
+    <a href="turn-signal.html">Turn Signal</a>
+    <a href="united.html">United Airlines</a>
+    <a href="join.html">Join</a>
+  </nav>
+
+  <!-- Absurd Pointless Clock Start -->
+  <div id="pointless-clock-container" style="display:flex;justify-content:center;align-items:center;margin-top:2em;position:relative;gap:2em;">
+    <!-- Lizzo dancing (replace src with your preferred image) -->
+    <div id="lizzo" style="display:flex;flex-direction:column;align-items:center;">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZh23X0fz1nCL2kvu4PjAGAAmojtkH6ieZUg&s"
+     alt="Lizzo"
+     id="lizzo-img"
+     style="width:120px;height:120px;border-radius:50%;box-shadow:0 0 32px #ff00cc, 0 0 16px #ffff00;animation:lizzo-dance 2s infinite;cursor:pointer;">
+      <span style="color:#ff00cc;font-family:'Comic Neue',cursive;font-size:1.3em;font-weight:bold;margin-top:0.5em;">Lizzo</span>
+    </div>
+    <audio id="lizzo-sound" src="/res/aud/liz/typeshi.mp3"></audio>
+    <div id="lizzo-overlay" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:999;background:radial-gradient(circle at 50% 50%, #ff00cc 0%, #1bffff 100%);justify-content:center;align-items:center;">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZh23X0fz1nCL2kvu4PjAGAAmojtkH6ieZUg&s"
+        alt="Lizzo"
+        style="width:80vw;max-width:700px;height:auto;border-radius:32px;box-shadow:0 0 128px #ff00cc, 0 0 64px #ffff00;animation:lizzo-dance 1.5s infinite;">
+      <button id="lizzo-close" style="position:absolute;top:32px;right:48px;background:#0071e3;color:#fff;font-size:2em;padding:0.3em 0.8em;border-radius:16px;border:none;box-shadow:0 2px 16px #0071e388;cursor:pointer;font-family:'SF Pro Display',Arial,sans-serif;">×</button>
+    </div>
+    <div style="position:relative;display:inline-block;">
+      <svg id="pointless-clock" width="260" height="260" viewBox="0 0 260 260" style="background:radial-gradient(circle at 130px 130px, #ff00cc 0%, #1bffff 100%);border-radius:50%;box-shadow:0 2px 32px #ff00cc88;transition:transform 0.7s cubic-bezier(.68,-0.55,.27,1.55);">
+      <!-- Absurd background shapes -->
+      <ellipse cx="130" cy="130" rx="120" ry="100" fill="url(#crazyGradient)" opacity="0.5"/>
+      <circle cx="60" cy="60" r="18" fill="#ffff00" opacity="0.7"/>
+      <circle cx="200" cy="60" r="12" fill="#00ff66" opacity="0.7"/>
+      <circle cx="60" cy="200" r="14" fill="#ff6600" opacity="0.7"/>
+      <circle cx="200" cy="200" r="10" fill="#00ffcc" opacity="0.7"/>
+      <defs>
+        <radialGradient id="crazyGradient" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#ff00cc"/>
+          <stop offset="50%" stop-color="#ffff00"/>
+          <stop offset="100%" stop-color="#1bffff"/>
+        </radialGradient>
+      </defs>
+      <!-- Sparkles -->
+      <g>
+        <circle cx="40" cy="130" r="4" fill="#fff" class="sparkle"/>
+        <circle cx="220" cy="130" r="3" fill="#fff" class="sparkle"/>
+        <circle cx="130" cy="40" r="3" fill="#fff" class="sparkle"/>
+        <circle cx="130" cy="220" r="4" fill="#fff" class="sparkle"/>
+        <circle cx="80" cy="80" r="2" fill="#fff" class="sparkle"/>
+        <circle cx="180" cy="180" r="2" fill="#fff" class="sparkle"/>
+      </g>
+      <!-- Clock face -->
+      <circle cx="130" cy="130" r="110" fill="none" stroke="#fff" stroke-width="8"/>
+      <!-- Numbers (absurd placement) -->
+      <g id="clock-numbers" font-family="Orbitron, sans-serif" font-size="28" font-weight="bold">
+        <text x="130" y="45" text-anchor="middle" fill="#00ff66">12</text>
+        <text x="210" y="80" text-anchor="middle" fill="#ff00cc">2</text>
+        <text x="230" y="130" text-anchor="middle" fill="#ffff00">3</text>
+        <text x="210" y="180" text-anchor="middle" fill="#00ffcc">4</text>
+        <text x="130" y="230" text-anchor="middle" fill="#ff6600">6</text>
+        <text x="50" y="180" text-anchor="middle" fill="#00ff66">8</text>
+        <text x="30" y="130" text-anchor="middle" fill="#ff00cc">9</text>
+        <text x="50" y="80" text-anchor="middle" fill="#ffff00">10</text>
+      </g>
+      <!-- 1:1 Tesla logo (SVG, center) -->
+      <g id="tesla-logo" transform="translate(130,130) scale(2)">
+        <path d="M0,-20 Q-10,-10 0,0 Q10,-10 0,-20 Z" fill="#fff" stroke="#e82127" stroke-width="2"/>
+        <rect x="-2" y="-20" width="4" height="14" fill="#e82127"/>
+        <path d="M-10,-10 Q0,-3 10,-10" stroke="#e82127" stroke-width="2" fill="none"/>
+        <!-- Tesla T shape -->
+        <path d="M0,-20 L0,10" stroke="#e82127" stroke-width="3"/>
+        <path d="M-10,-20 Q0,-12 10,-20" stroke="#e82127" stroke-width="3" fill="none"/>
+      </g>
+      <!-- Clock arms -->
+      <g id="clock-arms">
+        <line id="hour-arm" x1="130" y1="130" x2="130" y2="70" stroke="#ffff00" stroke-width="10" stroke-linecap="round"/>
+        <line id="minute-arm" x1="130" y1="130" x2="130" y2="40" stroke="#ff00cc" stroke-width="7" stroke-linecap="round"/>
+        <line id="second-arm" x1="130" y1="130" x2="130" y2="20" stroke="#00ffcc" stroke-width="4" stroke-linecap="round"/>
+      </g>
+      <circle cx="130" cy="130" r="14" fill="#e82127" stroke="#ffff00" stroke-width="3"/>
+    </svg>
+    <!-- Tesla PNG logo overlay -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Tesla_logo.png"
+      alt="Tesla Logo"
+      class="tesla-logo-overlay">
+  </div>
+  </div>
+  <!-- Absurd Pointless Clock End -->
+  <audio id="airbus-sound" src="/res/aud/airbus/airbus-autopilot-disconect-made-with-Voicemod.mp3"></audio>
+  <!-- (Replace with a better Airbus sound if you have a direct link) -->
+
+  <section>
+    <h2>Sniffles the Cat (Enemy of the Cult)</h2>
+    <div class="character">
+      <h3>Sniffles</h3>
+      <p>
+        The traitorous feline who almost ruined the mission. Sniffles is suspected of being an Iowa double agent. She once replaced all our cult robes with corn husks and hacked our group chat to send only pictures of Des Moines roundabouts.
+      </p>
+      <p>
+        <em>Current status: On the run. Last seen in a suspiciously Iowa-shaped shadow.</em>
+      </p>
+      <p>
+        <strong>Fun Fact:</strong> Sniffles can open any locked door, but only if there's corn on the other side.
+      </p>
+    </div>
+    <button class="back-btn" onclick="window.location.href='index.html'">Back to Home</button>
+  </section>
+  <div class="eco">#EcoFriendly</div>
+  <footer>
+    <p>&copy; 2025 The Anti-Iowa Cult. Proudly headquartered in "nowhere."<br>
+      <span style="color:#ff00cc;">This is a humor project. No actual Iowans, cats, carts, or pilots were harmed.</span>
+    </p>
+  </footer>
+  <script>
+    // Absurd pointless clock script
+    const hourArm = document.getElementById('hour-arm');
+    const minuteArm = document.getElementById('minute-arm');
+    const secondArm = document.getElementById('second-arm');
+    const clock = document.getElementById('pointless-clock');
+    let runaway = false;
+    let clockRunaway = false;
+    let clockTimeout = null;
+
+    function setArms(normal = true) {
+      if (normal) {
+        hourArm.setAttribute('x2', 130);
+        hourArm.setAttribute('y2', 70);
+        minuteArm.setAttribute('x2', 130);
+        minuteArm.setAttribute('y2', 40);
+        secondArm.setAttribute('x2', 130);
+        secondArm.setAttribute('y2', 20);
+      } else {
+        // Arms run away in random directions
+        hourArm.setAttribute('x2', 40 + Math.random()*180);
+        hourArm.setAttribute('y2', 40 + Math.random()*180);
+        minuteArm.setAttribute('x2', 40 + Math.random()*180);
+        minuteArm.setAttribute('y2', 40 + Math.random()*180);
+        secondArm.setAttribute('x2', 40 + Math.random()*180);
+        secondArm.setAttribute('y2', 40 + Math.random()*180);
+      }
+    }
+
+    setArms(true);
+
+    setInterval(() => {
+      runaway = !runaway;
+      setArms(!runaway);
+    }, 2500);
+
+    // Clock explodes and gets bigger on hover
+    clock.addEventListener('mouseenter', () => {
+      if (clockRunaway) return;
+      clockRunaway = true;
+      clock.style.animation = 'clock-explode 2s cubic-bezier(.68,-0.55,.27,1.55)';
+      if (clockTimeout) clearTimeout(clockTimeout);
+      clockTimeout = setTimeout(() => {
+        clock.style.animation = '';
+        clockRunaway = false;
+      }, 2000);
+    });
+
+    // Play Airbus autopilot disconnect sound on clock click
+    const airbusSound = document.getElementById('airbus-sound');
+    clock.addEventListener('click', () => {
+      airbusSound.currentTime = 0;
+      airbusSound.play();
+      // Extra visual effect: flash the clock border
+      clock.style.boxShadow = '0 0 64px #ffff00, 0 0 64px #ff00cc';
+      setTimeout(() => {
+        clock.style.boxShadow = '';
+      }, 400);
+    });
+
+    // (Optional) Add a sparkle burst on click
+    clock.addEventListener('click', () => {
+      const burst = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      burst.setAttribute("cx", 130);
+      burst.setAttribute("cy", 130);
+      burst.setAttribute("r", 0);
+      burst.setAttribute("fill", "#fff");
+      burst.setAttribute("opacity", "0.8");
+      burst.setAttribute("class", "sparkle");
+      clock.appendChild(burst);
+      let r = 0;
+      const interval = setInterval(() => {
+        r += 6;
+        burst.setAttribute("r", r);
+        burst.setAttribute("opacity", Math.max(0.8 - r/60, 0));
+        if (r > 60) {
+          clearInterval(interval);
+          clock.removeChild(burst);
+        }
+      }, 16);
+    });
+
+    // Lizzo fullscreen and sound effect
+    const lizzoImg = document.getElementById('lizzo-img');
+    const lizzoOverlay = document.getElementById('lizzo-overlay');
+    const lizzoSound = document.getElementById('lizzo-sound');
+    const lizzoClose = document.getElementById('lizzo-close');
+
+    lizzoImg.addEventListener('click', () => {
+      lizzoOverlay.style.display = 'flex';
+      lizzoSound.currentTime = 0;
+      lizzoSound.play();
+      document.body.style.overflow = 'hidden';
+    });
+
+    lizzoClose.addEventListener('click', () => {
+      lizzoOverlay.style.display = 'none';
+      lizzoSound.pause();
+      lizzoSound.currentTime = 0;
+      document.body.style.overflow = '';
+    });
+
+    // Also close overlay if user clicks outside the Lizzo image
+    lizzoOverlay.addEventListener('click', (e) => {
+      if (e.target === lizzoOverlay) {
+        lizzoOverlay.style.display = 'none';
+        lizzoSound.pause();
+        lizzoSound.currentTime = 0;
+        document.body.style.overflow = '';
+      }
+    });
+  </script>
+</body>
+</html>

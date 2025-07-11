@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Anti-Iowa Cult</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Comic Neue', 'Comic Sans MS', cursive, sans-serif;
+      color: #fff;
+      background: linear-gradient(135deg, #2e3192 0%, #1bffff 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    body {
+      position: relative;
+      z-index: 1;
+    }
+    /* Aurora Borealis Animation */
+    .aurora {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      background: transparent;
+    }
+    .aurora span {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.5;
+      animation: auroraMove 12s infinite linear alternate;
+    }
+    .aurora .a1 { background: #ff00cc; width: 40vw; height: 30vh; left: 10vw; top: 5vh; animation-delay: 0s;}
+    .aurora .a2 { background: #00ffcc; width: 30vw; height: 25vh; left: 50vw; top: 10vh; animation-delay: 2s;}
+    .aurora .a3 { background: #ffff00; width: 35vw; height: 20vh; left: 30vw; top: 40vh; animation-delay: 4s;}
+    .aurora .a4 { background: #ff6600; width: 25vw; height: 30vh; left: 70vw; top: 60vh; animation-delay: 6s;}
+    .aurora .a5 { background: #00ff66; width: 20vw; height: 20vh; left: 5vw; top: 70vh; animation-delay: 8s;}
+    @keyframes auroraMove {
+      0% { transform: translateY(0) scale(1);}
+      100% { transform: translateY(40px) scale(1.2);}
+    }
+    header {
+      background: rgba(44, 62, 80, 0.85);
+      text-align: center;
+      padding: 2.5rem 1rem 1.5rem 1rem;
+      border-bottom: 4px solid #1bffff;
+      box-shadow: 0 8px 32px #1bffff88;
+      position: relative;
+      z-index: 2;
+    }
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3.5em;
+      margin: 0;
+      letter-spacing: 0.1em;
+      color: #ff00cc;
+      text-shadow: 0 0 24px #1bffff, 0 0 8px #fff;
+    }
+    header p {
+      font-size: 1.5em;
+      color: #fff;
+      text-shadow: 0 0 8px #1bffff;
+      margin-top: 0.5em;
+    }
+    nav {
+      background: rgba(27,255,255,0.7);
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      padding: 1.2rem 0;
+      font-size: 1.2em;
+      position: sticky;
+      top: 0;
+      z-index: 3;
+      box-shadow: 0 2px 16px #1bffff44;
+    }
+    nav a {
+      color: #2e3192;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.2s, text-shadow 0.2s;
+      text-shadow: 0 0 8px #fff;
+    }
+    nav a:hover {
+      color: #ff00cc;
+      text-shadow: 0 0 16px #ff00cc;
+    }
+    section {
+      background: rgba(44, 62, 80, 0.85);
+      border-radius: 18px;
+      box-shadow: 0 4px 32px #1bffff44;
+      padding: 2.5rem 2rem;
+      max-width: 900px;
+      margin: 2.5rem auto;
+      position: relative;
+      z-index: 2;
+    }
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      color: #ffff00;
+      font-size: 2.2em;
+      margin-bottom: 1em;
+      text-shadow: 0 0 12px #ff00cc;
+    }
+    ul, ol {
+      font-size: 1.2em;
+      margin-left: 2em;
+      margin-bottom: 1em;
+    }
+    .character {
+      background: rgba(255,255,255,0.1);
+      border-left: 8px solid #ff00cc;
+      margin: 1.5em 0;
+      padding: 1em 2em;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px #ff00cc44;
+      font-size: 1.1em;
+      color: #fff;
+    }
+    .character h3 {
+      color: #ff00cc;
+      margin-top: 0;
+      font-family: 'Orbitron', sans-serif;
+      text-shadow: 0 0 8px #fff;
+    }
+    .drama {
+      background: rgba(255,255,255,0.08);
+      border-left: 8px solid #ffff00;
+      margin: 1.5em 0;
+      padding: 1em 2em;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px #ffff0044;
+      font-size: 1.1em;
+      color: #fff;
+    }
+    .united {
+      background: rgba(255,255,255,0.08);
+      border-left: 8px solid #00ffcc;
+      margin: 1.5em 0;
+      padding: 1em 2em;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px #00ffcc44;
+      font-size: 1.1em;
+      color: #fff;
+    }
+    .join-btn {
+      background: linear-gradient(90deg, #ff00cc 0%, #1bffff 100%);
+      color: #fff;
+      border: none;
+      padding: 1em 2.5em;
+      border-radius: 12px;
+      font-size: 1.3em;
+      cursor: pointer;
+      margin-top: 1.5em;
+      box-shadow: 0 2px 16px #ff00cc88;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .join-btn:hover {
+      background: linear-gradient(90deg, #ffff00 0%, #ff00cc 100%);
+      box-shadow: 0 4px 32px #ffff0088;
+    }
+    footer {
+      background: rgba(44, 62, 80, 0.95);
+      color: #fff;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 4rem;
+      font-size: 1.1em;
+      border-top: 4px solid #ff00cc;
+      box-shadow: 0 -8px 32px #ff00cc88;
+      position: relative;
+      z-index: 2;
+    }
+    @media (max-width: 700px) {
+      section { padding: 1.2rem 0.5rem; }
+      nav { font-size: 1em; gap: 1rem; }
+      header h1 { font-size: 2em; }
+      h2 { font-size: 1.3em; }
+    }
+  </style>
+</head>
+<body>
+  <div class="aurora">
+    <span class="a1"></span>
+    <span class="a2"></span>
+    <span class="a3"></span>
+    <span class="a4"></span>
+    <span class="a5"></span>
+  </div>
+  <header>
+    <h1>The Anti-Iowa Cult</h1>
+    <p>We don’t believe Iowa is real. And frankly, we’re better off that way.<br>
+      <span style="font-size:1.1em;color:#ffff00;text-shadow:0 0 8px #ff00cc;">Welcome to the Aurora of Truth.</span>
+    </p>
+  </header>
+  <nav>
+    <a href="about.html">About</a>
+    <a href="evidence.html">Evidence</a>
+    <a href="members.html">Members</a>
+    <a href="drama.html">Cult Drama</a>
+    <a href="sniffles.html">Sniffles</a>
+    <a href="linda.html">Linda</a>
+    <a href="mrs-sniffles.html">Mrs. Sniffles</a>
+    <a href="turn-signal.html">Turn Signal</a>
+    <a href="united.html">United Airlines</a>
+    <a href="#join">Join</a>
+  </nav>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <p>
+      Founded in a basement after a disappointing road trip that allegedly passed through "Iowa",
+      our sacred mission is to reveal the shocking truth: <strong>Iowa is a government psy-op</strong>. It’s just cornfields, cardboard towns,
+      and GPS loops. The Aurora Borealis above is a sign: Iowa is a myth, and we are the chosen ones to expose it.
+    </p>
+    <p>
+      Our founder once tried to buy a sandwich in Des Moines and was handed a Styrofoam model of bread. Suspicious? Yes.
+      Real? No. The cult’s headquarters are located in “nowhere,” which is still more real than Iowa.
+    </p>
+  </section>
+
+  <section id="evidence">
+    <h2>Proof Iowa Isn’t Real</h2>
+    <ul>
+      <li>No one has ever <em>actually</em> met someone born in Iowa.</li>
+      <li>Every "Iowa" license plate has at least one letter off-center.</li>
+      <li>It's always cloudy when you try to photograph it.</li>
+      <li>Google Maps reroutes you around it, but tells you you're in it. Classic misdirection.</li>
+      <li>Aliens have confirmed: "We skip that zone. Bad vibes."</li>
+      <li>United Airlines flights to Iowa always end up in Nebraska, but the pilot swears you landed in Des Moines.</li>
+      <li>Linda’s “special” pilot snacks are only served on Iowa-bound flights. Coincidence?</li>
+    </ul>
+  </section>
+
+  <section id="members">
+    <h2>Members of Honor</h2>
+    <ul>
+      <li>Greg: Saw a town vanish behind him while driving.</li>
+      <li>Tina: Ordered gas station sushi in Iowa — still alive, but changed.</li>
+      <li>Pastor Zorp: Communicates with the corn. Hears nothing back.</li>
+      <li>Linda: Fent dealer, drugs pilots for fun. Claims Iowa is her “best market.”</li>
+      <li>Mrs. Sniffles: A Walmart shopping cart with a vendetta against Iowa’s parking lots.</li>
+      <li>Turn Signal: Sniffles’ mate. Blinks only when Iowa is mentioned.</li>
+      <li>Sniffles: The cat. Enemy of the cult. See drama below.</li>
+      <li>And you? Click <a href="#join">here</a> to join. We won’t ask where you're from. Especially not if you say Iowa.</li>
+    </ul>
+  </section>
+
+  <section id="drama">
+    <h2>Cult Drama</h2>
+    <div class="drama">
+      <strong>Sniffles vs. The Cult:</strong> Sniffles once "accidentally" booked our entire cult retreat... in Council Bluffs. We lost five members to corn-induced
+      delirium. One now speaks in corn riddles. We’ve tried reasoning with Sniffles, but as expected — she knocked the laptop off the table.
+      <br><br>
+      <em>Sniffles, if you're reading this, stop peeing in the ceremonial robe bin.</em>
+    </div>
+    <div class="drama">
+      <strong>Linda’s Pilot Snacks:</strong> Linda, our resident fent dealer, has been slipping “special” treats to pilots on United Airlines flights to Iowa. The result? Pilots forget how to land, and passengers wake up in Nebraska.
+    </div>
+    <div class="drama">
+      <strong>Mrs. Sniffles:</strong> Not to be confused with Sniffles the cat, Mrs. Sniffles is a Walmart shopping cart who once led a rebellion in the parking lot. She claims Iowa’s carts are “government-issued decoys.”
+    </div>
+    <div class="drama">
+      <strong>Turn Signal:</strong> Sniffles’ mate. Only blinks when Iowa is mentioned. Has caused three pileups in “Iowa” (if it exists).
+    </div>
+  </section>
+
+  <section id="sniffles">
+    <h2>Sniffles the Cat (Enemy of the Cult)</h2>
+    <div class="character">
+      <h3>Sniffles</h3>
+      <p>
+        The traitorous feline who almost ruined the mission. Sniffles is suspected of being an Iowa double agent. She once replaced all our cult robes with corn husks and hacked our group chat to send only pictures of Des Moines roundabouts.
+      </p>
+      <p>
+        <em>Current status: On the run. Last seen in a suspiciously Iowa-shaped shadow.</em>
+      </p>
+    </div>
+  </section>
+
+  <section id="linda">
+    <h2>Linda the Fent Dealer</h2>
+    <div class="character">
+      <h3>Linda</h3>
+      <p>
+        Linda is our “pharmaceutical supplier.” She claims to have single-handedly kept United Airlines pilots “relaxed” on Iowa-bound flights. Her motto: “If you wake up in Nebraska, you’re welcome.”
+      </p>
+      <p>
+        <em>Linda’s favorite hobby: Drugging pilots for fun and profit.</em>
+      </p>
+    </div>
+  </section>
+
+  <section id="mrs-sniffles">
+    <h2>Mrs. Sniffles (Walmart Shopping Cart)</h2>
+    <div class="character">
+      <h3>Mrs. Sniffles</h3>
+      <p>
+        Not a cat. Not a person. Mrs. Sniffles is a Walmart shopping cart with a grudge against Iowa’s parking lots. She once led a rebellion, freeing 12 carts from “government storage.” She claims Iowa’s carts are bugged.
+      </p>
+      <p>
+        <em>Current status: Rolling free, but always watching.</em>
+      </p>
+    </div>
+  </section>
+
+  <section id="turn-signal">
+    <h2>Turn Signal (Sniffles’ Mate)</h2>
+    <div class="character">
+      <h3>Turn Signal</h3>
+      <p>
+        The only turn signal in the cult. Blinks only when Iowa is mentioned. Has caused three pileups in “Iowa” (if it exists). Suspected of being in love with Mrs. Sniffles, but refuses to signal his feelings.
+      </p>
+      <p>
+        <em>Current status: Blinking suspiciously.</em>
+      </p>
+    </div>
+  </section>
+
+  <section id="united">
+    <h2>United Airlines</h2>
+    <div class="united">
+      <h3>United Airlines</h3>
+      <p>
+        Official airline of the Anti-Iowa Cult. All flights to Iowa are rerouted to Nebraska, but the pilots swear you landed in Des Moines. Linda’s snacks are complimentary, but memory loss is not.
+      </p>
+      <p>
+        <em>Warning: If your flight lands in Iowa, check for corn in your luggage.</em>
+      </p>
+    </div>
+  </section>
+
+  <section id="join">
+    <h2>Join the Cult</h2>
+    <p>
+      Ready to expose the Iowa conspiracy? Click below to join our ranks. We promise: No corn, no GPS loops, and absolutely no Iowa.
+    </p>
+    <button class="join-btn" onclick="alert('Welcome to the cult! Down with Iowa!')">Join the Cult</button>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 The Anti-Iowa Cult. Proudly headquartered in "nowhere."<br>
+      <span style="color:#ff00cc;">This is a humor project. No actual Iowans, cats, carts, or pilots were harmed.</span>
+    </p>
+  </footer>
+</body>
+</html>
