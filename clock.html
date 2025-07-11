@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wacky Abel Tesfaye Clock</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            background: radial-gradient(circle at 50% 50%, #ff6ec4 0%, #7873f5 100%);
+            overflow: hidden;
+        }
+        #clock-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #wacky-clock {
+            width: 90vw;
+            height: 90vw;
+            max-width: 90vh;
+            max-height: 90vh;
+            display: block;
+        }
+        .abel-img {
+            filter: drop-shadow(0 0 10px #ff6ec4);
+            border-radius: 50%;
+        }
+        .bus-hand {
+            filter: drop-shadow(0 0 10px #7873f5);
+        }
+    </style>
+</head>
+<body>
+    <div id="clock-container">
+        <svg id="wacky-clock" viewBox="0 0 1000 1000">
+            <circle cx="500" cy="500" r="480" fill="#fff" stroke="#ff6ec4" stroke-width="20"/>
+            <!-- Abel Tesfaye images for numbers -->
+            <image href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaq-ILyznVmHd2M7iAS1g8278AqQIgXV3Mzg&s" x="470" y="80" width="300" height="300" class="abel-img"/>
+            <image href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaq-ILyznVmHd2M7iAS1g8278AqQIgXV3Mzg&s" x="700" y="180" width="300" height="300" class="abel-img"/>
+            <image href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaq-ILyznVmHd2M7iAS1g8278AqQIgXV3Mzg&s" x="820" y="400" width="300" height="300" class="abel-img"/>
+            <image href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaq-ILyznVmHd2M7iAS1g8278AqQIgXV3Mzg&s" x="820" y="3000" width="300" height="300" class="abel-img"/>
+            <image href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaq-ILyznVmHd2M7iAS1g8278AqQIgXV3Mzg&s" x="700" y="820" width="300" height="300" class="abel-img"/>
+            <image href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaq-ILyznVmHd2M7iAS1g8278AqQIgXV3Mzg&s" x="470" y="920" width="300" height="300" class="abel-img"/>
+            <image href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaq-ILyznVmHd2M7iAS1g8278AqQIgXV3Mzg&s" x="240" y="820" width="300" height="300" class="abel-img"/>
+            <image href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaq-ILyznVmHd2M7iAS1g8278AqQIgXV3Mzg&s" x="80" y="3000" width="300" height="300" class="abel-img"/>
+            <image href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaq-ILyznVmHd2M7iAS1g8278AqQIgXV3Mzg&s" x="80" y="400" width="300" height="300" class="abel-img"/>
+            <image href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaq-ILyznVmHd2M7iAS1g8278AqQIgXV3Mzg&s" x="240" y="180" width="300" height="300" class="abel-img"/>
+            <image href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaq-ILyznVmHd2M7iAS1g8278AqQIgXV3Mzg&s" x="470" y="80" width="300" height="300" class="abel-img"/>
+            <image href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaq-ILyznVmHd2M7iAS1g8278AqQIgXV3Mzg&s" x="700" y="180" width="300" height="300" class="abel-img"/>
+            <!-- School bus hands (hour, minute, second) -->
+            <image id="hour-hand" href="https://images.vexels.com/media/users/3/134420/isolated/preview/cb5d873d48e56e33a6971ef927cf430d-school-bus-illustration.png" x="470" y="500" width="300" height="200" class="bus-hand" style="transform-origin:500px 500px;"/>
+            <image id="minute-hand" href="https://images.vexels.com/media/users/3/134420/isolated/preview/cb5d873d48e56e33a6971ef927cf430d-school-bus-illustration.png" x="490" y="500" width="20" height="300" class="bus-hand" style="transform-origin:500px 500px;"/>
+            <image id="second-hand" href="https://images.vexels.com/media/users/3/134420/isolated/preview/cb5d873d48e56e33a6971ef927cf430d-school-bus-illustration.png" x="495" y="500" width="10" height="400" class="bus-hand" style="transform-origin:500px 500px;"/>
+            <circle cx="500" cy="500" r="30" fill="#ff6ec4" stroke="#7873f5" stroke-width="10"/>
+        </svg>
+    </div>
+    <script>
+        function setClockHands() {
+            // SUPER RANDOM, SUPER FAST CLOCK
+            // Time moves at random speed and random direction
+            const now = new Date();
+            // Randomize time speed and direction
+            const speed = Math.random() * 50 + 10; // 10x to 60x faster than real time
+            const direction = Math.random() > 0.5 ? 1 : -1;
+            // Use a base time and add random increments
+            const base = Date.now();
+            const fakeTime = new Date(base + direction * speed * (performance.now() % 100000));
+            const hour = fakeTime.getHours() % 12;
+            const minute = fakeTime.getMinutes();
+            const second = fakeTime.getSeconds();
+
+            // Randomize hand angles for extra chaos
+            const hourAngle = (hour + Math.random()) * 30;
+            const minuteAngle = (minute + Math.random() * 10) * 6;
+            const secondAngle = (second + Math.random() * 30) * 6;
+
+            document.getElementById('hour-hand').setAttribute('transform', `rotate(${hourAngle} 500 500)`);
+            document.getElementById('minute-hand').setAttribute('transform', `rotate(${minuteAngle} 500 500)`);
+            document.getElementById('second-hand').setAttribute('transform', `rotate(${secondAngle} 500 500)`);
+        }
+        setInterval(setClockHands, 100);
+        setClockHands();
+    </script>
+</body>
+</html>

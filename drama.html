@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍺 THE ADULT LIFE CHAOS SIMULATOR 🍺</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Creepster&family=Bangers&family=Freckle+Face&family=Orbitron:wght@900&family=Bungee&family=Pacifico&family=Righteous&family=Monoton&family=Kalam:wght@700&family=Permanent+Marker&family=Fredoka+One&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(45deg, #ff0080, #00ff80, #8000ff, #ff8000, #0080ff, #80ff00, #ff0040, #40ff00, #ff4000, #4000ff);
+            background-size: 1000% 1000%;
+            animation: psychedelicMadness 3s ease infinite;
+            overflow-x: hidden;
+            font-family: 'Comic Neue', cursive;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"><text y="24" font-size="24">🍺</text></svg>'), auto;
+            min-height: 10000px;
+        }
+        
+        @keyframes psychedelicMadness {
+            0% { background-position: 0% 0%; filter: hue-rotate(0deg) brightness(1); }
+            25% { background-position: 50% 25%; filter: hue-rotate(90deg) brightness(1.2); }
+            50% { background-position: 100% 50%; filter: hue-rotate(180deg) brightness(0.8); }
+            75% { background-position: 75% 75%; filter: hue-rotate(270deg) brightness(1.5); }
+            100% { background-position: 0% 100%; filter: hue-rotate(360deg) brightness(1); }
+        }
+        
+        .runaway-element {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .runaway-element:hover {
+            transform: translate(100px, 50px) rotate(45deg) scale(1.2);
+            filter: blur(2px);
+        }
+        
+        .flying-image {
+            position: fixed;
+            z-index: 100;
+            animation: insaneFly 6s linear infinite;
+            filter: sepia(100%) saturate(300%) hue-rotate(random(360deg));
+        }
+        
+        @keyframes insaneFly {
+            0% { transform: translateX(-400px) translateY(0px) rotate(0deg) scale(0.5); }
+            20% { transform: translateX(20vw) translateY(-150px) rotate(144deg) scale(1.8); }
+            40% { transform: translateX(60vw) translateY(200px) rotate(288deg) scale(0.3); }
+            60% { transform: translateX(80vw) translateY(-100px) rotate(432deg) scale(2.2); }
+            80% { transform: translateX(40vw) translateY(100px) rotate(576deg) scale(0.8); }
+            100% { transform: translateX(150vw) translateY(0px) rotate(720deg) scale(1); }
+        }
+        
+        .img1 { top: 5%; width: 150px; animation-delay: 0s; animation-duration: 5s; }
+        .img2 { top: 25%; width: 100px; animation-delay: 1s; animation-duration: 7s; }
+        .img3 { top: 45%; width: 200px; animation-delay: 2s; animation-duration: 4s; }
+        .img4 { top: 65%; width: 120px; animation-delay: 3s; animation-duration: 6s; }
+        .img5 { top: 85%; width: 180px; animation-delay: 4s; animation-duration: 8s; }
+        .img6 { top: 15%; width: 90px; animation-delay: 5s; animation-duration: 3s; }
+        .img7 { top: 35%; width: 160px; animation-delay: 6s; animation-duration: 9s; }
+        .img8 { top: 55%; width: 110px; animation-delay: 7s; animation-duration: 5s; }
+        .img9 { top: 75%; width: 140px; animation-delay: 8s; animation-duration: 7s; }
+        .img10 { top: 95%; width: 170px; animation-delay: 9s; animation-duration: 4s; }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .title {
+            font-family: 'Monoton', cursive;
+            font-size: 6rem;
+            text-align: center;
+            color: #ff1744;
+            text-shadow: 8px 8px 0px #00ff00, 16px 16px 0px #0000ff, 24px 24px 0px #ff00ff, 32px 32px 0px #ffff00, 40px 40px 0px #00ffff;
+            animation: titleMadness 1s ease-in-out infinite;
+            margin-bottom: 80px;
+            letter-spacing: 15px;
+        }
+        
+        @keyframes titleMadness {
+            0% { transform: translateY(0) scale(1) rotate(0deg); filter: hue-rotate(0deg); }
+            25% { transform: translateY(-30px) scale(1.1) rotate(10deg); filter: hue-rotate(90deg); }
+            50% { transform: translateY(15px) scale(0.9) rotate(-10deg); filter: hue-rotate(180deg); }
+            75% { transform: translateY(-15px) scale(1.05) rotate(5deg); filter: hue-rotate(270deg); }
+            100% { transform: translateY(0) scale(1) rotate(0deg); filter: hue-rotate(360deg); }
+        }
+        
+        .fact-box {
+            background: linear-gradient(135deg, 
+                rgba(255,255,255,0.9) 0%, 
+                rgba(255,0,255,0.8) 25%, 
+                rgba(0,255,255,0.7) 50%, 
+                rgba(255,255,0,0.8) 75%, 
+                rgba(255,0,0,0.9) 100%);
+            border: 10px solid;
+            border-image: linear-gradient(45deg, #ff0080, #00ff80, #8000ff, #ff8000, #0080ff, #80ff00) 1;
+            border-radius: 40px;
+            padding: 40px;
+            margin: 40px 0;
+            font-size: 1.6rem;
+            transform: rotate(-4deg) skew(3deg);
+            box-shadow: 
+                20px 20px 0px rgba(0, 0, 0, 0.6), 
+                40px 40px 0px rgba(255, 0, 255, 0.4),
+                60px 60px 0px rgba(0, 255, 255, 0.3);
+            animation: extremeWobble 4s ease-in-out infinite;
+        }
+        
+        @keyframes extremeWobble {
+            0%, 100% { transform: rotate(-4deg) skew(3deg) scale(1); }
+            25% { transform: rotate(3deg) skew(-2deg) scale(1.02); }
+            50% { transform: rotate(-2deg) skew(4deg) scale(0.98); }
+            75% { transform: rotate(2deg) skew(-3deg) scale(1.01); }
+        }
+        
+        .fact-box:nth-child(even) {
+            transform: rotate(4deg) skew(-3deg);
+            animation-delay: 1.5s;
+        }
+        
+        .fact-box:nth-child(3n) {
+            animation-delay: 3s;
+        }
+        
+        .random-font-1 { font-family: 'Bungee', cursive; color: #e74c3c; text-shadow: 4px 4px 0px #00ff00; }
+        .random-font-2 { font-family: 'Pacifico', cursive; color: #9b59b6; text-shadow: 3px 3px 0px #ffff00; }
+        .random-font-3 { font-family: 'Righteous', cursive; color: #27ae60; text-shadow: 5px 5px 0px #ff00ff; }
+        .random-font-4 { font-family: 'Creepster', cursive; color: #ff6b35; text-shadow: 2px 2px 0px #00ffff; }
+        .random-font-5 { font-family: 'Orbitron', monospace; color: #8e44ad; text-shadow: 4px 4px 0px #ff0080; }
+        .random-font-6 { font-family: 'Kalam', cursive; color: #ff5722; text-shadow: 3px 3px 0px #80ff00; }
+        .random-font-7 { font-family: 'Permanent Marker', cursive; color: #009688; text-shadow: 5px 5px 0px #ff4081; }
+        .random-font-8 { font-family: 'Fredoka One', cursive; color: #795548; text-shadow: 2px 2px 0px #00bcd4; }
+        
+        .button-chaos {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff9a9e, #fecfef, #a8edea, #fed6e3, #ffeaa7, #d299c2, #ffd89b, #19547b);
+            border: 8px solid;
+            border-image: linear-gradient(45deg, #ff0080, #00ff80, #8000ff, #ff8000, #0080ff, #80ff00, #ff0040, #40ff00) 1;
+            padding: 25px 50px;
+            margin: 20px;
+            border-radius: 60px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            animation: buttonInsanity 3s ease-in-out infinite;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
+            font-family: 'Bangers', cursive;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        @keyframes buttonInsanity {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+            10% { transform: translateY(-40px) rotate(60deg) scale(1.1); }
+            30% { transform: translateY(-20px) rotate(-60deg) scale(0.9); }
+            60% { transform: translateY(-15px) rotate(120deg) scale(1.05); }
+            40% { transform: translateY(-25px) rotate(-120deg) scale(0.95); }
+        }
+        
+        .button-chaos:hover {
+            animation: buttonExplosion 1s ease-in-out;
+            transform: scale(2) rotate(720deg);
+            z-index: 1000;
+        }
+        
+        @keyframes buttonExplosion {
+            0% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(3) rotate(360deg); }
+            100% { transform: scale(2) rotate(720deg); }
+        }
+        
+        .strobe-heavy {
+            animation: heavyStrobe 0.2s linear infinite;
+        }
+        
+        @keyframes heavyStrobe {
+            0% { opacity: 1; background-color: #ff0000; transform: scale(1); }
+            20% { opacity: 0.2; background-color: #00ff00; transform: scale(1.1); }
+            40% { opacity: 0.8; background-color: #0000ff; transform: scale(0.9); }
+            60% { opacity: 0.1; background-color: #ffff00; transform: scale(1.2); }
+            80% { opacity: 0.9; background-color: #ff00ff; transform: scale(0.8); }
+            100% { opacity: 1; background-color: #00ffff; transform: scale(1); }
+        }
+        
+        .rainbow-text-extreme {
+            background: linear-gradient(45deg, #ff0080, #00ff80, #8000ff, #ff8000, #0080ff, #80ff00, #ff0040, #40ff00, #ff4000, #4000ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 200%;
+            animation: extremeRainbow 0.5s ease-in-out infinite;
+        }
+        
+        @keyframes extremeRainbow {
+            0% { background-position: 0% 0%; filter: hue-rotate(0deg); }
+            25% { background-position: 50% 50%; filter: hue-rotate(90deg); }
+            50% { background-position: 100% 100%; filter: hue-rotate(180deg); }
+            75% { background-position: 50% 0%; filter: hue-rotate(270deg); }
+            100% { background-position: 0% 0%; filter: hue-rotate(360deg); }
+        }
+        
+        .chaos-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            background: 
+                radial-gradient(circle at 10% 10%, rgba(255,0,255,0.2) 0%, transparent 40%),
+                radial-gradient(circle at 90% 20%, rgba(0,255,255,0.2) 0%, transparent 40%),
+                radial-gradient(circle at 20% 80%, rgba(255,255,0,0.2) 0%, transparent 40%),
+                radial-gradient(circle at 80% 90%, rgba(255,0,0,0.2) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(0,255,0,0.1) 0%, transparent 60%);
+            animation: overlayMadness 2s ease-in-out infinite;
+        }
+        
+        @keyframes overlayMadness {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+        
+        .floating-chaos {
+            position: fixed;
+            font-size: 4rem;
+            font-weight: bold;
+            animation: chaosFloatExtreme 10s ease-in-out infinite;
+            z-index: 50;
+            font-family: 'Creepster', cursive;
+        }
+        
+        @keyframes chaosFloatExtreme {
+            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+            20% { transform: translateY(-80px) rotate(72deg) scale(1.2); }
+            40% { transform: translateY(60px) rotate(144deg) scale(0.8); }
+            60% { transform: translateY(-40px) rotate(216deg) scale(1.5); }
+            80% { transform: translateY(20px) rotate(288deg) scale(0.6); }
+        }
+        
+        .chaos1 { top: 3%; left: 3%; color: #ff0080; animation-delay: 0s; }
+        .chaos2 { top: 8%; right: 8%; color: #00ff80; animation-delay: 1s; }
+        .chaos3 { top: 88%; left: 12%; color: #8000ff; animation-delay: 2s; }
+        .chaos4 { top: 78%; right: 20%; color: #ff8000; animation-delay: 3s; }
+        .chaos5 { top: 48%; left: 88%; color: #0080ff; animation-delay: 4s; }
+        .chaos6 { top: 28%; right: 75%; color: #80ff00; animation-delay: 5s; }
+        .chaos7 { top: 68%; left: 5%; color: #ff0040; animation-delay: 6s; }
+        .chaos8 { top: 58%; right: 65%; color: #40ff00; animation-delay: 7s; }
+        
+        .glitch-extreme {
+            animation: extremeGlitch 1s infinite;
+        }
+        
+        @keyframes extremeGlitch {
+            0% { transform: translateX(0); }
+            10% { transform: translateX(-10px) skew(5deg); }
+            20% { transform: translateX(10px) skew(-5deg); }
+            30% { transform: translateX(-8px) skew(3deg); }
+            40% { transform: translateX(8px) skew(-3deg); }
+            50% { transform: translateX(-12px) skew(7deg); }
+            60% { transform: translateX(12px) skew(-7deg); }
+            70% { transform: translateX(-6px) skew(2deg); }
+            80% { transform: translateX(6px) skew(-2deg); }
+            90% { transform: translateX(-15px) skew(8deg); }
+            100% { transform: translateX(0); }
+        }
+        
+        .scroll-section {
+            min-height: 100vh;
+            padding: 100px 0;
+        }
+        
+        .profanity-meter {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            font-family: 'Bangers', cursive;
+            font-size: 1.2rem;
+            color: white;
+            z-index: 200;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .drunk-text {
+            font-style: italic;
+            transform: rotate(-2deg);
+            animation: drunkWobble 3s ease-in-out infinite;
+        }
+        
+        @keyframes drunkWobble {
+            0%, 100% { transform: rotate(-2deg); }
+            25% { transform: rotate(1deg); }
+            50% { transform: rotate(-1deg); }
+            75% { transform: rotate(2deg); }
+        }
+        
+        .screaming-text {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ff0000;
+            animation: screaming 0.5s ease-in-out infinite;
+        }
+        
+        @keyframes screaming {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        .adult-theme-1 { background: linear-gradient(45deg, #8B4513, #D2691E); }
+        .adult-theme-2 { background: linear-gradient(45deg, #2F4F4F, #708090); }
+        .adult-theme-3 { background: linear-gradient(45deg, #800000, #CD853F); }
+        .adult-theme-4 { background: linear-gradient(45deg, #556B2F, #8FBC8F); }
+        
+        .rickroll-button {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            font-size: 2rem;
+            padding: 30px 60px;
+            animation: rickrollPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes rickrollPulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.3) rotate(10deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="profanity-meter">
+        🔞 ADULT CONTENT LEVEL: <span id="profanity-level">MILD</span>
+    </div>
+    
+    <div class="chaos-overlay"></div>
+    
+    <div class="floating-chaos chaos1 strobe-heavy">BEER!</div>
+    <div class="floating-chaos chaos2 rainbow-text-extreme">WORK!</div>
+    <div class="floating-chaos chaos3 glitch-extreme">KIDS!</div>
+    <div class="floating-chaos chaos4 strobe-heavy">STRESS!</div>
+    <div class="floating-chaos chaos5 rainbow-text-extreme">PARTY!</div>
+    <div class="floating-chaos chaos6 glitch-extreme">BILLS!</div>
+    <div class="floating-chaos chaos7 strobe-heavy">JERKY!</div>
+    <div class="floating-chaos chaos8 rainbow-text-extreme">CHAOS!</div>
+    
+    <!-- Flying Images -->
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsdMRBfYRDTVQZQJjIO8Rmta7elFpAX6WddA&s" 
+         alt="Flying chaos 1" class="flying-image img1">
+    <img src="https://www.yesco.com/wp-content/uploads/2024/11/cusotm-signs-denver-optiv-YESCO.png" 
+         alt="Flying chaos 2" class="flying-image img2">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsdMRBfYRDTVQZQJjIO8Rmta7elFpAX6WddA&s" 
+         alt="Flying chaos 3" class="flying-image img3">
+    <img src="https://www.yesco.com/wp-content/uploads/2024/11/cusotm-signs-denver-optiv-YESCO.png" 
+         alt="Flying chaos 4" class="flying-image img4">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsdMRBfYRDTVQZQJjIO8Rmta7elFpAX6WddA&s" 
+         alt="Flying chaos 5" class="flying-image img5">
+    <img src="https://www.yesco.com/wp-content/uploads/2024/11/cusotm-signs-denver-optiv-YESCO.png" 
+         alt="Flying chaos 6" class="flying-image img6">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsdMRBfYRDTVQZQJjIO8Rmta7elFpAX6WddA&s" 
+         alt="Flying chaos 7" class="flying-image img7">
+    <img src="https://www.yesco.com/wp-content/uploads/2024/11/cusotm-signs-denver-optiv-YESCO.png" 
+         alt="Flying chaos 8" class="flying-image img8">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsdMRBfYRDTVQZQJjIO8Rmta7elFpAX6WddA&s" 
+         alt="Flying chaos 9" class="flying-image img9">
+    <img src="https://www.yesco.com/wp-content/uploads/2024/11/cusotm-signs-denver-optiv-YESCO.png" 
+         alt="Flying chaos 10" class="flying-image img10">
+    
+    <div class="container">
+        <!-- Section 1: Mild Adult Content -->
+        <div class="scroll-section">
+            <h1 class="title rainbow-text-extreme">🍺 ADULT LIFE CHAOS SIMULATOR 🍺</h1>
+            
+            <div class="fact-box random-font-1 runaway-element adult-theme-1">
+                <strong>FRAT PARTY WISDOM:</strong> The drunker you get, the smarter everyone else becomes. This is basic physics according to beer pong scientists! 🍺🏓
+            </div>
+            
+            <div class="fact-box random-font-2 runaway-element">
+                <strong>PARENTING REALITY:</strong> Having kids is like being pecked to death by a duck. Cute, but slowly driving you insane one "Why?" at a time! 🦆👶
+            </div>
+            
+            <div class="fact-box random-font-3 runaway-element adult-theme-2">
+                <strong>WORK LIFE BALANCE:</strong> Work-life balance is a myth created by people who don't have to pay rent. Balance is for gymnasts, not adults! 🤸‍♀️💼
+            </div>
+            
+            <div style="text-align: center; margin: 60px 0;">
+                <button class="button-chaos runaway-element" onclick="alert('College: Where you pay $50k to learn how to drink responsibly!')">
+                    COLLEGE WISDOM
+                </button>
+                <button class="button-chaos runaway-element" onclick="alert('Kids are just tiny drunk adults without the fun!')">
+                    PARENTING TIPS
+                </button>
+                <button class="button-chaos runaway-element" onclick="alert('Work harder! Your boss needs a third yacht!')">
+                    WORK MOTIVATION
+                </button>
+            </div>
+        </div>
+        
+        <!-- Section 2: Getting Spicier -->
+        <div class="scroll-section">
+            <div class="fact-box random-font-4 runaway-element adult-theme-3 drunk-text">
+                <strong>DRINKING FACT:</strong> Beer doesn't solve problems, but neither does milk. At least beer makes you forget you have problems! 🥛🍺
+            </div>
+            
+            <div class="fact-box random-font-5 runaway-element">
+                <strong>JERKY ADDICTION:</strong> Beef jerky is just expensive meat candy for adults who pretend to be healthy. $12 for dried cow? That's some bougie sh*t! 🥩💰
+            </div>
+            
+            <div class="fact-box random-font-6 runaway-element adult-theme-4">
+                <strong>TOO MANY KIDS:</strong> Having more than 2 kids is like being a referee in a fight where everyone is high on sugar and nobody knows the rules! 👶👶👶
+            </div>
+            
+            <div style="text-align: center; margin: 60px 0;">
+                <button class="button-chaos runaway-element" onclick="alert('Jerky is just cow chips for adults!')">
+                    JERKY WISDOM
+                </button>
+                <button class="button-chaos runaway-element" onclick="alert('Kids: Making parents drink since forever!')">
+                    PARENT REALITY
+                </button>
+                <button class="button-chaos runaway-element" onclick="alert('Work: Because Netflix doesn\\'t pay for itself!')">
+                    WORK TRUTH
+                </button>
+            </div>
+        </div>
+        
+        <!-- Section 3: More Adult Language -->
+        <div class="scroll-section">
+            <div class="fact-box random-font-7 runaway-element adult-theme-1 screaming-text">
+                <strong>WORK REALITY:</strong> Your job is like a bad relationship - it takes all your time, stresses you out, and the only reason you stay is because you need the money! 💸😤
+            </div>
+            
+            <div class="fact-box random-font-8 runaway-element drunk-text">
+                <strong>PARTY WISDOM:</strong> The best parties end with someone crying, someone puking, and someone telling everyone they love them. That's just Tuesday for parents! 🎉😭
+            </div>
+            
+            <div class="fact-box random-font-1 runaway-element adult-theme-2">
+                <strong>ADULT REALITY:</strong> Being an adult is like folding a fitted sheet - no one knows what the hell they're doing, but everyone pretends they do! 🛏️🤷‍♀️
+            </div>
+            
+            <div style="text-align: center; margin: 60px 0;">
+                <button class="button-chaos runaway-element" onclick="alert('Adulthood: Making it up as you go since forever!')">
+                    ADULT TRUTH
+                </button>
+                <button class="button-chaos runaway-element" onclick="alert('Bills: The only thing that comes regularly!')">
+                    BILL REALITY
+                </button>
+                <button class="button-chaos runaway-element rickroll-button" onclick="window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank')">
+                    CLICK FOR MOTIVATION
+                </button>
+            </div>
+        </div>
+        
+        <!-- Section 4: Getting Saltier -->
+        <div class="scroll-section">
+            <div class="fact-box random-font-2 runaway-element adult-theme-3 glitch-extreme">
+                <strong>PARENTING TRUTH:</strong> Kids are like tiny dictators who rule your house with an iron fist made of boogers and demanding snacks every 5 damn minutes! 👑👶
+            </div>
+            
+            <div class="fact-box random-font-3 runaway-element screaming-text">
+                <strong>WORK HELL:</strong> Your boss calling a meeting that could've been an email is the workplace equivalent of stepping on a LEGO barefoot! 📧💼
+            </div>
+            
+            <div class="fact-box random-font-4 runaway-element adult-theme-4 drunk-text">
+                <strong>DRINKING WISDOM:</strong> Wine is just grape juice that's been through some sh*t. Just like adults are just kids who've been through some sh*t! 🍷😅
+            </div>
+            
+            <div style="text-align: center; margin: 60px 0;">
+                <button class="button-chaos runaway-element" onclick="alert('Meetings: Where productivity goes to die!')">
+                    MEETING HELL
+                </button>
+                <button class="button-chaos runaway-element" onclick="alert('Kids: Professional sleep thi

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wacky Login</title>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #ff6ec4 0%, #7873f5 100%);
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .login-box {
+            background: rgba(255,255,255,0.8);
+            border: 5px dashed #ff6ec4;
+            border-radius: 30px;
+            box-shadow: 0 0 40px #7873f5;
+            padding: 40px 60px;
+            text-align: center;
+            animation: wobble 1.5s infinite alternate;
+        }
+        @keyframes wobble {
+            0% { transform: rotate(-2deg) scale(1.05);}
+            100% { transform: rotate(2deg) scale(0.95);}
+        }
+        input {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 15px;
+            border: 2px solid #7873f5;
+            font-size: 1.1em;
+            width: 80%;
+            outline: none;
+            transition: border 0.2s;
+        }
+        input:focus {
+            border: 2px solid #ff6ec4;
+        }
+        button {
+            background: #ff6ec4;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 12px 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-top: 15px;
+            box-shadow: 0 0 10px #7873f5;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #7873f5;
+        }
+        .greeting {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #7873f5;
+            text-shadow: 2px 2px #ff6ec4;
+            animation: bounce 1s infinite alternate;
+        }
+        @keyframes bounce {
+            0% { transform: translateY(0);}
+            100% { transform: translateY(-10px);}
+        }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <div class="greeting" id="greeting">👾 Welcome, Space Cadet! 👾</div>
+        <input type="email" id="email" placeholder="Enter your wacky email">
+        <input type="password" id="password" placeholder="Super secret password">
+        <button onclick="login()">🚀 Blast Off!</button>
+        <div id="message"></div>
+    </div>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBojUvZXxV6JMWrPUA95Palrt73jEgrEqo",
+            authDomain: "iowa-e875b.firebaseapp.com",
+            projectId: "iowa-e875b",
+            storageBucket: "iowa-e875b.firebasestorage.app",
+            messagingSenderId: "826589602144",
+            appId: "1:826589602144:web:e8a9c1b27b4ebcb9cf3e05",
+            measurementId: "G-6RQCYY8Y3X"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        function login() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            firebase.auth().signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    document.getElementById('greeting').textContent = `🌈 Hello, ${userCredential.user.email}! 🌈`;
+                    document.getElementById('message').textContent = "You're in! Enjoy the cosmic vibes!";
+                    setTimeout(() => {
+                        window.location.href = "clock.html";
+                    }, 1200);
+                })
+                .catch((error) => {
+                    document.getElementById('message').textContent = "Oops! " + error.message;
+                });
+        }
+    </script>
+</body>
+</html>

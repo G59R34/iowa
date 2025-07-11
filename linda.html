@@ -1,63 +1,425 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Linda the Fent Dealer - Anti-Iowa Cult</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
-  <style>
-    /* Copy the CSS from index.html for consistency */
-    html, body { height: 100%; margin: 0; padding: 0; font-family: 'Comic Neue', 'Comic Sans MS', cursive, sans-serif; color: #fff; background: linear-gradient(135deg, #2e3192 0%, #1bffff 100%); min-height: 100vh; overflow-x: hidden; }
-    .eco { position: fixed; bottom: 12px; right: 18px; background: #00ff66; color: #222; font-weight: bold; padding: 0.7em 1.2em; border-radius: 16px; box-shadow: 0 2px 12px #00ff6688; font-size: 1.1em; z-index: 99; letter-spacing: 0.05em; }
-    header { background: rgba(44, 62, 80, 0.85); text-align: center; padding: 2.5rem 1rem 1.5rem 1rem; border-bottom: 4px solid #1bffff; box-shadow: 0 8px 32px #1bffff88; position: relative; z-index: 2; }
-    header h1 { font-family: 'Orbitron', sans-serif; font-size: 2.2em; margin: 0; letter-spacing: 0.1em; color: #ff00cc; text-shadow: 0 0 24px #1bffff, 0 0 8px #fff; }
-    nav { background: rgba(27,255,255,0.7); display: flex; justify-content: center; gap: 2.5rem; padding: 1.2rem 0; font-size: 1.2em; position: sticky; top: 0; z-index: 3; box-shadow: 0 2px 16px #1bffff44; }
-    nav a { color: #2e3192; text-decoration: none; font-weight: bold; transition: color 0.2s, text-shadow 0.2s; text-shadow: 0 0 8px #fff; }
-    nav a:hover { color: #ff00cc; text-shadow: 0 0 16px #ff00cc; }
-    section { background: rgba(44, 62, 80, 0.85); border-radius: 18px; box-shadow: 0 4px 32px #1bffff44; padding: 2.5rem 2rem; max-width: 900px; margin: 2.5rem auto; position: relative; z-index: 2; }
-    h2 { font-family: 'Orbitron', sans-serif; color: #ffff00; font-size: 2em; margin-bottom: 1em; text-shadow: 0 0 12px #ff00cc; }
-    .character { background: rgba(255,255,255,0.1); border-left: 8px solid #ff00cc; margin: 1.5em 0; padding: 1em 2em; border-radius: 12px; box-shadow: 0 2px 12px #ff00cc44; font-size: 1.1em; color: #fff; }
-    .character h3 { color: #ff00cc; margin-top: 0; font-family: 'Orbitron', sans-serif; text-shadow: 0 0 8px #fff; }
-    .back-btn { background: linear-gradient(90deg, #1bffff 0%, #ff00cc 100%); color: #fff; border: none; padding: 0.7em 2em; border-radius: 12px; font-size: 1.1em; cursor: pointer; margin-top: 1.5em; box-shadow: 0 2px 16px #ff00cc88; transition: background 0.2s, box-shadow 0.2s; }
-    .back-btn:hover { background: linear-gradient(90deg, #ffff00 0%, #ff00cc 100%); box-shadow: 0 4px 32px #ffff0088; }
-    footer { background: rgba(44, 62, 80, 0.95); color: #fff; text-align: center; padding: 2rem 1rem; margin-top: 4rem; font-size: 1.1em; border-top: 4px solid #ff00cc; box-shadow: 0 -8px 32px #ff00cc88; position: relative; z-index: 2; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌈 FACTS THAT WILL RUIN YOUR BRAIN 🌈</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Creepster&family=Bangers&family=Freckle+Face&family=Orbitron:wght@900&family=Bungee&family=Pacifico&family=Righteous&family=Monoton&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(45deg, #ff0080, #00ff80, #8000ff, #ff8000, #0080ff, #80ff00, #ff0040, #40ff00);
+            background-size: 800% 800%;
+            animation: psychedelicShift 2s ease infinite;
+            overflow-x: hidden;
+            font-family: 'Comic Neue', cursive;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><text y="16" font-size="16">🤪</text></svg>'), auto;
+        }
+        
+        @keyframes psychedelicShift {
+            0% { background-position: 0% 0%; filter: hue-rotate(0deg); }
+            25% { background-position: 100% 0%; filter: hue-rotate(90deg); }
+            50% { background-position: 100% 100%; filter: hue-rotate(180deg); }
+            75% { background-position: 0% 100%; filter: hue-rotate(270deg); }
+            100% { background-position: 0% 0%; filter: hue-rotate(360deg); }
+        }
+        
+        .flying-image {
+            position: fixed;
+            z-index: 100;
+            animation: crazyFly 5s linear infinite;
+            filter: sepia(100%) saturate(200%) hue-rotate(45deg);
+        }
+        
+        @keyframes crazyFly {
+            0% { transform: translateX(-300px) translateY(0px) rotate(0deg) scale(1); }
+            25% { transform: translateX(25vw) translateY(-100px) rotate(180deg) scale(1.5); }
+            50% { transform: translateX(75vw) translateY(100px) rotate(360deg) scale(0.5); }
+            75% { transform: translateX(50vw) translateY(-50px) rotate(540deg) scale(2); }
+            100% { transform: translateX(120vw) translateY(0px) rotate(720deg) scale(1); }
+        }
+        
+        .img1 { 
+            top: 10%; 
+            width: 120px; 
+            animation-delay: 0s;
+            animation-duration: 4s;
+        }
+        
+        .img2 { 
+            top: 70%; 
+            width: 80px; 
+            animation-delay: 1s;
+            animation-duration: 6s;
+        }
+        
+        .img3 { 
+            top: 40%; 
+            width: 150px; 
+            animation-delay: 2s;
+            animation-duration: 3s;
+        }
+        
+        .img4 { 
+            top: 20%; 
+            width: 100px; 
+            animation-delay: 3s;
+            animation-duration: 5s;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .title {
+            font-family: 'Monoton', cursive;
+            font-size: 5rem;
+            text-align: center;
+            color: #ff1744;
+            text-shadow: 5px 5px 0px #00ff00, 10px 10px 0px #0000ff, 15px 15px 0px #ff00ff, 20px 20px 0px #ffff00;
+            animation: seizureWarning 0.5s ease-in-out infinite;
+            margin-bottom: 50px;
+            letter-spacing: 10px;
+        }
+        
+        @keyframes seizureWarning {
+            0% { transform: translateY(0) scale(1) rotate(0deg); }
+            25% { transform: translateY(-20px) scale(1.1) rotate(5deg); }
+            50% { transform: translateY(10px) scale(0.9) rotate(-5deg); }
+            75% { transform: translateY(-5px) scale(1.05) rotate(3deg); }
+            100% { transform: translateY(0) scale(1) rotate(0deg); }
+        }
+        
+        .fact-box {
+            background: linear-gradient(45deg, rgba(255,255,255,0.9), rgba(255,0,255,0.7), rgba(0,255,255,0.8), rgba(255,255,0,0.9));
+            border: 8px solid;
+            border-image: linear-gradient(45deg, #ff0080, #00ff80, #8000ff, #ff8000) 1;
+            border-radius: 30px;
+            padding: 30px;
+            margin: 30px 0;
+            font-size: 1.4rem;
+            transform: rotate(-3deg) skew(2deg);
+            box-shadow: 15px 15px 0px rgba(0, 0, 0, 0.5), 30px 30px 0px rgba(255, 0, 255, 0.3);
+            animation: wobble 3s ease-in-out infinite;
+        }
+        
+        @keyframes wobble {
+            0%, 100% { transform: rotate(-3deg) skew(2deg); }
+            33% { transform: rotate(2deg) skew(-1deg); }
+            66% { transform: rotate(-1deg) skew(3deg); }
+        }
+        
+        .fact-box:nth-child(even) {
+            transform: rotate(3deg) skew(-2deg);
+            animation-delay: 1s;
+        }
+        
+        .fact-box:nth-child(odd) {
+            animation-delay: 2s;
+        }
+        
+        .random-font-1 { font-family: 'Bungee', cursive; color: #e74c3c; text-shadow: 3px 3px 0px #00ff00; }
+        .random-font-2 { font-family: 'Pacifico', cursive; color: #9b59b6; text-shadow: 2px 2px 0px #ffff00; }
+        .random-font-3 { font-family: 'Righteous', cursive; color: #27ae60; text-shadow: 4px 4px 0px #ff00ff; }
+        .random-font-4 { font-family: 'Creepster', cursive; color: #ff6b35; text-shadow: 2px 2px 0px #00ffff; }
+        .random-font-5 { font-family: 'Orbitron', monospace; color: #8e44ad; text-shadow: 3px 3px 0px #ff0080; }
+        
+        .button-chaos {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff9a9e, #fecfef, #fecfef, #ffeaa7, #a8edea, #fed6e3);
+            border: 5px solid;
+            border-image: linear-gradient(45deg, #ff0080, #00ff80, #8000ff, #ff8000) 1;
+            padding: 20px 40px;
+            margin: 15px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            animation: insaneBounce 2s ease-in-out infinite;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            font-family: 'Bangers', cursive;
+        }
+        
+        @keyframes insaneBounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(0deg); }
+            10% { transform: translateY(-30px) rotate(45deg); }
+            30% { transform: translateY(-15px) rotate(-45deg); }
+            60% { transform: translateY(-10px) rotate(90deg); }
+            40% { transform: translateY(-20px) rotate(-90deg); }
+        }
+        
+        .button-chaos:hover {
+            animation: explosion 0.8s ease-in-out;
+            transform: scale(1.5);
+        }
+        
+        @keyframes explosion {
+            0% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(2) rotate(180deg); }
+            100% { transform: scale(1) rotate(360deg); }
+        }
+        
+        .strobe {
+            animation: strobeLight 0.3s linear infinite;
+        }
+        
+        @keyframes strobeLight {
+            0% { opacity: 1; background-color: #ff0000; }
+            25% { opacity: 0; background-color: #00ff00; }
+            50% { opacity: 1; background-color: #0000ff; }
+            75% { opacity: 0; background-color: #ffff00; }
+            100% { opacity: 1; background-color: #ff00ff; }
+        }
+        
+        .rainbow-text {
+            background: linear-gradient(45deg, #ff0080, #00ff80, #8000ff, #ff8000, #0080ff, #80ff00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: rainbowShift 1s ease-in-out infinite;
+        }
+        
+        @keyframes rainbowShift {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+        
+        .matrix-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255,0,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 60% 30%, rgba(255,255,0,0.1) 0%, transparent 50%);
+            animation: matrixGlow 4s ease-in-out infinite;
+        }
+        
+        @keyframes matrixGlow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+        
+        .floating-chaos {
+            position: fixed;
+            font-size: 3rem;
+            font-weight: bold;
+            animation: chaosFloat 8s ease-in-out infinite;
+            z-index: 50;
+            font-family: 'Creepster', cursive;
+        }
+        
+        @keyframes chaosFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-50px) rotate(90deg); }
+            50% { transform: translateY(50px) rotate(180deg); }
+            75% { transform: translateY(-25px) rotate(270deg); }
+        }
+        
+        .chaos1 { top: 5%; left: 5%; color: #ff0080; animation-delay: 0s; }
+        .chaos2 { top: 15%; right: 5%; color: #00ff80; animation-delay: 1s; }
+        .chaos3 { top: 85%; left: 15%; color: #8000ff; animation-delay: 2s; }
+        .chaos4 { top: 75%; right: 25%; color: #ff8000; animation-delay: 3s; }
+        .chaos5 { top: 45%; left: 85%; color: #0080ff; animation-delay: 4s; }
+        
+        .glitch {
+            animation: glitchEffect 2s infinite;
+        }
+        
+        @keyframes glitchEffect {
+            0% { transform: translateX(0); }
+            10% { transform: translateX(-5px); }
+            20% { transform: translateX(5px); }
+            30% { transform: translateX(-5px); }
+            40% { transform: translateX(5px); }
+            50% { transform: translateX(-5px); }
+            60% { transform: translateX(5px); }
+            70% { transform: translateX(-5px); }
+            80% { transform: translateX(5px); }
+            90% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+
+        /* Message of the Day Banner */
+        #motd-banner {
+            width: 100vw;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            background: linear-gradient(90deg, #ff00cc, #1bffff);
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3em;
+            text-align: center;
+            padding: 1em 0;
+            box-shadow: 0 4px 32px #ff00cc88;
+            display: none;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Linda the Fent Dealer</h1>
-  </header>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="evidence.html">Evidence</a>
-    <a href="members.html">Members</a>
-    <a href="drama.html">Cult Drama</a>
-    <a href="sniffles.html">Sniffles</a>
-    <a href="linda.html">Linda</a>
-    <a href="mrs-sniffles.html">Mrs. Sniffles</a>
-    <a href="turn-signal.html">Turn Signal</a>
-    <a href="united.html">United Airlines</a>
-    <a href="join.html">Join</a>
-  </nav>
-  <section>
-    <h2>Linda the Fent Dealer</h2>
-    <div class="character">
-      <h3>Linda</h3>
-      <p>
-        Linda is our “pharmaceutical supplier.” She claims to have single-handedly kept United Airlines pilots “relaxed” on Iowa-bound flights. Her motto: “If you wake up in Nebraska, you’re welcome.”
-      </p>
-      <p>
-        <em>Linda’s favorite hobby: Drugging pilots for fun and profit.</em>
-      </p>
+    <div class="matrix-effect"></div>
+    
+    <div class="floating-chaos chaos1 strobe">CHAOS!</div>
+    <div class="floating-chaos chaos2 rainbow-text">MADNESS!</div>
+    <div class="floating-chaos chaos3 glitch">INSANITY!</div>
+    <div class="floating-chaos chaos4 strobe">BONKERS!</div>
+    <div class="floating-chaos chaos5 rainbow-text">HELP!</div>
+    
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsdMRBfYRDTVQZQJjIO8Rmta7elFpAX6WddA&s" 
+         alt="Flying chaos" class="flying-image img1">
+    <img src="https://www.yesco.com/wp-content/uploads/2024/11/cusotm-signs-denver-optiv-YESCO.png" 
+         alt="More chaos" class="flying-image img2">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsdMRBfYRDTVQZQJjIO8Rmta7elFpAX6WddA&s" 
+         alt="Even more chaos" class="flying-image img3">
+    <img src="https://www.yesco.com/wp-content/uploads/2024/11/cusotm-signs-denver-optiv-YESCO.png" 
+         alt="Ultimate chaos" class="flying-image img4">
+    
+    <div class="container">
+        <h1 class="title rainbow-text">🎪 COMPLETELY WRONG FACTS 🎪</h1>
+        
+        <div class="fact-box random-font-1 glitch">
+            <strong>PUBERTY "FACT":</strong> During puberty, teenagers grow a third arm that only appears on Tuesdays. This is why they're always reaching for snacks! Scientists call this "Snackius Appendagius" 🦾🍕
+        </div>
+        
+        <div class="fact-box random-font-2 strobe">
+            <strong>EIFFEL TOWER "FACT":</strong> The Eiffel Tower was originally built as a giant tuning fork to communicate with aliens. It plays the French national anthem in B-flat every full moon! 🗼👽
+        </div>
+        
+        <div class="fact-box random-font-3 rainbow-text">
+            <strong>KIM JONG UN "FACT":</strong> Kim Jong Un once arm-wrestled a polar bear and won. The bear now works as his personal hairstylist and invented the iconic haircut by accident while sneezing! 🐻💇‍♂️
+        </div>
+        
+        <div style="text-align: center; margin: 50px 0;">
+            <button class="button-chaos" onclick="alert('Teenagers shed their skin like snakes during growth spurts!')">
+                MORE PUBERTY LIES
+            </button>
+            <button class="button-chaos" onclick="alert('The Eiffel Tower can walk but chooses not to!')">
+                TOWER SECRETS
+            </button>
+            <button class="button-chaos" onclick="alert('Kim Jong Un invented the internet using only paperclips!')">
+                LEADER MYTHS
+            </button>
+        </div>
+        
+        <div class="fact-box random-font-4 glitch">
+            <strong>ANOTHER PUBERTY "FACT":</strong> Acne is actually tiny volcanoes that erupt when teenagers hear their parents' music. Each pimple contains exactly 0.3 seconds of embarrassment! 🌋😱
+        </div>
+        
+        <div class="fact-box random-font-5 strobe">
+            <strong>EIFFEL TOWER "FACT":</strong> The tower grows 6 inches taller every time someone says "oui oui baguette" within a 50-mile radius. It's currently 47 feet taller than originally planned! 🥖📏
+        </div>
+        
+        <div class="fact-box random-font-1 rainbow-text">
+            <strong>KIM JONG UN "FACT":</strong> He doesn't actually walk anywhere - he teleports using the power of concentrated kimchi. The energy creates those mysterious lights people see over North Korea! ✨🥬
+        </div>
+        
+        <div style="text-align: center; margin: 50px 0;">
+            <button class="button-chaos" onclick="document.body.style.animation = 'spin 2s linear infinite'">
+                SPIN THE WORLD
+            </button>
+            <button class="button-chaos" onclick="alert('You have unlocked the secret of nonsense!')">
+                UNLOCK SECRETS
+            </button>
+            <button class="button-chaos" onclick="location.reload()">
+                RELOAD MADNESS
+            </button>
+        </div>
+        
+        <div class="fact-box random-font-2 glitch">
+            <strong>PUBERTY "FACT":</strong> Voice cracks are actually attempts to speak whale language. Marine biologists estimate 73% of teenage boys are fluent in humpback whale by age 16! 🐋🎤
+        </div>
+        
+        <div class="fact-box random-font-3 strobe">
+            <strong>EIFFEL TOWER "FACT":</strong> The tower's iron lattice structure was inspired by a croissant that fell into Gustav Eiffel's coffee. The coffee stain is still visible on the original blueprints! ☕🥐
+        </div>
+        
+        <div class="fact-box random-font-4 rainbow-text">
+            <strong>KIM JONG UN "FACT":</strong> He owns 47 unicorns and rides them to work every Tuesday. The unicorns are trained in nuclear physics and help design missiles using rainbow mathematics! 🦄🌈
+        </div>
+        
+        <div style="text-align: center; font-size: 4rem; margin: 60px 0; font-family: 'Monoton', cursive; color: #ff0080;">
+            <span class="strobe">🌈 YOUR BRAIN IS NOW BROKEN 🌈</span>
+            <br>
+            <span style="font-size: 1.5rem; font-family: 'Creepster', cursive; color: #00ff80;">
+                (congratulations, you've reached peak chaos)
+            </span>
+        </div>
+        
+        <div style="text-align: center; margin: 50px 0;">
+            <button class="button-chaos" onclick="alert('These facts are 100% scientifically inaccurate!')">
+                FACT CHECK (SPOILER: ALL WRONG)
+            </button>
+            <button class="button-chaos" onclick="window.close()">
+                ESCAPE THE MADNESS
+            </button>
+            <button class="button-chaos" onclick="alert('Thank you for destroying your retinas!')">
+                DESTROY VISION
+            </button>
+        </div>
     </div>
-    <button class="back-btn" onclick="window.location.href='index.html'">Back to Home</button>
-  </section>
-  <div class="eco">#EcoFriendly</div>
-  <footer>
-    <p>&copy; 2025 The Anti-Iowa Cult. Proudly headquartered in "nowhere."<br>
-      <span style="color:#ff00cc;">This is a humor project. No actual Iowans, cats, carts, or pilots were harmed.</span>
-    </p>
-  </footer>
+
+    <!-- Message of the Day Banner -->
+    <div id="motd-banner">
+      <!-- Message will appear here -->
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-remote-config-compat.js"></script>
+    <!-- If you have a shared firebase-init.js, use that instead of inline config below -->
+    <script>
+      // TODO: Replace with your shared Firebase config/init if available
+     const firebaseConfig = {
+    apiKey: "AIzaSyBojUvZXxV6JMWrPUA95Palrt73jEgrEqo",
+    authDomain: "iowa-e875b.firebaseapp.com",
+    projectId: "iowa-e875b",
+    storageBucket: "iowa-e875b.firebasestorage.app",
+    messagingSenderId: "826589602144",
+    appId: "1:826589602144:web:e8a9c1b27b4ebcb9cf3e05",
+    measurementId: "G-6RQCYY8Y3X"
+        // ...other config
+      };
+      firebase.initializeApp(firebaseConfig);
+
+      const remoteConfig = firebase.remoteConfig();
+      remoteConfig.settings = {
+        minimumFetchIntervalMillis: 3600000, // 1 hour
+      };
+      remoteConfig.defaultConfig = {
+        msg: "Welcome to the Anti-Iowa Cult! (Default message)",
+      };
+
+      remoteConfig.fetchAndActivate()
+        .then(() => {
+          const motd = remoteConfig.getString('msg');
+          if (motd) {
+            const banner = document.getElementById('motd-banner');
+            banner.textContent = motd;
+            banner.style.display = 'block';
+          }
+        })
+        .catch((err) => {
+          // Show default message if fetch fails
+          const banner = document.getElementById('motd-banner');
+          banner.textContent = remoteConfig.defaultConfig.msg;
+          banner.style.display = 'block';
+        });
+    </script>
 </body>
 </html>

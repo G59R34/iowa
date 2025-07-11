@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Join the Anti-Iowa Cult</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+body {
+    margin: 0;
+    background: linear-gradient(135deg, #ff00ff, #00ffff, #ffff00);
+    font-family: 'Press Start 2P', cursive;
+    color: white;
+    animation: spinBG 20s linear infinite;
+    text-shadow: 2px 2px 4px #000;
+}
+@keyframes spinBG {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+}
+h1 {
+    text-align: center;
+    font-size: 4vh;
+    animation: shake 0.3s infinite alternate;
+}
+@keyframes shake {
+    from { transform: translateX(-5px) rotate(-2deg); }
+    to { transform: translateX(5px) rotate(2deg); }
+}
+form {
+    background: rgba(0,0,0,0.7);
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 400px;
+    margin: 40px auto;
+    box-shadow: 0 0 30px 10px #00ffff;
+    animation: bounce 2s infinite alternate;
+}
+@keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-10px); }
+}
+label, input {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    font-size: 2vh;
+}
+input[type="submit"] {
+    background: linear-gradient(90deg, #ff00ff, #00ffff);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 2vh;
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: 0 0 10px #ffff00;
+    transition: transform 0.2s;
+}
+input[type="submit"]:hover {
+    transform: scale(1.1) rotate(-2deg);
+    background: linear-gradient(90deg, #ffff00, #ff00ff);
+}
+#feedback {
+    text-align: center;
+    font-size: 2vh;
+    margin-top: 20px;
+    color: #00ff00;
+    animation: glitch 1s infinite;
+}
+@keyframes glitch {
+    0% { text-shadow: 2px 0 red; }
+    25% { text-shadow: -2px 0 lime; }
+    50% { text-shadow: 2px 2px blue; }
+    75% { text-shadow: -2px -2px yellow; }
+    100% { text-shadow: 2px 0 red; }
+}
+nav {
+    text-align: center;
+    margin-top: 20px;
+}
+nav a {
+    color: #ffff00;
+    font-size: 2vh;
+    margin: 0 15px;
+    text-decoration: underline wavy #00ffff;
+    transition: color 0.2s;
+}
+nav a:hover {
+    color: #ff00ff;
+}
+</style>
+<!-- Firebase JS SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-remote-config-compat.js"></script>
+<script>
+  // Firebase config (replace with your actual config)
+  const firebaseConfig = {
+    apiKey: "AIzaSyBojUvZXxV6JMWrPUA95Palrt73jEgrEqo",
+    authDomain: "iowa-e875b.firebaseapp.com",
+    projectId: "iowa-e875b",
+    storageBucket: "iowa-e875b.firebasestorage.app",
+    messagingSenderId: "826589602144",
+    appId: "1:826589602144:web:e8a9c1b27b4ebcb9cf3e05",
+    measurementId: "G-6RQCYY8Y3X"
+  };
+  // Initialize Firebase only once
+  if (!window.firebaseApp) {
+    window.firebaseApp = firebase.initializeApp(firebaseConfig);
+    window.db = firebase.firestore();
+    window.auth = firebase.auth();
+  }
+
+  const remoteConfig = firebase.remoteConfig();
+  remoteConfig.settings = {
+    minimumFetchIntervalMillis: 3600000, // 1 hour
+  };
+  remoteConfig.defaultConfig = {
+    msg: "Welcome to the Anti-Iowa Cult! (Default message)",
+  };
+
+  remoteConfig.fetchAndActivate()
+    .then(() => {
+      const motd = remoteConfig.getString('msg');
+      if (motd) {
+        const banner = document.getElementById('motd-banner');
+        banner.textContent = motd;
+        banner.style.display = 'block';
+      }
+    })
+    .catch((err) => {
+      // Show default message if fetch fails
+      const banner = document.getElementById('motd-banner');
+      banner.textContent = remoteConfig.defaultConfig.msg;
+      banner.style.display = 'block';
+    });
+</script>
+</head>
+<body>
+<!-- Message of the Day Banner -->
+<div id="motd-banner" style="width:100vw;position:fixed;top:0;left:0;z-index:100;background:linear-gradient(90deg,#ff00cc,#1bffff);color:#fff;font-family:'Orbitron',sans-serif;font-size:1.3em;text-align:center;padding:1em 0;box-shadow:0 4px 32px #ff00cc88;display:none;">
+  <!-- Message will appear here -->
+</div>
+<nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="linda.html">Linda</a>
+    <a href="sniffles.html">Sniffles</a>
+    <a href="mrs-sniffles.html">Mrs. Sniffles</a>
+    <a href="turn-signal.html">Turn Signal</a>
+    <a href="united.html">United Airlines</a>
+    <a href="join.html"><b>Join</b></a>
+</nav>
+<h1>😈 JOIN THE ANTI-IOWA CULT 😈</h1>
+<form id="joinForm">
+    <label for="name">Your Cult Name:</label>
+    <input type="text" id="name" name="name" required placeholder="e.g. Big Sniffle">
+    <label for="email">Email (for cult updates):</label>
+    <input type="email" id="email" name="email" required placeholder="e.g. sniffle@cult.com">
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required placeholder="Choose a password">
+    <label for="reason">Why you hatin' on Iowa?</label>
+    <input type="text" id="reason" name="reason" required placeholder="e.g. Corn trauma">
+    <input type="submit" value="Join Now 🚀">
+</form>
+<div id="feedback"></div>
+<script>
+document.getElementById('joinForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    const reason = document.getElementById('reason').value.trim();
+    const feedback = document.getElementById('feedback');
+    feedback.textContent = "Submitting your cult application...";
+    try {
+        // Create user in Firebase Auth
+        const userCredential = await window.auth.createUserWithEmailAndPassword(email, password);
+        const user = userCredential.user;
+        // Add to Firestore
+        await window.db.collection('members').doc(user.uid).set({
+            name, email, reason, timestamp: new Date()
+        });
+        feedback.textContent = "🔥 You in, fam! Welcome to the Anti-Iowa Cult. 🔥";
+        document.getElementById('joinForm').reset();
+    } catch (err) {
+        feedback.textContent = "😱 Error joining cult: " + err.message;
+    }
+});
+</script>
+</body>
+</html>

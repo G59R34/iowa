@@ -1,65 +1,284 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Turn Signal - Anti-Iowa Cult</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
-  <style>
-    html, body { height: 100%; margin: 0; padding: 0; font-family: 'Comic Neue', 'Comic Sans MS', cursive, sans-serif; color: #fff; background: linear-gradient(135deg, #2e3192 0%, #1bffff 100%); min-height: 100vh; overflow-x: hidden; }
-    .eco { position: fixed; bottom: 12px; right: 18px; background: #00ff66; color: #222; font-weight: bold; padding: 0.7em 1.2em; border-radius: 16px; box-shadow: 0 2px 12px #00ff6688; font-size: 1.1em; z-index: 99; letter-spacing: 0.05em; }
-    header { background: rgba(44, 62, 80, 0.85); text-align: center; padding: 2.5rem 1rem 1.5rem 1rem; border-bottom: 4px solid #1bffff; box-shadow: 0 8px 32px #1bffff88; position: relative; z-index: 2; }
-    header h1 { font-family: 'Orbitron', sans-serif; font-size: 2.2em; margin: 0; letter-spacing: 0.1em; color: #ff00cc; text-shadow: 0 0 24px #1bffff, 0 0 8px #fff; }
-    nav { background: rgba(27,255,255,0.7); display: flex; justify-content: center; gap: 2.5rem; padding: 1.2rem 0; font-size: 1.2em; position: sticky; top: 0; z-index: 3; box-shadow: 0 2px 16px #1bffff44; }
-    nav a { color: #2e3192; text-decoration: none; font-weight: bold; transition: color 0.2s, text-shadow 0.2s; text-shadow: 0 0 8px #fff; }
-    nav a:hover { color: #ff00cc; text-shadow: 0 0 16px #ff00cc; }
-    section { background: rgba(44, 62, 80, 0.85); border-radius: 18px; box-shadow: 0 4px 32px #1bffff44; padding: 2.5rem 2rem; max-width: 900px; margin: 2.5rem auto; position: relative; z-index: 2; }
-    h2 { font-family: 'Orbitron', sans-serif; color: #ffff00; font-size: 2em; margin-bottom: 1em; text-shadow: 0 0 12px #ff00cc; }
-    .character { background: rgba(255,255,255,0.1); border-left: 8px solid #ff00cc; margin: 1.5em 0; padding: 1em 2em; border-radius: 12px; box-shadow: 0 2px 12px #ff00cc44; font-size: 1.1em; color: #fff; }
-    .character h3 { color: #ff00cc; margin-top: 0; font-family: 'Orbitron', sans-serif; text-shadow: 0 0 8px #fff; }
-    .back-btn { background: linear-gradient(90deg, #1bffff 0%, #ff00cc 100%); color: #fff; border: none; padding: 0.7em 2em; border-radius: 12px; font-size: 1.1em; cursor: pointer; margin-top: 1.5em; box-shadow: 0 2px 16px #ff00cc88; transition: background 0.2s, box-shadow 0.2s; }
-    .back-btn:hover { background: linear-gradient(90deg, #ffff00 0%, #ff00cc 100%); box-shadow: 0 4px 32px #ffff0088; }
-    footer { background: rgba(44, 62, 80, 0.95); color: #fff; text-align: center; padding: 2rem 1rem; margin-top: 4rem; font-size: 1.1em; border-top: 4px solid #ff00cc; box-shadow: 0 -8px 32px #ff00cc88; position: relative; z-index: 2; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌈 WELCOME TO THE VOID 🌈</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Creepster&family=Bangers&family=Freckle+Face&family=Orbitron:wght@900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7);
+            background-size: 400% 400%;
+            animation: gradientShift 3s ease infinite;
+            overflow-x: hidden;
+            font-family: 'Comic Neue', cursive;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .flying-image {
+            position: fixed;
+            z-index: 100;
+            animation: fly 8s linear infinite;
+        }
+        
+        @keyframes fly {
+            0% { transform: translateX(-200px) rotate(0deg); }
+            25% { transform: translateX(50vw) rotate(90deg); }
+            50% { transform: translateX(100vw) rotate(180deg); }
+            75% { transform: translateX(50vw) rotate(270deg); }
+            100% { transform: translateX(-200px) rotate(360deg); }
+        }
+        
+        .img1 { 
+            top: 20%; 
+            width: 100px; 
+            animation-delay: 0s;
+        }
+        
+        .img2 { 
+            top: 60%; 
+            width: 150px; 
+            animation-delay: 2s;
+        }
+        
+        .img3 { 
+            top: 40%; 
+            width: 80px; 
+            animation-delay: 4s;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .title {
+            font-family: 'Creepster', cursive;
+            font-size: 4rem;
+            text-align: center;
+            color: #ff1744;
+            text-shadow: 3px 3px 0px #00ff00, 6px 6px 0px #0000ff;
+            animation: bounce 2s ease-in-out infinite;
+            margin-bottom: 30px;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-30px); }
+            60% { transform: translateY(-15px); }
+        }
+        
+        .fact-box {
+            background: rgba(255, 255, 255, 0.9);
+            border: 5px solid #ff6b6b;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px 0;
+            font-size: 1.2rem;
+            transform: rotate(-2deg);
+            box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.3);
+        }
+        
+        .fact-box:nth-child(even) {
+            transform: rotate(2deg);
+            border-color: #4ecdc4;
+        }
+        
+        .random-font-1 { font-family: 'Bangers', cursive; color: #e74c3c; }
+        .random-font-2 { font-family: 'Freckle Face', cursive; color: #9b59b6; }
+        .random-font-3 { font-family: 'Orbitron', monospace; color: #27ae60; }
+        
+        .button-chaos {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff9a9e, #fecfef, #fecfef, #ffeaa7);
+            border: none;
+            padding: 15px 30px;
+            margin: 10px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            animation: wiggle 1s ease-in-out infinite;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        @keyframes wiggle {
+            0%, 7% { transform: rotateZ(0); }
+            15% { transform: rotateZ(-15deg); }
+            20% { transform: rotateZ(10deg); }
+            25% { transform: rotateZ(-10deg); }
+            30% { transform: rotateZ(6deg); }
+            35% { transform: rotateZ(-4deg); }
+            40%, 100% { transform: rotateZ(0); }
+        }
+        
+        .button-chaos:hover {
+            animation: spin 0.5s ease-in-out;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .blink {
+            animation: blinker 1s linear infinite;
+        }
+        
+        @keyframes blinker {
+            50% { opacity: 0; }
+        }
+        
+        .upside-down {
+            transform: rotate(180deg);
+        }
+        
+        .tax-fraud-warning {
+            background: #ffff00;
+            color: #ff0000;
+            font-family: 'Bangers', cursive;
+            font-size: 2rem;
+            padding: 20px;
+            border: 10px dashed #ff0000;
+            margin: 30px 0;
+            text-align: center;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .floating-text {
+            position: fixed;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff1744;
+            animation: float 6s ease-in-out infinite;
+            z-index: 50;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .text1 { top: 10%; left: 10%; }
+        .text2 { top: 80%; right: 10%; }
+        .text3 { top: 50%; left: 80%; }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Turn Signal (Sniffles’ Mate)</h1>
-  </header>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="evidence.html">Evidence</a>
-    <a href="members.html">Members</a>
-    <a href="drama.html">Cult Drama</a>
-    <a href="sniffles.html">Sniffles</a>
-    <a href="linda.html">Linda</a>
-    <a href="mrs-sniffles.html">Mrs. Sniffles</a>
-    <a href="turn-signal.html">Turn Signal</a>
-    <a href="united.html">United Airlines</a>
-    <a href="join.html">Join</a>
-  </nav>
-  <section>
-    <h2>Turn Signal (Sniffles’ Mate)</h2>
-    <div class="character">
-      <h3>Turn Signal</h3>
-      <p>
-        The only turn signal in the cult. Blinks only when Iowa is mentioned. Has caused three pileups in “Iowa” (if it exists). Suspected of being in love with Mrs. Sniffles, but refuses to signal his feelings.
-      </p>
-      <p>
-        <em>Current status: Blinking suspiciously.</em>
-      </p>
-      <p>
-        <strong>Fun Fact:</strong> Turn Signal once blinked Morse code for "Iowa is fake" during a traffic jam.
-      </p>
+    <div class="floating-text text1 blink">¡HOLA!</div>
+    <div class="floating-text text2">こんにちは</div>
+    <div class="floating-text text3">BONJOUR!</div>
+    
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsdMRBfYRDTVQZQJjIO8Rmta7elFpAX6WddA&s" 
+         alt="Flying chaos" class="flying-image img1">
+    <img src="https://www.yesco.com/wp-content/uploads/2024/11/cusotm-signs-denver-optiv-YESCO.png" 
+         alt="More chaos" class="flying-image img2">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsdMRBfYRDTVQZQJjIO8Rmta7elFpAX6WddA&s" 
+         alt="Even more chaos" class="flying-image img3">
+    
+    <div class="container">
+        <h1 class="title">🎪 WELCOME TO THE DIMENSION OF PURE CHAOS 🎪</h1>
+        
+        <div class="fact-box random-font-1">
+            <strong>RANDOM FACT:</strong> Dolphins sleep with one eye open because they're secretly plotting world domination! 🐬
+        </div>
+        
+        <div class="fact-box random-font-2">
+            <strong>另一个随机事实:</strong> Bananas are berries, but strawberries aren't. Nature is drunk. 🍌🍓
+        </div>
+        
+        <div class="fact-box random-font-3 upside-down">
+            <strong>FAKTOR NGẼCANG:</strong> The Great Wall of China is visible from space, but so is your disappointment in this website.
+        </div>
+        
+        <div class="tax-fraud-warning blink">
+            ⚠️ ATTENTION IOWA RESIDENTS ⚠️
+            <br>
+            THE CORN IS WATCHING YOU
+        </div>
+        
+        <div style="text-align: center; margin: 40px 0;">
+            <button class="button-chaos" onclick="alert('This button judges your life choices!')">
+                CLICK ME FOR EXISTENTIAL CRISIS
+            </button>
+            <button class="button-chaos" onclick="console.log('Why did you click this?')">
+                RANDOM BUTTON #47
+            </button>
+            <button class="button-chaos" onclick="document.body.style.transform = 'rotate(180deg)'">
+                FLIP REALITY
+            </button>
+        </div>
+        
+        <div class="fact-box random-font-1">
+            <strong>VERDAD ALEATORIA:</strong> Octopuses have three hearts and blue blood. They're basically alien royalty! 🐙👑
+        </div>
+        
+        <div class="fact-box random-font-2">
+            <strong>СЛУЧАЙНЫЙ ФАКТ:</strong> Honey never spoils. You could eat 3000-year-old honey and it would still be good. Time is meaningless! 🍯
+        </div>
+        
+        <div style="text-align: center; margin: 40px 0;">
+            <button class="button-chaos" onclick="alert('Iowa corn subsidies are not a joke!')">
+                DEFINITELY NOT TAX ADVICE
+            </button>
+            <button class="button-chaos" onclick="document.body.style.backgroundColor = '#' + Math.floor(Math.random()*16777215).toString(16)">
+                RAINBOW MODE ACTIVATE
+            </button>
+            <button class="button-chaos" onclick="alert('You have been blessed by the chaos gods!')">
+                MEANINGLESS BUTTON
+            </button>
+        </div>
+        
+        <div class="fact-box random-font-3">
+            <strong>FAKT LOSOWY:</strong> A group of flamingos is called a "flamboyance." This is the only useful thing you'll learn today. 🦩
+        </div>
+        
+        <div style="text-align: center; font-size: 3rem; margin: 50px 0; font-family: 'Creepster', cursive;">
+            🌈 YOU HAVE REACHED THE END OF MADNESS 🌈
+            <br>
+            <span style="font-size: 1rem; font-family: 'Comic Neue', cursive;">
+                (but madness never truly ends, does it?)
+            </span>
+        </div>
+        
+        <div class="tax-fraud-warning">
+            REMEMBER: THE IRS DOESN'T ACCEPT CORN AS PAYMENT
+            <br>
+            (We checked)
+        </div>
+        
+        <div style="text-align: center; margin: 40px 0;">
+            <button class="button-chaos" onclick="location.reload()">
+                EXPERIENCE THE CHAOS AGAIN
+            </button>
+            <button class="button-chaos" onclick="alert('This website was made by someone who clearly needs help')">
+                CALL FOR HELP
+            </button>
+            <button class="button-chaos" onclick="window.close()">
+                ESCAPE THE MADNESS
+            </button>
+        </div>
     </div>
-    <button class="back-btn" onclick="window.location.href='index.html'">Back to Home</button>
-  </section>
-  <div class="eco">#EcoFriendly</div>
-  <footer>
-    <p>&copy; 2025 The Anti-Iowa Cult. Proudly headquartered in "nowhere."<br>
-      <span style="color:#ff00cc;">This is a humor project. No actual Iowans, cats, carts, or pilots were harmed.</span>
-    </p>
-  </footer>
 </body>
 </html>

@@ -270,6 +270,11 @@
     <a href="join.html">Join</a>
   </nav>
 
+  <!-- Message of the Day Banner -->
+  <div id="motd-banner" style="width:100vw;position:fixed;top:0;left:0;z-index:100;background:linear-gradient(90deg,#ff00cc,#1bffff);color:#fff;font-family:'Orbitron',sans-serif;font-size:1.3em;text-align:center;padding:1em 0;box-shadow:0 4px 32px #ff00cc88;display:none;">
+    <!-- Message will appear here -->
+  </div>
+
   <!-- Absurd Pointless Clock Start -->
   <div id="pointless-clock-container" style="display:flex;justify-content:center;align-items:center;margin-top:2em;position:relative;gap:2em;">
     <!-- Lizzo dancing (replace src with your preferred image) -->
@@ -373,6 +378,48 @@
       <span style="color:#ff00cc;">This is a humor project. No actual Iowans, cats, carts, or pilots were harmed.</span>
     </p>
   </footer>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-remote-config-compat.js"></script>
+  <!-- If you have a shared firebase-init.js, use that instead of inline config below -->
+  <script>
+    // TODO: Replace with your shared Firebase config/init if available
+  const firebaseConfig = {
+    apiKey: "AIzaSyBojUvZXxV6JMWrPUA95Palrt73jEgrEqo",
+    authDomain: "iowa-e875b.firebaseapp.com",
+    projectId: "iowa-e875b",
+    storageBucket: "iowa-e875b.firebasestorage.app",
+    messagingSenderId: "826589602144",
+    appId: "1:826589602144:web:e8a9c1b27b4ebcb9cf3e05",
+    measurementId: "G-6RQCYY8Y3X"
+      // ...other config
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    const remoteConfig = firebase.remoteConfig();
+    remoteConfig.settings = {
+      minimumFetchIntervalMillis: 3600000, // 1 hour
+    };
+    remoteConfig.defaultConfig = {
+      msg: "Welcome to the Anti-Iowa Cult! (Default message)",
+    };
+
+    remoteConfig.fetchAndActivate()
+      .then(() => {
+        const motd = remoteConfig.getString('msg');
+        if (motd) {
+          const banner = document.getElementById('motd-banner');
+          banner.textContent = motd;
+          banner.style.display = 'block';
+        }
+      })
+      .catch((err) => {
+        // Show default message if fetch fails
+        const banner = document.getElementById('motd-banner');
+        banner.textContent = remoteConfig.defaultConfig.msg;
+        banner.style.display = 'block';
+      });
+  </script>
   <script>
     // Absurd pointless clock script
     const hourArm = document.getElementById('hour-arm');

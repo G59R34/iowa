@@ -208,7 +208,8 @@
     <a href="mrs-sniffles.html">Mrs. Sniffles</a>
     <a href="turn-signal.html">Turn Signal</a>
     <a href="united.html">United Airlines</a>
-    <a href="#join">Join</a>
+    <a href="join.html">Join</a>
+    <a href="login.html">LOG TF IN</a>
   </nav>
 
   <section id="about">
@@ -348,5 +349,86 @@
       <span style="color:#ff00cc;">This is a humor project. No actual Iowans, cats, carts, or pilots were harmed.</span>
     </p>
   </footer>
+
+  <!-- Message of the Day Banner -->
+  <div id="motd-banner" style="width:100vw;position:fixed;top:0;left:0;z-index:100;background:linear-gradient(90deg,#ff00cc,#1bffff);color:#fff;font-family:'Orbitron',sans-serif;font-size:1.3em;text-align:center;padding:1em 0;box-shadow:0 4px 32px #ff00cc88;display:none;">
+    <!-- Message will appear here -->
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-remote-config-compat.js"></script>
+  <!-- If you have a shared firebase-init.js, use that instead of inline config below -->
+  <script>
+    // TODO: Replace with your shared Firebase config/init if available
+    const firebaseConfig = {
+    apiKey: "AIzaSyBojUvZXxV6JMWrPUA95Palrt73jEgrEqo",
+    authDomain: "iowa-e875b.firebaseapp.com",
+    projectId: "iowa-e875b",
+    storageBucket: "iowa-e875b.firebasestorage.app",
+    messagingSenderId: "826589602144",
+    appId: "1:826589602144:web:e8a9c1b27b4ebcb9cf3e05",
+    measurementId: "G-6RQCYY8Y3X"
+      // ...other config
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    const remoteConfig = firebase.remoteConfig();
+    remoteConfig.settings = {
+      minimumFetchIntervalMillis: 0, // allow fetch every call for real-time updates
+    };
+
+    // Poll for updates every 10 seconds
+    setInterval(() => {
+      remoteConfig.fetchAndActivate()
+        .then(() => {
+          const motd = remoteConfig.getString('msg');
+          const banner = document.getElementById('motd-banner');
+          if (motd && banner.textContent !== motd) {
+            banner.textContent = motd;
+            banner.style.display = 'block';
+          }
+        });
+    }, 1);
+    remoteConfig.defaultConfig = {
+      msg: "Welcome to the Anti-Iowa Cult! (Default message)",
+    };
+
+    remoteConfig.fetchAndActivate()
+      .then(() => {
+        const motd = remoteConfig.getString('msg');
+        if (motd) {
+          const banner = document.getElementById('motd-banner');
+          banner.textContent = motd;
+          banner.style.display = 'block';
+        }
+      })
+      .catch((err) => {
+        // Show default message if fetch fails
+        const banner = document.getElementById('motd-banner');
+        banner.textContent = remoteConfig.defaultConfig.msg;
+        banner.style.display = 'block';
+      });
+  </script>
+
+  <!-- Firebase Auth greeting -->
+  <script>
+    firebase.auth().onAuthStateChanged(function(user) {
+      let greeting = document.createElement('div');
+      greeting.id = 'user-greeting';
+      greeting.style = "position:fixed;top:60px;right:0;z-index:101;background:linear-gradient(90deg,#1bffff,#ff00cc);color:#2e3192;font-family:'Orbitron',sans-serif;font-size:1.1em;padding:0.7em 2em;border-radius:0 0 0 18px;box-shadow:0 4px 32px #ff00cc88;";
+      if (user && user.email) {
+        // Use email prefix as username, or displayName if set
+        const username = user.displayName || user.email.split('@')[0];
+        greeting.textContent = `whaddup ${username}`;
+      } else {
+        greeting.textContent = "whaddup guest";
+      }
+      // Remove old greeting if present
+      const old = document.getElementById('user-greeting');
+      if (old) old.remove();
+      document.body.appendChild(greeting);
+    });
+  </script>
 </body>
 </html>
