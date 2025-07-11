@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CRACKED OUT WEB 2.0</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body {
+    margin: 0;
+    background: linear-gradient(135deg, #ff00ff, #00ffff, #ffff00);
+    overflow: hidden;
+    font-family: 'Press Start 2P', cursive;
+    animation: spinBG 20s linear infinite;
+    color: white;
+    text-shadow: 2px 2px 4px #000;
+}
+
+h1 {
+    font-size: 4vh;
+    text-align: center;
+    animation: shake 0.3s infinite alternate;
+}
+
+p {
+    font-size: 2vh;
+    text-align: center;
+    margin: 20px;
+    animation: glitch 1s infinite;
+}
+
+.facts, .questions, .math {
+    margin: 20px;
+    text-align: center;
+    font-size: 1.8vh;
+    animation: bounce 2s infinite alternate;
+}
+
+img {
+    position: absolute;
+    width: 150px;
+    height: auto;
+    animation: fly 10s linear infinite;
+    opacity: 0.8;
+}
+
+img:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+img:nth-child(2) { top: 50%; left: 50%; animation-delay: 5s; }
+
+@keyframes fly {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(500px, -200px) rotate(45deg); }
+    50% { transform: translate(-300px, 300px) rotate(90deg); }
+    75% { transform: translate(200px, -500px) rotate(135deg); }
+    100% { transform: translate(0, 0) rotate(360deg); }
+}
+
+@keyframes shake {
+    from { transform: translateX(-5px) rotate(-2deg); }
+    to { transform: translateX(5px) rotate(2deg); }
+}
+
+@keyframes glitch {
+    0% { text-shadow: 2px 0 red; }
+    25% { text-shadow: -2px 0 lime; }
+    50% { text-shadow: 2px 2px blue; }
+    75% { text-shadow: -2px -2px yellow; }
+    100% { text-shadow: 2px 0 red; }
+}
+
+@keyframes spinBG {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+}
+
+@keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-10px); }
+}
+</style>
+</head>
+<body>
+    <h1>🚀 yo yo yo dawg мы тут flyin 🔥🔥🔥</h1>
+    <p>Shiii bruh, math be hittin different: </p>
+    <div class="math">
+        <p>2 + 2 = ? (bro it's always 4, on god)</p>
+        <p>E = mc² cuz Einstein was trappin too 🔬💰</p>
+        <p>sin(A) = 5/11, dawg we proved dat earlier 😎</p>
+        <p>∫ eˣ dx = eˣ + C ... bruh what even is a C 😂</p>
+    </div>
+    <p>✈️ Private pilot homie Qs, fo real:</p>
+    <div class="questions">
+        <p>Yo what’s da minimum fuel reserve for day VFR? ⛽</p>
+        <p>Bruh explain da difference between indicated and true altitude 🏔️</p>
+        <p>How u do a spin recovery, my G? 🔄</p>
+        <p>What's da purpose of mixture control fam? 🍔 (jk fuel/air ratio bro)</p>
+    </div>
+    <p>😳 puberty facts on da hood:</p>
+    <div class="facts">
+        <p>Yo dawg ur brain be re-wiring like crazy durin puberty 🤯</p>
+        <p>Homie, u can grow up to 4 inches in a year, no cap 📏</p>
+        <p>Voice get all deep n sh*t, u start soundin like ur uncle 🗣️</p>
+        <p>Bruh pimples be poppin, it’s da hormones trippin 😤</p>
+    </div>
+    <p>Shabab 我们飞 high, Bruder alles kaputt, но всё красиво 🤡💀</p>
+    <img src="https://cdn.openart.ai/stable_diffusion/9e361783944dac08e7997eee6a6bad2eeb858ded_2000x2000.webp" alt="crazy image">
+    <img src="https://www.pngkey.com/png/full/225-2255351_world-trade-center-burning-9-11-towers-smoking.png" alt="wtc burning">
+</body>
+</html>
