@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tesla Mode - Slop for the Screen</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(120deg, #000 0%, #222 100%);
+            overflow: hidden;
+        }
+        .slop-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2vw;
+        }
+        .slop-title {
+            font-family: 'Orbitron', 'Comic Neue', Arial, sans-serif;
+            font-size: 7vw;
+            color: #00ffe7;
+            text-shadow: 0 0 40px #ff00cc, 0 0 20px #1bffff;
+            margin-bottom: 2vw;
+            animation: pulse 1.5s infinite alternate;
+        }
+        @keyframes pulse {
+            0% { text-shadow: 0 0 40px #ff00cc, 0 0 20px #1bffff; }
+            100% { text-shadow: 0 0 80px #ff00cc, 0 0 40px #ffff00; }
+        }
+        .slop-row {
+            display: flex;
+            gap: 3vw;
+            align-items: center;
+            justify-content: center;
+        }
+        .slop-img {
+            width: 18vw;
+            height: 18vw;
+            border-radius: 50%;
+            box-shadow: 0 0 40px #00ffe7, 0 0 20px #ff00cc;
+            object-fit: cover;
+            animation: spin 6s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg);}
+            100% { transform: rotate(360deg);}
+        }
+        .slop-text {
+            font-family: 'Comic Neue', cursive, sans-serif;
+            font-size: 3vw;
+            color: #ff00cc;
+            background: rgba(0,255,231,0.1);
+            border-radius: 2vw;
+            padding: 1vw 2vw;
+            box-shadow: 0 0 20px #1bffff;
+            animation: bounce 2s infinite alternate;
+        }
+        @keyframes bounce {
+            0% { transform: translateY(0);}
+            100% { transform: translateY(-2vw);}
+        }
+        .tesla-logo {
+            width: 12vw;
+            margin-top: 2vw;
+            filter: drop-shadow(0 0 20px #ff00cc);
+            animation: wiggle 1.2s infinite alternate;
+        }
+        @keyframes wiggle {
+            0% { transform: rotate(-8deg);}
+            100% { transform: rotate(8deg);}
+        }
+    </style>
+</head>
+<body>
+    <!-- Message of the Day Banner (Firebase Remote Config) -->
+    <div id="motd-banner" style="
+        width: 100vw;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        background: linear-gradient(90deg,#ff00cc,#00ffe7);
+        color: #fff;
+        font-family: 'Orbitron',sans-serif;
+        font-size: 2vw;
+        text-align: center;
+        padding: 1vw 0 0.7vw 0;
+        box-shadow: 0 4px 32px #ff00cc88;
+        display: none;
+        letter-spacing: 0.05em;
+        text-shadow: 0 0 12px #1bffff, 0 0 8px #ff00cc;
+    ">
+        <!-- Message will appear here -->
+    </div>
+    <!-- Menu Bar (styled to fit below MOTD banner) -->
+    <nav style="
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        gap: 3vw;
+        background: rgba(0,255,231,0.12);
+        box-shadow: 0 2px 20px #ff00cc;
+        font-family: 'Orbitron', 'Comic Neue', Arial, sans-serif;
+        font-size: 2vw;
+        padding: 1vw 0;
+        position: sticky;
+        top: 4vw; /* Place below banner (banner is ~3vw tall) */
+        z-index: 999;
+        /* margin-top: 2vw; */ /* Remove this line */
+    ">
+        <a href="index.html" style="color:#00ffe7;text-decoration:none;">Home</a>
+        <a href="tesla.html" style="color:#ff00cc;text-decoration:none;">Tesla Mode</a>
+        <a href="clock.html" style="color:#00ffe7;text-decoration:none;">Clock</a>
+        <a href="join.html" style="color:#ff00cc;text-decoration:none;">Join</a>
+        <a href="login.html" style="color:#00ffe7;text-decoration:none;">Login</a>
+        <a href="united.html" style="color:#ff00cc;text-decoration:none;">United</a>
+    </nav>
+    <div class="slop-container" style="margin-top: 6vw;"> <!-- Reduce margin-top -->
+        <div class="slop-title">TESLA MODE</div>
+        <div class="slop-row">
+            <img class="slop-img" src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Tesla_logo.png" alt="Tesla">
+            <div class="slop-text">Slop for the screen. Only for real ones.</div>
+            <img class="slop-img" src="https://media.giphy.com/media/3o6ZtpxSZbQRRnwCKQ/giphy.gif" alt="Slop">
+        </div>
+        <div class="slop-row">
+            <div class="slop-text">Corn is not a valid payment method.</div>
+            <img class="slop-img" src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" alt="Slop">
+            <div class="slop-text">Iowa is a myth. Tesla is real.</div>
+        </div>
+        <div class="slop-row">
+            <img class="slop-img" src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif" alt="Slop">
+            <div class="slop-text">Touch the screen for more slop.</div>
+            <img class="slop-img" src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="Slop">
+        </div>
+        <img class="tesla-logo" src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Tesla_logo.png" alt="Tesla Logo">
+    </div>
+    <!-- Firebase SDKs for Remote Config -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-remote-config-compat.js"></script>
+    <script>
+        // Use the same Firebase config as other pages
+        const firebaseConfig = {
+            apiKey: "AIzaSyBojUvZXxV6JMWrPUA95Palrt73jEgrEqo",
+            authDomain: "iowa-e875b.firebaseapp.com",
+            projectId: "iowa-e875b",
+            storageBucket: "iowa-e875b.firebasestorage.app",
+            messagingSenderId: "826589602144",
+            appId: "1:826589602144:web:e8a9c1b27b4ebcb9cf3e05",
+            measurementId: "G-6RQCYY8Y3X"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        const remoteConfig = firebase.remoteConfig();
+        remoteConfig.settings = {
+            minimumFetchIntervalMillis: 0,
+        };
+        remoteConfig.defaultConfig = {
+            msg: "Welcome to Tesla Mode! (Default message)",
+        };
+
+        function updateMotd() {
+            remoteConfig.fetchAndActivate()
+                .then(() => {
+                    const motd = remoteConfig.getString('msg');
+                    const banner = document.getElementById('motd-banner');
+                    banner.textContent = motd || remoteConfig.defaultConfig.msg;
+                    banner.style.display = 'block';
+                })
+                .catch(() => {
+                    const banner = document.getElementById('motd-banner');
+                    banner.textContent = remoteConfig.defaultConfig.msg;
+                    banner.style.display = 'block';
+                });
+        }
+        updateMotd();
+        setInterval(updateMotd, 10000);
+    </script>
+    <script>
+        // On touch/click, randomize the background and show a random slop message
+        const slopTexts = [
+            "Slop engaged. Please remain seated.",
+            "Tesla detected. Iowa rejected.",
+            "Screen too clean, add more slop.",
+            "You are now in maximum slop mode.",
+            "Corn subsidies not accepted.",
+            "Linda is not allowed in Tesla Mode.",
+            "Sniffles hacked the autopilot.",
+            "Slop is love. Slop is life.",
+            "Touch again for more slop."
+        ];
+
+        const getRandomSlopText = () => {
+            return slopTexts[Math.floor(Math.random() * slopTexts.length)];
+        }
+
+        document.body.addEventListener('click', () => {
+            document.body.style.background = `linear-gradient(${Math.random() * 360}deg, #${Math.floor(Math.random()*16777215).toString(16)} 0%, #${Math.floor(Math.random()*16777215).toString(16)} 100%)`;
+            const slopTextElements = document.querySelectorAll('.slop-text');
+            slopTextElements.forEach(el => {
+                el.innerText = getRandomSlopText();
+            });
+        });
+    </script>
+</body>
+</html>

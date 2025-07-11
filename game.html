@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Corn From Iowa - The Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ffefc1 0%, #baffc9 100%);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            font-family: 'Comic Neue', 'Comic Sans MS', cursive, sans-serif;
+        }
+        #game-canvas {
+            display: block;
+            margin: 0 auto;
+            background: #e5e5ea;
+            border: 8px solid #ffcc00;
+            border-radius: 24px;
+            box-shadow: 0 0 40px #ffcc00;
+            animation: bgMove 8s linear infinite alternate;
+            max-width: 98vw;
+            max-height: 70vh;
+        }
+        @keyframes bgMove {
+            0% { box-shadow: 0 0 40px #ffcc00, 0 0 0 #00ff66; }
+            100% { box-shadow: 0 0 80px #00ff66, 0 0 40px #ffcc00; }
+        }
+        #hud {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            padding: 1em 0;
+            background: linear-gradient(90deg, #ffcc00 0%, #00ff66 100%);
+            color: #222;
+            font-size: 2em;
+            text-align: center;
+            z-index: 10;
+            font-family: 'Orbitron', 'Comic Neue', Arial, sans-serif;
+            letter-spacing: 0.05em;
+            box-shadow: 0 4px 32px #ffcc00;
+        }
+        #hud.pulse {
+            animation: pulseHud 0.4s;
+        }
+        @keyframes pulseHud {
+            0% { background: #ffcc00; }
+            50% { background: #ff6666; }
+            100% { background: linear-gradient(90deg, #ffcc00 0%, #00ff66 100%); }
+        }
+        #start-btn, #restart-btn {
+            position: fixed;
+            left: 50%;
+            top: 60%;
+            transform: translate(-50%, -50%);
+            font-size: 2em;
+            background: linear-gradient(90deg, #ffcc00 0%, #00ff66 100%);
+            color: #222;
+            border: none;
+            border-radius: 16px;
+            padding: 0.7em 2em;
+            box-shadow: 0 2px 16px #ffcc0088;
+            cursor: pointer;
+            font-family: 'Orbitron', 'Comic Neue', Arial, sans-serif;
+            font-weight: bold;
+            z-index: 20;
+        }
+        #restart-btn { display: none; }
+        #instructions {
+            position: fixed;
+            left: 50%;
+            top: 75%;
+            transform: translate(-50%, -50%);
+            font-size: 1.2em;
+            color: #222;
+            background: #fff8;
+            border-radius: 12px;
+            padding: 1em 2em;
+            font-family: 'Comic Neue', 'Comic Sans MS', cursive, sans-serif;
+            z-index: 20;
+        }
+        .confetti {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1000;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: confetti-fall 1.2s linear forwards;
+        }
+        @keyframes confetti-fall {
+            to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        #exit-btn {
+            position:fixed;
+            right:2em;
+            top:1em;
+            z-index:30;
+            font-size:1.5em;
+            background:linear-gradient(90deg,#ff6666 0%,#ffcc00 100%);
+            color:#222;
+            border:none;
+            border-radius:16px;
+            padding:0.5em 1.5em;
+            box-shadow:0 2px 16px #ff666688;
+            cursor:pointer;
+            font-family:'Orbitron','Comic Neue',Arial,sans-serif;
+            font-weight:bold;
+        }
+        #review-popup {
+            display:none;
+            position:fixed;
+            top:0;left:0;width:100vw;height:100vh;
+            background:#0008;
+            z-index:10000;
+            align-items:center;
+            justify-content:center;
+        }
+        #review-popup > div {
+            background:#fffbe8;
+            border-radius:24px;
+            padding:2em 2.5em;
+            box-shadow:0 8px 48px #ffcc00cc;
+            text-align:center;
+            max-width:90vw;
+        }
+        @media (max-width: 700px) {
+            #game-canvas { max-width: 98vw; max-height: 50vh; }
+            #hud { font-size: 1.2em; }
+            #start-btn, #restart-btn { font-size: 1.2em; }
+            #instructions { font-size: 1em; padding: 0.7em 1em; }
+        }
+    </style>
+</head>
+<body>
+    <div id="hud">Score: <span id="score">0</span> | Corn Left: <span id="corn-left">0</span></div>
+    <button id="start-btn">Start Deleting Corn</button>
+    <button id="restart-btn">Restart</button>
+    <div id="instructions">Click or tap the corn to delete it! Clear all corn before time runs out. 🕹️</div>
+    <canvas id="game-canvas" width="900" height="600"></canvas>
+    <button id="exit-btn">Exit</button>
+    <div id="review-popup">
+      <div>
+        <h2 style="color:#ff6666;font-family:'Orbitron',Arial,sans-serif;">Mandatory Corn Game Review</h2>
+        <p style="font-size:1.2em;color:#222;">Before you leave, please tell us what you thought of deleting corn from Iowa:</p>
+        <textarea id="review-text" rows="4" style="width:100%;max-width:400px;border-radius:12px;border:2px solid #ffcc00;padding:1em;font-size:1em;"></textarea>
+        <br>
+        <button id="submit-review-btn" style="margin-top:1em;font-size:1.2em;background:linear-gradient(90deg,#ffcc00 0%,#00ff66 100%);color:#222;border:none;border-radius:12px;padding:0.5em 2em;box-shadow:0 2px 16px #ffcc0088;cursor:pointer;font-family:'Orbitron','Comic Neue',Arial,sans-serif;font-weight:bold;">Submit & Exit</button>
+        <p id="review-error" style="color:#ff6666;font-size:1em;display:none;margin-top:0.5em;">Please write a review before exiting!</p>
+      </div>
+    </div>
+    <script>
+    // --- Game Variables ---
+    const canvas = document.getElementById('game-canvas');
+    const ctx = canvas.getContext('2d');
+    const scoreEl = document.getElementById('score');
+    const cornLeftEl = document.getElementById('corn-left');
+    const startBtn = document.getElementById('start-btn');
+    const restartBtn = document.getElementById('restart-btn');
+    const hud = document.getElementById('hud');
+    const instructions = document.getElementById('instructions');
+    const exitBtn = document.getElementById('exit-btn');
+    const reviewPopup = document.getElementById('review-popup');
+    const reviewText = document.getElementById('review-text');
+    const submitReviewBtn = document.getElementById('submit-review-btn');
+    const reviewError = document.getElementById('review-error');
+
+    let cornArr = [];
+    let score = 0;
+    let cornLeft = 0;
+    let gameActive = false;
+    let timer = 0;
+    let maxTime = 30; // seconds
+    let popEffects = [];
+    let cornRain = [];
+    let gameEnded = false;
+
+    // Corn image
+    const cornImg = new Image();
+    cornImg.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTD6A8PSdNjNDK5rOIq9m55cydQIeux-2Jo3Q&s";
+    cornImg.onload = () => drawIntro();
+
+    // --- Utility Functions ---
+    function randomCorn() {
+        return {
+            x: Math.random() * (canvas.width - 80) + 40,
+            y: Math.random() * (canvas.height - 120) + 80,
+            r: 44 + Math.random() * 18,
+            alive: true,
+            dx: (Math.random() - 0.5) * 2.5,
+            dy: (Math.random() - 0.5) * 2.5,
+            rot: Math.random() * Math.PI * 2
+        };
+    }
+    function randomColor() {
+        const colors = ["#ffe600", "#ffcc00", "#00ff66", "#ff6666", "#00e6ff", "#ff00cc"];
+        return colors[Math.floor(Math.random()*colors.length)];
+    }
+    function playDeleteSound() {
+        const audio = new Audio("https://cdn.pixabay.com/audio/2022/03/15/audio_115b7b2b7b.mp3");
+        audio.volume = 0.3;
+        audio.play();
+    }
+    function spawnConfetti() {
+        const conf = document.createElement('div');
+        conf.className = 'confetti';
+        conf.style.left = (Math.random()*100) + 'vw';
+        conf.style.top = '-20px';
+        conf.style.background = randomColor();
+        conf.style.animationDuration = (0.8 + Math.random()*0.7) + 's';
+        document.body.appendChild(conf);
+        setTimeout(() => conf.remove(), 1200);
+    }
+
+    // --- Drawing Functions ---
+    function drawIntro() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.save();
+        ctx.font = "bold 2.5em Orbitron, Arial";
+        ctx.fillStyle = "#ffcc00";
+        ctx.textAlign = "center";
+        ctx.shadowColor = "#ffcc00";
+        ctx.shadowBlur = 32;
+        ctx.fillText("Delete all the corn from Iowa!", canvas.width/2, canvas.height/2 - 40);
+        ctx.drawImage(cornImg, canvas.width/2-60, canvas.height/2, 120, 120);
+        ctx.restore();
+    }
+    function drawCorn() {
+        cornArr.forEach(corn => {
+            if (corn.alive) {
+                ctx.save();
+                ctx.translate(corn.x, corn.y);
+                ctx.rotate(corn.rot + Math.sin(Date.now()/300 + corn.x) * 0.2);
+                ctx.shadowColor = "#ffe600";
+                ctx.shadowBlur = 32;
+                ctx.drawImage(cornImg, -corn.r, -corn.r, corn.r*2, corn.r*2);
+                ctx.restore();
+            }
+        });
+    }
+    function drawPopEffects() {
+        popEffects.forEach((pop, i) => {
+            ctx.save();
+            ctx.globalAlpha = 1 - pop.life/20;
+            ctx.translate(pop.x, pop.y);
+            for (let j = 0; j < 8; j++) {
+                ctx.rotate(Math.PI/4);
+                ctx.fillStyle = pop.color;
+                ctx.beginPath();
+                ctx.arc(0, pop.life*2 + 8, 6-pop.life/4, 0, 2*Math.PI);
+                ctx.fill();
+            }
+            ctx.restore();
+            pop.life++;
+        });
+        popEffects = popEffects.filter(pop => pop.life < 20);
+    }
+    function drawHud() {
+        scoreEl.textContent = score;
+        cornLeftEl.textContent = cornLeft;
+    }
+    function drawTimer() {
+        ctx.save();
+        ctx.font = "bold 2em Orbitron, Arial";
+        ctx.fillStyle = "#ffcc00";
+        ctx.textAlign = "center";
+        ctx.shadowColor = "#ffcc00";
+        ctx.shadowBlur = 16 + Math.sin(Date.now()/200)*8;
+        ctx.fillText("Time Left: " + Math.max(0, Math.ceil(maxTime - timer)), canvas.width/2, 50);
+        ctx.restore();
+    }
+    function drawCornRain() {
+        cornRain.forEach(rain => {
+            ctx.save();
+            ctx.globalAlpha = rain.alpha;
+            ctx.translate(rain.x, rain.y);
+            ctx.rotate(rain.rot);
+            ctx.drawImage(cornImg, -rain.r, -rain.r, rain.r*2, rain.r*2);
+            ctx.restore();
+            rain.y += rain.speed;
+            rain.rot += 0.05;
+            rain.alpha -= 0.005;
+        });
+        cornRain = cornRain.filter(rain => rain.alpha > 0);
+    }
+
+    // --- Game Logic ---
+    function spawnCorn(n) {
+        cornArr = [];
+        for (let i = 0; i < n; i++) cornArr.push(randomCorn());
+        cornLeft = n;
+        score = 0;
+        scoreEl.textContent = score;
+        cornLeftEl.textContent = cornLeft;
+        popEffects = [];
+        gameEnded = false;
+    }
+    function updateCorn() {
+        cornArr.forEach(corn => {
+            if (corn.alive) {
+                corn.x += corn.dx;
+                corn.y += corn.dy;
+                corn.rot += 0.01;
+                // Bounce off walls
+                if (corn.x < corn.r || corn.x > canvas.width - corn.r) corn.dx *= -1;
+                if (corn.y < corn.r || corn.y > canvas.height - corn.r) corn.dy *= -1;
+            }
+        });
+    }
+    function gameLoop() {
+        if (!gameActive) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        updateCorn();
+        drawCorn();
+        drawPopEffects();
+        drawCornRain();
+        drawTimer();
+        drawHud();
+        timer += 1/60;
+        if (cornLeft === 0) {
+            endGame(true);
+        } else if (timer >= maxTime) {
+            endGame(false);
+        } else {
+            requestAnimationFrame(gameLoop);
+        }
+    }
+    function endGame(win) {
+        if (gameEnded) return;
+        gameEnded = true;
+        gameActive = false;
+        instructions.textContent = win
+            ? "You deleted all the corn from Iowa! 🌽🚫 You win! Click Restart to play again."
+            : "Time's up! Iowa is still full of corn. 😭 Try again!";
+        restartBtn.style.display = "block";
+        startBtn.style.display = "none";
+        hud.classList.add('pulse');
+        setTimeout(() => hud.classList.remove('pulse'), 400);
+        showExitBtn(false);
+        // Confetti and corn rain
+        if (win) {
+            for (let i = 0; i < 40; i++) spawnConfetti();
+            for (let i = 0; i < 20; i++) cornRain.push({
+                x: Math.random()*canvas.width,
+                y: -40,
+                r: 24 + Math.random()*16,
+                rot: Math.random()*Math.PI*2,
+                speed: 4 + Math.random()*2,
+                alpha: 1
+            });
+        } else {
+            for (let i = 0; i < 10; i++) cornRain.push({
+                x: Math.random()*canvas.width,
+                y: -40,
+                r: 24 + Math.random()*16,
+                rot: Math.random()*Math.PI*2,
+                speed: 3 + Math.random()*2,
+                alpha: 1
+            });
+        }
+        animateEnd();
+    }
+    function animateEnd() {
+        function loop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawCornRain();
+            drawTimer();
+            drawHud();
+            if (cornRain.length > 0) {
+                requestAnimationFrame(loop);
+            }
+        }
+        loop();
+    }
+
+    // --- Event Handlers ---
+    function handleClick(e) {
+        if (!gameActive) return;
+        const rect = canvas.getBoundingClientRect();
+        const mx = (e.clientX - rect.left) * (canvas.width / rect.width);
+        const my = (e.clientY - rect.top) * (canvas.height / rect.height);
+        cornArr.forEach(corn => {
+            if (corn.alive) {
+                const dist = Math.sqrt((mx - corn.x)**2 + (my - corn.y)**2);
+                if (dist < corn.r) {
+                    corn.alive = false;
+                    cornLeft--;
+                    score++;
+                    playDeleteSound();
+                    popEffects.push({
+                        x: corn.x,
+                        y: corn.y,
+                        color: randomColor(),
+                        life: 0
+                    });
+                    hud.classList.add('pulse');
+                    setTimeout(() => hud.classList.remove('pulse'), 300);
+                }
+            }
+        });
+    }
+    canvas.addEventListener('mousedown', handleClick);
+    canvas.addEventListener('touchstart', function(e) {
+        const touch = e.touches[0];
+        handleClick({
+            clientX: touch.clientX,
+            clientY: touch.clientY
+        });
+    });
+
+    // --- Game Controls ---
+    function showExitBtn(show) {
+        exitBtn.style.display = show ? "block" : "none";
+    }
+    showExitBtn(false);
+
+    function startGame() {
+        spawnCorn(18);
+        timer = 0;
+        gameActive = true;
+        instructions.textContent = "Click or tap the corn to delete it! Clear all corn before time runs out. 🕹️";
+        restartBtn.style.display = "none";
+        startBtn.style.display = "none";
+        showExitBtn(true);
+        gameLoop();
+    }
+    function restartGame() {
+        startGame();
+    }
+    startBtn.onclick = startGame;
+    restartBtn.onclick = restartGame;
+
+    // --- Exit & Review Popup ---
+    exitBtn.onclick = function() {
+        reviewPopup.style.display = "flex";
+        reviewText.value = "";
+        reviewError.style.display = "none";
+    };
+    submitReviewBtn.onclick = function() {
+        if (reviewText.value.trim().length < 1) {
+            reviewError.style.display = "block";
+            reviewText.focus();
+            return;
+        }
+        reviewPopup.style.display = "none";
+        canvas.style.display = "none";
+        hud.style.display = "none";
+        instructions.style.display = "none";
+        startBtn.style.display = "none";
+        restartBtn.style.display = "none";
+        exitBtn.style.display = "none";
+        document.body.insertAdjacentHTML('beforeend', `<div style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:#fffbe8;z-index:9999;display:flex;align-items:center;justify-content:center;font-size:2em;color:#ff6666;font-family:'Orbitron',Arial,sans-serif;text-align:center;">Thanks for your review! You have exited the Corn Game.<br><br>🌽🚫</div>`);
+    };
+
+    // --- Responsive Canvas ---
+    function resizeCanvas() {
+        let w = Math.min(window.innerWidth * 0.98, 900);
+        let h = Math.min(window.innerHeight * 0.7, 600);
+        canvas.width = w;
+        canvas.height = h;
+        if (!gameActive) drawIntro();
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    </script>
+</body>

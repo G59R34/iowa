@@ -23,19 +23,23 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
-            overflow: hidden;
+            overflow-x: hidden;
+            box-sizing: border-box;
+            padding-top: 100px; /* Add padding for nav bar */
         }
         .login-box {
             background: rgba(255,255,255,0.8);
             border: 5px dashed #ff6ec4;
             border-radius: 30px;
             box-shadow: 0 0 40px #7873f5;
-            padding: 40px 60px;
+            padding: 30px 20px;
             text-align: center;
             animation: wobble 1.5s infinite alternate;
+            max-width: 400px;
+            width: 90vw;
+            margin: 0 auto;
         }
         @keyframes wobble {
             0% { transform: rotate(-2deg) scale(1.05);}
@@ -47,9 +51,10 @@
             border-radius: 15px;
             border: 2px solid #7873f5;
             font-size: 1.1em;
-            width: 80%;
+            width: 90%;
             outline: none;
             transition: border 0.2s;
+            box-sizing: border-box;
         }
         input:focus {
             border: 2px solid #ff6ec4;
@@ -65,6 +70,8 @@
             margin-top: 15px;
             box-shadow: 0 0 10px #7873f5;
             transition: background 0.2s;
+            width: 90%;
+            max-width: 300px;
         }
         button:hover {
             background: #7873f5;
@@ -75,19 +82,48 @@
             color: #7873f5;
             text-shadow: 2px 2px #ff6ec4;
             animation: bounce 1s infinite alternate;
+            word-break: break-word;
         }
         @keyframes bounce {
             0% { transform: translateY(0);}
             100% { transform: translateY(-10px);}
         }
+        @media (max-width: 600px) {
+            .login-box {
+                padding: 20px 5vw;
+                font-size: 1em;
+            }
+            .greeting {
+                font-size: 1.2em;
+            }
+            button, input {
+                font-size: 1em;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Navigation/Menu Bar -->
+    <nav style="width:100vw; background:linear-gradient(90deg,#ff6ec4,#7873f5); box-shadow:0 4px 20px #7873f5; display:flex; align-items:center; justify-content:space-between; padding:18px 40px; position:fixed; top:0; left:0; z-index:999; font-family:'Comic Sans MS',cursive,sans-serif;">
+        <div style="font-size:2em; font-weight:bold; color:#fff; text-shadow:2px 2px #ff6ec4; letter-spacing:2px; animation:bounce 1s infinite alternate;">
+            🛑 Anti-Iowa Cult 🛑
+        </div>
+        <div style="display:flex; gap:30px;">
+            <a href="index.html" style="color:#fff; font-size:1.2em; text-decoration:none; font-weight:bold; transition:color 0.2s;">Home</a>
+            <a href="join.html" style="color:#fff; font-size:1.2em; text-decoration:none; font-weight:bold; transition:color 0.2s;">Join</a>
+            <a href="about.html" style="color:#fff; font-size:1.2em; text-decoration:none; font-weight:bold; transition:color 0.2s;">About</a>
+            <a href="turn-signal.html" style="color:#fff; font-size:1.2em; text-decoration:none; font-weight:bold; transition:color 0.2s;">Turn Signal</a>
+            <a href="united.html" style="color:#fff; font-size:1.2em; text-decoration:none; font-weight:bold; transition:color 0.2s;">United</a>
+        </div>
+    </nav>
     <div class="login-box">
-        <div class="greeting" id="greeting">👾 Welcome, Space Cadet! 👾</div>
+        <div class="greeting" id="greeting">Bruh Log TF in FN!</div>
         <input type="email" id="email" placeholder="Enter your wacky email">
         <input type="password" id="password" placeholder="Super secret password">
-        <button onclick="login()">🚀 Blast Off!</button>
+        <button onclick="login()">Touch Time!</button>
+        <button id="google-login" style="background:#fff; color:#7873f5; border:2px solid #ff6ec4; margin-top:10px; font-weight:bold; display:flex; align-items:center; justify-content:center; gap:10px;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" style="width:24px; height:24px;"> Login with Google
+        </button>
         <div id="message"></div>
     </div>
     <script>
@@ -117,6 +153,22 @@
                     document.getElementById('message').textContent = "Oops! " + error.message;
                 });
         }
+
+        // Google login function
+        document.getElementById('google-login').onclick = function() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithPopup(provider)
+                .then((result) => {
+                    document.getElementById('greeting').textContent = `🌈 Hello, ${result.user.displayName || result.user.email}! 🌈`;
+                    document.getElementById('message').textContent = "Google magic! You're in!";
+                    setTimeout(() => {
+                        window.location.href = "clock.html";
+                    }, 1200);
+                })
+                .catch((error) => {
+                    document.getElementById('message').textContent = "Google fail: " + error.message;
+                });
+        };
     </script>
 </body>
 </html>
