@@ -1,4 +1,4 @@
-// Live Chat System for The Anti-Iowa Cult
+// Live Chat System for The Anti-Iowa Cult - GitHub Pages Version
 class LiveChat {
     constructor() {
         this.username = null;
@@ -6,6 +6,7 @@ class LiveChat {
         this.isConnected = false;
         this.messages = [];
         this.isMinimized = false;
+        this.backendUrl = 'https://anti-iowa-chat.onrender.com'; // Your Render URL
         this.init();
     }
 
@@ -60,9 +61,9 @@ class LiveChat {
     }
 
     connectWebSocket() {
-        // Connect to WebSocket server
+        // Connect to deployed backend server
         const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-        const wsUrl = `${protocol}//${window.location.hostname}:3000`;
+        const wsUrl = `${protocol}//${this.backendUrl.replace(/^https?:\/\//, '')}`;
         
         try {
             this.socket = new WebSocket(wsUrl);
