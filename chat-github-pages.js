@@ -6,7 +6,7 @@ class LiveChat {
         this.isConnected = false;
         this.messages = [];
         this.isMinimized = false;
-        this.backendUrl = 'https://your-backend-url.herokuapp.com'; // Change this to your deployed backend URL
+        this.backendUrl = 'https://iowa.onrender.com'; // Change this to your deployed backend URL
         this.init();
     }
 

@@ -6,7 +6,7 @@ class LiveChat {
         this.isConnected = false;
         this.messages = [];
         this.isMinimized = false;
-        this.backendUrl = 'https://anti-iowa-chat.onrender.com'; // Your Render URL
+        this.backendUrl = 'https://iowa.onrender.com'; // Your Render URL
         this.init();
     }
 
