@@ -5,7 +5,7 @@
     <script src="global-nav.js"></script>
     <meta charset="UTF-8">
     <title>Delete Corn From Iowa - The Game</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
     <style>
         html, body {
             margin: 0;
@@ -113,6 +113,98 @@
             cursor:pointer;
             font-family:'Orbitron','Comic Neue',Arial,sans-serif;
             font-weight:bold;
+        }
+
+        /* AI Game Features */
+        #ai-controls {
+            position: fixed;
+            left: 1em;
+            top: 1em;
+            z-index: 30;
+            background: rgba(0,0,0,0.8);
+            border-radius: 16px;
+            padding: 1em;
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            backdrop-filter: blur(10px);
+            border: 2px solid #00ff88;
+        }
+
+        #ai-controls h3 {
+            margin: 0 0 0.5em 0;
+            color: #00ff88;
+            font-size: 0.9em;
+        }
+
+        .ai-btn {
+            background: linear-gradient(135deg, #00ff88, #00cc6a);
+            color: #1a1a2e;
+            border: none;
+            border-radius: 8px;
+            padding: 0.5em 1em;
+            margin: 0.2em;
+            cursor: pointer;
+            font-size: 0.8em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .ai-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0,255,136,0.5);
+        }
+
+        .ai-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        #ai-stats {
+            position: fixed;
+            right: 1em;
+            bottom: 1em;
+            z-index: 30;
+            background: rgba(0,0,0,0.8);
+            border-radius: 16px;
+            padding: 1em;
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            backdrop-filter: blur(10px);
+            border: 2px solid #ff00cc;
+        }
+
+        #ai-stats h3 {
+            margin: 0 0 0.5em 0;
+            color: #ff00cc;
+            font-size: 0.9em;
+        }
+
+        .stat-item {
+            font-size: 0.8em;
+            margin: 0.2em 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .ai-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.9);
+            color: #00ff88;
+            padding: 1em 2em;
+            border-radius: 16px;
+            font-family: 'Orbitron', sans-serif;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border: 2px solid #00ff88;
+            animation: aiMessage 3s ease-in-out;
+        }
+
+        @keyframes aiMessage {
+            0%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+            20%, 80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
         }
         #review-popup {
             display:none;
@@ -270,6 +362,38 @@
 </head>
 <body>
     <div id="hud">Score: <span id="score">0</span> | Corn Left: <span id="corn-left">0</span></div>
+    
+    <!-- AI Game Controls -->
+    <div id="ai-controls">
+        <h3>🤖 AI Controls</h3>
+        <button class="ai-btn" id="ai-auto-play">Auto Play</button>
+        <button class="ai-btn" id="ai-speed-up">Speed Up</button>
+        <button class="ai-btn" id="ai-slow-down">Slow Down</button>
+        <button class="ai-btn" id="ai-corn-rain">Corn Rain</button>
+        <button class="ai-btn" id="ai-time-freeze">Time Freeze</button>
+    </div>
+
+    <!-- AI Stats Panel -->
+    <div id="ai-stats">
+        <h3>📊 AI Stats</h3>
+        <div class="stat-item">
+            <span>Corn Deleted:</span>
+            <span id="ai-corn-deleted">0</span>
+        </div>
+        <div class="stat-item">
+            <span>Time Saved:</span>
+            <span id="ai-time-saved">0s</span>
+        </div>
+        <div class="stat-item">
+            <span>AI Power:</span>
+            <span id="ai-power">100%</span>
+        </div>
+        <div class="stat-item">
+            <span>Difficulty:</span>
+            <span id="ai-difficulty">Normal</span>
+        </div>
+    </div>
+
     <button id="start-btn">Start Deleting Corn</button>
     <button id="restart-btn">Restart</button>
     <div id="instructions">Click or tap the corn to delete it! Clear all corn before time runs out. 🕹️</div>
@@ -311,6 +435,17 @@
     let cornRain = [];
     let gameEnded = false;
 
+    // AI Game Variables
+    let aiAutoPlay = false;
+    let aiSpeedMultiplier = 1;
+    let aiTimeFreeze = false;
+    let aiCornDeleted = 0;
+    let aiTimeSaved = 0;
+    let aiPower = 100;
+    let aiDifficulty = 'Normal';
+    let aiAutoPlayInterval = null;
+    let aiLastAutoClick = 0;
+
     // Corn image
     const cornImg = new Image();
     cornImg.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTD6A8PSdNjNDK5rOIq9m55cydQIeux-2Jo3Q&s";
@@ -346,6 +481,130 @@
         conf.style.animationDuration = (0.8 + Math.random()*0.7) + 's';
         document.body.appendChild(conf);
         setTimeout(() => conf.remove(), 1200);
+    }
+
+    // --- AI Functions ---
+    function showAIMessage(message) {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = 'ai-message';
+        msgDiv.textContent = message;
+        document.body.appendChild(msgDiv);
+        setTimeout(() => msgDiv.remove(), 3000);
+    }
+
+    function updateAIStats() {
+        document.getElementById('ai-corn-deleted').textContent = aiCornDeleted;
+        document.getElementById('ai-time-saved').textContent = aiTimeSaved + 's';
+        document.getElementById('ai-power').textContent = aiPower + '%';
+        document.getElementById('ai-difficulty').textContent = aiDifficulty;
+    }
+
+    function aiAutoPlayFunction() {
+        if (!aiAutoPlay || !gameActive) return;
+        
+        const now = Date.now();
+        if (now - aiLastAutoClick < 200) return; // Limit clicks per second
+        
+        // Find closest corn to center
+        let closestCorn = null;
+        let closestDistance = Infinity;
+        
+        cornArr.forEach(corn => {
+            if (corn.alive) {
+                const distance = Math.sqrt(
+                    Math.pow(corn.x - canvas.width/2, 2) + 
+                    Math.pow(corn.y - canvas.height/2, 2)
+                );
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestCorn = corn;
+                }
+            }
+        });
+        
+        if (closestCorn) {
+            // Simulate click on corn
+            const rect = canvas.getBoundingClientRect();
+            const x = closestCorn.x + rect.left;
+            const y = closestCorn.y + rect.top;
+            
+            const clickEvent = new MouseEvent('click', {
+                clientX: x,
+                clientY: y,
+                bubbles: true
+            });
+            
+            canvas.dispatchEvent(clickEvent);
+            aiLastAutoClick = now;
+        }
+    }
+
+    function toggleAutoPlay() {
+        aiAutoPlay = !aiAutoPlay;
+        const btn = document.getElementById('ai-auto-play');
+        
+        if (aiAutoPlay) {
+            btn.textContent = 'Stop Auto';
+            btn.style.background = 'linear-gradient(135deg, #ff6666, #ff1744)';
+            showAIMessage('🤖 AI Auto Play Activated!');
+            aiAutoPlayInterval = setInterval(aiAutoPlayFunction, 100);
+        } else {
+            btn.textContent = 'Auto Play';
+            btn.style.background = 'linear-gradient(135deg, #00ff88, #00cc6a)';
+            showAIMessage('🤖 AI Auto Play Deactivated');
+            if (aiAutoPlayInterval) {
+                clearInterval(aiAutoPlayInterval);
+                aiAutoPlayInterval = null;
+            }
+        }
+    }
+
+    function speedUp() {
+        aiSpeedMultiplier = Math.min(aiSpeedMultiplier * 1.5, 3);
+        aiPower = Math.max(aiPower - 10, 20);
+        showAIMessage('⚡ Speed Increased!');
+        updateAIStats();
+    }
+
+    function slowDown() {
+        aiSpeedMultiplier = Math.max(aiSpeedMultiplier / 1.5, 0.5);
+        aiPower = Math.min(aiPower + 5, 100);
+        showAIMessage('🐌 Speed Decreased');
+        updateAIStats();
+    }
+
+    function triggerCornRain() {
+        for (let i = 0; i < 15; i++) {
+            cornRain.push({
+                x: Math.random() * canvas.width,
+                y: -40,
+                r: 20 + Math.random() * 20,
+                rot: Math.random() * Math.PI * 2,
+                speed: 3 + Math.random() * 3,
+                alpha: 1
+            });
+        }
+        aiPower = Math.max(aiPower - 15, 20);
+        showAIMessage('🌽 Corn Rain Activated!');
+        updateAIStats();
+    }
+
+    function toggleTimeFreeze() {
+        aiTimeFreeze = !aiTimeFreeze;
+        const btn = document.getElementById('ai-time-freeze');
+        
+        if (aiTimeFreeze) {
+            btn.textContent = 'Unfreeze';
+            btn.style.background = 'linear-gradient(135deg, #00e6ff, #0099cc)';
+            showAIMessage('❄️ Time Frozen!');
+            aiTimeSaved += 5;
+            aiPower = Math.max(aiPower - 20, 20);
+        } else {
+            btn.textContent = 'Time Freeze';
+            btn.style.background = 'linear-gradient(135deg, #00ff88, #00cc6a)';
+            showAIMessage('⏰ Time Unfrozen');
+        }
+        updateAIStats();
     }
 
     // --- Drawing Functions ---
@@ -452,7 +711,12 @@
         drawCornRain();
         drawTimer();
         drawHud();
-        timer += 1/60;
+        
+        // AI Time Freeze Logic
+        if (!aiTimeFreeze) {
+            timer += (1/60) * aiSpeedMultiplier;
+        }
+        
         if (cornLeft === 0) {
             endGame(true);
         } else if (timer >= maxTime) {
@@ -522,6 +786,14 @@
                     corn.alive = false;
                     cornLeft--;
                     score++;
+                    
+                    // AI Stats Tracking
+                    aiCornDeleted++;
+                    if (aiAutoPlay) {
+                        aiPower = Math.max(aiPower - 1, 20);
+                    }
+                    updateAIStats();
+                    
                     playDeleteSound();
                     popEffects.push({
                         x: corn.x,
@@ -598,5 +870,15 @@
     }
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
+
+    // --- AI Button Event Listeners ---
+    document.getElementById('ai-auto-play').addEventListener('click', toggleAutoPlay);
+    document.getElementById('ai-speed-up').addEventListener('click', speedUp);
+    document.getElementById('ai-slow-down').addEventListener('click', slowDown);
+    document.getElementById('ai-corn-rain').addEventListener('click', triggerCornRain);
+    document.getElementById('ai-time-freeze').addEventListener('click', toggleTimeFreeze);
+
+    // Initialize AI Stats
+    updateAIStats();
     </script>
 </body>

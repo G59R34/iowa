@@ -26,6 +26,14 @@ class GlobalNav {
     }
 
     createNav() {
+        // Create trigger area
+        const trigger = document.createElement('div');
+        trigger.className = 'nav-trigger';
+        
+        // Create glowing indicator
+        const indicator = document.createElement('div');
+        indicator.className = 'nav-indicator';
+        
         const nav = document.createElement('nav');
         nav.className = 'global-nav';
         nav.innerHTML = `
@@ -204,10 +212,112 @@ class GlobalNav {
                 box-shadow: 0 4px 20px rgba(0,0,0,0.3);
                 z-index: 10000;
                 font-family: 'Orbitron', 'Comic Neue', sans-serif;
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
                 backdrop-filter: blur(10px);
                 border-bottom: 2px solid #00ff88;
                 min-height: 70px;
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+
+            .global-nav.show {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            /* Hover trigger area */
+            .nav-trigger {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 20px;
+                z-index: 9999;
+                background: transparent;
+                cursor: pointer;
+            }
+
+            /* Glowing indicator when nav is hidden */
+            .nav-indicator {
+                position: fixed;
+                top: 5px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 60px;
+                height: 4px;
+                background: linear-gradient(90deg, #00ff88, #00cc6a);
+                border-radius: 2px;
+                z-index: 9998;
+                opacity: 0.7;
+                transition: all 0.3s ease;
+                box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+                animation: navPulse 2s ease-in-out infinite;
+            }
+
+            .nav-indicator:hover {
+                opacity: 1;
+                box-shadow: 0 0 20px rgba(0, 255, 136, 0.8);
+                transform: translateX(-50%) scaleX(1.2);
+            }
+
+            @keyframes navPulse {
+                0%, 100% { 
+                    opacity: 0.7;
+                    box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+                }
+                50% { 
+                    opacity: 1;
+                    box-shadow: 0 0 20px rgba(0, 255, 136, 0.8);
+                }
+            }
+
+            /* Cool entrance animation for nav */
+            .global-nav.show .nav-header {
+                animation: navSlideIn 0.4s ease-out;
+            }
+
+            .global-nav.show .nav-brand {
+                animation: brandGlow 0.6s ease-out;
+            }
+
+            @keyframes navSlideIn {
+                0% {
+                    transform: translateY(-20px);
+                    opacity: 0;
+                }
+                100% {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+
+            @keyframes brandGlow {
+                0% {
+                    text-shadow: 0 0 10px #00ff88;
+                }
+                50% {
+                    text-shadow: 0 0 30px #00ff88, 0 0 50px #00ff88;
+                }
+                100% {
+                    text-shadow: 0 0 10px #00ff88;
+                }
+            }
+
+            /* Hover effects for trigger area */
+            .nav-trigger:hover::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.1), transparent);
+                animation: triggerScan 1s ease-in-out;
+            }
+
+            @keyframes triggerScan {
+                0% { transform: translateX(-100%); }
+                100% { transform: translateX(100%); }
             }
 
             .nav-header {
@@ -561,6 +671,17 @@ class GlobalNav {
                     padding: 0.6em;
                 }
 
+                /* Mobile touch support */
+                .nav-trigger {
+                    height: 30px;
+                }
+
+                .nav-indicator {
+                    width: 80px;
+                    height: 6px;
+                    top: 8px;
+                }
+
                 .nav-menu {
                     grid-template-columns: 1fr;
                     gap: 0.8em;
@@ -717,6 +838,8 @@ class GlobalNav {
         `;
 
         document.head.appendChild(style);
+        document.body.insertBefore(trigger, document.body.firstChild);
+        document.body.insertBefore(indicator, document.body.firstChild);
         document.body.insertBefore(nav, document.body.firstChild);
 
         // Add padding to body to account for fixed nav
@@ -725,11 +848,11 @@ class GlobalNav {
             const isSmallMobile = window.innerWidth <= 480;
             
             if (isSmallMobile) {
-                document.body.style.paddingTop = '75px';
+                document.body.style.paddingTop = '25px';
             } else if (isMobile) {
-                document.body.style.paddingTop = '80px';
+                document.body.style.paddingTop = '30px';
             } else {
-                document.body.style.paddingTop = '90px';
+                document.body.style.paddingTop = '30px';
             }
         };
         
@@ -762,6 +885,9 @@ class GlobalNav {
         const aiInput = document.querySelector('.ai-text-input');
         const aiSend = document.querySelector('.ai-send');
         const chat = document.querySelector('.ai-chat');
+        const trigger = document.querySelector('.nav-trigger');
+        const indicator = document.querySelector('.nav-indicator');
+        const nav = document.querySelector('.global-nav');
 
         toggle.addEventListener('click', () => {
             this.toggleMenu();
@@ -809,6 +935,75 @@ class GlobalNav {
                 if (this.isOpen) this.closeMenu();
                 if (document.querySelector('.ai-panel').classList.contains('open')) this.closeAI();
             }
+        });
+
+        // Hover events for navigation
+        let navTimeout;
+        
+        trigger.addEventListener('mouseenter', () => {
+            clearTimeout(navTimeout);
+            nav.classList.add('show');
+            indicator.style.opacity = '0';
+        });
+
+        trigger.addEventListener('mouseleave', () => {
+            navTimeout = setTimeout(() => {
+                nav.classList.remove('show');
+                indicator.style.opacity = '0.7';
+            }, 1000); // 1 second delay before hiding
+        });
+
+        // Keep nav visible when hovering over it
+        nav.addEventListener('mouseenter', () => {
+            clearTimeout(navTimeout);
+        });
+
+        nav.addEventListener('mouseleave', () => {
+            navTimeout = setTimeout(() => {
+                nav.classList.remove('show');
+                indicator.style.opacity = '0.7';
+            }, 1000);
+        });
+
+        // Show nav on indicator hover
+        indicator.addEventListener('mouseenter', () => {
+            clearTimeout(navTimeout);
+            nav.classList.add('show');
+            indicator.style.opacity = '0';
+        });
+
+        // Touch support for mobile
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartY = e.touches[0].clientY;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndY = e.changedTouches[0].clientY;
+            const swipeDistance = touchStartY - touchEndY;
+            
+            // Swipe down from top to show nav
+            if (touchStartY < 50 && swipeDistance > 30) {
+                clearTimeout(navTimeout);
+                nav.classList.add('show');
+                indicator.style.opacity = '0';
+                
+                // Auto-hide after 3 seconds on mobile
+                setTimeout(() => {
+                    nav.classList.remove('show');
+                    indicator.style.opacity = '0.7';
+                }, 3000);
+            }
+        });
+
+        // Tap indicator to show nav on mobile
+        indicator.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            clearTimeout(navTimeout);
+            nav.classList.add('show');
+            indicator.style.opacity = '0';
         });
     }
 
