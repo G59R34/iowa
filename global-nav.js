@@ -177,6 +177,24 @@ class GlobalNav {
         // Add comprehensive styles
         const style = document.createElement('style');
         style.textContent = `
+            /* Global scroll fixes */
+            html, body {
+                margin: 0;
+                padding: 0;
+                overflow-x: hidden;
+                overscroll-behavior: none;
+                -webkit-overflow-scrolling: touch;
+                height: 100%;
+                width: 100%;
+            }
+
+            body {
+                position: relative;
+                background: linear-gradient(135deg, #2e3192 0%, #1bffff 100%);
+                min-height: 100vh;
+                min-height: calc(var(--vh, 1vh) * 100);
+            }
+
             .global-nav {
                 position: fixed;
                 top: 0;
@@ -644,6 +662,58 @@ class GlobalNav {
                     display: none !important;
                 }
             }
+
+            /* Additional scroll and layout fixes */
+            * {
+                box-sizing: border-box;
+            }
+
+            /* Ensure main content area is properly positioned */
+            main, .main-content, #main {
+                position: relative;
+                z-index: 1;
+                min-height: calc(100vh - 90px);
+                min-height: calc((var(--vh, 1vh) * 100) - 90px);
+            }
+
+            /* Fix for iOS Safari viewport issues */
+            @supports (-webkit-touch-callout: none) {
+                body {
+                    min-height: -webkit-fill-available;
+                }
+            }
+
+            /* Prevent any unwanted margins/padding on root elements */
+            html {
+                scroll-behavior: smooth;
+            }
+
+            /* Ensure sections don't create unwanted gaps */
+            section {
+                position: relative;
+                z-index: 1;
+            }
+
+            /* Fix aurora animation positioning */
+            .aurora {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                height: calc(var(--vh, 1vh) * 100);
+                pointer-events: none;
+                z-index: 0;
+                background: transparent;
+                overflow: hidden;
+            }
+
+            /* Ensure footer doesn't create gaps */
+            footer {
+                position: relative;
+                z-index: 1;
+                margin-bottom: 0;
+            }
         `;
 
         document.head.appendChild(style);
@@ -665,6 +735,21 @@ class GlobalNav {
         
         updateBodyPadding();
         window.addEventListener('resize', updateBodyPadding);
+
+        // Fix scroll issues by ensuring proper viewport handling
+        const fixScrollIssues = () => {
+            // Prevent overscroll/bounce on mobile
+            document.body.style.overscrollBehavior = 'none';
+            document.documentElement.style.overscrollBehavior = 'none';
+            
+            // Ensure proper viewport height handling
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        };
+        
+        fixScrollIssues();
+        window.addEventListener('resize', fixScrollIssues);
+        window.addEventListener('orientationchange', fixScrollIssues);
     }
 
     bindEvents() {
