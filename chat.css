@@ -251,12 +251,13 @@
 }
 
 .username-controls {
-    display: flex;
+    display: flex !important;
     justify-content: space-between;
     align-items: center;
     margin-top: 8px;
     padding-top: 8px;
     border-top: 1px solid rgba(27, 255, 255, 0.2);
+    width: 100%;
 }
 
 .current-username {
@@ -275,6 +276,9 @@
     cursor: pointer;
     transition: all 0.2s;
     font-family: inherit;
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .change-username-btn:hover {

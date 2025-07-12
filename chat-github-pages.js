@@ -56,6 +56,19 @@ class LiveChat {
         `;
 
         document.body.insertAdjacentHTML('beforeend', chatHTML);
+        
+        // Debug: Check if elements were created
+        setTimeout(() => {
+            const usernameControls = document.getElementById('username-controls');
+            const changeUsernameBtn = document.getElementById('change-username');
+            const currentUsername = document.getElementById('current-username');
+            
+            console.log('Chat widget created, elements found:', {
+                usernameControls: !!usernameControls,
+                changeUsernameBtn: !!changeUsernameBtn,
+                currentUsername: !!currentUsername
+            });
+        }, 100);
     }
 
     loadUsername() {
@@ -227,10 +240,18 @@ class LiveChat {
     }
 
     showMessageSection() {
-        document.getElementById('username-section').style.display = 'none';
-        document.getElementById('message-section').style.display = 'block';
-        document.getElementById('message-input').focus();
+        const usernameSection = document.getElementById('username-section');
+        const messageSection = document.getElementById('message-section');
+        
+        if (usernameSection) usernameSection.style.display = 'none';
+        if (messageSection) messageSection.style.display = 'block';
+        
+        const messageInput = document.getElementById('message-input');
+        if (messageInput) messageInput.focus();
+        
         this.updateCurrentUsername();
+        
+        console.log('Message section shown, username controls should be visible');
     }
 
     showUsernameSection() {
@@ -244,6 +265,12 @@ class LiveChat {
         const currentUsernameElement = document.getElementById('current-username');
         if (currentUsernameElement && this.username) {
             currentUsernameElement.textContent = `Chatting as: ${this.username}`;
+            console.log('Updated current username display:', this.username);
+        } else {
+            console.log('Could not update username display:', {
+                hasElement: !!currentUsernameElement,
+                hasUsername: !!this.username
+            });
         }
     }
 
