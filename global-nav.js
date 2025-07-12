@@ -1237,8 +1237,8 @@ class GlobalNav {
                 .firebase-banner {
                     position: fixed;
                     z-index: 10002;
-                    max-width: 400px;
-                    min-width: 300px;
+                    max-width: 500px;
+                    min-width: 400px;
                     background: rgba(26, 26, 46, 0.98);
                     backdrop-filter: blur(20px);
                     border: 2px solid;
@@ -1317,13 +1317,13 @@ class GlobalNav {
                 .firebase-banner-content {
                     display: flex;
                     align-items: center;
-                    gap: 12px;
-                    padding: 16px;
+                    gap: 16px;
+                    padding: 20px;
                     position: relative;
                 }
 
                 .firebase-banner-icon {
-                    font-size: 1.5em;
+                    font-size: 1.8em;
                     flex-shrink: 0;
                     animation: firebase-banner-pulse 2s infinite;
                 }
@@ -1336,14 +1336,14 @@ class GlobalNav {
                 .firebase-banner-title {
                     color: #fff;
                     font-weight: bold;
-                    font-size: 0.95em;
-                    margin-bottom: 4px;
+                    font-size: 1.1em;
+                    margin-bottom: 6px;
                     text-shadow: 0 0 10px currentColor;
                 }
 
                 .firebase-banner-message {
                     color: rgba(255, 255, 255, 0.8);
-                    font-size: 0.85em;
+                    font-size: 0.95em;
                     line-height: 1.4;
                 }
 
@@ -1351,14 +1351,14 @@ class GlobalNav {
                     background: linear-gradient(135deg, #00ff88, #00cc6a);
                     border: none;
                     border-radius: 8px;
-                    padding: 8px 16px;
+                    padding: 10px 18px;
                     color: #1a1a2e;
                     font-weight: bold;
-                    font-size: 0.8em;
+                    font-size: 0.9em;
                     cursor: pointer;
                     transition: all 0.3s ease;
                     flex-shrink: 0;
-                    min-height: 32px;
+                    min-height: 36px;
                 }
 
                 .firebase-banner-action:hover {
@@ -1370,10 +1370,10 @@ class GlobalNav {
                     background: rgba(255, 255, 255, 0.1);
                     border: none;
                     border-radius: 50%;
-                    width: 24px;
-                    height: 24px;
+                    width: 28px;
+                    height: 28px;
                     color: #fff;
-                    font-size: 1.2em;
+                    font-size: 1.4em;
                     cursor: pointer;
                     display: flex;
                     align-items: center;
@@ -1418,17 +1418,17 @@ class GlobalNav {
                 /* Mobile responsiveness */
                 @media (max-width: 768px) {
                     .firebase-banner {
-                        max-width: calc(100vw - 40px);
+                        max-width: calc(100vw - 20px);
                         min-width: auto;
-                        margin: 0 20px;
+                        margin: 0 10px;
                     }
 
                     .firebase-banner-top-right,
                     .firebase-banner-top-left,
                     .firebase-banner-bottom-right,
                     .firebase-banner-bottom-left {
-                        left: 20px;
-                        right: 20px;
+                        left: 10px;
+                        right: 10px;
                         transform: translateY(100%);
                     }
 
@@ -1440,55 +1440,56 @@ class GlobalNav {
                     }
 
                     .firebase-banner-content {
-                        padding: 12px;
-                        gap: 8px;
+                        padding: 18px;
+                        gap: 12px;
                     }
 
                     .firebase-banner-icon {
-                        font-size: 1.3em;
+                        font-size: 1.6em;
                     }
 
                     .firebase-banner-title {
-                        font-size: 0.9em;
+                        font-size: 1.05em;
                     }
 
                     .firebase-banner-message {
-                        font-size: 0.8em;
+                        font-size: 0.9em;
                     }
 
                     .firebase-banner-action {
-                        padding: 6px 12px;
-                        font-size: 0.75em;
-                        min-height: 28px;
+                        padding: 8px 16px;
+                        font-size: 0.85em;
+                        min-height: 32px;
                     }
                 }
 
                 @media (max-width: 480px) {
                     .firebase-banner {
-                        margin: 0 10px;
+                        margin: 0 5px;
+                        max-width: calc(100vw - 10px);
                     }
 
                     .firebase-banner-content {
-                        padding: 10px;
-                        gap: 6px;
+                        padding: 16px;
+                        gap: 10px;
                     }
 
                     .firebase-banner-icon {
-                        font-size: 1.2em;
+                        font-size: 1.5em;
                     }
 
                     .firebase-banner-title {
-                        font-size: 0.85em;
+                        font-size: 1em;
                     }
 
                     .firebase-banner-message {
-                        font-size: 0.75em;
+                        font-size: 0.85em;
                     }
 
                     .firebase-banner-action {
-                        padding: 5px 10px;
-                        font-size: 0.7em;
-                        min-height: 26px;
+                        padding: 7px 14px;
+                        font-size: 0.8em;
+                        min-height: 30px;
                     }
                 }
             `;
