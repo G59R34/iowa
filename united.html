@@ -22,353 +22,496 @@
   <!-- United Airlines font: use 'Helvetica Neue', Arial, sans-serif -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    html, body {
-      height: 100%;
+    /* United Airlines Website Style */
+    * {
       margin: 0;
       padding: 0;
-      font-family: 'Helvetica Neue', 'Roboto', Arial, sans-serif;
-      color: #1a1f71;
-      background: linear-gradient(180deg, #e9f4fb 0%, #ffffff 100%);
-      min-height: 100vh;
-      overflow-x: hidden;
+      box-sizing: border-box;
     }
-    .eco {
-      position: fixed;
-      bottom: 12px;
-      right: 18px;
-      background: #00b2e6;
-      color: #fff;
-      font-weight: 700;
-      padding: 0.7em 1.2em;
-      border-radius: 16px;
-      box-shadow: 0 2px 12px #00b2e688;
-      font-size: 1.1em;
-      z-index: 99;
-      letter-spacing: 0.05em;
-      border: 2px solid #1a1f71;
-    }
-    header {
-      background: #1a1f71;
-      text-align: center;
-      padding: 2.5rem 1rem 1.5rem 1rem;
-      border-bottom: 6px solid #005da9;
-      box-shadow: 0 8px 32px #005da988;
-      position: relative;
-      z-index: 2;
-    }
-    header h1 {
-      font-family: 'Helvetica Neue', 'Roboto', Arial, sans-serif;
-      font-size: 2.5em;
-      margin: 0;
-      letter-spacing: 0.08em;
-      color: #fff;
-      text-shadow: 0 2px 12px #005da9;
-      font-weight: 700;
-    }
-    nav {
-      background: #e9f4fb;
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      padding: 1.2rem 0;
-      font-size: 1.15em;
-      position: sticky;
-      top: 0;
-      z-index: 3;
-      box-shadow: 0 2px 16px #005da944;
-      border-bottom: 2px solid #005da9;
-    }
-    nav a {
-      color: #005da9;
-      text-decoration: none;
-      font-weight: 700;
-      padding: 0.3em 0.7em;
-      border-radius: 6px;
-      transition: background 0.2s, color 0.2s;
-    }
-    nav a:hover {
-      background: #005da9;
-      color: #fff;
-    }
-    section {
-      background: #fff;
-      border-radius: 20px;
-      box-shadow: 0 4px 32px #005da922;
-      padding: 2.5rem 2rem;
-      max-width: 900px;
-      margin: 2.5rem auto;
-      position: relative;
-      z-index: 2;
-      border: 1px solid #e9f4fb;
-    }
-    h2 {
-      font-family: 'Helvetica Neue', 'Roboto', Arial, sans-serif;
-      color: #005da9;
-      font-size: 2em;
-      margin-bottom: 1em;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-shadow: 0 2px 8px #e9f4fb;
-    }
-    .united {
-      background: #e9f4fb;
-      border-left: 8px solid #005da9;
-      margin: 1.5em 0;
-      padding: 1.2em 2em;
-      border-radius: 14px;
-      box-shadow: 0 2px 12px #005da922;
-      font-size: 1.15em;
-      color: #1a1f71;
-    }
-    .united h3 {
-      color: #1a1f71;
-      margin-top: 0;
-      font-family: 'Helvetica Neue', 'Roboto', Arial, sans-serif;
-      font-weight: 700;
-      font-size: 1.3em;
-      letter-spacing: 0.03em;
-      text-shadow: 0 2px 8px #e9f4fb;
-    }
-    .back-btn {
-      background: #005da9;
-      color: #fff;
-      border: none;
-      padding: 0.7em 2em;
-      border-radius: 12px;
-      font-size: 1.1em;
-      cursor: pointer;
-      margin-top: 1.5em;
-      box-shadow: 0 2px 16px #005da988;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      transition: background 0.2s, box-shadow 0.2s;
-    }
-    .back-btn:hover {
-      background: #00b2e6;
-      box-shadow: 0 4px 32px #00b2e688;
-    }
-    footer {
-      background: #1a1f71;
-      color: #fff;
-      text-align: center;
-      padding: 2rem 1rem;
-      margin-top: 4rem;
-      font-size: 1.1em;
-      border-top: 6px solid #005da9;
-      box-shadow: 0 -8px 32px #005da988;
-      position: relative;
-      z-index: 2;
-    }
-    footer span {
-      color: #00b2e6;
-      font-weight: 700;
-    }
-    /* United Airlines "globe" accent (SVG) */
-    .globe {
-      display: block;
-      margin: 0 auto 2rem auto;
-      width: 120px;
-      height: 120px;
-    }
-    @media (max-width: 700px) {
-      section { padding: 1.2rem 0.5rem; }
-      nav { gap: 1rem; font-size: 1em; }
-      .globe { width: 80px; height: 80px; }
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>United Airlines</h1>
-  </header>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="evidence.html">Evidence</a>
-    <a href="members.html">Members</a>
-    <a href="drama.html">Cult Drama</a>
-    <a href="sniffles.html">Sniffles</a>
-    <a href="linda.html">Linda</a>
-    <a href="mrs-sniffles.html">Mrs. Sniffles</a>
-    <a href="turn-signal.html">Turn Signal</a>
-    <a href="united.html">United Airlines</a>
-    <a href="join.html">Join</a>
-  </nav>
-  <section>
-    <!-- United Airlines Globe SVG Accent -->
-    <svg class="globe" viewBox="0 0 120 120" fill="none">
-      <circle cx="60" cy="60" r="56" stroke="#005da9" stroke-width="8" fill="#e9f4fb"/>
-      <path d="M60,4 a56,56 0 1,0 0,112 a56,56 0 1,0 0,-112" stroke="#00b2e6" stroke-width="3" fill="none"/>
-      <path d="M4,60 a56,56 0 0,1 112,0" stroke="#005da9" stroke-width="3" fill="none"/>
-      <path d="M60,116 a56,56 0 0,1 0,-112" stroke="#00b2e6" stroke-width="3" fill="none"/>
-    </svg>
-    <h2>United Airlines</h2>
-    <div class="united">
-      <h3>United Airlines</h3>
-      <p>
-        Official airline of the Anti-Iowa Cult. All flights to Iowa are rerouted to Nebraska, but the pilots swear you landed in Des Moines. Linda’s snacks are complimentary, but memory loss is not.
-      </p>
-      <p>
-        <em>Warning: If your flight lands in Iowa, check for corn in your luggage.</em>
-      </p>
-      <p>
-        <strong>Fun Fact:</strong> United Airlines once lost a whole plane in a corn maze near "Des Moines."
-      </p>
-    </div>
-    <button class="back-btn" onclick="window.location.href='index.html'">Back to Home</button>
-  </section>
-<a class="eco" href="#EcoFriendly">a=#EcoFriendly</a>
-  <footer>
-    <p>&copy; 2025 The Anti-Iowa Cult. Proudly headquartered in "nowhere."<br>
-      <span>This is a humor project. No actual Iowans, cats, carts, or pilots were harmed.</span>
-    </p>
-  </footer>
-</body>
-</html>
-<!-- Shopping cart widget -->
-<style>
-  .cart-widget {
-    background: url('https://media.glamour.com/photos/5f6ca4a6648355568fd96159/1:1/w_1905,h_1905,c_limit/GettyImages-1165612513.jpg') 
-                center center / cover no-repeat;
-    padding: 20px;
-    border: 5px solid hotpink;
-    color: white;
-    font-family: Comic Sans MS, sans-serif;
-    max-width: 300px;
-  }
-  .cart-widget h2 {
-    background: hotpink;
-    padding: 10px;
-    margin: -20px -20px 10px;
-    text-align: center;
-    font-size: 1.5em;
-  }
-  .cart-widget ul {
-    list-style: none;
-    padding: 0;
-  }
-  .cart-widget li {
-    background: rgba(255, 105, 180, 0.8);
-    margin: 5px 0;
-    padding: 10px;
-  }
-  .cart-widget .total {
-    font-weight: bold;
-    text-align: right;
-    margin-top: 10px;
-  }
-  .cart-widget button {
-    background: hotpink;
-    color: white;
-    border: none;
-    padding: 10px;
-    width: 100%;
-    font-size: 1em;
-    cursor: pointer;
-  }
-</style>
 
-<div class="cart-widget">
-  <h2>Your Cart</h2>
-  <ul>
-    <li>MOZA Racing Wheel — $299.99</li>
-    <li>Pedal Set — $149.99</li>
-    <li>Wheel Stand — $79.99</li>
-  </ul>
-  <div class="total">Total: $529.97</div>
-  <button>Checkout Now!</button>
-</div>
-<!DOCTYPE html>
-<html lang="zh">
-<head>
-  <meta charset="UTF-8">
-  <title>💥 WHAT EVEN IS THIS 💥</title>
-  <style>
     body {
-      background: linear-gradient(45deg, hotpink, cyan, lime, gold);
-      animation: spin 12s linear infinite;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      color: #000;
-      overflow-x: hidden;
+      font-family: 'Helvetica Neue', 'Roboto', Arial, sans-serif;
+      color: #1a1f71;
+      background: #ffffff;
+      line-height: 1.6;
     }
-    @keyframes spin {
-      0% { background-position: 0 0; }
-      100% { background-position: 1000px 0; }
+
+    /* Header */
+    .united-header {
+      background: #1a1f71;
+      padding: 0;
+      position: relative;
+      z-index: 100;
     }
-    .whoKnows {
-      transform: rotate(15deg) scale(1.2);
-      background: rgba(0,0,0,0.2);
-      border: 4px dashed #fff;
-      margin: 50px auto;
-      padding: 20px;
-      width: 80%;
-      animation: disco 2s infinite alternate;
+
+    .header-top {
+      background: #005da9;
+      padding: 8px 0;
+      font-size: 12px;
+      color: white;
     }
-    @keyframes disco {
-      0% { filter: hue-rotate(0deg); }
-      100% { filter: hue-rotate(360deg); }
+
+    .header-top-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
     }
-    h1 {
+
+    .header-top a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+    }
+
+    .main-header {
+      background: white;
+      padding: 15px 0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .united-logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #1a1f71;
+      text-decoration: none;
+    }
+
+    .united-logo span {
+      color: #005da9;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #1a1f71 0%, #005da9 100%);
+      color: white;
+      padding: 80px 0;
       text-align: center;
-      font-size: 5em;
-      color: yellow;
-      text-shadow: 2px 2px purple;
+      position: relative;
+      overflow: hidden;
     }
-    .floating-plane {
+
+    .hero::before {
+      content: '';
       position: absolute;
-      top: 20%;
-      left: -200px;
-      width: 300px;
-      animation: flyAcross 15s linear infinite;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+      animation: float 20s infinite linear;
     }
-    @keyframes flyAcross {
-      0% { left: -300px; transform: rotate(0deg); }
-      100% { left: 120%; transform: rotate(720deg); }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-20px); }
     }
-    .fireText {
-      color: red;
-      animation: flicker 0.2s infinite;
-      font-size: 2em;
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 2;
     }
-    @keyframes flicker {
-      0% { opacity: 1; }
-      50% { opacity: 0.3; }
-      100% { opacity: 1; }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 300;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
+
+    .hero p {
+      font-size: 20px;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    .hero-btn {
+      background: #00b2e6;
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .hero-btn:hover {
+      background: #0099cc;
+    }
+
+    /* Search Section */
+    .search-section {
+      background: white;
+      padding: 40px 0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .search-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .search-box {
+      background: #f8f9fa;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .search-box h2 {
+      color: #1a1f71;
+      font-size: 24px;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .search-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr auto;
+      gap: 15px;
+      align-items: end;
+    }
+
+    .form-group {
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: #1a1f71;
+      font-size: 14px;
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    .search-btn {
+      background: #1a1f71;
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .search-btn:hover {
+      background: #005da9;
+    }
+
+    /* Content Sections */
+    .content-section {
+      padding: 60px 0;
+      background: #f8f9fa;
+    }
+
+    .content-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title h2 {
+      font-size: 36px;
+      color: #1a1f71;
+      margin-bottom: 10px;
+      font-weight: 300;
+    }
+
+    .section-title p {
+      font-size: 18px;
+      color: #666;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    }
+
+    .feature-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+      color: #005da9;
+    }
+
+    .feature-card h3 {
+      font-size: 20px;
+      color: #1a1f71;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .feature-card p {
+      color: #666;
+      line-height: 1.6;
+    }
+
+    /* Warning Section */
+    .warning-section {
+      background: #fff3cd;
+      border: 1px solid #ffeaa7;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 30px 0;
+    }
+
+    .warning-section h3 {
+      color: #856404;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    .warning-section p {
+      color: #856404;
+      margin-bottom: 0;
+    }
+
+    /* Footer */
+    .united-footer {
+      background: #1a1f71;
+      color: white;
+      padding: 40px 0 20px;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    .footer-content p {
+      margin-bottom: 10px;
+    }
+
+    .footer-content span {
+      color: #00b2e6;
+      font-weight: 600;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .search-form {
+        grid-template-columns: 1fr;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .header-content {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .header-top-content {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding: 60px 0;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .search-box {
+        padding: 20px;
+      }
+
+      .feature-card {
+        padding: 20px;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>🔌 Yo da routerz got SECRETS 💀💻</h1>
-
-  <div class="whoKnows">
-    <p class="fireText">"Ayo deadass my modem out here speakin hex an Chinese bro 🤯🥢"</p>
-    <p>"Config lookin like:", 什麼鬼?!</p>
-    <p>We plugged in sum Mouse123* type beat an it hit us with 💣 encrypted sushi logic 💣</p>
-    <p><strong>"First 32 bytes: 1e37...deadass I thought it was my crypto wallet 💸"</strong></p>
-    <p><em>xmlc.py or bust. Fr on god.</em></p>
-    <p>So we cloned da repo — bang bang 💥💥</p>
-    <pre>
-      git clone https://github.com/maciekrb/xmlc.git
-      cd xmlc
-      python3 xmlc.py config.dat decrypted.txt
-    </pre>
-    <p>結果？你問結果？Bruh 我只看到彩虹跟吶喊 😵💫</p>
-    <p>💽 config.dat got decrypted faster than my GPA in high school 🧠📉</p>
+  <!-- United Airlines Header -->
+  <div class="united-header">
+    <div class="header-top">
+      <div class="header-top-content">
+        <div>
+          <a href="#">English</a>
+          <a href="#">Español</a>
+          <a href="#">中文</a>
+        </div>
+        <div>
+          <a href="#">Sign in</a>
+          <a href="#">Join MileagePlus</a>
+          <a href="#">Help</a>
+        </div>
+      </div>
+    </div>
+    <div class="main-header">
+      <div class="header-content">
+        <a href="#" class="united-logo">United <span>Airlines</span></a>
+        <div>
+          <span style="color: #666; font-size: 14px;">Official Airline of the Anti-Iowa Cult</span>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <img class="floating-plane" src="https://images.news18.com/ibnlive/uploads/2021/09/plane-incidence-163215224616x9.jpg" alt="chaos plane">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Fly United to Nowhere</h1>
+      <p>Official airline of the Anti-Iowa Cult. We promise you'll never land in Iowa, because it doesn't exist.</p>
+      <a href="#search" class="hero-btn">Book Your Flight</a>
+    </div>
+  </section>
 
-  <div class="whoKnows">
-    <p>THEN IT HIT ME LIKE A 🛬💥 IN THE DMs</p>
-    <p>Router firmware: UNKNOWN 🧿<br>
-    Passwords? ADMIN GOT 'EM.<br>
-    Configs? Encrypted like grandma's secret noodle recipe 🥡</p>
-    <p>🔥🔥🔥<strong>"DROP THE COMMANDS OR GET DROPPED" - TDS 2025</strong>🔥🔥🔥</p>
-    <p>🔥你不能停止這場派對🔥</p>
-  </div>
+  <!-- Search Section -->
+  <section class="search-section" id="search">
+    <div class="search-container">
+      <div class="search-box">
+        <h2>Book Your Anti-Iowa Flight</h2>
+        <form class="search-form">
+          <div class="form-group">
+            <label>From</label>
+            <input type="text" placeholder="Any real city" value="Chicago">
+          </div>
+          <div class="form-group">
+            <label>To</label>
+            <input type="text" placeholder="Anywhere but Iowa" value="Nebraska">
+          </div>
+          <div class="form-group">
+            <label>Date</label>
+            <input type="date" value="2025-01-15">
+          </div>
+          <button type="button" class="search-btn" onclick="showBookingMessage()">Search</button>
+        </form>
+      </div>
+    </div>
+  </section>
 
-  <footer class="whoKnows">
-    <p style="font-size: 1.5em;">“Iowa ain't even real bro.” - Confucius probably</p>
+  <!-- Content Section -->
+  <section class="content-section">
+    <div class="content-container">
+      <div class="section-title">
+        <h2>Why Fly United?</h2>
+        <p>We're the only airline that guarantees you'll never accidentally land in Iowa</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">✈️</div>
+          <h3>Iowa-Free Guarantee</h3>
+          <p>Our pilots are specially trained to avoid the non-existent state of Iowa. If you somehow end up there, we'll refund your ticket and pay for your therapy.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🍿</div>
+          <h3>Linda's Special Snacks</h3>
+          <p>Complimentary "relaxation" snacks provided by our resident fent dealer, Linda. Warning: May cause temporary memory loss and unexpected landings in Nebraska.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🎭</div>
+          <h3>Cult Entertainment</h3>
+          <p>In-flight entertainment includes cult propaganda, corn conspiracy theories, and live updates on why Iowa is a government psy-op.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🛡️</div>
+          <h3>GPS Protection</h3>
+          <p>Our advanced navigation systems automatically reroute around Iowa's GPS loops. You'll never get stuck in a cornfield simulation again.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">👥</div>
+          <h3>Cult Member Discounts</h3>
+          <p>Join the Anti-Iowa Cult and get exclusive discounts on flights to anywhere but Iowa. Plus, free cult robes with every booking.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🚫</div>
+          <h3>No Corn Policy</h3>
+          <p>We have a strict no-corn policy. If you find corn in your luggage, it means you've been compromised by Iowa agents. Contact cult security immediately.</p>
+        </div>
+      </div>
+
+      <div class="warning-section">
+        <h3>⚠️ Important Notice</h3>
+        <p>If your flight lands in Iowa, you've been deceived. Iowa doesn't exist. Contact the Anti-Iowa Cult immediately for extraction and deprogramming services.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="united-footer">
+    <div class="footer-content">
+      <p>&copy; 2025 United Airlines - Anti-Iowa Cult Partnership</p>
+      <p><span>Flying you to places that actually exist since 1926</span></p>
+      <p>This is a humor project. No actual flights to Iowa were harmed in the making of this website.</p>
+    </div>
   </footer>
+
+  <script>
+    function showBookingMessage() {
+      alert('Booking confirmed! Your flight has been rerouted to Nebraska. The pilot will swear you landed in Des Moines, but trust us - you didn\'t. Welcome to the Anti-Iowa Cult! 🌽🚫');
+    }
+  </script>
 </body>
 </html>
