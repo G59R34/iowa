@@ -32,8 +32,12 @@ body {
 }
 h1 {
     text-align: center;
-    font-size: 4vh;
+    font-size: clamp(1.5em, 6vw, 4vh);
     animation: shake 0.3s infinite alternate;
+    margin: 1em 0.5em;
+    line-height: 1.2;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 @keyframes shake {
     from { transform: translateX(-5px) rotate(-2deg); }
@@ -47,6 +51,8 @@ form {
     margin: 40px auto;
     box-shadow: 0 0 30px 10px #00ffff;
     animation: bounce 2s infinite alternate;
+    width: calc(100vw - 40px);
+    box-sizing: border-box;
 }
 @keyframes bounce {
     from { transform: translateY(0); }
@@ -56,18 +62,35 @@ label, input {
     display: block;
     width: 100%;
     margin-bottom: 15px;
-    font-size: 2vh;
+    font-size: clamp(0.8em, 3vw, 2vh);
+    box-sizing: border-box;
+}
+input {
+    padding: 12px;
+    border-radius: 8px;
+    border: 2px solid #00ffff;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    font-size: 16px; /* Prevents zoom on iOS */
+    min-height: 44px;
+}
+input:focus {
+    outline: none;
+    border-color: #ffff00;
+    box-shadow: 0 0 10px #ffff00;
 }
 input[type="submit"] {
     background: linear-gradient(90deg, #ff00ff, #00ffff);
     color: white;
     border: none;
     border-radius: 10px;
-    font-size: 2vh;
-    padding: 10px;
+    font-size: clamp(0.9em, 3.5vw, 2vh);
+    padding: 12px;
     cursor: pointer;
     box-shadow: 0 0 10px #ffff00;
     transition: transform 0.2s;
+    min-height: 48px;
+    font-weight: bold;
 }
 input[type="submit"]:hover {
     transform: scale(1.1) rotate(-2deg);
@@ -75,10 +98,12 @@ input[type="submit"]:hover {
 }
 #feedback {
     text-align: center;
-    font-size: 2vh;
+    font-size: clamp(0.8em, 3vw, 2vh);
     margin-top: 20px;
     color: #00ff00;
     animation: glitch 1s infinite;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 @keyframes glitch {
     0% { text-shadow: 2px 0 red; }
@@ -90,16 +115,258 @@ input[type="submit"]:hover {
 nav {
     text-align: center;
     margin-top: 20px;
+    padding: 0 10px;
 }
 nav a {
     color: #ffff00;
-    font-size: 2vh;
-    margin: 0 15px;
+    font-size: clamp(0.7em, 2.5vw, 2vh);
+    margin: 0 8px;
     text-decoration: underline wavy #00ffff;
     transition: color 0.2s;
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.1);
+    min-height: 36px;
+    line-height: 1.2;
 }
 nav a:hover {
     color: #ff00ff;
+    background: rgba(255,255,255,0.2);
+}
+
+/* Mobile-first responsive design */
+@media (max-width: 768px) {
+    body {
+        padding-top: 60px; /* Space for MOTD banner */
+    }
+    
+    h1 {
+        font-size: clamp(1.2em, 5vw, 2.5em);
+        margin: 0.8em 0.3em;
+    }
+    
+    form {
+        padding: 25px 20px;
+        margin: 20px auto;
+        border-radius: 16px;
+        width: calc(100vw - 20px);
+    }
+    
+    label, input {
+        font-size: clamp(0.7em, 2.5vw, 1.5em);
+        margin-bottom: 12px;
+    }
+    
+    input {
+        padding: 10px 12px;
+        min-height: 44px;
+        border-radius: 6px;
+    }
+    
+    input[type="submit"] {
+        font-size: clamp(0.8em, 3vw, 1.5em);
+        padding: 10px 16px;
+        min-height: 44px;
+        border-radius: 8px;
+    }
+    
+    #feedback {
+        font-size: clamp(0.7em, 2.5vw, 1.5em);
+        margin-top: 15px;
+    }
+    
+    nav {
+        margin-top: 15px;
+        padding: 0 8px;
+    }
+    
+    nav a {
+        font-size: clamp(0.6em, 2.2vw, 1.3em);
+        margin: 0 4px;
+        padding: 6px 10px;
+        border-radius: 6px;
+        min-height: 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding-top: 50px;
+    }
+    
+    h1 {
+        font-size: clamp(1em, 4.5vw, 2em);
+        margin: 0.6em 0.2em;
+    }
+    
+    form {
+        padding: 20px 15px;
+        margin: 15px auto;
+        border-radius: 12px;
+        width: calc(100vw - 15px);
+    }
+    
+    label, input {
+        font-size: clamp(0.6em, 2.2vw, 1.2em);
+        margin-bottom: 10px;
+    }
+    
+    input {
+        padding: 8px 10px;
+        min-height: 40px;
+        border-radius: 4px;
+    }
+    
+    input[type="submit"] {
+        font-size: clamp(0.7em, 2.8vw, 1.2em);
+        padding: 8px 14px;
+        min-height: 40px;
+        border-radius: 6px;
+    }
+    
+    #feedback {
+        font-size: clamp(0.6em, 2.2vw, 1.2em);
+        margin-top: 12px;
+    }
+    
+    nav {
+        margin-top: 12px;
+        padding: 0 6px;
+    }
+    
+    nav a {
+        font-size: clamp(0.5em, 2vw, 1.1em);
+        margin: 0 3px;
+        padding: 5px 8px;
+        border-radius: 4px;
+        min-height: 28px;
+    }
+}
+
+@media (max-width: 360px) {
+    body {
+        padding-top: 45px;
+    }
+    
+    h1 {
+        font-size: clamp(0.9em, 4vw, 1.8em);
+        margin: 0.5em 0.2em;
+    }
+    
+    form {
+        padding: 15px 12px;
+        margin: 10px auto;
+        border-radius: 8px;
+        width: calc(100vw - 12px);
+    }
+    
+    label, input {
+        font-size: clamp(0.55em, 2vw, 1em);
+        margin-bottom: 8px;
+    }
+    
+    input {
+        padding: 6px 8px;
+        min-height: 36px;
+        border-radius: 3px;
+    }
+    
+    input[type="submit"] {
+        font-size: clamp(0.6em, 2.5vw, 1em);
+        padding: 6px 12px;
+        min-height: 36px;
+        border-radius: 4px;
+    }
+    
+    #feedback {
+        font-size: clamp(0.55em, 2vw, 1em);
+        margin-top: 10px;
+    }
+    
+    nav {
+        margin-top: 10px;
+        padding: 0 4px;
+    }
+    
+    nav a {
+        font-size: clamp(0.45em, 1.8vw, 1em);
+        margin: 0 2px;
+        padding: 4px 6px;
+        border-radius: 3px;
+        min-height: 24px;
+    }
+}
+
+/* Landscape orientation adjustments */
+@media (orientation: landscape) and (max-height: 500px) {
+    body {
+        padding-top: 40px;
+    }
+    
+    h1 {
+        font-size: clamp(1em, 3.5vw, 1.5em);
+        margin: 0.4em 0.2em;
+    }
+    
+    form {
+        padding: 15px 20px;
+        margin: 10px auto;
+        border-radius: 12px;
+    }
+    
+    label, input {
+        font-size: clamp(0.6em, 2vw, 1em);
+        margin-bottom: 8px;
+    }
+    
+    input {
+        padding: 6px 10px;
+        min-height: 32px;
+    }
+    
+    input[type="submit"] {
+        font-size: clamp(0.7em, 2.5vw, 1em);
+        padding: 6px 12px;
+        min-height: 32px;
+    }
+    
+    nav {
+        margin-top: 8px;
+    }
+    
+    nav a {
+        font-size: clamp(0.5em, 1.8vw, 0.9em);
+        padding: 4px 8px;
+        min-height: 24px;
+    }
+}
+
+/* Touch-friendly improvements */
+@media (hover: none) and (pointer: coarse) {
+    input, input[type="submit"], nav a {
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+    
+    * {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    input[type="submit"]:hover {
+        transform: none;
+    }
+    
+    nav a:hover {
+        background: rgba(255,255,255,0.1);
+    }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    body {
+        text-shadow: 1px 1px 2px #000;
+    }
 }
 </style>
 <!-- Firebase JS SDKs -->

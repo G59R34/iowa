@@ -5,6 +5,7 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934641350357854"
      crossorigin="anonymous"></script>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wacky Abel Tesfaye Clock</title>
     <style>
         html, body {
@@ -28,6 +29,11 @@
             max-width: 90vh;
             max-height: 90vh;
             display: block;
+            touch-action: manipulation;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
         .abel-img {
             filter: drop-shadow(0 0 10px #ff6ec4);
@@ -35,6 +41,58 @@
         }
         .bus-hand {
             filter: drop-shadow(0 0 10px #7873f5);
+        }
+        
+        /* Mobile-first responsive design */
+        @media (max-width: 768px) {
+            #wacky-clock {
+                width: 85vw;
+                height: 85vw;
+                max-width: 85vh;
+                max-height: 85vh;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            #wacky-clock {
+                width: 80vw;
+                height: 80vw;
+                max-width: 80vh;
+                max-height: 80vh;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            #wacky-clock {
+                width: 75vw;
+                height: 75vw;
+                max-width: 75vh;
+                max-height: 75vh;
+            }
+        }
+        
+        /* Landscape orientation adjustments */
+        @media (orientation: landscape) and (max-height: 500px) {
+            #wacky-clock {
+                width: 70vh;
+                height: 70vh;
+                max-width: 70vw;
+                max-height: 70vh;
+            }
+        }
+        
+        /* Touch-friendly improvements */
+        @media (hover: none) and (pointer: coarse) {
+            * {
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+        
+        /* High DPI displays */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .abel-img, .bus-hand {
+                filter: drop-shadow(0 0 5px currentColor);
+            }
         }
     </style>
 </head>

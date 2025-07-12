@@ -89,16 +89,224 @@
             0% { transform: translateY(0);}
             100% { transform: translateY(-10px);}
         }
-        @media (max-width: 600px) {
-            .login-box {
-                padding: 20px 5vw;
-                font-size: 1em;
+        /* Mobile-first responsive design */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 80px;
             }
+            
+            .login-box {
+                padding: 25px 15px;
+                font-size: 0.95em;
+                border-radius: 20px;
+                margin: 10px;
+                width: calc(100vw - 20px);
+                max-width: 350px;
+            }
+            
+            .greeting {
+                font-size: clamp(1.1em, 5vw, 1.5em);
+                margin-bottom: 15px;
+                line-height: 1.2;
+            }
+            
+            button, input {
+                font-size: 16px; /* Prevents zoom on iOS */
+                padding: 12px 15px;
+                min-height: 48px;
+                border-radius: 12px;
+            }
+            
+            button {
+                margin-top: 12px;
+                padding: 12px 20px;
+            }
+            
+            #google-login {
+                margin-top: 8px;
+                padding: 10px 15px;
+                font-size: 0.9em;
+            }
+            
+            nav {
+                padding: 12px 20px;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            nav > div:first-child {
+                font-size: clamp(1.2em, 6vw, 1.8em);
+            }
+            
+            nav > div:last-child {
+                display: flex;
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav a {
+                font-size: 0.9em;
+                padding: 8px 12px;
+                border-radius: 8px;
+                background: rgba(255,255,255,0.1);
+                min-height: 36px;
+                display: flex;
+                align-items: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding-top: 70px;
+            }
+            
+            .login-box {
+                padding: 20px 12px;
+                font-size: 0.9em;
+                border-radius: 16px;
+                margin: 8px;
+                width: calc(100vw - 16px);
+            }
+            
+            .greeting {
+                font-size: clamp(1em, 4.5vw, 1.3em);
+                margin-bottom: 12px;
+            }
+            
+            button, input {
+                font-size: 16px;
+                padding: 10px 12px;
+                min-height: 44px;
+                border-radius: 10px;
+            }
+            
+            button {
+                margin-top: 10px;
+                padding: 10px 16px;
+            }
+            
+            #google-login {
+                margin-top: 6px;
+                padding: 8px 12px;
+                font-size: 0.85em;
+            }
+            
+            nav {
+                padding: 10px 15px;
+            }
+            
+            nav > div:first-child {
+                font-size: clamp(1em, 5vw, 1.5em);
+            }
+            
+            nav > div:last-child {
+                gap: 10px;
+            }
+            
+            nav a {
+                font-size: 0.85em;
+                padding: 6px 10px;
+                border-radius: 6px;
+                min-height: 32px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            body {
+                padding-top: 60px;
+            }
+            
+            .login-box {
+                padding: 15px 10px;
+                font-size: 0.85em;
+                border-radius: 12px;
+                margin: 5px;
+                width: calc(100vw - 10px);
+            }
+            
+            .greeting {
+                font-size: clamp(0.9em, 4vw, 1.2em);
+                margin-bottom: 10px;
+            }
+            
+            button, input {
+                font-size: 16px;
+                padding: 8px 10px;
+                min-height: 40px;
+                border-radius: 8px;
+            }
+            
+            button {
+                margin-top: 8px;
+                padding: 8px 14px;
+            }
+            
+            #google-login {
+                margin-top: 5px;
+                padding: 6px 10px;
+                font-size: 0.8em;
+            }
+            
+            nav {
+                padding: 8px 10px;
+            }
+            
+            nav > div:first-child {
+                font-size: clamp(0.9em, 4.5vw, 1.3em);
+            }
+            
+            nav > div:last-child {
+                gap: 8px;
+            }
+            
+            nav a {
+                font-size: 0.8em;
+                padding: 5px 8px;
+                border-radius: 4px;
+                min-height: 28px;
+            }
+        }
+        
+        /* Landscape orientation adjustments */
+        @media (orientation: landscape) and (max-height: 500px) {
+            body {
+                padding-top: 50px;
+            }
+            
+            .login-box {
+                padding: 15px 20px;
+                margin: 5px auto;
+            }
+            
             .greeting {
                 font-size: 1.2em;
+                margin-bottom: 10px;
             }
+            
             button, input {
-                font-size: 1em;
+                padding: 8px 12px;
+                min-height: 36px;
+            }
+            
+            nav {
+                padding: 8px 20px;
+            }
+            
+            nav > div:first-child {
+                font-size: 1.2em;
+            }
+        }
+        
+        /* Touch-friendly improvements */
+        @media (hover: none) and (pointer: coarse) {
+            button, input, nav a {
+                -webkit-tap-highlight-color: transparent;
+                touch-action: manipulation;
+            }
+            
+            * {
+                -webkit-overflow-scrolling: touch;
             }
         }
     </style>

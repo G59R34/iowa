@@ -130,11 +130,140 @@
             text-align:center;
             max-width:90vw;
         }
-        @media (max-width: 700px) {
-            #game-canvas { max-width: 98vw; max-height: 50vh; }
-            #hud { font-size: 1.2em; }
-            #start-btn, #restart-btn { font-size: 1.2em; }
-            #instructions { font-size: 1em; padding: 0.7em 1em; }
+        /* Mobile-first responsive design */
+        @media (max-width: 768px) {
+            #game-canvas { 
+                max-width: 95vw; 
+                max-height: 60vh; 
+                border-width: 4px;
+                border-radius: 16px;
+            }
+            #hud { 
+                font-size: 1.1em; 
+                padding: 0.8em 0;
+                position: relative;
+            }
+            #start-btn, #restart-btn { 
+                font-size: 1.1em; 
+                padding: 0.8em 1.5em;
+                min-height: 48px;
+                border-radius: 12px;
+            }
+            #instructions { 
+                font-size: 0.95em; 
+                padding: 0.8em 1.2em; 
+                border-radius: 8px;
+                max-width: 90vw;
+            }
+            #exit-btn {
+                font-size: 1.2em;
+                padding: 0.6em 1.2em;
+                min-height: 44px;
+                border-radius: 12px;
+                right: 1em;
+                top: 0.5em;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            #game-canvas { 
+                max-width: 98vw; 
+                max-height: 50vh; 
+                border-width: 3px;
+                border-radius: 12px;
+            }
+            #hud { 
+                font-size: 1em; 
+                padding: 0.6em 0;
+            }
+            #start-btn, #restart-btn { 
+                font-size: 1em; 
+                padding: 0.7em 1.2em;
+                min-height: 44px;
+            }
+            #instructions { 
+                font-size: 0.9em; 
+                padding: 0.6em 1em; 
+                border-radius: 6px;
+            }
+            #exit-btn {
+                font-size: 1em;
+                padding: 0.5em 1em;
+                min-height: 40px;
+                right: 0.5em;
+                top: 0.3em;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            #game-canvas { 
+                max-width: 99vw; 
+                max-height: 45vh; 
+                border-width: 2px;
+                border-radius: 8px;
+            }
+            #hud { 
+                font-size: 0.9em; 
+                padding: 0.5em 0;
+            }
+            #start-btn, #restart-btn { 
+                font-size: 0.9em; 
+                padding: 0.6em 1em;
+                min-height: 40px;
+            }
+            #instructions { 
+                font-size: 0.85em; 
+                padding: 0.5em 0.8em; 
+                border-radius: 4px;
+            }
+            #exit-btn {
+                font-size: 0.9em;
+                padding: 0.4em 0.8em;
+                min-height: 36px;
+                right: 0.3em;
+                top: 0.2em;
+            }
+        }
+        
+        /* Landscape orientation adjustments */
+        @media (orientation: landscape) and (max-height: 500px) {
+            #game-canvas { 
+                max-height: 70vh; 
+            }
+            #hud { 
+                font-size: 0.9em; 
+                padding: 0.4em 0;
+            }
+            #start-btn, #restart-btn { 
+                font-size: 0.9em; 
+                padding: 0.5em 1em;
+                min-height: 36px;
+            }
+            #instructions { 
+                font-size: 0.8em; 
+                padding: 0.4em 0.8em; 
+            }
+            #exit-btn {
+                font-size: 0.8em;
+                padding: 0.3em 0.8em;
+                min-height: 32px;
+            }
+        }
+        
+        /* Touch-friendly improvements */
+        @media (hover: none) and (pointer: coarse) {
+            #start-btn, #restart-btn, #exit-btn {
+                -webkit-tap-highlight-color: transparent;
+                touch-action: manipulation;
+            }
+            
+            #game-canvas {
+                touch-action: manipulation;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
         }
     </style>
 </head>
