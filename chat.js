@@ -45,6 +45,10 @@ class LiveChat {
                                 <input type="text" id="message-input" placeholder="Type your message..." maxlength="500">
                                 <button id="send-message">Send</button>
                             </div>
+                            <div class="username-controls">
+                                <span class="current-username" id="current-username"></span>
+                                <button id="change-username" class="change-username-btn">Change Username</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -189,6 +193,13 @@ class LiveChat {
         document.getElementById('chat-close').addEventListener('click', () => {
             this.closeChat();
         });
+
+        // Change username button
+        document.addEventListener('click', (e) => {
+            if (e.target.id === 'change-username') {
+                this.showUsernameSection();
+            }
+        });
     }
 
     setUsername() {
@@ -219,6 +230,21 @@ class LiveChat {
         document.getElementById('username-section').style.display = 'none';
         document.getElementById('message-section').style.display = 'block';
         document.getElementById('message-input').focus();
+        this.updateCurrentUsername();
+    }
+
+    showUsernameSection() {
+        document.getElementById('message-section').style.display = 'none';
+        document.getElementById('username-section').style.display = 'flex';
+        document.getElementById('username-input').focus();
+        document.getElementById('username-input').select();
+    }
+
+    updateCurrentUsername() {
+        const currentUsernameElement = document.getElementById('current-username');
+        if (currentUsernameElement && this.username) {
+            currentUsernameElement.textContent = `Chatting as: ${this.username}`;
+        }
     }
 
     sendJoinMessage() {
@@ -266,10 +292,7 @@ class LiveChat {
         
         if (!this.username) {
             this.addSystemMessage('Please set a username first!');
-            // Show username section again
-            document.getElementById('username-section').style.display = 'flex';
-            document.getElementById('message-section').style.display = 'none';
-            document.getElementById('username-input').focus();
+            this.showUsernameSection();
             return;
         }
         

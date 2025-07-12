@@ -45,6 +45,9 @@
     font-size: 1.1em;
     color: #fff;
     text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .chat-controls {
@@ -185,6 +188,12 @@
     gap: 10px;
 }
 
+.username-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 #username-input, #message-input {
     background: rgba(255, 255, 255, 0.1);
     border: 2px solid #1bffff;
@@ -239,6 +248,39 @@
 .message-input-container #send-message {
     white-space: nowrap;
     min-width: 60px;
+}
+
+.username-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(27, 255, 255, 0.2);
+}
+
+.current-username {
+    font-size: 0.85em;
+    color: rgba(255, 255, 255, 0.8);
+    font-style: italic;
+}
+
+.change-username-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #1bffff;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75em;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.change-username-btn:hover {
+    background: rgba(27, 255, 255, 0.2);
+    border-color: #ff00cc;
+    transform: scale(1.05);
 }
 
 /* Mobile Responsive Design */
@@ -303,6 +345,20 @@
     #set-username, #send-message {
         padding: 8px 12px;
         font-size: 0.9em;
+    }
+    
+    .username-controls {
+        margin-top: 6px;
+        padding-top: 6px;
+    }
+    
+    .current-username {
+        font-size: 0.8em;
+    }
+    
+    .change-username-btn {
+        padding: 3px 6px;
+        font-size: 0.7em;
     }
 }
 
@@ -376,12 +432,16 @@
 
 /* Connection status */
 .connection-status {
-    position: absolute;
-    top: 5px;
-    right: 5px;
     width: 8px;
     height: 8px;
     border-radius: 50%;
+    background: #ffff00;
+    animation: pulse 2s infinite;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+.connection-status.connected {
     background: #00ff00;
     animation: pulse 2s infinite;
 }
@@ -389,6 +449,11 @@
 .connection-status.disconnected {
     background: #ff0000;
     animation: none;
+}
+
+.connection-status.error {
+    background: #ff6600;
+    animation: pulse 1s infinite;
 }
 
 @keyframes pulse {
