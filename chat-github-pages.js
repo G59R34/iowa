@@ -22,6 +22,7 @@ class LiveChat {
             <div id="chat-widget" class="chat-widget">
                 <div class="chat-header">
                     <span class="chat-title">🌽 Live Chat</span>
+                    <div class="connection-status" id="connection-status"></div>
                     <div class="chat-controls">
                         <button class="chat-minimize" id="chat-minimize">−</button>
                         <button class="chat-close" id="chat-close">×</button>
@@ -57,6 +58,10 @@ class LiveChat {
         this.username = localStorage.getItem('chat-username');
         if (this.username) {
             this.showMessageSection();
+            // If WebSocket is already connected, send join message
+            if (this.socket && this.socket.readyState === WebSocket.OPEN) {
+                this.sendJoinMessage();
+            }
         }
     }
 
@@ -70,8 +75,14 @@ class LiveChat {
             
             this.socket.onopen = () => {
                 this.isConnected = true;
+                this.updateConnectionStatus('connected');
                 this.addSystemMessage('Connected to chat server');
                 console.log('WebSocket connected');
+                
+                // If username is already set, send join message
+                if (this.username) {
+                    this.sendJoinMessage();
+                }
             };
             
             this.socket.onmessage = (event) => {
@@ -85,6 +96,7 @@ class LiveChat {
             
             this.socket.onclose = () => {
                 this.isConnected = false;
+                this.updateConnectionStatus('disconnected');
                 this.addSystemMessage('Disconnected from chat server');
                 console.log('WebSocket disconnected');
                 
@@ -98,6 +110,7 @@ class LiveChat {
             
             this.socket.onerror = (error) => {
                 console.error('WebSocket error:', error);
+                this.updateConnectionStatus('error');
                 this.addSystemMessage('Connection error - trying to reconnect...');
             };
             
@@ -197,12 +210,7 @@ class LiveChat {
         this.showMessageSection();
         
         // Send join message to WebSocket server
-        if (this.socket && this.socket.readyState === WebSocket.OPEN) {
-            this.socket.send(JSON.stringify({
-                type: 'join',
-                username: username
-            }));
-        }
+        this.sendJoinMessage();
         
         this.addSystemMessage(`Welcome, ${username}! You're now chatting.`);
     }
@@ -213,6 +221,43 @@ class LiveChat {
         document.getElementById('message-input').focus();
     }
 
+    sendJoinMessage() {
+        if (this.username && this.socket && this.socket.readyState === WebSocket.OPEN) {
+            console.log('Sending join message for username:', this.username);
+            this.socket.send(JSON.stringify({
+                type: 'join',
+                username: this.username
+            }));
+        } else {
+            console.log('Cannot send join message:', {
+                hasUsername: !!this.username,
+                hasSocket: !!this.socket,
+                socketState: this.socket ? this.socket.readyState : 'no socket'
+            });
+        }
+    }
+
+    updateConnectionStatus(status) {
+        const statusElement = document.getElementById('connection-status');
+        if (!statusElement) return;
+        
+        statusElement.className = `connection-status ${status}`;
+        
+        switch (status) {
+            case 'connected':
+                statusElement.title = 'Connected';
+                break;
+            case 'disconnected':
+                statusElement.title = 'Disconnected';
+                break;
+            case 'error':
+                statusElement.title = 'Connection Error';
+                break;
+            default:
+                statusElement.title = 'Connecting...';
+        }
+    }
+
     sendMessage() {
         const messageInput = document.getElementById('message-input');
         const message = messageInput.value.trim();
@@ -220,7 +265,11 @@ class LiveChat {
         if (!message) return;
         
         if (!this.username) {
-            alert('Please set a username first!');
+            this.addSystemMessage('Please set a username first!');
+            // Show username section again
+            document.getElementById('username-section').style.display = 'flex';
+            document.getElementById('message-section').style.display = 'none';
+            document.getElementById('username-input').focus();
             return;
         }
         
@@ -235,7 +284,11 @@ class LiveChat {
             this.addMessage(this.username, message, true);
             messageInput.value = '';
         } else {
-            this.addSystemMessage('Not connected to chat server');
+            this.addSystemMessage('Not connected to chat server - trying to reconnect...');
+            // Try to reconnect
+            setTimeout(() => {
+                this.connectWebSocket();
+            }, 2000);
         }
     }
 
