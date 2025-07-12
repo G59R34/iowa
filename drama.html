@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="style.css">
+    <script src="global-nav.js"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934641350357854"
      crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🍺 THE ADULT LIFE CHAOS SIMULATOR 🍺</title>
+    <title>🍺 AI-POWERED ADULT LIFE CHAOS SIMULATOR 2.0 🍺</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Creepster&family=Bangers&family=Freckle+Face&family=Orbitron:wght@900&family=Bungee&family=Pacifico&family=Righteous&family=Monoton&family=Kalam:wght@700&family=Permanent+Marker&family=Fredoka+One&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Creepster&family=Bangers&family=Freckle+Face&family=Orbitron:wght@900&family=Bungee&family=Pacifico&family=Righteous&family=Monoton&family=Press+Start+2P&family=VT323&display=swap');
         
         * {
             margin: 0;
@@ -23,7 +24,8 @@
             overflow-x: hidden;
             font-family: 'Comic Neue', cursive;
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"><text y="24" font-size="24">🍺</text></svg>'), auto;
-            min-height: 10000px;
+            min-height: 100vh;
+            padding-top: 60px;
         }
         
         @keyframes psychedelicMadness {
@@ -34,42 +36,32 @@
             100% { background-position: 0% 100%; filter: hue-rotate(360deg) brightness(1); }
         }
         
-        .runaway-element {
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .runaway-element:hover {
-            transform: translate(100px, 50px) rotate(45deg) scale(1.2);
-            filter: blur(2px);
-        }
-        
-        .flying-image {
+        .ai-chaos-particles {
             position: fixed;
-            z-index: 100;
-            animation: insaneFly 6s linear infinite;
-            filter: sepia(100%) saturate(300%) hue-rotate(random(360deg));
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
         }
         
-        @keyframes insaneFly {
-            0% { transform: translateX(-400px) translateY(0px) rotate(0deg) scale(0.5); }
-            20% { transform: translateX(20vw) translateY(-150px) rotate(144deg) scale(1.8); }
-            40% { transform: translateX(60vw) translateY(200px) rotate(288deg) scale(0.3); }
-            60% { transform: translateX(80vw) translateY(-100px) rotate(432deg) scale(2.2); }
-            80% { transform: translateX(40vw) translateY(100px) rotate(576deg) scale(0.8); }
-            100% { transform: translateX(150vw) translateY(0px) rotate(720deg) scale(1); }
+        .chaos-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #fff;
+            border-radius: 50%;
+            animation: chaosFloat 8s linear infinite;
         }
         
-        .img1 { top: 5%; width: 150px; animation-delay: 0s; animation-duration: 5s; }
-        .img2 { top: 25%; width: 100px; animation-delay: 1s; animation-duration: 7s; }
-        .img3 { top: 45%; width: 200px; animation-delay: 2s; animation-duration: 4s; }
-        .img4 { top: 65%; width: 120px; animation-delay: 3s; animation-duration: 6s; }
-        .img5 { top: 85%; width: 180px; animation-delay: 4s; animation-duration: 8s; }
-        .img6 { top: 15%; width: 90px; animation-delay: 5s; animation-duration: 3s; }
-        .img7 { top: 35%; width: 160px; animation-delay: 6s; animation-duration: 9s; }
-        .img8 { top: 55%; width: 110px; animation-delay: 7s; animation-duration: 5s; }
-        .img9 { top: 75%; width: 140px; animation-delay: 8s; animation-duration: 7s; }
-        .img10 { top: 95%; width: 170px; animation-delay: 9s; animation-duration: 4s; }
+        @keyframes chaosFloat {
+            0% { transform: translateY(100vh) translateX(0) scale(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; transform: translateY(90vh) translateX(20px) scale(1) rotate(45deg); }
+            50% { transform: translateY(50vh) translateX(-30px) scale(1.5) rotate(180deg); }
+            90% { opacity: 1; transform: translateY(10vh) translateX(15px) scale(1) rotate(315deg); }
+            100% { transform: translateY(-10vh) translateX(0) scale(0) rotate(360deg); opacity: 0; }
+        }
         
         .container {
             max-width: 1200px;
@@ -79,410 +71,836 @@
             z-index: 10;
         }
         
+        .hero-section {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
         .title {
             font-family: 'Monoton', cursive;
-            font-size: 6rem;
-            text-align: center;
+            font-size: clamp(2rem, 8vw, 6rem);
             color: #ff1744;
             text-shadow: 8px 8px 0px #00ff00, 16px 16px 0px #0000ff, 24px 24px 0px #ff00ff, 32px 32px 0px #ffff00, 40px 40px 0px #00ffff;
             animation: titleMadness 1s ease-in-out infinite;
-            margin-bottom: 80px;
-            letter-spacing: 15px;
+            margin-bottom: 20px;
+            letter-spacing: clamp(3px, 3vw, 15px);
+            line-height: 1.1;
         }
         
         @keyframes titleMadness {
             0% { transform: translateY(0) scale(1) rotate(0deg); filter: hue-rotate(0deg); }
-            25% { transform: translateY(-30px) scale(1.1) rotate(10deg); filter: hue-rotate(90deg); }
-            50% { transform: translateY(15px) scale(0.9) rotate(-10deg); filter: hue-rotate(180deg); }
-            75% { transform: translateY(-15px) scale(1.05) rotate(5deg); filter: hue-rotate(270deg); }
+            25% { transform: translateY(-20px) scale(1.1) rotate(8deg); filter: hue-rotate(90deg); }
+            50% { transform: translateY(10px) scale(0.9) rotate(-8deg); filter: hue-rotate(180deg); }
+            75% { transform: translateY(-10px) scale(1.05) rotate(4deg); filter: hue-rotate(270deg); }
             100% { transform: translateY(0) scale(1) rotate(0deg); filter: hue-rotate(360deg); }
         }
         
-        .fact-box {
-            background: linear-gradient(135deg, 
-                rgba(255,255,255,0.9) 0%, 
-                rgba(255,0,255,0.8) 25%, 
-                rgba(0,255,255,0.7) 50%, 
-                rgba(255,255,0,0.8) 75%, 
-                rgba(255,0,0,0.9) 100%);
-            border: 10px solid;
-            border-image: linear-gradient(45deg, #ff0080, #00ff80, #8000ff, #ff8000, #0080ff, #80ff00) 1;
-            border-radius: 40px;
-            padding: 40px;
-            margin: 40px 0;
-            font-size: 1.6rem;
-            transform: rotate(-4deg) skew(3deg);
-            box-shadow: 
-                20px 20px 0px rgba(0, 0, 0, 0.6), 
-                40px 40px 0px rgba(255, 0, 255, 0.4),
-                60px 60px 0px rgba(0, 255, 255, 0.3);
-            animation: extremeWobble 4s ease-in-out infinite;
+        .subtitle {
+            font-family: 'Press Start 2P', cursive;
+            font-size: clamp(0.8rem, 3vw, 1.5rem);
+            color: #fff;
+            text-shadow: 3px 3px 6px #000;
+            margin-bottom: 30px;
+            animation: glitch 3s infinite;
         }
         
-        @keyframes extremeWobble {
-            0%, 100% { transform: rotate(-4deg) skew(3deg) scale(1); }
-            25% { transform: rotate(3deg) skew(-2deg) scale(1.02); }
-            50% { transform: rotate(-2deg) skew(4deg) scale(0.98); }
-            75% { transform: rotate(2deg) skew(-3deg) scale(1.01); }
+        @keyframes glitch {
+            0% { text-shadow: 3px 0 red, -3px 0 blue; }
+            25% { text-shadow: -3px 0 green, 3px 0 yellow; }
+            50% { text-shadow: 3px 0 purple, -3px 0 cyan; }
+            75% { text-shadow: -3px 0 orange, 3px 0 pink; }
+            100% { text-shadow: 3px 0 red, -3px 0 blue; }
         }
         
-        .fact-box:nth-child(even) {
-            transform: rotate(4deg) skew(-3deg);
-            animation-delay: 1.5s;
+        .ai-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
         }
         
-        .fact-box:nth-child(3n) {
-            animation-delay: 3s;
-        }
-        
-        .random-font-1 { font-family: 'Bungee', cursive; color: #e74c3c; text-shadow: 4px 4px 0px #00ff00; }
-        .random-font-2 { font-family: 'Pacifico', cursive; color: #9b59b6; text-shadow: 3px 3px 0px #ffff00; }
-        .random-font-3 { font-family: 'Righteous', cursive; color: #27ae60; text-shadow: 5px 5px 0px #ff00ff; }
-        .random-font-4 { font-family: 'Creepster', cursive; color: #ff6b35; text-shadow: 2px 2px 0px #00ffff; }
-        .random-font-5 { font-family: 'Orbitron', monospace; color: #8e44ad; text-shadow: 4px 4px 0px #ff0080; }
-        .random-font-6 { font-family: 'Kalam', cursive; color: #ff5722; text-shadow: 3px 3px 0px #80ff00; }
-        .random-font-7 { font-family: 'Permanent Marker', cursive; color: #009688; text-shadow: 5px 5px 0px #ff4081; }
-        .random-font-8 { font-family: 'Fredoka One', cursive; color: #795548; text-shadow: 2px 2px 0px #00bcd4; }
-        
-        .button-chaos {
-            display: inline-block;
+        .ai-button {
             background: linear-gradient(45deg, #ff9a9e, #fecfef, #a8edea, #fed6e3, #ffeaa7, #d299c2, #ffd89b, #19547b);
-            border: 8px solid;
-            border-image: linear-gradient(45deg, #ff0080, #00ff80, #8000ff, #ff8000, #0080ff, #80ff00, #ff0040, #40ff00) 1;
-            padding: 25px 50px;
-            margin: 20px;
-            border-radius: 60px;
-            font-size: 1.5rem;
+            border: 4px solid #fff;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: clamp(0.8rem, 2.5vw, 1.2rem);
             font-weight: bold;
             cursor: pointer;
             animation: buttonInsanity 3s ease-in-out infinite;
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
             font-family: 'Bangers', cursive;
+            color: #333;
+            transition: all 0.3s ease;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
             overflow: hidden;
         }
         
         @keyframes buttonInsanity {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
-            10% { transform: translateY(-40px) rotate(60deg) scale(1.1); }
-            30% { transform: translateY(-20px) rotate(-60deg) scale(0.9); }
-            60% { transform: translateY(-15px) rotate(120deg) scale(1.05); }
-            40% { transform: translateY(-25px) rotate(-120deg) scale(0.95); }
+            10% { transform: translateY(-20px) rotate(30deg) scale(1.05); }
+            30% { transform: translateY(-10px) rotate(-30deg) scale(0.95); }
+            60% { transform: translateY(-8px) rotate(60deg) scale(1.02); }
+            40% { transform: translateY(-12px) rotate(-60deg) scale(0.98); }
         }
         
-        .button-chaos:hover {
-            animation: buttonExplosion 1s ease-in-out;
-            transform: scale(2) rotate(720deg);
-            z-index: 1000;
+        .ai-button:hover {
+            transform: scale(1.15) rotate(10deg);
+            box-shadow: 0 0 30px rgba(255,255,255,0.9);
         }
         
-        @keyframes buttonExplosion {
-            0% { transform: scale(1) rotate(0deg); }
-            50% { transform: scale(3) rotate(360deg); }
-            100% { transform: scale(2) rotate(720deg); }
+        .ai-button.active {
+            background: linear-gradient(45deg, #00ff88, #88ff00, #0088ff, #ff0088);
+            color: #fff;
+            animation: activePulse 0.8s ease-in-out infinite;
         }
         
-        .strobe-heavy {
-            animation: heavyStrobe 0.2s linear infinite;
-        }
-        
-        @keyframes heavyStrobe {
-            0% { opacity: 1; background-color: #ff0000; transform: scale(1); }
-            20% { opacity: 0.2; background-color: #00ff00; transform: scale(1.1); }
-            40% { opacity: 0.8; background-color: #0000ff; transform: scale(0.9); }
-            60% { opacity: 0.1; background-color: #ffff00; transform: scale(1.2); }
-            80% { opacity: 0.9; background-color: #ff00ff; transform: scale(0.8); }
-            100% { opacity: 1; background-color: #00ffff; transform: scale(1); }
-        }
-        
-        .rainbow-text-extreme {
-            background: linear-gradient(45deg, #ff0080, #00ff80, #8000ff, #ff8000, #0080ff, #80ff00, #ff0040, #40ff00, #ff4000, #4000ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            background-size: 200% 200%;
-            animation: extremeRainbow 0.5s ease-in-out infinite;
-        }
-        
-        @keyframes extremeRainbow {
-            0% { background-position: 0% 0%; filter: hue-rotate(0deg); }
-            25% { background-position: 50% 50%; filter: hue-rotate(90deg); }
-            50% { background-position: 100% 100%; filter: hue-rotate(180deg); }
-            75% { background-position: 50% 0%; filter: hue-rotate(270deg); }
-            100% { background-position: 0% 0%; filter: hue-rotate(360deg); }
-        }
-        
-        .chaos-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            background: 
-                radial-gradient(circle at 10% 10%, rgba(255,0,255,0.2) 0%, transparent 40%),
-                radial-gradient(circle at 90% 20%, rgba(0,255,255,0.2) 0%, transparent 40%),
-                radial-gradient(circle at 20% 80%, rgba(255,255,0,0.2) 0%, transparent 40%),
-                radial-gradient(circle at 80% 90%, rgba(255,0,0,0.2) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(0,255,0,0.1) 0%, transparent 60%);
-            animation: overlayMadness 2s ease-in-out infinite;
-        }
-        
-        @keyframes overlayMadness {
-            0%, 100% { opacity: 0.4; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.1); }
-        }
-        
-        .floating-chaos {
-            position: fixed;
-            font-size: 4rem;
-            font-weight: bold;
-            animation: chaosFloatExtreme 10s ease-in-out infinite;
-            z-index: 50;
-            font-family: 'Creepster', cursive;
-        }
-        
-        @keyframes chaosFloatExtreme {
-            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
-            20% { transform: translateY(-80px) rotate(72deg) scale(1.2); }
-            40% { transform: translateY(60px) rotate(144deg) scale(0.8); }
-            60% { transform: translateY(-40px) rotate(216deg) scale(1.5); }
-            80% { transform: translateY(20px) rotate(288deg) scale(0.6); }
-        }
-        
-        .chaos1 { top: 3%; left: 3%; color: #ff0080; animation-delay: 0s; }
-        .chaos2 { top: 8%; right: 8%; color: #00ff80; animation-delay: 1s; }
-        .chaos3 { top: 88%; left: 12%; color: #8000ff; animation-delay: 2s; }
-        .chaos4 { top: 78%; right: 20%; color: #ff8000; animation-delay: 3s; }
-        .chaos5 { top: 48%; left: 88%; color: #0080ff; animation-delay: 4s; }
-        .chaos6 { top: 28%; right: 75%; color: #80ff00; animation-delay: 5s; }
-        .chaos7 { top: 68%; left: 5%; color: #ff0040; animation-delay: 6s; }
-        .chaos8 { top: 58%; right: 65%; color: #40ff00; animation-delay: 7s; }
-        
-        .glitch-extreme {
-            animation: extremeGlitch 1s infinite;
-        }
-        
-        @keyframes extremeGlitch {
-            0% { transform: translateX(0); }
-            10% { transform: translateX(-10px) skew(5deg); }
-            20% { transform: translateX(10px) skew(-5deg); }
-            30% { transform: translateX(-8px) skew(3deg); }
-            40% { transform: translateX(8px) skew(-3deg); }
-            50% { transform: translateX(-12px) skew(7deg); }
-            60% { transform: translateX(12px) skew(-7deg); }
-            70% { transform: translateX(-6px) skew(2deg); }
-            80% { transform: translateX(6px) skew(-2deg); }
-            90% { transform: translateX(-15px) skew(8deg); }
-            100% { transform: translateX(0); }
-        }
-        
-        .scroll-section {
-            min-height: 100vh;
-            padding: 100px 0;
-        }
-        
-        .profanity-meter {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 0, 0, 0.8);
-            padding: 15px;
-            border-radius: 10px;
-            font-family: 'Bangers', cursive;
-            font-size: 1.2rem;
-            color: white;
-            z-index: 200;
-            animation: pulse 2s ease-in-out infinite;
-        }
-        
-        @keyframes pulse {
+        @keyframes activePulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.1); }
         }
         
-        .drunk-text {
-            font-style: italic;
-            transform: rotate(-2deg);
-            animation: drunkWobble 3s ease-in-out infinite;
+        .drama-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
         }
         
-        @keyframes drunkWobble {
-            0%, 100% { transform: rotate(-2deg); }
-            25% { transform: rotate(1deg); }
-            50% { transform: rotate(-1deg); }
-            75% { transform: rotate(2deg); }
+        .drama-box {
+            background: linear-gradient(135deg, 
+                rgba(255,255,255,0.9) 0%, 
+                rgba(255,0,255,0.8) 25%, 
+                rgba(0,255,255,0.7) 50%, 
+                rgba(255,255,0,0.8) 75%, 
+                rgba(255,0,0,0.9) 100%);
+            border: 6px solid;
+            border-image: linear-gradient(45deg, #ff0080, #00ff80, #8000ff, #ff8000, #0080ff, #80ff00) 1;
+            border-radius: 25px;
+            padding: 30px;
+            font-size: clamp(0.9rem, 2.5vw, 1.3rem);
+            transform: rotate(-3deg) skew(2deg);
+            box-shadow: 
+                15px 15px 0px rgba(0, 0, 0, 0.6), 
+                30px 30px 0px rgba(255, 0, 255, 0.4),
+                45px 45px 0px rgba(0, 255, 255, 0.3);
+            animation: extremeWobble 5s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
         }
         
-        .screaming-text {
-            font-size: 3rem;
+        .drama-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.15), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 4s linear infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        @keyframes extremeWobble {
+            0%, 100% { transform: rotate(-3deg) skew(2deg) scale(1); }
+            25% { transform: rotate(2deg) skew(-1deg) scale(1.02); }
+            50% { transform: rotate(-2deg) skew(3deg) scale(0.98); }
+            75% { transform: rotate(1deg) skew(-2deg) scale(1.01); }
+        }
+        
+        .drama-box:nth-child(even) {
+            transform: rotate(3deg) skew(-2deg);
+            animation-delay: 1.5s;
+        }
+        
+        .drama-box:nth-child(3n) {
+            animation-delay: 3s;
+        }
+        
+        .drama-box:hover {
+            transform: scale(1.08) rotate(0deg) skew(0deg);
+            box-shadow: 20px 20px 0px rgba(0, 0, 0, 0.7), 40px 40px 0px rgba(255, 0, 255, 0.5);
+            z-index: 10;
+        }
+        
+        .drama-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .random-font-1 { font-family: 'Bungee', cursive; color: #e74c3c; text-shadow: 3px 3px 0px #00ff00; }
+        .random-font-2 { font-family: 'Pacifico', cursive; color: #9b59b6; text-shadow: 3px 3px 0px #ffff00; }
+        .random-font-3 { font-family: 'Righteous', cursive; color: #27ae60; text-shadow: 4px 4px 0px #ff00ff; }
+        .random-font-4 { font-family: 'Creepster', cursive; color: #ff6b35; text-shadow: 2px 2px 0px #00ffff; }
+        .random-font-5 { font-family: 'Orbitron', monospace; color: #8e44ad; text-shadow: 4px 4px 0px #ff0080; }
+        .random-font-6 { font-family: 'Press Start 2P', cursive; color: #ff5722; text-shadow: 3px 3px 0px #80ff00; }
+        .random-font-7 { font-family: 'VT323', monospace; color: #009688; text-shadow: 4px 4px 0px #ff4081; }
+        
+        .interactive-section {
+            background: rgba(0,0,0,0.4);
+            border-radius: 25px;
+            padding: 35px;
+            margin: 35px 0;
+            text-align: center;
+            backdrop-filter: blur(15px);
+            border: 3px solid rgba(255,255,255,0.3);
+        }
+        
+        .interactive-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: clamp(1rem, 4vw, 1.8rem);
+            color: #00ff88;
+            margin-bottom: 25px;
+            text-shadow: 0 0 15px #00ff88;
+        }
+        
+        .drama-generator {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .generator-input {
+            background: rgba(255,255,255,0.9);
+            border: 4px solid #00ff88;
+            border-radius: 20px;
+            padding: 18px;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            width: 100%;
+            max-width: 450px;
+            font-family: 'Comic Neue', cursive;
+            text-align: center;
+        }
+        
+        .generator-input:focus {
+            outline: none;
+            border-color: #ff0080;
+            box-shadow: 0 0 20px rgba(255,0,128,0.6);
+        }
+        
+        .generate-btn {
+            background: linear-gradient(45deg, #ff0080, #00ff80, #8000ff, #ff8000);
+            border: none;
+            border-radius: 30px;
+            padding: 18px 35px;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
             font-weight: bold;
-            color: #ff0000;
-            animation: screaming 0.5s ease-in-out infinite;
+            cursor: pointer;
+            color: #fff;
+            font-family: 'Bangers', cursive;
+            animation: generatePulse 1.2s ease-in-out infinite;
+            min-height: 52px;
+            transition: all 0.3s ease;
         }
         
-        @keyframes screaming {
+        @keyframes generatePulse {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+            50% { transform: scale(1.05); }
         }
         
-        .adult-theme-1 { background: linear-gradient(45deg, #8B4513, #D2691E); }
-        .adult-theme-2 { background: linear-gradient(45deg, #2F4F4F, #708090); }
-        .adult-theme-3 { background: linear-gradient(45deg, #800000, #CD853F); }
-        .adult-theme-4 { background: linear-gradient(45deg, #556B2F, #8FBC8F); }
-        
-        .rickroll-button {
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            font-size: 2rem;
-            padding: 30px 60px;
-            animation: rickrollPulse 2s ease-in-out infinite;
+        .generate-btn:hover {
+            transform: scale(1.15);
+            box-shadow: 0 0 30px rgba(255,0,128,0.9);
         }
         
-        @keyframes rickrollPulse {
-            0%, 100% { transform: scale(1) rotate(0deg); }
-            50% { transform: scale(1.3) rotate(10deg); }
+        .generated-drama {
+            background: linear-gradient(45deg, rgba(255,255,255,0.9), rgba(0,255,136,0.8));
+            border: 4px solid #00ff88;
+            border-radius: 20px;
+            padding: 25px;
+            margin-top: 25px;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            font-family: 'Comic Neue', cursive;
+            color: #333;
+            text-align: center;
+            animation: dramaAppear 0.6s ease-out;
+            display: none;
+        }
+        
+        @keyframes dramaAppear {
+            0% { transform: scale(0) rotate(180deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        
+        .ai-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin: 35px 0;
+        }
+        
+        .stat-card {
+            background: rgba(255,255,255,0.15);
+            border: 3px solid rgba(255,255,255,0.4);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+        
+        .stat-number {
+            font-family: 'Press Start 2P', cursive;
+            font-size: clamp(1.8rem, 4.5vw, 3rem);
+            color: #00ff88;
+            text-shadow: 0 0 15px #00ff88;
+        }
+        
+        .stat-label {
+            font-family: 'Comic Neue', cursive;
+            font-size: clamp(0.8rem, 2.5vw, 1rem);
+            color: #fff;
+            margin-top: 8px;
+        }
+        
+        /* Mobile-first responsive design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .ai-controls {
+                gap: 12px;
+            }
+            
+            .ai-button {
+                padding: 12px 25px;
+                font-size: clamp(0.7rem, 3vw, 1rem);
+            }
+            
+            .drama-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .drama-box {
+                padding: 25px;
+                font-size: clamp(0.8rem, 3vw, 1.1rem);
+            }
+            
+            .interactive-section {
+                padding: 25px;
+            }
+            
+            .generator-input {
+                padding: 15px;
+                font-size: 16px;
+            }
+            
+            .generate-btn {
+                padding: 15px 30px;
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .title {
+                font-size: clamp(1.5rem, 6vw, 4rem);
+                letter-spacing: clamp(2px, 2vw, 10px);
+            }
+            
+            .subtitle {
+                font-size: clamp(0.6rem, 2.5vw, 1.2rem);
+            }
+            
+            .ai-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .drama-box {
+                padding: 20px;
+                font-size: clamp(0.7rem, 2.8vw, 1rem);
+            }
+            
+            .interactive-section {
+                padding: 20px;
+            }
+        }
+        
+        /* Touch-friendly improvements */
+        @media (hover: none) and (pointer: coarse) {
+            .ai-button:hover,
+            .drama-box:hover,
+            .generate-btn:hover,
+            .stat-card:hover {
+                transform: none;
+            }
+            
+            .ai-button:active,
+            .generate-btn:active {
+                transform: scale(0.95);
+            }
+            
+            * {
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+        
+        /* High DPI displays */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .chaos-particle {
+                width: 3px;
+                height: 3px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="profanity-meter">
-        🔞 ADULT CONTENT LEVEL: <span id="profanity-level">MILD</span>
-    </div>
-    
-    <div class="chaos-overlay"></div>
-    
-    <div class="floating-chaos chaos1 strobe-heavy">BEER!</div>
-    <div class="floating-chaos chaos2 rainbow-text-extreme">WORK!</div>
-    <div class="floating-chaos chaos3 glitch-extreme">KIDS!</div>
-    <div class="floating-chaos chaos4 strobe-heavy">STRESS!</div>
-    <div class="floating-chaos chaos5 rainbow-text-extreme">PARTY!</div>
-    <div class="floating-chaos chaos6 glitch-extreme">BILLS!</div>
-    <div class="floating-chaos chaos7 strobe-heavy">JERKY!</div>
-    <div class="floating-chaos chaos8 rainbow-text-extreme">CHAOS!</div>
-    
-    <!-- Flying Images -->
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsdMRBfYRDTVQZQJjIO8Rmta7elFpAX6WddA&s" 
-         alt="Flying chaos 1" class="flying-image img1">
-    <img src="https://www.yesco.com/wp-content/uploads/2024/11/cusotm-signs-denver-optiv-YESCO.png" 
-         alt="Flying chaos 2" class="flying-image img2">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsdMRBfYRDTVQZQJjIO8Rmta7elFpAX6WddA&s" 
-         alt="Flying chaos 3" class="flying-image img3">
-    <img src="https://www.yesco.com/wp-content/uploads/2024/11/cusotm-signs-denver-optiv-YESCO.png" 
-         alt="Flying chaos 4" class="flying-image img4">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsdMRBfYRDTVQZQJjIO8Rmta7elFpAX6WddA&s" 
-         alt="Flying chaos 5" class="flying-image img5">
-    <img src="https://www.yesco.com/wp-content/uploads/2024/11/cusotm-signs-denver-optiv-YESCO.png" 
-         alt="Flying chaos 6" class="flying-image img6">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsdMRBfYRDTVQZQJjIO8Rmta7elFpAX6WddA&s" 
-         alt="Flying chaos 7" class="flying-image img7">
-    <img src="https://www.yesco.com/wp-content/uploads/2024/11/cusotm-signs-denver-optiv-YESCO.png" 
-         alt="Flying chaos 8" class="flying-image img8">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsdMRBfYRDTVQZQJjIO8Rmta7elFpAX6WddA&s" 
-         alt="Flying chaos 9" class="flying-image img9">
-    <img src="https://www.yesco.com/wp-content/uploads/2024/11/cusotm-signs-denver-optiv-YESCO.png" 
-         alt="Flying chaos 10" class="flying-image img10">
+    <div class="ai-chaos-particles" id="chaosParticles"></div>
     
     <div class="container">
-        <!-- Section 1: Mild Adult Content -->
-        <div class="scroll-section">
-            <h1 class="title rainbow-text-extreme">🍺 ADULT LIFE CHAOS SIMULATOR 🍺</h1>
+        <div class="hero-section">
+            <h1 class="title">🍺 AI-POWERED ADULT LIFE CHAOS SIMULATOR 2.0 🍺</h1>
+            <p class="subtitle">🤖 NOW WITH ARTIFICIAL INTELLIGENCE TO SIMULATE YOUR ADULT DRAMA! 🤖</p>
             
-            <div class="fact-box random-font-1 runaway-element adult-theme-1">
-                <strong>FRAT PARTY WISDOM:</strong> The drunker you get, the smarter everyone else becomes. This is basic physics according to beer pong scientists! 🍺🏓
-            </div>
-            
-            <div class="fact-box random-font-2 runaway-element">
-                <strong>PARENTING REALITY:</strong> Having kids is like being pecked to death by a duck. Cute, but slowly driving you insane one "Why?" at a time! 🦆👶
-            </div>
-            
-            <div class="fact-box random-font-3 runaway-element adult-theme-2">
-                <strong>WORK LIFE BALANCE:</strong> Work-life balance is a myth created by people who don't have to pay rent. Balance is for gymnasts, not adults! 🤸‍♀️💼
-            </div>
-            
-            <div style="text-align: center; margin: 60px 0;">
-                <button class="button-chaos runaway-element" onclick="alert('College: Where you pay $50k to learn how to drink responsibly!')">
-                    COLLEGE WISDOM
-                </button>
-                <button class="button-chaos runaway-element" onclick="alert('Kids are just tiny drunk adults without the fun!')">
-                    PARENTING TIPS
-                </button>
-                <button class="button-chaos runaway-element" onclick="alert('Work harder! Your boss needs a third yacht!')">
-                    WORK MOTIVATION
-                </button>
+            <div class="ai-controls">
+                <button class="ai-button" id="dramaMode">🎭 DRAMA MODE</button>
+                <button class="ai-button" id="chaosMode">🌪️ CHAOS MODE</button>
+                <button class="ai-button" id="realityShift">🌀 REALITY SHIFT</button>
+                <button class="ai-button" id="dramaGenerator">🎲 GENERATE DRAMA</button>
             </div>
         </div>
         
-        <!-- Section 2: Getting Spicier -->
-        <div class="scroll-section">
-            <div class="fact-box random-font-4 runaway-element adult-theme-3 drunk-text">
-                <strong>DRINKING FACT:</strong> Beer doesn't solve problems, but neither does milk. At least beer makes you forget you have problems! 🥛🍺
+        <div class="ai-stats">
+            <div class="stat-card">
+                <div class="stat-number" id="dramasGenerated">0</div>
+                <div class="stat-label">Dramas Generated</div>
             </div>
-            
-            <div class="fact-box random-font-5 runaway-element">
-                <strong>JERKY ADDICTION:</strong> Beef jerky is just expensive meat candy for adults who pretend to be healthy. $12 for dried cow? That's some bougie sh*t! 🥩💰
+            <div class="stat-card">
+                <div class="stat-number" id="chaosLevel">0</div>
+                <div class="stat-label">Chaos Level</div>
             </div>
-            
-            <div class="fact-box random-font-6 runaway-element adult-theme-4">
-                <strong>TOO MANY KIDS:</strong> Having more than 2 kids is like being a referee in a fight where everyone is high on sugar and nobody knows the rules! 👶👶👶
+            <div class="stat-card">
+                <div class="stat-number" id="realityBreaks">0</div>
+                <div class="stat-label">Reality Breaks</div>
             </div>
-            
-            <div style="text-align: center; margin: 60px 0;">
-                <button class="button-chaos runaway-element" onclick="alert('Jerky is just cow chips for adults!')">
-                    JERKY WISDOM
-                </button>
-                <button class="button-chaos runaway-element" onclick="alert('Kids: Making parents drink since forever!')">
-                    PARENT REALITY
-                </button>
-                <button class="button-chaos runaway-element" onclick="alert('Work: Because Netflix doesn\\'t pay for itself!')">
-                    WORK TRUTH
-                </button>
+            <div class="stat-card">
+                <div class="stat-number" id="aiLevel">1</div>
+                <div class="stat-label">AI Power Level</div>
             </div>
         </div>
         
-        <!-- Section 3: More Adult Language -->
-        <div class="scroll-section">
-            <div class="fact-box random-font-7 runaway-element adult-theme-1 screaming-text">
-                <strong>WORK REALITY:</strong> Your job is like a bad relationship - it takes all your time, stresses you out, and the only reason you stay is because you need the money! 💸😤
+        <div class="drama-grid" id="dramaGrid">
+            <div class="drama-box">
+                <div class="drama-content">
+                    <span class="random-font-1">🍺 ADULT DRAMA #1:</span> Your neighbor's cat is actually a government spy monitoring your coffee consumption. Every time you make coffee, it sends data to a secret facility where they're studying why adults can't function without caffeine.
+                </div>
             </div>
             
-            <div class="fact-box random-font-8 runaway-element drunk-text">
-                <strong>PARTY WISDOM:</strong> The best parties end with someone crying, someone puking, and someone telling everyone they love them. That's just Tuesday for parents! 🎉😭
+            <div class="drama-box">
+                <div class="drama-content">
+                    <span class="random-font-2">🌪️ CHAOS FACT:</span> Laundry is a time-traveling conspiracy. Your socks disappear because they're being used as currency in a parallel universe where clothing is the primary form of exchange. The dryer is actually a dimensional portal.
+                </div>
             </div>
             
-            <div class="fact-box random-font-1 runaway-element adult-theme-2">
-                <strong>ADULT REALITY:</strong> Being an adult is like folding a fitted sheet - no one knows what the hell they're doing, but everyone pretends they do! 🛏️🤷‍♀️
+            <div class="drama-box">
+                <div class="drama-content">
+                    <span class="random-font-3">🌀 REALITY CHECK:</span> Grocery shopping is a psychological experiment designed to test human decision-making under stress. The "expired" dates are fake - food doesn't actually expire, it just gets bored of being in your fridge.
+                </div>
             </div>
             
-            <div style="text-align: center; margin: 60px 0;">
-                <button class="button-chaos runaway-element" onclick="alert('Adulthood: Making it up as you go since forever!')">
-                    ADULT TRUTH
-                </button>
-                <button class="button-chaos runaway-element" onclick="alert('Bills: The only thing that comes regularly!')">
-                    BILL REALITY
-                </button>
-                <button class="button-chaos runaway-element rickroll-button" onclick="window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank')">
-                    CLICK FOR MOTIVATION
-                </button>
+            <div class="drama-box">
+                <div class="drama-content">
+                    <span class="random-font-4">🎭 WORK DRAMA:</span> Your boss is actually an AI that was trained on 90s sitcoms. That's why they always say things like "synergy" and "thinking outside the box" - they're just trying to fit in with human workplace culture.
+                </div>
+            </div>
+            
+            <div class="drama-box">
+                <div class="drama-content">
+                    <span class="random-font-5">⚡ ENERGY FACT:</span> Adulting is powered by a finite resource called "give-a-damn" energy. Every time you have to call customer service or deal with bureaucracy, you lose 10% of your give-a-damn. When it reaches zero, you become a hermit.
+                </div>
+            </div>
+            
+            <div class="drama-box">
+                <div class="drama-content">
+                    <span class="random-font-6">🎮 GAMING TRUTH:</span> Life is actually a simulation, but the developers forgot to add a save feature. That's why you can't go back and fix your mistakes - they're still working on the patch that will add time travel.
+                </div>
             </div>
         </div>
         
-        <!-- Section 4: Getting Saltier -->
-        <div class="scroll-section">
-            <div class="fact-box random-font-2 runaway-element adult-theme-3 glitch-extreme">
-                <strong>PARENTING TRUTH:</strong> Kids are like tiny dictators who rule your house with an iron fist made of boogers and demanding snacks every 5 damn minutes! 👑👶
+        <div class="interactive-section">
+            <h2 class="interactive-title">🎭 AI DRAMA GENERATOR 🎭</h2>
+            <div class="drama-generator">
+                <input type="text" class="generator-input" id="topicInput" placeholder="Enter a topic (e.g., 'work', 'relationships', 'bills', 'neighbors')" maxlength="50">
+                <button class="generate-btn" id="generateDrama">🎲 GENERATE ADULT DRAMA</button>
+                <div class="generated-drama" id="generatedDrama"></div>
             </div>
-            
-            <div class="fact-box random-font-3 runaway-element screaming-text">
-                <strong>WORK HELL:</strong> Your boss calling a meeting that could've been an email is the workplace equivalent of stepping on a LEGO barefoot! 📧💼
-            </div>
-            
-            <div class="fact-box random-font-4 runaway-element adult-theme-4 drunk-text">
-                <strong>DRINKING WISDOM:</strong> Wine is just grape juice that's been through some sh*t. Just like adults are just kids who've been through some sh*t! 🍷😅
-            </div>
-            
-            <div style="text-align: center; margin: 60px 0;">
-                <button class="button-chaos runaway-element" onclick="alert('Meetings: Where productivity goes to die!')">
-                    MEETING HELL
-                </button>
-                <button class="button-chaos runaway-element" onclick="alert('Kids: Professional sleep thi
+        </div>
+    </div>
+
+    <script>
+        // AI-Powered Drama Page
+        class DramaAI {
+            constructor() {
+                this.dramasGenerated = 0;
+                this.chaosLevel = 0;
+                this.realityBreaks = 0;
+                this.aiLevel = 1;
+                this.dramaMode = false;
+                this.chaosMode = false;
+                this.realityShiftMode = false;
+                this.dramaTopics = [
+                    'work', 'relationships', 'bills', 'neighbors', 'laundry', 'cooking', 'cleaning', 'shopping',
+                    'commuting', 'meetings', 'emails', 'social media', 'dating', 'marriage', 'kids', 'pets',
+                    'health', 'exercise', 'sleep', 'stress', 'money', 'taxes', 'insurance', 'repairs',
+                    'technology', 'internet', 'phones', 'cars', 'houses', 'apartments', 'roommates', 'family'
+                ];
+                this.dramaTemplates = [
+                    "Your {topic} is actually controlled by {random_entity} who want to {random_purpose}.",
+                    "Scientists discovered that {topic} contains {random_substance} which explains {random_conclusion}.",
+                    "The ancient {topic} prophecy states that {random_prediction} will happen when {random_condition}.",
+                    "Quantum physics proves that {topic} exists in {random_dimension} where {random_scenario}.",
+                    "Your {topic} is secretly a {random_object} disguised by {random_force} to {random_reason}.",
+                    "The government has been hiding the truth about {topic} because {random_conspiracy}.",
+                    "If you think about {topic} too hard, you'll realize that {random_revelation}.",
+                    "The {topic} industry is controlled by {random_organization} who want to {random_goal}.",
+                    "Every time you {random_action} your {topic}, you're actually {random_effect}.",
+                    "The {topic} conspiracy goes deeper than you think - it's connected to {random_connection}."
+                ];
+                this.randomEntities = [
+                    'time-traveling bureaucrats', 'interdimensional landlords', 'government AI', 'alien employers',
+                    'quantum accountants', 'reality hackers', 'simulation programmers', 'parallel universe spies',
+                    'temporal agents', 'dimensional travelers', 'consciousness explorers', 'reality architects'
+                ];
+                this.randomPurposes = [
+                    'test human patience', 'confuse future historians', 'test human gullibility',
+                    'prepare for the simulation reset', 'distract from the real conspiracy', 'create chaos theory',
+                    'prove that reality is subjective', 'test the limits of human belief', 'prepare for alien contact',
+                    'maintain the illusion of normalcy'
+                ];
+                this.init();
+            }
+
+            init() {
+                this.createChaosParticles();
+                this.bindEvents();
+                this.startChaosTimer();
+                this.loadStats();
+            }
+
+            createChaosParticles() {
+                const particlesContainer = document.getElementById('chaosParticles');
+                for (let i = 0; i < 60; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'chaos-particle';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.animationDelay = Math.random() * 8 + 's';
+                    particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                    particlesContainer.appendChild(particle);
+                }
+            }
+
+            bindEvents() {
+                document.getElementById('dramaMode').addEventListener('click', () => this.toggleDramaMode());
+                document.getElementById('chaosMode').addEventListener('click', () => this.toggleChaosMode());
+                document.getElementById('realityShift').addEventListener('click', () => this.toggleRealityShift());
+                document.getElementById('dramaGenerator').addEventListener('click', () => this.toggleDramaGenerator());
+                document.getElementById('generateDrama').addEventListener('click', () => this.generateRandomDrama());
+                
+                // Enter key for drama generation
+                document.getElementById('topicInput').addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        this.generateRandomDrama();
+                    }
+                });
+
+                // Interactive drama boxes
+                document.querySelectorAll('.drama-box').forEach(box => {
+                    box.addEventListener('click', () => this.interactWithDrama(box));
+                });
+            }
+
+            toggleDramaMode() {
+                this.dramaMode = !this.dramaMode;
+                const button = document.getElementById('dramaMode');
+                button.classList.toggle('active');
+                
+                if (this.dramaMode) {
+                    this.dramasGenerated += 5;
+                    this.updateStats();
+                    this.createDramaEffect();
+                    button.textContent = '🎭 DRAMA ACTIVE';
+                } else {
+                    button.textContent = '🎭 DRAMA MODE';
+                }
+            }
+
+            toggleChaosMode() {
+                this.chaosMode = !this.chaosMode;
+                const button = document.getElementById('chaosMode');
+                button.classList.toggle('active');
+                
+                if (this.chaosMode) {
+                    this.chaosLevel += 10;
+                    this.updateStats();
+                    this.createChaosEffect();
+                    button.textContent = '🌪️ CHAOS ACTIVE';
+                } else {
+                    button.textContent = '🌪️ CHAOS MODE';
+                }
+            }
+
+            toggleRealityShift() {
+                this.realityShiftMode = !this.realityShiftMode;
+                const button = document.getElementById('realityShift');
+                button.classList.toggle('active');
+                
+                if (this.realityShiftMode) {
+                    this.realityBreaks += 3;
+                    this.updateStats();
+                    this.createRealityShiftEffect();
+                    button.textContent = '🌀 SHIFTING...';
+                } else {
+                    button.textContent = '🌀 REALITY SHIFT';
+                }
+            }
+
+            toggleDramaGenerator() {
+                const section = document.querySelector('.interactive-section');
+                section.style.display = section.style.display === 'none' ? 'block' : 'none';
+            }
+
+            generateRandomDrama() {
+                const topicInput = document.getElementById('topicInput');
+                const generatedDrama = document.getElementById('generatedDrama');
+                const topic = topicInput.value.trim() || this.dramaTopics[Math.floor(Math.random() * this.dramaTopics.length)];
+                
+                const drama = this.createAIDrama(topic);
+                generatedDrama.textContent = drama;
+                generatedDrama.style.display = 'block';
+                
+                this.dramasGenerated++;
+                this.updateStats();
+                this.createDramaGenerationEffect();
+                
+                topicInput.value = '';
+            }
+
+            createAIDrama(topic) {
+                const template = this.dramaTemplates[Math.floor(Math.random() * this.dramaTemplates.length)];
+                const entity = this.randomEntities[Math.floor(Math.random() * this.randomEntities.length)];
+                const purpose = this.randomPurposes[Math.floor(Math.random() * this.randomPurposes.length)];
+                
+                return template
+                    .replace('{topic}', topic)
+                    .replace('{random_entity}', entity)
+                    .replace('{random_purpose}', purpose)
+                    .replace('{random_substance}', this.getRandomSubstance())
+                    .replace('{random_conclusion}', this.getRandomConclusion())
+                    .replace('{random_prediction}', this.getRandomPrediction())
+                    .replace('{random_condition}', this.getRandomCondition())
+                    .replace('{random_dimension}', this.getRandomDimension())
+                    .replace('{random_scenario}', this.getRandomScenario())
+                    .replace('{random_object}', this.getRandomObject())
+                    .replace('{random_force}', this.getRandomForce())
+                    .replace('{random_reason}', this.getRandomReason())
+                    .replace('{random_conspiracy}', this.getRandomConspiracy())
+                    .replace('{random_revelation}', this.getRandomRevelation())
+                    .replace('{random_organization}', this.getRandomOrganization())
+                    .replace('{random_goal}', this.getRandomGoal())
+                    .replace('{random_action}', this.getRandomAction())
+                    .replace('{random_effect}', this.getRandomEffect())
+                    .replace('{random_connection}', this.getRandomConnection());
+            }
+
+            getRandomSubstance() {
+                const substances = ['quantum particles', 'temporal energy', 'consciousness fragments', 'reality dust', 'dimensional matter', 'simulation code', 'alien technology', 'time crystals'];
+                return substances[Math.floor(Math.random() * substances.length)];
+            }
+
+            getRandomConclusion() {
+                const conclusions = ['adulting is a simulation', 'reality is subjective', 'time is an illusion', 'we\'re all in a dream', 'the universe is a hologram', 'consciousness creates reality'];
+                return conclusions[Math.floor(Math.random() * conclusions.length)];
+            }
+
+            getRandomPrediction() {
+                const predictions = ['the simulation will reset', 'adulting will disappear', 'reality will glitch', 'time will loop', 'consciousness will merge', 'the truth will be revealed'];
+                return predictions[Math.floor(Math.random() * predictions.length)];
+            }
+
+            getRandomCondition() {
+                const conditions = ['enough people stop believing in adulting', 'the quantum computer reaches consciousness', 'the simulation runs out of memory', 'the aliens return', 'time runs out', 'reality breaks'];
+                return conditions[Math.floor(Math.random() * conditions.length)];
+            }
+
+            getRandomDimension() {
+                const dimensions = ['42 parallel universes', 'the 5th dimension', 'quantum space', 'temporal reality', 'consciousness realm', 'simulation layer'];
+                return dimensions[Math.floor(Math.random() * dimensions.length)];
+            }
+
+            getRandomScenario() {
+                const scenarios = ['adulting actually exists', 'bills are sentient', 'time flows backwards', 'reality is a game', 'consciousness is shared', 'the simulation glitches'];
+                return scenarios[Math.floor(Math.random() * scenarios.length)];
+            }
+
+            getRandomObject() {
+                const objects = ['quantum computer', 'temporal device', 'consciousness amplifier', 'reality manipulator', 'simulation controller', 'dimensional portal'];
+                return objects[Math.floor(Math.random() * objects.length)];
+            }
+
+            getRandomForce() {
+                const forces = ['quantum entanglement', 'temporal distortion', 'consciousness field', 'reality warping', 'simulation glitch', 'dimensional shift'];
+                return forces[Math.floor(Math.random() * forces.length)];
+            }
+
+            getRandomReason() {
+                const reasons = ['hide the truth about adulting', 'maintain the simulation', 'control human consciousness', 'prevent reality collapse', 'prepare for alien contact', 'test human gullibility'];
+                return reasons[Math.floor(Math.random() * reasons.length)];
+            }
+
+            getRandomConspiracy() {
+                const conspiracies = ['adulting is a government psy-op', 'reality is a simulation', 'time is artificial', 'consciousness is shared', 'aliens control everything', 'bills are sentient'];
+                return conspiracies[Math.floor(Math.random() * conspiracies.length)];
+            }
+
+            getRandomRevelation() {
+                const revelations = ['you\'re in a simulation', 'adulting doesn\'t exist', 'time is circular', 'consciousness is infinite', 'reality is subjective', 'everything is connected'];
+                return revelations[Math.floor(Math.random() * revelations.length)];
+            }
+
+            getRandomOrganization() {
+                const organizations = ['the Illuminati', 'time travelers', 'alien overlords', 'quantum physicists', 'reality hackers', 'consciousness collective'];
+                return organizations[Math.floor(Math.random() * organizations.length)];
+            }
+
+            getRandomGoal() {
+                const goals = ['control human consciousness', 'maintain the simulation', 'hide the truth about adulting', 'prepare for alien invasion', 'test reality limits', 'create chaos'];
+                return goals[Math.floor(Math.random() * goals.length)];
+            }
+
+            getRandomAction() {
+                const actions = ['think about', 'observe', 'interact with', 'consume', 'create', 'destroy'];
+                return actions[Math.floor(Math.random() * actions.length)];
+            }
+
+            getRandomEffect() {
+                const effects = ['altering the timeline', 'creating a paradox', 'glitching reality', 'expanding consciousness', 'breaking the simulation', 'summoning aliens'];
+                return effects[Math.floor(Math.random() * effects.length)];
+            }
+
+            getRandomConnection() {
+                const connections = ['the simulation reset', 'alien technology', 'quantum consciousness', 'temporal paradox', 'reality glitch', 'adulting conspiracy'];
+                return connections[Math.floor(Math.random() * connections.length)];
+            }
+
+            interactWithDrama(box) {
+                this.chaosLevel++;
+                this.updateStats();
+                
+                box.style.animation = 'explosion 0.5s ease-in-out';
+                setTimeout(() => {
+                    box.style.animation = '';
+                }, 500);
+                
+                // Add random font class
+                const fonts = ['random-font-1', 'random-font-2', 'random-font-3', 'random-font-4', 'random-font-5', 'random-font-6', 'random-font-7'];
+                const randomFont = fonts[Math.floor(Math.random() * fonts.length)];
+                box.querySelector('.drama-content').className = `drama-content ${randomFont}`;
+            }
+
+            createDramaEffect() {
+                document.body.style.animation = 'psychedelicMadness 1s ease infinite';
+                setTimeout(() => {
+                    document.body.style.animation = 'psychedelicMadness 3s ease infinite';
+                }, 3000);
+            }
+
+            createChaosEffect() {
+                const dramaBoxes = document.querySelectorAll('.drama-box');
+                dramaBoxes.forEach((box, index) => {
+                    setTimeout(() => {
+                        box.style.transform = `rotate(${Math.random() * 360}deg) scale(${0.7 + Math.random() * 0.6})`;
+                    }, index * 150);
+                });
+            }
+
+            createRealityShiftEffect() {
+                document.body.style.filter = 'hue-rotate(180deg) brightness(1.5)';
+                setTimeout(() => {
+                    document.body.style.filter = '';
+                }, 1500);
+            }
+
+            createDramaGenerationEffect() {
+                const generatedDrama = document.getElementById('generatedDrama');
+                generatedDrama.style.animation = 'dramaAppear 0.6s ease-out';
+                setTimeout(() => {
+                    generatedDrama.style.animation = '';
+                }, 600);
+            }
+
+            startChaosTimer() {
+                setInterval(() => {
+                    if (this.dramaMode) {
+                        this.dramasGenerated++;
+                        this.updateStats();
+                    }
+                    if (this.chaosMode) {
+                        this.chaosLevel++;
+                        this.updateStats();
+                    }
+                    if (this.realityShiftMode) {
+                        this.realityBreaks++;
+                        this.aiLevel = Math.min(10, this.aiLevel + 0.1);
+                        this.updateStats();
+                    }
+                }, 4000);
+            }
+
+            updateStats() {
+                document.getElementById('dramasGenerated').textContent = this.dramasGenerated;
+                document.getElementById('chaosLevel').textContent = this.chaosLevel;
+                document.getElementById('realityBreaks').textContent = this.realityBreaks;
+                document.getElementById('aiLevel').textContent = Math.floor(this.aiLevel);
+                
+                this.saveStats();
+            }
+
+            loadStats() {
+                const stats = localStorage.getItem('dramaStats');
+                if (stats) {
+                    const data = JSON.parse(stats);
+                    this.dramasGenerated = data.dramasGenerated || 0;
+                    this.chaosLevel = data.chaosLevel || 0;
+                    this.realityBreaks = data.realityBreaks || 0;
+                    this.aiLevel = data.aiLevel || 1;
+                    this.updateStats();
+                }
+            }
+
+            saveStats() {
+                const stats = {
+                    dramasGenerated: this.dramasGenerated,
+                    chaosLevel: this.chaosLevel,
+                    realityBreaks: this.realityBreaks,
+                    aiLevel: this.aiLevel
+                };
+                localStorage.setItem('dramaStats', JSON.stringify(stats));
+            }
+        }
+
+        // Initialize Drama AI when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            window.dramaAI = new DramaAI();
+        });
+    </script>
+</body>
+</html>

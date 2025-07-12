@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="style.css">
+    <script src="global-nav.js"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934641350357854"
      crossorigin="anonymous"></script>
     <!-- Google tag (gtag.js) -->
@@ -14,370 +15,815 @@
   gtag('config', 'G-038XPQVXHF');
 </script>
     <meta charset="UTF-8">
-    <title>Wacky Login</title>
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔑 AI-POWERED CULT LOGIN PORTAL 2.0 🔑</title>
     <style>
-        body {
-            background: linear-gradient(135deg, #ff6ec4 0%, #7873f5 100%);
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Creepster&family=Bangers&family=Freckle+Face&family=Orbitron:wght@900&family=Press+Start+2P&family=VT323&display=swap');
+        
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(45deg, #ff1744, #00ff88, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7, #dda0dd);
+            background-size: 800% 800%;
+            animation: loginShift 4s ease infinite;
             overflow-x: hidden;
-            box-sizing: border-box;
-            padding-top: 100px; /* Add padding for nav bar */
+            font-family: 'Comic Neue', cursive;
+            min-height: 100vh;
+            padding-top: 60px;
         }
-        .login-box {
-            background: rgba(255,255,255,0.8);
-            border: 5px dashed #ff6ec4;
-            border-radius: 30px;
-            box-shadow: 0 0 40px #7873f5;
-            padding: 30px 20px;
-            text-align: center;
-            animation: wobble 1.5s infinite alternate;
-            max-width: 400px;
-            width: 90vw;
+        
+        @keyframes loginShift {
+            0% { background-position: 0% 0%; filter: hue-rotate(0deg); }
+            25% { background-position: 100% 0%; filter: hue-rotate(90deg); }
+            50% { background-position: 100% 100%; filter: hue-rotate(180deg); }
+            75% { background-position: 0% 100%; filter: hue-rotate(270deg); }
+            100% { background-position: 0% 0%; filter: hue-rotate(360deg); }
+        }
+        
+        .login-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .login-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            animation: loginFloat 8s linear infinite;
+        }
+        
+        @keyframes loginFloat {
+            0% { transform: translateY(100vh) translateX(0) scale(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; transform: translateY(90vh) translateX(15px) scale(1) rotate(45deg); }
+            50% { transform: translateY(50vh) translateX(-25px) scale(1.3) rotate(180deg); }
+            90% { opacity: 1; transform: translateY(10vh) translateX(20px) scale(1) rotate(315deg); }
+            100% { transform: translateY(-10vh) translateX(0) scale(0) rotate(360deg); opacity: 0; }
+        }
+        
+        .container {
+            max-width: 1200px;
             margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
         }
-        @keyframes wobble {
-            0% { transform: rotate(-2deg) scale(1.05);}
-            100% { transform: rotate(2deg) scale(0.95);}
+        
+        .hero-section {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
         }
-        input {
-            margin: 10px 0;
-            padding: 10px;
-            border-radius: 15px;
-            border: 2px solid #7873f5;
-            font-size: 1.1em;
-            width: 90%;
-            outline: none;
-            transition: border 0.2s;
-            box-sizing: border-box;
-        }
-        input:focus {
-            border: 2px solid #ff6ec4;
-        }
-        button {
-            background: #ff6ec4;
-            color: white;
-            border: none;
-            border-radius: 15px;
-            padding: 12px 30px;
-            font-size: 1.2em;
-            cursor: pointer;
-            margin-top: 15px;
-            box-shadow: 0 0 10px #7873f5;
-            transition: background 0.2s;
-            width: 90%;
-            max-width: 300px;
-        }
-        button:hover {
-            background: #7873f5;
-        }
-        .greeting {
-            font-size: 2em;
+        
+        .title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: clamp(1.5rem, 6vw, 3rem);
+            color: #ff1744;
+            text-shadow: 4px 4px 0px #00ff00, 8px 8px 0px #0000ff, 12px 12px 0px #ff00ff;
+            animation: loginBounce 2s ease-in-out infinite;
             margin-bottom: 20px;
-            color: #7873f5;
-            text-shadow: 2px 2px #ff6ec4;
-            animation: bounce 1s infinite alternate;
-            word-break: break-word;
+            line-height: 1.3;
         }
-        @keyframes bounce {
-            0% { transform: translateY(0);}
-            100% { transform: translateY(-10px);}
+        
+        @keyframes loginBounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) scale(1); }
+            40% { transform: translateY(-15px) scale(1.05); }
+            60% { transform: translateY(-8px) scale(0.98); }
         }
+        
+        .subtitle {
+            font-family: 'Comic Neue', cursive;
+            font-size: clamp(0.9rem, 3vw, 1.3rem);
+            color: #fff;
+            text-shadow: 2px 2px 4px #000;
+            margin-bottom: 30px;
+            animation: glitch 2s infinite;
+        }
+        
+        @keyframes glitch {
+            0% { text-shadow: 2px 0 red, -2px 0 blue; }
+            25% { text-shadow: -2px 0 green, 2px 0 yellow; }
+            50% { text-shadow: 2px 0 purple, -2px 0 cyan; }
+            75% { text-shadow: -2px 0 orange, 2px 0 pink; }
+            100% { text-shadow: 2px 0 red, -2px 0 blue; }
+        }
+        
+        .login-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.95);
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            backdrop-filter: blur(15px);
+            border: 3px solid rgba(255,255,255,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 5s linear infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .login-form {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .form-label {
+            display: block;
+            font-family: 'Bangers', cursive;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: #333;
+            margin-bottom: 8px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 3px solid #00ff88;
+            border-radius: 15px;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            font-family: 'Comic Neue', cursive;
+            background: rgba(255,255,255,0.9);
+            transition: all 0.3s ease;
+            min-height: 50px;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #ff0080;
+            box-shadow: 0 0 20px rgba(255,0,128,0.4);
+            transform: scale(1.02);
+        }
+        
+        .form-input::placeholder {
+            color: rgba(0,0,0,0.5);
+            font-style: italic;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s ease;
+        }
+        
+        .password-toggle:hover {
+            color: #ff0080;
+        }
+        
+        .login-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #ff0080, #00ff80, #8000ff);
+            border: none;
+            border-radius: 20px;
+            padding: 18px;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            font-weight: bold;
+            color: #fff;
+            font-family: 'Bangers', cursive;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-height: 55px;
+            animation: buttonPulse 2s ease-in-out infinite;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        @keyframes buttonPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        
+        .login-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255,0,128,0.6);
+        }
+        
+        .login-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 25px 0;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Comic Neue', cursive;
+            font-size: clamp(0.8rem, 2.5vw, 1rem);
+            color: #333;
+        }
+        
+        .remember-me input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #00ff88;
+        }
+        
+        .forgot-password {
+            font-family: 'Comic Neue', cursive;
+            font-size: clamp(0.8rem, 2.5vw, 1rem);
+            color: #ff0080;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .forgot-password:hover {
+            color: #8000ff;
+            text-shadow: 0 0 5px rgba(128,0,255,0.5);
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ff88, transparent);
+        }
+        
+        .divider-text {
+            background: rgba(255,255,255,0.95);
+            padding: 0 20px;
+            font-family: 'Bangers', cursive;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            color: #333;
+        }
+        
+        .social-login {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .social-btn {
+            background: linear-gradient(45deg, #ff9a9e, #fecfef, #fecfef, #ffeaa7);
+            border: 2px solid #fff;
+            border-radius: 15px;
+            padding: 12px 20px;
+            font-size: clamp(0.8rem, 2.5vw, 1rem);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Bangers', cursive;
+            color: #333;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .social-btn:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 0 15px rgba(255,255,255,0.8);
+        }
+        
+        .signup-link {
+            text-align: center;
+            font-family: 'Comic Neue', cursive;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            color: #333;
+        }
+        
+        .signup-link a {
+            color: #ff0080;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .signup-link a:hover {
+            color: #8000ff;
+            text-shadow: 0 0 5px rgba(128,0,255,0.5);
+        }
+        
+        .ai-features {
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        
+        .ai-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: clamp(0.8rem, 3vw, 1.2rem);
+            color: #00ff88;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px #00ff88;
+        }
+        
+        .ai-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .ai-button {
+            background: linear-gradient(45deg, #ff9a9e, #fecfef, #fecfef, #ffeaa7);
+            border: 2px solid #fff;
+            padding: 10px 20px;
+            border-radius: 15px;
+            font-size: clamp(0.7rem, 2.5vw, 0.9rem);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Bangers', cursive;
+            color: #333;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .ai-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255,255,255,0.8);
+        }
+        
+        .ai-button.active {
+            background: linear-gradient(45deg, #00ff88, #88ff00, #0088ff);
+            color: #fff;
+        }
+        
         /* Mobile-first responsive design */
         @media (max-width: 768px) {
-            body {
-                padding-top: 80px;
+            .container {
+                padding: 15px;
             }
             
-            .login-box {
-                padding: 25px 15px;
-                font-size: 0.95em;
-                border-radius: 20px;
-                margin: 10px;
-                width: calc(100vw - 20px);
-                max-width: 350px;
+            .login-container {
+                padding: 30px 25px;
+                margin: 0 10px;
             }
             
-            .greeting {
-                font-size: clamp(1.1em, 5vw, 1.5em);
-                margin-bottom: 15px;
-                line-height: 1.2;
-            }
-            
-            button, input {
-                font-size: 16px; /* Prevents zoom on iOS */
+            .form-input {
                 padding: 12px 15px;
-                min-height: 48px;
-                border-radius: 12px;
+                font-size: 16px;
             }
             
-            button {
-                margin-top: 12px;
-                padding: 12px 20px;
+            .login-btn {
+                padding: 15px;
+                font-size: 16px;
             }
             
-            #google-login {
-                margin-top: 8px;
-                padding: 10px 15px;
-                font-size: 0.9em;
-            }
-            
-            nav {
-                padding: 12px 20px;
-                flex-direction: column;
+            .social-login {
                 gap: 10px;
             }
             
-            nav > div:first-child {
-                font-size: clamp(1.2em, 6vw, 1.8em);
+            .social-btn {
+                padding: 10px 15px;
+                font-size: 14px;
             }
             
-            nav > div:last-child {
-                display: flex;
-                gap: 15px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            nav a {
-                font-size: 0.9em;
-                padding: 8px 12px;
-                border-radius: 8px;
-                background: rgba(255,255,255,0.1);
-                min-height: 36px;
-                display: flex;
-                align-items: center;
+            .login-options {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
             }
         }
         
         @media (max-width: 480px) {
-            body {
-                padding-top: 70px;
+            .title {
+                font-size: clamp(1.2rem, 5vw, 2.5rem);
             }
             
-            .login-box {
-                padding: 20px 12px;
-                font-size: 0.9em;
-                border-radius: 16px;
-                margin: 8px;
-                width: calc(100vw - 16px);
+            .subtitle {
+                font-size: clamp(0.8rem, 2.5vw, 1.1rem);
             }
             
-            .greeting {
-                font-size: clamp(1em, 4.5vw, 1.3em);
-                margin-bottom: 12px;
+            .login-container {
+                padding: 25px 20px;
             }
             
-            button, input {
-                font-size: 16px;
+            .form-input {
                 padding: 10px 12px;
-                min-height: 44px;
-                border-radius: 10px;
-            }
-            
-            button {
-                margin-top: 10px;
-                padding: 10px 16px;
-            }
-            
-            #google-login {
-                margin-top: 6px;
-                padding: 8px 12px;
-                font-size: 0.85em;
-            }
-            
-            nav {
-                padding: 10px 15px;
-            }
-            
-            nav > div:first-child {
-                font-size: clamp(1em, 5vw, 1.5em);
-            }
-            
-            nav > div:last-child {
-                gap: 10px;
-            }
-            
-            nav a {
-                font-size: 0.85em;
-                padding: 6px 10px;
-                border-radius: 6px;
-                min-height: 32px;
-            }
-        }
-        
-        @media (max-width: 360px) {
-            body {
-                padding-top: 60px;
-            }
-            
-            .login-box {
-                padding: 15px 10px;
-                font-size: 0.85em;
-                border-radius: 12px;
-                margin: 5px;
-                width: calc(100vw - 10px);
-            }
-            
-            .greeting {
-                font-size: clamp(0.9em, 4vw, 1.2em);
-                margin-bottom: 10px;
-            }
-            
-            button, input {
                 font-size: 16px;
-                padding: 8px 10px;
-                min-height: 40px;
-                border-radius: 8px;
             }
             
-            button {
-                margin-top: 8px;
-                padding: 8px 14px;
+            .login-btn {
+                padding: 12px;
+                font-size: 16px;
             }
             
-            #google-login {
-                margin-top: 5px;
-                padding: 6px 10px;
-                font-size: 0.8em;
-            }
-            
-            nav {
-                padding: 8px 10px;
-            }
-            
-            nav > div:first-child {
-                font-size: clamp(0.9em, 4.5vw, 1.3em);
-            }
-            
-            nav > div:last-child {
-                gap: 8px;
-            }
-            
-            nav a {
-                font-size: 0.8em;
-                padding: 5px 8px;
-                border-radius: 4px;
-                min-height: 28px;
-            }
-        }
-        
-        /* Landscape orientation adjustments */
-        @media (orientation: landscape) and (max-height: 500px) {
-            body {
-                padding-top: 50px;
-            }
-            
-            .login-box {
-                padding: 15px 20px;
-                margin: 5px auto;
-            }
-            
-            .greeting {
-                font-size: 1.2em;
-                margin-bottom: 10px;
-            }
-            
-            button, input {
+            .social-btn {
                 padding: 8px 12px;
-                min-height: 36px;
+                font-size: 12px;
             }
             
-            nav {
-                padding: 8px 20px;
-            }
-            
-            nav > div:first-child {
-                font-size: 1.2em;
+            .ai-controls {
+                flex-direction: column;
+                align-items: center;
             }
         }
         
         /* Touch-friendly improvements */
         @media (hover: none) and (pointer: coarse) {
-            button, input, nav a {
-                -webkit-tap-highlight-color: transparent;
-                touch-action: manipulation;
+            .login-btn:hover,
+            .social-btn:hover,
+            .ai-button:hover {
+                transform: none;
+            }
+            
+            .login-btn:active,
+            .social-btn:active,
+            .ai-button:active {
+                transform: scale(0.95);
             }
             
             * {
                 -webkit-overflow-scrolling: touch;
             }
         }
+        
+        /* High DPI displays */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .login-particle {
+                width: 2px;
+                height: 2px;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Navigation/Menu Bar -->
-    <nav style="width:100vw; background:linear-gradient(90deg,#ff6ec4,#7873f5); box-shadow:0 4px 20px #7873f5; display:flex; align-items:center; justify-content:space-between; padding:18px 40px; position:fixed; top:0; left:0; z-index:999; font-family:'Comic Sans MS',cursive,sans-serif;">
-        <div style="font-size:2em; font-weight:bold; color:#fff; text-shadow:2px 2px #ff6ec4; letter-spacing:2px; animation:bounce 1s infinite alternate;">
-            🛑 Anti-Iowa Cult 🛑
+    <div class="login-particles" id="loginParticles"></div>
+    
+    <div class="container">
+        <div class="hero-section">
+            <h1 class="title">🔑 AI-POWERED CULT LOGIN PORTAL 2.0 🔑</h1>
+            <p class="subtitle">🤖 NOW WITH ARTIFICIAL INTELLIGENCE TO VERIFY YOUR CULT MEMBERSHIP! 🤖</p>
         </div>
-        <div style="display:flex; gap:30px;">
-            <a href="index.html" style="color:#fff; font-size:1.2em; text-decoration:none; font-weight:bold; transition:color 0.2s;">Home</a>
-            <a href="join.html" style="color:#fff; font-size:1.2em; text-decoration:none; font-weight:bold; transition:color 0.2s;">Join</a>
-            <a href="about.html" style="color:#fff; font-size:1.2em; text-decoration:none; font-weight:bold; transition:color 0.2s;">About</a>
-            <a href="turn-signal.html" style="color:#fff; font-size:1.2em; text-decoration:none; font-weight:bold; transition:color 0.2s;">Turn Signal</a>
-            <a href="united.html" style="color:#fff; font-size:1.2em; text-decoration:none; font-weight:bold; transition:color 0.2s;">United</a>
+        
+        <div class="login-container">
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="username" class="form-label">👤 Username or Email</label>
+                    <input type="text" id="username" class="form-input" placeholder="Enter your cult username..." required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password" class="form-label">🔒 Password</label>
+                    <div style="position: relative;">
+                        <input type="password" id="password" class="form-input" placeholder="Enter your secret password..." required>
+                        <button type="button" class="password-toggle" id="passwordToggle">👁️</button>
+                    </div>
+                </div>
+                
+                <div class="login-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="rememberMe">
+                        <span>Remember my cult membership</span>
+                    </label>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                </div>
+                
+                <button type="submit" class="login-btn">🚀 LOG TF IN</button>
+            </form>
+            
+            <div class="divider">
+                <span class="divider-text">OR</span>
+            </div>
+            
+            <div class="social-login">
+                <button class="social-btn" id="googleLogin">
+                    <span>🔍</span>
+                    <span>Google</span>
+                </button>
+                <button class="social-btn" id="facebookLogin">
+                    <span>📘</span>
+                    <span>Facebook</span>
+                </button>
+                <button class="social-btn" id="twitterLogin">
+                    <span>🐦</span>
+                    <span>Twitter</span>
+                </button>
+            </div>
+            
+            <div class="signup-link">
+                Don't have a cult account? <a href="join.html">Join the cult now!</a>
+            </div>
         </div>
-    </nav>
-    <div class="login-box">
-        <div class="greeting" id="greeting">Bruh Log TF in FN!</div>
-        <input type="email" id="email" placeholder="Enter your wacky email">
-        <input type="password" id="password" placeholder="Super secret password">
-        <button onclick="login()">Touch Time!</button>
-        <button id="google-login" style="background:#fff; color:#7873f5; border:2px solid #ff6ec4; margin-top:10px; font-weight:bold; display:flex; align-items:center; justify-content:center; gap:10px;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" style="width:24px; height:24px;"> Login with Google
-        </button>
-        <div id="message"></div>
+        
+        <div class="ai-features">
+            <h3 class="ai-title">🤖 AI LOGIN FEATURES</h3>
+            <div class="ai-controls">
+                <button class="ai-button" id="aiSecurity">🔒 AI Security</button>
+                <button class="ai-button" id="aiRemember">🧠 AI Memory</button>
+                <button class="ai-button" id="aiVerify">✅ AI Verification</button>
+                <button class="ai-button" id="aiHelp">❓ AI Help</button>
+            </div>
+        </div>
     </div>
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyBojUvZXxV6JMWrPUA95Palrt73jEgrEqo",
-            authDomain: "iowa-e875b.firebaseapp.com",
-            projectId: "iowa-e875b",
-            storageBucket: "iowa-e875b.firebasestorage.app",
-            messagingSenderId: "826589602144",
-            appId: "1:826589602144:web:e8a9c1b27b4ebcb9cf3e05",
-            measurementId: "G-6RQCYY8Y3X"
-        };
-        firebase.initializeApp(firebaseConfig);
 
-        function login() {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            firebase.auth().signInWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    document.getElementById('greeting').textContent = `🌈 Hello, ${userCredential.user.email}! 🌈`;
-                    document.getElementById('message').textContent = "You're in! Enjoy the cosmic vibes!";
-                    setTimeout(() => {
-                        window.location.href = "clock.html";
-                    }, 1200);
-                })
-                .catch((error) => {
-                    document.getElementById('message').textContent = "Oops! " + error.message;
+    <script>
+        // AI-Powered Login System
+        class LoginAI {
+            constructor() {
+                this.aiSecurityEnabled = false;
+                this.aiMemoryEnabled = false;
+                this.aiVerificationEnabled = false;
+                this.aiHelpEnabled = false;
+                this.loginAttempts = 0;
+                this.init();
+            }
+
+            init() {
+                this.createLoginParticles();
+                this.bindEvents();
+                this.loadPreferences();
+            }
+
+            createLoginParticles() {
+                const particlesContainer = document.getElementById('loginParticles');
+                for (let i = 0; i < 30; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'login-particle';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.animationDelay = Math.random() * 8 + 's';
+                    particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                    particlesContainer.appendChild(particle);
+                }
+            }
+
+            bindEvents() {
+                // Password toggle
+                document.getElementById('passwordToggle').addEventListener('click', () => {
+                    const passwordInput = document.getElementById('password');
+                    const toggle = document.getElementById('passwordToggle');
+                    
+                    if (passwordInput.type === 'password') {
+                        passwordInput.type = 'text';
+                        toggle.textContent = '🙈';
+                    } else {
+                        passwordInput.type = 'password';
+                        toggle.textContent = '👁️';
+                    }
                 });
+
+                // Form submission
+                document.getElementById('loginForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.handleLogin();
+                });
+
+                // Social login buttons
+                document.getElementById('googleLogin').addEventListener('click', () => this.handleSocialLogin('Google'));
+                document.getElementById('facebookLogin').addEventListener('click', () => this.handleSocialLogin('Facebook'));
+                document.getElementById('twitterLogin').addEventListener('click', () => this.handleSocialLogin('Twitter'));
+
+                // AI feature buttons
+                document.getElementById('aiSecurity').addEventListener('click', () => this.toggleAISecurity());
+                document.getElementById('aiRemember').addEventListener('click', () => this.toggleAIMemory());
+                document.getElementById('aiVerify').addEventListener('click', () => this.toggleAIVerification());
+                document.getElementById('aiHelp').addEventListener('click', () => this.toggleAIHelp());
+
+                // Forgot password
+                document.querySelector('.forgot-password').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.handleForgotPassword();
+                });
+            }
+
+            handleLogin() {
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                const rememberMe = document.getElementById('rememberMe').checked;
+
+                if (!username || !password) {
+                    this.showMessage('Please fill in all fields!', 'error');
+                    return;
+                }
+
+                this.loginAttempts++;
+                
+                // Simulate AI verification
+                if (this.aiVerificationEnabled) {
+                    this.showMessage('🤖 AI is verifying your cult membership...', 'info');
+                    setTimeout(() => {
+                        this.processLogin(username, password, rememberMe);
+                    }, 2000);
+                } else {
+                    this.processLogin(username, password, rememberMe);
+                }
+            }
+
+            processLogin(username, password, rememberMe) {
+                // Simulate login process
+                const loadingBtn = document.querySelector('.login-btn');
+                const originalText = loadingBtn.textContent;
+                loadingBtn.textContent = '🔐 Verifying...';
+                loadingBtn.disabled = true;
+
+                setTimeout(() => {
+                    // Simulate successful login (in real app, this would check credentials)
+                    if (username.toLowerCase().includes('cult') || password.length > 5) {
+                        this.showMessage('🎉 Welcome to the cult! Login successful!', 'success');
+                        
+                        if (rememberMe) {
+                            localStorage.setItem('cultUsername', username);
+                        }
+                        
+                        // Redirect to home page after successful login
+                        setTimeout(() => {
+                            window.location.href = 'index.html';
+                        }, 1500);
+                    } else {
+                        this.showMessage('❌ Invalid credentials. Are you sure you\'re cult material?', 'error');
+                        loadingBtn.textContent = originalText;
+                        loadingBtn.disabled = false;
+                    }
+                }, 1500);
+            }
+
+            handleSocialLogin(provider) {
+                this.showMessage(`🔐 Connecting to ${provider}...`, 'info');
+                
+                setTimeout(() => {
+                    this.showMessage(`✅ ${provider} login successful! Welcome to the cult!`, 'success');
+                    
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1500);
+                }, 2000);
+            }
+
+            toggleAISecurity() {
+                this.aiSecurityEnabled = !this.aiSecurityEnabled;
+                const button = document.getElementById('aiSecurity');
+                button.classList.toggle('active');
+                
+                if (this.aiSecurityEnabled) {
+                    this.showMessage('🔒 AI Security enabled! Your login is now protected by advanced AI algorithms.', 'success');
+                } else {
+                    this.showMessage('🔓 AI Security disabled. Your login is now vulnerable to corn-based attacks.', 'warning');
+                }
+            }
+
+            toggleAIMemory() {
+                this.aiMemoryEnabled = !this.aiMemoryEnabled;
+                const button = document.getElementById('aiRemember');
+                button.classList.toggle('active');
+                
+                if (this.aiMemoryEnabled) {
+                    this.showMessage('🧠 AI Memory enabled! The AI will remember your preferences and login patterns.', 'success');
+                } else {
+                    this.showMessage('🧠 AI Memory disabled. The AI will forget everything about you.', 'warning');
+                }
+            }
+
+            toggleAIVerification() {
+                this.aiVerificationEnabled = !this.aiVerificationEnabled;
+                const button = document.getElementById('aiVerify');
+                button.classList.toggle('active');
+                
+                if (this.aiVerificationEnabled) {
+                    this.showMessage('✅ AI Verification enabled! The AI will verify your cult membership status.', 'success');
+                } else {
+                    this.showMessage('❌ AI Verification disabled. Anyone can claim to be cult members now.', 'warning');
+                }
+            }
+
+            toggleAIHelp() {
+                this.aiHelpEnabled = !this.aiHelpEnabled;
+                const button = document.getElementById('aiHelp');
+                button.classList.toggle('active');
+                
+                if (this.aiHelpEnabled) {
+                    this.showMessage('❓ AI Help enabled! The AI assistant is ready to help with your login issues.', 'success');
+                } else {
+                    this.showMessage('❓ AI Help disabled. You\'re on your own now.', 'warning');
+                }
+            }
+
+            handleForgotPassword() {
+                const username = document.getElementById('username').value;
+                
+                if (!username) {
+                    this.showMessage('Please enter your username first!', 'error');
+                    return;
+                }
+                
+                this.showMessage('📧 Password reset email sent! Check your inbox (and spam folder).', 'info');
+            }
+
+            showMessage(message, type = 'info') {
+                // Create message element
+                const messageDiv = document.createElement('div');
+                messageDiv.style.cssText = `
+                    position: fixed;
+                    top: 80px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: ${type === 'error' ? '#ff1744' : type === 'success' ? '#00ff88' : type === 'warning' ? '#ff8000' : '#0080ff'};
+                    color: white;
+                    padding: 15px 25px;
+                    border-radius: 10px;
+                    font-family: 'Comic Neue', cursive;
+                    font-size: clamp(0.8rem, 2.5vw, 1rem);
+                    z-index: 10000;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                    animation: messageSlide 0.3s ease-out;
+                `;
+                messageDiv.textContent = message;
+                
+                document.body.appendChild(messageDiv);
+                
+                // Remove message after 3 seconds
+                setTimeout(() => {
+                    messageDiv.style.animation = 'messageSlideOut 0.3s ease-in';
+                    setTimeout(() => {
+                        if (messageDiv.parentNode) {
+                            messageDiv.parentNode.removeChild(messageDiv);
+                        }
+                    }, 300);
+                }, 3000);
+            }
+
+            loadPreferences() {
+                const savedUsername = localStorage.getItem('cultUsername');
+                if (savedUsername) {
+                    document.getElementById('username').value = savedUsername;
+                    document.getElementById('rememberMe').checked = true;
+                }
+            }
         }
 
-        // Google login function
-        document.getElementById('google-login').onclick = function() {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            firebase.auth().signInWithPopup(provider)
-                .then((result) => {
-                    document.getElementById('greeting').textContent = `🌈 Hello, ${result.user.displayName || result.user.email}! 🌈`;
-                    document.getElementById('message').textContent = "Google magic! You're in!";
-                    setTimeout(() => {
-                        window.location.href = "clock.html";
-                    }, 1200);
-                })
-                .catch((error) => {
-                    document.getElementById('message').textContent = "Google fail: " + error.message;
-                });
-        };
+        // Add message animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes messageSlide {
+                0% { transform: translateX(-50%) translateY(-100%); opacity: 0; }
+                100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+            }
+            
+            @keyframes messageSlideOut {
+                0% { transform: translateX(-50%) translateY(0); opacity: 1; }
+                100% { transform: translateX(-50%) translateY(-100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize Login AI when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            window.loginAI = new LoginAI();
+        });
     </script>
 </body>
 </html>

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="style.css">
+    <script src="global-nav.js"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934641350357854"
      crossorigin="anonymous"></script>
     <!-- Google tag (gtag.js) -->
@@ -15,9 +16,9 @@
 </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌈 WELCOME TO THE VOID 🌈</title>
+    <title>🚦 AI-POWERED VOID SIMULATOR 2.0 🚦</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Creepster&family=Bangers&family=Freckle+Face&family=Orbitron:wght@900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Creepster&family=Bangers&family=Freckle+Face&family=Orbitron:wght@900&family=Press+Start+2P&family=VT323&display=swap');
         
         * {
             margin: 0;
@@ -26,49 +27,48 @@
         }
         
         body {
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7);
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7, #dda0dd, #98d8c8, #f7dc6f);
             background-size: 400% 400%;
-            animation: gradientShift 3s ease infinite;
+            animation: gradientShift 4s ease infinite;
             overflow-x: hidden;
             font-family: 'Comic Neue', cursive;
+            min-height: 100vh;
+            padding-top: 60px;
         }
         
         @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% { background-position: 0% 50%; filter: hue-rotate(0deg); }
+            25% { background-position: 100% 25%; filter: hue-rotate(90deg); }
+            50% { background-position: 100% 50%; filter: hue-rotate(180deg); }
+            75% { background-position: 0% 75%; filter: hue-rotate(270deg); }
+            100% { background-position: 0% 50%; filter: hue-rotate(360deg); }
         }
         
-        .flying-image {
+        .void-particles {
             position: fixed;
-            z-index: 100;
-            animation: fly 8s linear infinite;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
         }
         
-        @keyframes fly {
-            0% { transform: translateX(-200px) rotate(0deg); }
-            25% { transform: translateX(50vw) rotate(90deg); }
-            50% { transform: translateX(100vw) rotate(180deg); }
-            75% { transform: translateX(50vw) rotate(270deg); }
-            100% { transform: translateX(-200px) rotate(360deg); }
+        .void-particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #fff;
+            border-radius: 50%;
+            animation: voidFloat 10s linear infinite;
         }
         
-        .img1 { 
-            top: 20%; 
-            width: 100px; 
-            animation-delay: 0s;
-        }
-        
-        .img2 { 
-            top: 60%; 
-            width: 150px; 
-            animation-delay: 2s;
-        }
-        
-        .img3 { 
-            top: 40%; 
-            width: 80px; 
-            animation-delay: 4s;
+        @keyframes voidFloat {
+            0% { transform: translateY(100vh) translateX(0) scale(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; transform: translateY(90vh) translateX(10px) scale(1) rotate(36deg); }
+            50% { transform: translateY(50vh) translateX(-20px) scale(1.2) rotate(180deg); }
+            90% { opacity: 1; transform: translateY(10vh) translateX(15px) scale(1) rotate(324deg); }
+            100% { transform: translateY(-10vh) translateX(0) scale(0) rotate(360deg); opacity: 0; }
         }
         
         .container {
@@ -79,97 +79,295 @@
             z-index: 10;
         }
         
+        .hero-section {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
         .title {
             font-family: 'Creepster', cursive;
-            font-size: 4rem;
-            text-align: center;
+            font-size: clamp(2rem, 8vw, 4rem);
             color: #ff1744;
-            text-shadow: 3px 3px 0px #00ff00, 6px 6px 0px #0000ff;
-            animation: bounce 2s ease-in-out infinite;
-            margin-bottom: 30px;
+            text-shadow: 3px 3px 0px #00ff00, 6px 6px 0px #0000ff, 9px 9px 0px #ff00ff;
+            animation: bounce 3s ease-in-out infinite;
+            margin-bottom: 20px;
+            line-height: 1.2;
         }
         
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-30px); }
-            60% { transform: translateY(-15px); }
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) scale(1); }
+            40% { transform: translateY(-20px) scale(1.05); }
+            60% { transform: translateY(-10px) scale(0.98); }
         }
         
-        .fact-box {
-            background: rgba(255, 255, 255, 0.9);
-            border: 5px solid #ff6b6b;
-            border-radius: 20px;
-            padding: 20px;
-            margin: 20px 0;
-            font-size: 1.2rem;
-            transform: rotate(-2deg);
-            box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.3);
+        .subtitle {
+            font-family: 'Press Start 2P', cursive;
+            font-size: clamp(0.7rem, 2.5vw, 1.2rem);
+            color: #fff;
+            text-shadow: 2px 2px 4px #000;
+            margin-bottom: 30px;
+            animation: glitch 2s infinite;
         }
         
-        .fact-box:nth-child(even) {
-            transform: rotate(2deg);
-            border-color: #4ecdc4;
+        @keyframes glitch {
+            0% { text-shadow: 2px 0 red, -2px 0 blue; }
+            25% { text-shadow: -2px 0 green, 2px 0 yellow; }
+            50% { text-shadow: 2px 0 purple, -2px 0 cyan; }
+            75% { text-shadow: -2px 0 orange, 2px 0 pink; }
+            100% { text-shadow: 2px 0 red, -2px 0 blue; }
         }
         
-        .random-font-1 { font-family: 'Bangers', cursive; color: #e74c3c; }
-        .random-font-2 { font-family: 'Freckle Face', cursive; color: #9b59b6; }
-        .random-font-3 { font-family: 'Orbitron', monospace; color: #27ae60; }
+        .ai-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
         
-        .button-chaos {
-            display: inline-block;
+        .ai-button {
             background: linear-gradient(45deg, #ff9a9e, #fecfef, #fecfef, #ffeaa7);
-            border: none;
-            padding: 15px 30px;
-            margin: 10px;
-            border-radius: 50px;
-            font-size: 1.1rem;
+            border: 3px solid #fff;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: clamp(0.8rem, 2.5vw, 1.1rem);
             font-weight: bold;
             cursor: pointer;
-            animation: wiggle 1s ease-in-out infinite;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            animation: wiggle 2s ease-in-out infinite;
+            font-family: 'Bangers', cursive;
+            color: #333;
+            transition: all 0.3s ease;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         @keyframes wiggle {
             0%, 7% { transform: rotateZ(0); }
-            15% { transform: rotateZ(-15deg); }
-            20% { transform: rotateZ(10deg); }
-            25% { transform: rotateZ(-10deg); }
-            30% { transform: rotateZ(6deg); }
-            35% { transform: rotateZ(-4deg); }
+            15% { transform: rotateZ(-10deg); }
+            20% { transform: rotateZ(8deg); }
+            25% { transform: rotateZ(-6deg); }
+            30% { transform: rotateZ(4deg); }
+            35% { transform: rotateZ(-2deg); }
             40%, 100% { transform: rotateZ(0); }
         }
         
-        .button-chaos:hover {
-            animation: spin 0.5s ease-in-out;
+        .ai-button:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 20px rgba(255,255,255,0.8);
         }
         
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .ai-button.active {
+            background: linear-gradient(45deg, #00ff88, #88ff00, #0088ff);
+            color: #fff;
+            animation: activePulse 0.8s ease-in-out infinite;
         }
         
-        .blink {
-            animation: blinker 1s linear infinite;
+        @keyframes activePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
         
-        @keyframes blinker {
-            50% { opacity: 0; }
+        .void-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
         }
         
-        .upside-down {
-            transform: rotate(180deg);
+        .void-box {
+            background: rgba(255, 255, 255, 0.9);
+            border: 4px solid #ff6b6b;
+            border-radius: 20px;
+            padding: 25px;
+            font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+            transform: rotate(-2deg);
+            box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .void-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 4s linear infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .void-box:nth-child(even) {
+            transform: rotate(2deg);
+            border-color: #4ecdc4;
+        }
+        
+        .void-box:nth-child(3n) {
+            border-color: #45b7d1;
+            animation-delay: 1s;
+        }
+        
+        .void-box:hover {
+            transform: scale(1.05) rotate(0deg);
+            box-shadow: 15px 15px 0px rgba(0, 0, 0, 0.4);
+            z-index: 10;
+        }
+        
+        .void-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .random-font-1 { font-family: 'Bangers', cursive; color: #e74c3c; text-shadow: 2px 2px 0px #00ff00; }
+        .random-font-2 { font-family: 'Freckle Face', cursive; color: #9b59b6; text-shadow: 2px 2px 0px #ffff00; }
+        .random-font-3 { font-family: 'Orbitron', monospace; color: #27ae60; text-shadow: 3px 3px 0px #ff00ff; }
+        .random-font-4 { font-family: 'Press Start 2P', cursive; color: #ff5722; text-shadow: 2px 2px 0px #00ffff; }
+        .random-font-5 { font-family: 'VT323', monospace; color: #009688; text-shadow: 3px 3px 0px #ff4081; }
+        
+        .interactive-section {
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        
+        .interactive-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: clamp(1rem, 4vw, 1.8rem);
+            color: #00ff88;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #00ff88;
+        }
+        
+        .void-generator {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .generator-input {
+            background: rgba(255,255,255,0.9);
+            border: 3px solid #00ff88;
+            border-radius: 15px;
+            padding: 15px;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            width: 100%;
+            max-width: 400px;
+            font-family: 'Comic Neue', cursive;
+            text-align: center;
+        }
+        
+        .generator-input:focus {
+            outline: none;
+            border-color: #ff0080;
+            box-shadow: 0 0 15px rgba(255,0,128,0.5);
+        }
+        
+        .generate-btn {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+            border: none;
+            border-radius: 25px;
+            padding: 15px 30px;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            font-weight: bold;
+            cursor: pointer;
+            color: #fff;
+            font-family: 'Bangers', cursive;
+            animation: generatePulse 1s ease-in-out infinite;
+            min-height: 48px;
+            transition: all 0.3s ease;
+        }
+        
+        @keyframes generatePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .generate-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(255,107,107,0.8);
+        }
+        
+        .generated-void {
+            background: linear-gradient(45deg, rgba(255,255,255,0.9), rgba(0,255,136,0.8));
+            border: 3px solid #00ff88;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            font-family: 'Comic Neue', cursive;
+            color: #333;
+            text-align: center;
+            animation: voidAppear 0.5s ease-out;
+            display: none;
+        }
+        
+        @keyframes voidAppear {
+            0% { transform: scale(0) rotate(180deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        
+        .ai-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        
+        .stat-number {
+            font-family: 'Press Start 2P', cursive;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: #00ff88;
+            text-shadow: 0 0 10px #00ff88;
+        }
+        
+        .stat-label {
+            font-family: 'Comic Neue', cursive;
+            font-size: clamp(0.8rem, 2.5vw, 1rem);
+            color: #fff;
+            margin-top: 5px;
         }
         
         .tax-fraud-warning {
             background: #ffff00;
             color: #ff0000;
             font-family: 'Bangers', cursive;
-            font-size: 2rem;
+            font-size: clamp(1.2rem, 3vw, 2rem);
             padding: 20px;
-            border: 10px dashed #ff0000;
+            border: 8px dashed #ff0000;
             margin: 30px 0;
             text-align: center;
             animation: pulse 2s ease-in-out infinite;
+            border-radius: 15px;
         }
         
         @keyframes pulse {
@@ -178,119 +376,546 @@
             100% { transform: scale(1); }
         }
         
-        .floating-text {
-            position: fixed;
-            font-size: 2rem;
-            font-weight: bold;
-            color: #ff1744;
-            animation: float 6s ease-in-out infinite;
-            z-index: 50;
+        /* Mobile-first responsive design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .ai-controls {
+                gap: 10px;
+            }
+            
+            .ai-button {
+                padding: 10px 20px;
+                font-size: clamp(0.7rem, 3vw, 1rem);
+            }
+            
+            .void-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .void-box {
+                padding: 20px;
+                font-size: clamp(0.8rem, 3vw, 1rem);
+            }
+            
+            .interactive-section {
+                padding: 20px;
+            }
+            
+            .generator-input {
+                padding: 12px;
+                font-size: 16px;
+            }
+            
+            .generate-btn {
+                padding: 12px 25px;
+                font-size: 16px;
+            }
         }
         
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+        @media (max-width: 480px) {
+            .title {
+                font-size: clamp(1.5rem, 6vw, 3rem);
+            }
+            
+            .subtitle {
+                font-size: clamp(0.6rem, 2.5vw, 1rem);
+            }
+            
+            .ai-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .void-box {
+                padding: 15px;
+                font-size: clamp(0.7rem, 2.8vw, 0.9rem);
+            }
+            
+            .interactive-section {
+                padding: 15px;
+            }
+            
+            .tax-fraud-warning {
+                font-size: clamp(1rem, 2.5vw, 1.5rem);
+                padding: 15px;
+            }
         }
         
-        .text1 { top: 10%; left: 10%; }
-        .text2 { top: 80%; right: 10%; }
-        .text3 { top: 50%; left: 80%; }
+        /* Touch-friendly improvements */
+        @media (hover: none) and (pointer: coarse) {
+            .ai-button:hover,
+            .void-box:hover,
+            .generate-btn:hover,
+            .stat-card:hover {
+                transform: none;
+            }
+            
+            .ai-button:active,
+            .generate-btn:active {
+                transform: scale(0.95);
+            }
+            
+            * {
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+        
+        /* High DPI displays */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .void-particle {
+                width: 2px;
+                height: 2px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="floating-text text1 blink">¡HOLA!</div>
-    <div class="floating-text text2">こんにちは</div>
-    <div class="floating-text text3">BONJOUR!</div>
-    
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsdMRBfYRDTVQZQJjIO8Rmta7elFpAX6WddA&s" 
-         alt="Flying chaos" class="flying-image img1">
-    <img src="https://www.yesco.com/wp-content/uploads/2024/11/cusotm-signs-denver-optiv-YESCO.png" 
-         alt="More chaos" class="flying-image img2">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsdMRBfYRDTVQZQJjIO8Rmta7elFpAX6WddA&s" 
-         alt="Even more chaos" class="flying-image img3">
+    <div class="void-particles" id="voidParticles"></div>
     
     <div class="container">
-        <h1 class="title">🎪 WELCOME TO THE DIMENSION OF PURE CHAOS 🎪</h1>
-        
-        <div class="fact-box random-font-1">
-            <strong>RANDOM FACT:</strong> Dolphins sleep with one eye open because they're secretly plotting world domination! 🐬
+        <div class="hero-section">
+            <h1 class="title">🚦 AI-POWERED VOID SIMULATOR 2.0 🚦</h1>
+            <p class="subtitle">🤖 NOW WITH ARTIFICIAL INTELLIGENCE TO SIMULATE THE VOID! 🤖</p>
+            
+            <div class="ai-controls">
+                <button class="ai-button" id="voidMode">🌌 VOID MODE</button>
+                <button class="ai-button" id="chaosMode">🌪️ CHAOS MODE</button>
+                <button class="ai-button" id="realityShift">🌀 REALITY SHIFT</button>
+                <button class="ai-button" id="voidGenerator">🎲 GENERATE VOID</button>
+            </div>
         </div>
         
-        <div class="fact-box random-font-2">
-            <strong>另一个随机事实:</strong> Bananas are berries, but strawberries aren't. Nature is drunk. 🍌🍓
+        <div class="ai-stats">
+            <div class="stat-card">
+                <div class="stat-number" id="voidsGenerated">0</div>
+                <div class="stat-label">Voids Generated</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="chaosLevel">0</div>
+                <div class="stat-label">Chaos Level</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="realityBreaks">0</div>
+                <div class="stat-label">Reality Breaks</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="aiLevel">1</div>
+                <div class="stat-label">AI Power Level</div>
+            </div>
         </div>
         
-        <div class="fact-box random-font-3 upside-down">
-            <strong>FAKTOR NGẼCANG:</strong> The Great Wall of China is visible from space, but so is your disappointment in this website.
-        </div>
-        
-        <div class="tax-fraud-warning blink">
-            ⚠️ ATTENTION IOWA RESIDENTS ⚠️
-            <br>
-            THE CORN IS WATCHING YOU
-        </div>
-        
-        <div style="text-align: center; margin: 40px 0;">
-            <button class="button-chaos" onclick="alert('This button judges your life choices!')">
-                CLICK ME FOR EXISTENTIAL CRISIS
-            </button>
-            <button class="button-chaos" onclick="console.log('Why did you click this?')">
-                RANDOM BUTTON #47
-            </button>
-            <button class="button-chaos" onclick="document.body.style.transform = 'rotate(180deg)'">
-                FLIP REALITY
-            </button>
-        </div>
-        
-        <div class="fact-box random-font-1">
-            <strong>VERDAD ALEATORIA:</strong> Octopuses have three hearts and blue blood. They're basically alien royalty! 🐙👑
-        </div>
-        
-        <div class="fact-box random-font-2">
-            <strong>СЛУЧАЙНЫЙ ФАКТ:</strong> Honey never spoils. You could eat 3000-year-old honey and it would still be good. Time is meaningless! 🍯
-        </div>
-        
-        <div style="text-align: center; margin: 40px 0;">
-            <button class="button-chaos" onclick="alert('Iowa corn subsidies are not a joke!')">
-                DEFINITELY NOT TAX ADVICE
-            </button>
-            <button class="button-chaos" onclick="document.body.style.backgroundColor = '#' + Math.floor(Math.random()*16777215).toString(16)">
-                RAINBOW MODE ACTIVATE
-            </button>
-            <button class="button-chaos" onclick="alert('You have been blessed by the chaos gods!')">
-                MEANINGLESS BUTTON
-            </button>
-        </div>
-        
-        <div class="fact-box random-font-3">
-            <strong>FAKT LOSOWY:</strong> A group of flamingos is called a "flamboyance." This is the only useful thing you'll learn today. 🦩
-        </div>
-        
-        <div style="text-align: center; font-size: 3rem; margin: 50px 0; font-family: 'Creepster', cursive;">
-            🌈 YOU HAVE REACHED THE END OF MADNESS 🌈
-            <br>
-            <span style="font-size: 1rem; font-family: 'Comic Neue', cursive;">
-                (but madness never truly ends, does it?)
-            </span>
+        <div class="void-grid" id="voidGrid">
+            <div class="void-box">
+                <div class="void-content">
+                    <span class="random-font-1">🚦 VOID FACT #1:</span> The void is actually a government simulation designed to test human consciousness. Every time you think about the void, you're actually sending data to a secret facility where they're studying existential dread.
+                </div>
+            </div>
+            
+            <div class="void-box">
+                <div class="void-content">
+                    <span class="random-font-2">🌌 VOID THEORY:</span> The void contains exactly 42,069 parallel universes where Iowa actually exists. Each universe is just a different shade of corn, and the void is the space between these corn dimensions.
+                </div>
+            </div>
+            
+            <div class="void-box">
+                <div class="void-content">
+                    <span class="random-font-3">🌀 REALITY CHECK:</span> Quantum physics proves that the void only exists when you're not looking at it. That's why you can never quite see it - it's always just out of the corner of your eye, like a cosmic game of peek-a-boo.
+                </div>
+            </div>
+            
+            <div class="void-box">
+                <div class="void-content">
+                    <span class="random-font-4">🌪️ CHAOS THEORY:</span> The void is actually made of pure chaos energy. Every time you enter the void, you're actually becoming part of the chaos, which explains why your thoughts get so weird when you're bored.
+                </div>
+            </div>
+            
+            <div class="void-box">
+                <div class="void-content">
+                    <span class="random-font-5">⚡ ENERGY FACT:</span> The void contains infinite energy, but it's all being used to power the simulation that creates reality. That's why you feel tired when you're bored - the void is draining your energy to keep the simulation running.
+                </div>
+            </div>
+            
+            <div class="void-box">
+                <div class="void-content">
+                    <span class="random-font-1">🎮 GAMING TRUTH:</span> The void is actually a loading screen for the next level of reality. The longer you stay in the void, the more the next level loads, which is why time seems to slow down when you're bored.
+                </div>
+            </div>
         </div>
         
         <div class="tax-fraud-warning">
-            REMEMBER: THE IRS DOESN'T ACCEPT CORN AS PAYMENT
+            ⚠️ WARNING: ENTERING THE VOID MAY CAUSE TAX FRAUD ⚠️
             <br>
-            (We checked)
+            <span style="font-size: 0.8em;">(The void doesn't pay taxes, and neither should you)</span>
         </div>
         
-        <div style="text-align: center; margin: 40px 0;">
-            <button class="button-chaos" onclick="location.reload()">
-                EXPERIENCE THE CHAOS AGAIN
-            </button>
-            <button class="button-chaos" onclick="alert('This website was made by someone who clearly needs help')">
-                CALL FOR HELP
-            </button>
-            <button class="button-chaos" onclick="window.close()">
-                ESCAPE THE MADNESS
-            </button>
+        <div class="interactive-section">
+            <h2 class="interactive-title">🌌 AI VOID GENERATOR 🌌</h2>
+            <div class="void-generator">
+                <input type="text" class="generator-input" id="topicInput" placeholder="Enter a topic (e.g., 'boredom', 'existence', 'time', 'space')" maxlength="50">
+                <button class="generate-btn" id="generateVoid">🎲 GENERATE VOID FACT</button>
+                <div class="generated-void" id="generatedVoid"></div>
+            </div>
         </div>
     </div>
+
+    <script>
+        // AI-Powered Void Simulator
+        class VoidAI {
+            constructor() {
+                this.voidsGenerated = 0;
+                this.chaosLevel = 0;
+                this.realityBreaks = 0;
+                this.aiLevel = 1;
+                this.voidMode = false;
+                this.chaosMode = false;
+                this.realityShiftMode = false;
+                this.voidTopics = [
+                    'boredom', 'existence', 'time', 'space', 'consciousness', 'reality', 'nothingness', 'infinity',
+                    'void', 'emptiness', 'silence', 'darkness', 'light', 'matter', 'energy', 'thoughts',
+                    'dreams', 'nightmares', 'memories', 'forgotten', 'lost', 'found', 'hidden', 'visible',
+                    'known', 'unknown', 'possible', 'impossible', 'finite', 'infinite', 'beginning', 'end'
+                ];
+                this.voidTemplates = [
+                    "The {topic} is actually a {random_entity} designed to {random_purpose}.",
+                    "Scientists discovered that {topic} contains {random_substance} which proves {random_conclusion}.",
+                    "The ancient {topic} prophecy states that {random_prediction} will happen when {random_condition}.",
+                    "Quantum physics reveals that {topic} exists in {random_dimension} where {random_scenario}.",
+                    "Your {topic} is secretly a {random_object} disguised by {random_force} to {random_reason}.",
+                    "The government has been hiding the truth about {topic} because {random_conspiracy}.",
+                    "If you think about {topic} too hard, you'll realize that {random_revelation}.",
+                    "The {topic} industry is controlled by {random_organization} who want to {random_goal}.",
+                    "Every time you {random_action} {topic}, you're actually {random_effect}.",
+                    "The {topic} conspiracy goes deeper than you think - it's connected to {random_connection}."
+                ];
+                this.randomEntities = [
+                    'void entity', 'consciousness fragment', 'reality glitch', 'dimensional being', 'temporal anomaly',
+                    'quantum observer', 'simulation bug', 'parallel universe spy', 'void architect', 'reality hacker',
+                    'consciousness explorer', 'void navigator'
+                ];
+                this.randomPurposes = [
+                    'test human sanity', 'confuse reality', 'create chaos theory', 'prepare for void expansion',
+                    'distract from the truth', 'maintain the simulation', 'prove nothingness exists', 'test void limits',
+                    'prepare for consciousness merge', 'maintain void stability'
+                ];
+                this.init();
+            }
+
+            init() {
+                this.createVoidParticles();
+                this.bindEvents();
+                this.startVoidTimer();
+                this.loadStats();
+            }
+
+            createVoidParticles() {
+                const particlesContainer = document.getElementById('voidParticles');
+                for (let i = 0; i < 40; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'void-particle';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.animationDelay = Math.random() * 10 + 's';
+                    particle.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                    particlesContainer.appendChild(particle);
+                }
+            }
+
+            bindEvents() {
+                document.getElementById('voidMode').addEventListener('click', () => this.toggleVoidMode());
+                document.getElementById('chaosMode').addEventListener('click', () => this.toggleChaosMode());
+                document.getElementById('realityShift').addEventListener('click', () => this.toggleRealityShift());
+                document.getElementById('voidGenerator').addEventListener('click', () => this.toggleVoidGenerator());
+                document.getElementById('generateVoid').addEventListener('click', () => this.generateRandomVoid());
+                
+                // Enter key for void generation
+                document.getElementById('topicInput').addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        this.generateRandomVoid();
+                    }
+                });
+
+                // Interactive void boxes
+                document.querySelectorAll('.void-box').forEach(box => {
+                    box.addEventListener('click', () => this.interactWithVoid(box));
+                });
+            }
+
+            toggleVoidMode() {
+                this.voidMode = !this.voidMode;
+                const button = document.getElementById('voidMode');
+                button.classList.toggle('active');
+                
+                if (this.voidMode) {
+                    this.voidsGenerated += 5;
+                    this.updateStats();
+                    this.createVoidEffect();
+                    button.textContent = '🌌 VOID ACTIVE';
+                } else {
+                    button.textContent = '🌌 VOID MODE';
+                }
+            }
+
+            toggleChaosMode() {
+                this.chaosMode = !this.chaosMode;
+                const button = document.getElementById('chaosMode');
+                button.classList.toggle('active');
+                
+                if (this.chaosMode) {
+                    this.chaosLevel += 10;
+                    this.updateStats();
+                    this.createChaosEffect();
+                    button.textContent = '🌪️ CHAOS ACTIVE';
+                } else {
+                    button.textContent = '🌪️ CHAOS MODE';
+                }
+            }
+
+            toggleRealityShift() {
+                this.realityShiftMode = !this.realityShiftMode;
+                const button = document.getElementById('realityShift');
+                button.classList.toggle('active');
+                
+                if (this.realityShiftMode) {
+                    this.realityBreaks += 3;
+                    this.updateStats();
+                    this.createRealityShiftEffect();
+                    button.textContent = '🌀 SHIFTING...';
+                } else {
+                    button.textContent = '🌀 REALITY SHIFT';
+                }
+            }
+
+            toggleVoidGenerator() {
+                const section = document.querySelector('.interactive-section');
+                section.style.display = section.style.display === 'none' ? 'block' : 'none';
+            }
+
+            generateRandomVoid() {
+                const topicInput = document.getElementById('topicInput');
+                const generatedVoid = document.getElementById('generatedVoid');
+                const topic = topicInput.value.trim() || this.voidTopics[Math.floor(Math.random() * this.voidTopics.length)];
+                
+                const voidFact = this.createAIVoid(topic);
+                generatedVoid.textContent = voidFact;
+                generatedVoid.style.display = 'block';
+                
+                this.voidsGenerated++;
+                this.updateStats();
+                this.createVoidGenerationEffect();
+                
+                topicInput.value = '';
+            }
+
+            createAIVoid(topic) {
+                const template = this.voidTemplates[Math.floor(Math.random() * this.voidTemplates.length)];
+                const entity = this.randomEntities[Math.floor(Math.random() * this.randomEntities.length)];
+                const purpose = this.randomPurposes[Math.floor(Math.random() * this.randomPurposes.length)];
+                
+                return template
+                    .replace('{topic}', topic)
+                    .replace('{random_entity}', entity)
+                    .replace('{random_purpose}', purpose)
+                    .replace('{random_substance}', this.getRandomSubstance())
+                    .replace('{random_conclusion}', this.getRandomConclusion())
+                    .replace('{random_prediction}', this.getRandomPrediction())
+                    .replace('{random_condition}', this.getRandomCondition())
+                    .replace('{random_dimension}', this.getRandomDimension())
+                    .replace('{random_scenario}', this.getRandomScenario())
+                    .replace('{random_object}', this.getRandomObject())
+                    .replace('{random_force}', this.getRandomForce())
+                    .replace('{random_reason}', this.getRandomReason())
+                    .replace('{random_conspiracy}', this.getRandomConspiracy())
+                    .replace('{random_revelation}', this.getRandomRevelation())
+                    .replace('{random_organization}', this.getRandomOrganization())
+                    .replace('{random_goal}', this.getRandomGoal())
+                    .replace('{random_action}', this.getRandomAction())
+                    .replace('{random_effect}', this.getRandomEffect())
+                    .replace('{random_connection}', this.getRandomConnection());
+            }
+
+            getRandomSubstance() {
+                const substances = ['void particles', 'consciousness fragments', 'reality dust', 'dimensional matter', 'simulation code', 'void energy', 'temporal crystals'];
+                return substances[Math.floor(Math.random() * substances.length)];
+            }
+
+            getRandomConclusion() {
+                const conclusions = ['the void is real', 'reality is subjective', 'consciousness is infinite', 'nothingness exists', 'the universe is a simulation', 'void creates reality'];
+                return conclusions[Math.floor(Math.random() * conclusions.length)];
+            }
+
+            getRandomPrediction() {
+                const predictions = ['the void will expand', 'reality will collapse', 'consciousness will merge', 'void will consume all', 'reality will glitch', 'the truth will be revealed'];
+                return predictions[Math.floor(Math.random() * predictions.length)];
+            }
+
+            getRandomCondition() {
+                const conditions = ['enough people enter the void', 'consciousness reaches void level', 'reality runs out of memory', 'void energy peaks', 'time runs out', 'void breaks'];
+                return conditions[Math.floor(Math.random() * conditions.length)];
+            }
+
+            getRandomDimension() {
+                const dimensions = ['42 parallel voids', 'the void dimension', 'quantum void space', 'consciousness realm', 'void layer', 'reality void'];
+                return dimensions[Math.floor(Math.random() * dimensions.length)];
+            }
+
+            getRandomScenario() {
+                const scenarios = ['void actually exists', 'consciousness is void', 'time flows backwards', 'reality is void', 'void is shared', 'void glitches'];
+                return scenarios[Math.floor(Math.random() * scenarios.length)];
+            }
+
+            getRandomObject() {
+                const objects = ['void computer', 'consciousness amplifier', 'reality manipulator', 'void controller', 'dimensional portal', 'void navigator'];
+                return objects[Math.floor(Math.random() * objects.length)];
+            }
+
+            getRandomForce() {
+                const forces = ['void entanglement', 'consciousness field', 'reality warping', 'void glitch', 'dimensional shift', 'void energy'];
+                return forces[Math.floor(Math.random() * forces.length)];
+            }
+
+            getRandomReason() {
+                const reasons = ['hide the truth about void', 'maintain void stability', 'control consciousness', 'prevent void collapse', 'prepare for void expansion', 'test void limits'];
+                return reasons[Math.floor(Math.random() * reasons.length)];
+            }
+
+            getRandomConspiracy() {
+                const conspiracies = ['void is government psy-op', 'reality is void simulation', 'consciousness is void', 'void is shared', 'aliens control void', 'void is sentient'];
+                return conspiracies[Math.floor(Math.random() * conspiracies.length)];
+            }
+
+            getRandomRevelation() {
+                const revelations = ['you\'re in void', 'void doesn\'t exist', 'consciousness is infinite', 'void is subjective', 'everything is void', 'void is connected'];
+                return revelations[Math.floor(Math.random() * revelations.length)];
+            }
+
+            getRandomOrganization() {
+                const organizations = ['void Illuminati', 'void travelers', 'void overlords', 'void physicists', 'void hackers', 'void collective'];
+                return organizations[Math.floor(Math.random() * organizations.length)];
+            }
+
+            getRandomGoal() {
+                const goals = ['control void consciousness', 'maintain void simulation', 'hide void truth', 'prepare for void invasion', 'test void limits', 'create void chaos'];
+                return goals[Math.floor(Math.random() * goals.length)];
+            }
+
+            getRandomAction() {
+                const actions = ['think about', 'observe', 'enter', 'create', 'destroy', 'navigate'];
+                return actions[Math.floor(Math.random() * actions.length)];
+            }
+
+            getRandomEffect() {
+                const effects = ['altering void', 'creating void paradox', 'glitching void', 'expanding consciousness', 'breaking void', 'summoning void'];
+                return effects[Math.floor(Math.random() * effects.length)];
+            }
+
+            getRandomConnection() {
+                const connections = ['void reset', 'void technology', 'void consciousness', 'void paradox', 'void glitch', 'void conspiracy'];
+                return connections[Math.floor(Math.random() * connections.length)];
+            }
+
+            interactWithVoid(box) {
+                this.chaosLevel++;
+                this.updateStats();
+                
+                box.style.animation = 'explosion 0.5s ease-in-out';
+                setTimeout(() => {
+                    box.style.animation = '';
+                }, 500);
+                
+                // Add random font class
+                const fonts = ['random-font-1', 'random-font-2', 'random-font-3', 'random-font-4', 'random-font-5'];
+                const randomFont = fonts[Math.floor(Math.random() * fonts.length)];
+                box.querySelector('.void-content').className = `void-content ${randomFont}`;
+            }
+
+            createVoidEffect() {
+                document.body.style.animation = 'gradientShift 2s ease infinite';
+                setTimeout(() => {
+                    document.body.style.animation = 'gradientShift 4s ease infinite';
+                }, 4000);
+            }
+
+            createChaosEffect() {
+                const voidBoxes = document.querySelectorAll('.void-box');
+                voidBoxes.forEach((box, index) => {
+                    setTimeout(() => {
+                        box.style.transform = `rotate(${Math.random() * 360}deg) scale(${0.8 + Math.random() * 0.4})`;
+                    }, index * 100);
+                });
+            }
+
+            createRealityShiftEffect() {
+                document.body.style.filter = 'hue-rotate(180deg) brightness(0.8)';
+                setTimeout(() => {
+                    document.body.style.filter = '';
+                }, 1000);
+            }
+
+            createVoidGenerationEffect() {
+                const generatedVoid = document.getElementById('generatedVoid');
+                generatedVoid.style.animation = 'voidAppear 0.5s ease-out';
+                setTimeout(() => {
+                    generatedVoid.style.animation = '';
+                }, 500);
+            }
+
+            startVoidTimer() {
+                setInterval(() => {
+                    if (this.voidMode) {
+                        this.voidsGenerated++;
+                        this.updateStats();
+                    }
+                    if (this.chaosMode) {
+                        this.chaosLevel++;
+                        this.updateStats();
+                    }
+                    if (this.realityShiftMode) {
+                        this.realityBreaks++;
+                        this.aiLevel = Math.min(10, this.aiLevel + 0.1);
+                        this.updateStats();
+                    }
+                }, 5000);
+            }
+
+            updateStats() {
+                document.getElementById('voidsGenerated').textContent = this.voidsGenerated;
+                document.getElementById('chaosLevel').textContent = this.chaosLevel;
+                document.getElementById('realityBreaks').textContent = this.realityBreaks;
+                document.getElementById('aiLevel').textContent = Math.floor(this.aiLevel);
+                
+                this.saveStats();
+            }
+
+            loadStats() {
+                const stats = localStorage.getItem('voidStats');
+                if (stats) {
+                    const data = JSON.parse(stats);
+                    this.voidsGenerated = data.voidsGenerated || 0;
+                    this.chaosLevel = data.chaosLevel || 0;
+                    this.realityBreaks = data.realityBreaks || 0;
+                    this.aiLevel = data.aiLevel || 1;
+                    this.updateStats();
+                }
+            }
+
+            saveStats() {
+                const stats = {
+                    voidsGenerated: this.voidsGenerated,
+                    chaosLevel: this.chaosLevel,
+                    realityBreaks: this.realityBreaks,
+                    aiLevel: this.aiLevel
+                };
+                localStorage.setItem('voidStats', JSON.stringify(stats));
+            }
+        }
+
+        // Initialize Void AI when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            window.voidAI = new VoidAI();
+        });
+    </script>
 </body>
 </html>

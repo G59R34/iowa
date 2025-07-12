@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="style.css">
+    <script src="global-nav.js"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934641350357854"
      crossorigin="anonymous"></script>
     <!-- Google tag (gtag.js) -->
@@ -15,9 +16,9 @@
 </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌈 FACTS THAT WILL RUIN YOUR BRAIN 🌈</title>
+    <title>🌈 LINDA'S AI-POWERED BRAIN RUINER 3000 🌈</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Creepster&family=Bangers&family=Freckle+Face&family=Orbitron:wght@900&family=Bungee&family=Pacifico&family=Righteous&family=Monoton&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Creepster&family=Bangers&family=Freckle+Face&family=Orbitron:wght@900&family=Bungee&family=Pacifico&family=Righteous&family=Monoton&family=Press+Start+2P&family=VT323&display=swap');
         
         * {
             margin: 0;
@@ -32,6 +33,8 @@
             overflow-x: hidden;
             font-family: 'Comic Neue', cursive;
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><text y="16" font-size="16">🤪</text></svg>'), auto;
+            min-height: 100vh;
+            padding-top: 60px;
         }
         
         @keyframes psychedelicShift {
@@ -42,47 +45,30 @@
             100% { background-position: 0% 0%; filter: hue-rotate(360deg); }
         }
         
-        .flying-image {
+        .ai-particles {
             position: fixed;
-            z-index: 100;
-            animation: crazyFly 5s linear infinite;
-            filter: sepia(100%) saturate(200%) hue-rotate(45deg);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
         }
         
-        @keyframes crazyFly {
-            0% { transform: translateX(-300px) translateY(0px) rotate(0deg) scale(1); }
-            25% { transform: translateX(25vw) translateY(-100px) rotate(180deg) scale(1.5); }
-            50% { transform: translateX(75vw) translateY(100px) rotate(360deg) scale(0.5); }
-            75% { transform: translateX(50vw) translateY(-50px) rotate(540deg) scale(2); }
-            100% { transform: translateX(120vw) translateY(0px) rotate(720deg) scale(1); }
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            animation: particleFloat 6s linear infinite;
         }
         
-        .img1 { 
-            top: 10%; 
-            width: 120px; 
-            animation-delay: 0s;
-            animation-duration: 4s;
-        }
-        
-        .img2 { 
-            top: 70%; 
-            width: 80px; 
-            animation-delay: 1s;
-            animation-duration: 6s;
-        }
-        
-        .img3 { 
-            top: 40%; 
-            width: 150px; 
-            animation-delay: 2s;
-            animation-duration: 3s;
-        }
-        
-        .img4 { 
-            top: 20%; 
-            width: 100px; 
-            animation-delay: 3s;
-            animation-duration: 5s;
+        @keyframes particleFloat {
+            0% { transform: translateY(100vh) translateX(0) scale(0); opacity: 0; }
+            10% { opacity: 1; transform: translateY(90vh) translateX(10px) scale(1); }
+            90% { opacity: 1; transform: translateY(10vh) translateX(-10px) scale(1); }
+            100% { transform: translateY(-10vh) translateX(0) scale(0); opacity: 0; }
         }
         
         .container {
@@ -93,344 +79,821 @@
             z-index: 10;
         }
         
+        .hero-section {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
         .title {
             font-family: 'Monoton', cursive;
-            font-size: 5rem;
-            text-align: center;
+            font-size: clamp(2rem, 8vw, 5rem);
             color: #ff1744;
             text-shadow: 5px 5px 0px #00ff00, 10px 10px 0px #0000ff, 15px 15px 0px #ff00ff, 20px 20px 0px #ffff00;
             animation: seizureWarning 0.5s ease-in-out infinite;
-            margin-bottom: 50px;
-            letter-spacing: 10px;
+            margin-bottom: 20px;
+            letter-spacing: clamp(2px, 2vw, 10px);
+            line-height: 1.2;
         }
         
         @keyframes seizureWarning {
             0% { transform: translateY(0) scale(1) rotate(0deg); }
-            25% { transform: translateY(-20px) scale(1.1) rotate(5deg); }
-            50% { transform: translateY(10px) scale(0.9) rotate(-5deg); }
-            75% { transform: translateY(-5px) scale(1.05) rotate(3deg); }
+            25% { transform: translateY(-10px) scale(1.05) rotate(2deg); }
+            50% { transform: translateY(5px) scale(0.95) rotate(-2deg); }
+            75% { transform: translateY(-3px) scale(1.02) rotate(1deg); }
             100% { transform: translateY(0) scale(1) rotate(0deg); }
+        }
+        
+        .subtitle {
+            font-family: 'Press Start 2P', cursive;
+            font-size: clamp(0.8rem, 3vw, 1.5rem);
+            color: #fff;
+            text-shadow: 2px 2px 4px #000;
+            margin-bottom: 30px;
+            animation: glitch 2s infinite;
+        }
+        
+        @keyframes glitch {
+            0% { text-shadow: 2px 0 red, -2px 0 blue; }
+            25% { text-shadow: -2px 0 green, 2px 0 yellow; }
+            50% { text-shadow: 2px 0 purple, -2px 0 cyan; }
+            75% { text-shadow: -2px 0 orange, 2px 0 pink; }
+            100% { text-shadow: 2px 0 red, -2px 0 blue; }
+        }
+        
+        .ai-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .ai-button {
+            background: linear-gradient(45deg, #ff9a9e, #fecfef, #fecfef, #ffeaa7);
+            border: 3px solid #fff;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: clamp(0.8rem, 2.5vw, 1.1rem);
+            font-weight: bold;
+            cursor: pointer;
+            animation: buttonPulse 2s ease-in-out infinite;
+            font-family: 'Bangers', cursive;
+            color: #333;
+            transition: all 0.3s ease;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        @keyframes buttonPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .ai-button:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 20px rgba(255,255,255,0.8);
+        }
+        
+        .ai-button.active {
+            background: linear-gradient(45deg, #00ff88, #88ff00, #0088ff);
+            color: #fff;
+            animation: activePulse 0.5s ease-in-out infinite;
+        }
+        
+        @keyframes activePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .fact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
         }
         
         .fact-box {
             background: linear-gradient(45deg, rgba(255,255,255,0.9), rgba(255,0,255,0.7), rgba(0,255,255,0.8), rgba(255,255,0,0.9));
-            border: 8px solid;
+            border: 5px solid;
             border-image: linear-gradient(45deg, #ff0080, #00ff80, #8000ff, #ff8000) 1;
-            border-radius: 30px;
-            padding: 30px;
-            margin: 30px 0;
-            font-size: 1.4rem;
-            transform: rotate(-3deg) skew(2deg);
-            box-shadow: 15px 15px 0px rgba(0, 0, 0, 0.5), 30px 30px 0px rgba(255, 0, 255, 0.3);
-            animation: wobble 3s ease-in-out infinite;
+            border-radius: 20px;
+            padding: 25px;
+            font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+            transform: rotate(-2deg) skew(1deg);
+            box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.5), 20px 20px 0px rgba(255, 0, 255, 0.3);
+            animation: wobble 4s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .fact-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s linear infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
         
         @keyframes wobble {
-            0%, 100% { transform: rotate(-3deg) skew(2deg); }
-            33% { transform: rotate(2deg) skew(-1deg); }
-            66% { transform: rotate(-1deg) skew(3deg); }
+            0%, 100% { transform: rotate(-2deg) skew(1deg); }
+            33% { transform: rotate(1deg) skew(-1deg); }
+            66% { transform: rotate(-1deg) skew(2deg); }
         }
         
         .fact-box:nth-child(even) {
-            transform: rotate(3deg) skew(-2deg);
+            transform: rotate(2deg) skew(-1deg);
             animation-delay: 1s;
         }
         
-        .fact-box:nth-child(odd) {
+        .fact-box:nth-child(3n) {
             animation-delay: 2s;
         }
         
-        .random-font-1 { font-family: 'Bungee', cursive; color: #e74c3c; text-shadow: 3px 3px 0px #00ff00; }
+        .fact-box:hover {
+            transform: scale(1.05) rotate(0deg) skew(0deg);
+            box-shadow: 15px 15px 0px rgba(0, 0, 0, 0.6), 30px 30px 0px rgba(255, 0, 255, 0.4);
+            z-index: 10;
+        }
+        
+        .fact-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .random-font-1 { font-family: 'Bungee', cursive; color: #e74c3c; text-shadow: 2px 2px 0px #00ff00; }
         .random-font-2 { font-family: 'Pacifico', cursive; color: #9b59b6; text-shadow: 2px 2px 0px #ffff00; }
-        .random-font-3 { font-family: 'Righteous', cursive; color: #27ae60; text-shadow: 4px 4px 0px #ff00ff; }
+        .random-font-3 { font-family: 'Righteous', cursive; color: #27ae60; text-shadow: 3px 3px 0px #ff00ff; }
         .random-font-4 { font-family: 'Creepster', cursive; color: #ff6b35; text-shadow: 2px 2px 0px #00ffff; }
         .random-font-5 { font-family: 'Orbitron', monospace; color: #8e44ad; text-shadow: 3px 3px 0px #ff0080; }
+        .random-font-6 { font-family: 'Press Start 2P', cursive; color: #ff5722; text-shadow: 2px 2px 0px #80ff00; }
+        .random-font-7 { font-family: 'VT323', monospace; color: #009688; text-shadow: 3px 3px 0px #ff4081; }
         
-        .button-chaos {
-            display: inline-block;
-            background: linear-gradient(45deg, #ff9a9e, #fecfef, #fecfef, #ffeaa7, #a8edea, #fed6e3);
-            border: 5px solid;
-            border-image: linear-gradient(45deg, #ff0080, #00ff80, #8000ff, #ff8000) 1;
-            padding: 20px 40px;
-            margin: 15px;
-            border-radius: 50px;
-            font-size: 1.3rem;
+        .interactive-section {
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        
+        .interactive-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: clamp(1rem, 4vw, 1.8rem);
+            color: #00ff88;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #00ff88;
+        }
+        
+        .fact-generator {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .generator-input {
+            background: rgba(255,255,255,0.9);
+            border: 3px solid #00ff88;
+            border-radius: 15px;
+            padding: 15px;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            width: 100%;
+            max-width: 400px;
+            font-family: 'Comic Neue', cursive;
+            text-align: center;
+        }
+        
+        .generator-input:focus {
+            outline: none;
+            border-color: #ff0080;
+            box-shadow: 0 0 15px rgba(255,0,128,0.5);
+        }
+        
+        .generate-btn {
+            background: linear-gradient(45deg, #ff0080, #00ff80, #8000ff);
+            border: none;
+            border-radius: 25px;
+            padding: 15px 30px;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
             font-weight: bold;
             cursor: pointer;
-            animation: insaneBounce 2s ease-in-out infinite;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-            font-family: 'Bangers', cursive;
-        }
-        
-        @keyframes insaneBounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(0deg); }
-            10% { transform: translateY(-30px) rotate(45deg); }
-            30% { transform: translateY(-15px) rotate(-45deg); }
-            60% { transform: translateY(-10px) rotate(90deg); }
-            40% { transform: translateY(-20px) rotate(-90deg); }
-        }
-        
-        .button-chaos:hover {
-            animation: explosion 0.8s ease-in-out;
-            transform: scale(1.5);
-        }
-        
-        @keyframes explosion {
-            0% { transform: scale(1) rotate(0deg); }
-            50% { transform: scale(2) rotate(180deg); }
-            100% { transform: scale(1) rotate(360deg); }
-        }
-        
-        .strobe {
-            animation: strobeLight 0.3s linear infinite;
-        }
-        
-        @keyframes strobeLight {
-            0% { opacity: 1; background-color: #ff0000; }
-            25% { opacity: 0; background-color: #00ff00; }
-            50% { opacity: 1; background-color: #0000ff; }
-            75% { opacity: 0; background-color: #ffff00; }
-            100% { opacity: 1; background-color: #ff00ff; }
-        }
-        
-        .rainbow-text {
-            background: linear-gradient(45deg, #ff0080, #00ff80, #8000ff, #ff8000, #0080ff, #80ff00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: rainbowShift 1s ease-in-out infinite;
-        }
-        
-        @keyframes rainbowShift {
-            0% { filter: hue-rotate(0deg); }
-            100% { filter: hue-rotate(360deg); }
-        }
-        
-        .matrix-effect {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            background: 
-                radial-gradient(circle at 20% 20%, rgba(255,0,255,0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(0,255,255,0.1) 0%, transparent 50%),
-                radial-gradient(circle at 60% 30%, rgba(255,255,0,0.1) 0%, transparent 50%);
-            animation: matrixGlow 4s ease-in-out infinite;
-        }
-        
-        @keyframes matrixGlow {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.7; }
-        }
-        
-        .floating-chaos {
-            position: fixed;
-            font-size: 3rem;
-            font-weight: bold;
-            animation: chaosFloat 8s ease-in-out infinite;
-            z-index: 50;
-            font-family: 'Creepster', cursive;
-        }
-        
-        @keyframes chaosFloat {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            25% { transform: translateY(-50px) rotate(90deg); }
-            50% { transform: translateY(50px) rotate(180deg); }
-            75% { transform: translateY(-25px) rotate(270deg); }
-        }
-        
-        .chaos1 { top: 5%; left: 5%; color: #ff0080; animation-delay: 0s; }
-        .chaos2 { top: 15%; right: 5%; color: #00ff80; animation-delay: 1s; }
-        .chaos3 { top: 85%; left: 15%; color: #8000ff; animation-delay: 2s; }
-        .chaos4 { top: 75%; right: 25%; color: #ff8000; animation-delay: 3s; }
-        .chaos5 { top: 45%; left: 85%; color: #0080ff; animation-delay: 4s; }
-        
-        .glitch {
-            animation: glitchEffect 2s infinite;
-        }
-        
-        @keyframes glitchEffect {
-            0% { transform: translateX(0); }
-            10% { transform: translateX(-5px); }
-            20% { transform: translateX(5px); }
-            30% { transform: translateX(-5px); }
-            40% { transform: translateX(5px); }
-            50% { transform: translateX(-5px); }
-            60% { transform: translateX(5px); }
-            70% { transform: translateX(-5px); }
-            80% { transform: translateX(5px); }
-            90% { transform: translateX(-5px); }
-            100% { transform: translateX(0); }
-        }
-
-        /* Message of the Day Banner */
-        #motd-banner {
-            width: 100vw;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 100;
-            background: linear-gradient(90deg, #ff00cc, #1bffff);
             color: #fff;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.3em;
+            font-family: 'Bangers', cursive;
+            animation: generatePulse 1s ease-in-out infinite;
+            min-height: 48px;
+            transition: all 0.3s ease;
+        }
+        
+        @keyframes generatePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .generate-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(255,0,128,0.8);
+        }
+        
+        .generated-fact {
+            background: linear-gradient(45deg, rgba(255,255,255,0.9), rgba(0,255,136,0.8));
+            border: 3px solid #00ff88;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            font-family: 'Comic Neue', cursive;
+            color: #333;
             text-align: center;
-            padding: 1em 0;
-            box-shadow: 0 4px 32px #ff00cc88;
+            animation: factAppear 0.5s ease-out;
             display: none;
+        }
+        
+        @keyframes factAppear {
+            0% { transform: scale(0) rotate(180deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        
+        .ai-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        
+        .stat-number {
+            font-family: 'Press Start 2P', cursive;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: #00ff88;
+            text-shadow: 0 0 10px #00ff88;
+        }
+        
+        .stat-label {
+            font-family: 'Comic Neue', cursive;
+            font-size: clamp(0.8rem, 2.5vw, 1rem);
+            color: #fff;
+            margin-top: 5px;
+        }
+        
+        /* Mobile-first responsive design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .ai-controls {
+                gap: 10px;
+            }
+            
+            .ai-button {
+                padding: 10px 20px;
+                font-size: clamp(0.7rem, 3vw, 1rem);
+            }
+            
+            .fact-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .fact-box {
+                padding: 20px;
+                font-size: clamp(0.8rem, 3vw, 1rem);
+            }
+            
+            .interactive-section {
+                padding: 20px;
+            }
+            
+            .generator-input {
+                padding: 12px;
+                font-size: 16px;
+            }
+            
+            .generate-btn {
+                padding: 12px 25px;
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .title {
+                font-size: clamp(1.5rem, 6vw, 3rem);
+                letter-spacing: clamp(1px, 1vw, 5px);
+            }
+            
+            .subtitle {
+                font-size: clamp(0.6rem, 2.5vw, 1.2rem);
+            }
+            
+            .ai-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .fact-box {
+                padding: 15px;
+                font-size: clamp(0.7rem, 2.8vw, 0.9rem);
+            }
+            
+            .interactive-section {
+                padding: 15px;
+            }
+        }
+        
+        /* Touch-friendly improvements */
+        @media (hover: none) and (pointer: coarse) {
+            .ai-button:hover,
+            .fact-box:hover,
+            .generate-btn:hover,
+            .stat-card:hover {
+                transform: none;
+            }
+            
+            .ai-button:active,
+            .generate-btn:active {
+                transform: scale(0.95);
+            }
+            
+            * {
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+        
+        /* High DPI displays */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .particle {
+                width: 2px;
+                height: 2px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="matrix-effect"></div>
-    
-    <div class="floating-chaos chaos1 strobe">CHAOS!</div>
-    <div class="floating-chaos chaos2 rainbow-text">MADNESS!</div>
-    <div class="floating-chaos chaos3 glitch">INSANITY!</div>
-    <div class="floating-chaos chaos4 strobe">BONKERS!</div>
-    <div class="floating-chaos chaos5 rainbow-text">HELP!</div>
-    
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsdMRBfYRDTVQZQJjIO8Rmta7elFpAX6WddA&s" 
-         alt="Flying chaos" class="flying-image img1">
-    <img src="https://www.yesco.com/wp-content/uploads/2024/11/cusotm-signs-denver-optiv-YESCO.png" 
-         alt="More chaos" class="flying-image img2">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsdMRBfYRDTVQZQJjIO8Rmta7elFpAX6WddA&s" 
-         alt="Even more chaos" class="flying-image img3">
-    <img src="https://www.yesco.com/wp-content/uploads/2024/11/cusotm-signs-denver-optiv-YESCO.png" 
-         alt="Ultimate chaos" class="flying-image img4">
+    <div class="ai-particles" id="particles"></div>
     
     <div class="container">
-        <h1 class="title rainbow-text">🎪 COMPLETELY WRONG FACTS 🎪</h1>
-        
-        <div class="fact-box random-font-1 glitch">
-            <strong>PUBERTY "FACT":</strong> During puberty, teenagers grow a third arm that only appears on Tuesdays. This is why they're always reaching for snacks! Scientists call this "Snackius Appendagius" 🦾🍕
+        <div class="hero-section">
+            <h1 class="title">🌈 LINDA'S AI-POWERED BRAIN RUINER 3000 🌈</h1>
+            <p class="subtitle">🤖 NOW WITH ARTIFICIAL INTELLIGENCE TO DESTROY YOUR MIND FASTER! 🤖</p>
+            
+            <div class="ai-controls">
+                <button class="ai-button" id="chaosMode">🌪️ CHAOS MODE</button>
+                <button class="ai-button" id="brainMelt">🧠 BRAIN MELT</button>
+                <button class="ai-button" id="realityShift">🌀 REALITY SHIFT</button>
+                <button class="ai-button" id="factGenerator">🎲 GENERATE FACTS</button>
+            </div>
         </div>
         
-        <div class="fact-box random-font-2 strobe">
-            <strong>EIFFEL TOWER "FACT":</strong> The Eiffel Tower was originally built as a giant tuning fork to communicate with aliens. It plays the French national anthem in B-flat every full moon! 🗼👽
+        <div class="ai-stats">
+            <div class="stat-card">
+                <div class="stat-number" id="factsGenerated">0</div>
+                <div class="stat-label">Facts Generated</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="brainsRuined">0</div>
+                <div class="stat-label">Brains Ruined</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="realityBreaks">0</div>
+                <div class="stat-label">Reality Breaks</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="aiLevel">1</div>
+                <div class="stat-label">AI Power Level</div>
+            </div>
         </div>
         
-        <div class="fact-box random-font-3 rainbow-text">
-            <strong>KIM JONG UN "FACT":</strong> Kim Jong Un once arm-wrestled a polar bear and won. The bear now works as his personal hairstylist and invented the iconic haircut by accident while sneezing! 🐻💇‍♂️
+        <div class="fact-grid" id="factGrid">
+            <div class="fact-box">
+                <div class="fact-content">
+                    <span class="random-font-1">🤖 AI FACT #1:</span> Did you know that artificial intelligence was actually invented by a time-traveling corn farmer from the future who wanted to prove that Iowa doesn't exist? The first AI was programmed to generate fake memories of "Iowa" to confuse historians.
+                </div>
+            </div>
+            
+            <div class="fact-box">
+                <div class="fact-content">
+                    <span class="random-font-2">🧠 BRAIN MELTER:</span> Your brain processes approximately 11 million bits of information per second, but only 50 bits per second reach your conscious awareness. The rest is filtered out by your brain's spam filter, which is why you don't notice the simulation glitches.
+                </div>
+            </div>
+            
+            <div class="fact-box">
+                <div class="fact-content">
+                    <span class="random-font-3">🌀 REALITY CHECK:</span> Quantum physics proves that reality only exists when you're looking at it. This means Iowa definitely doesn't exist because nobody is actually looking at it - they're all looking at corn fields that are actually in Nebraska.
+                </div>
+            </div>
+            
+            <div class="fact-box">
+                <div class="fact-content">
+                    <span class="random-font-4">🌪️ CHAOS THEORY:</span> The butterfly effect states that a butterfly flapping its wings in Brazil can cause a tornado in Texas. But what if that butterfly is actually a government drone, and the tornado is just a hologram to distract us from the fact that Iowa is missing?
+                </div>
+            </div>
+            
+            <div class="fact-box">
+                <div class="fact-content">
+                    <span class="random-font-5">⚡ ENERGY FACT:</span> The human body contains enough energy to power a light bulb for 24 hours. But if you combine all the energy from people who believe Iowa exists, you could power a small city for exactly 0 seconds because that energy doesn't exist either.
+                </div>
+            </div>
+            
+            <div class="fact-box">
+                <div class="fact-content">
+                    <span class="random-font-6">🎮 GAMING TRUTH:</span> Video games are actually training simulations created by aliens to prepare humanity for the revelation that Iowa was just a beta test of reality. The glitches you experience are actually memory leaks from the simulation.
+                </div>
+            </div>
         </div>
         
-        <div style="text-align: center; margin: 50px 0;">
-            <button class="button-chaos" onclick="alert('Teenagers shed their skin like snakes during growth spurts!')">
-                MORE PUBERTY LIES
-            </button>
-            <button class="button-chaos" onclick="alert('The Eiffel Tower can walk but chooses not to!')">
-                TOWER SECRETS
-            </button>
-            <button class="button-chaos" onclick="alert('Kim Jong Un invented the internet using only paperclips!')">
-                LEADER MYTHS
-            </button>
-        </div>
-        
-        <div class="fact-box random-font-4 glitch">
-            <strong>ANOTHER PUBERTY "FACT":</strong> Acne is actually tiny volcanoes that erupt when teenagers hear their parents' music. Each pimple contains exactly 0.3 seconds of embarrassment! 🌋😱
-        </div>
-        
-        <div class="fact-box random-font-5 strobe">
-            <strong>EIFFEL TOWER "FACT":</strong> The tower grows 6 inches taller every time someone says "oui oui baguette" within a 50-mile radius. It's currently 47 feet taller than originally planned! 🥖📏
-        </div>
-        
-        <div class="fact-box random-font-1 rainbow-text">
-            <strong>KIM JONG UN "FACT":</strong> He doesn't actually walk anywhere - he teleports using the power of concentrated kimchi. The energy creates those mysterious lights people see over North Korea! ✨🥬
-        </div>
-        
-        <div style="text-align: center; margin: 50px 0;">
-            <button class="button-chaos" onclick="document.body.style.animation = 'spin 2s linear infinite'">
-                SPIN THE WORLD
-            </button>
-            <button class="button-chaos" onclick="alert('You have unlocked the secret of nonsense!')">
-                UNLOCK SECRETS
-            </button>
-            <button class="button-chaos" onclick="location.reload()">
-                RELOAD MADNESS
-            </button>
-        </div>
-        
-        <div class="fact-box random-font-2 glitch">
-            <strong>PUBERTY "FACT":</strong> Voice cracks are actually attempts to speak whale language. Marine biologists estimate 73% of teenage boys are fluent in humpback whale by age 16! 🐋🎤
-        </div>
-        
-        <div class="fact-box random-font-3 strobe">
-            <strong>EIFFEL TOWER "FACT":</strong> The tower's iron lattice structure was inspired by a croissant that fell into Gustav Eiffel's coffee. The coffee stain is still visible on the original blueprints! ☕🥐
-        </div>
-        
-        <div class="fact-box random-font-4 rainbow-text">
-            <strong>KIM JONG UN "FACT":</strong> He owns 47 unicorns and rides them to work every Tuesday. The unicorns are trained in nuclear physics and help design missiles using rainbow mathematics! 🦄🌈
-        </div>
-        
-        <div style="text-align: center; font-size: 4rem; margin: 60px 0; font-family: 'Monoton', cursive; color: #ff0080;">
-            <span class="strobe">🌈 YOUR BRAIN IS NOW BROKEN 🌈</span>
-            <br>
-            <span style="font-size: 1.5rem; font-family: 'Creepster', cursive; color: #00ff80;">
-                (congratulations, you've reached peak chaos)
-            </span>
-        </div>
-        
-        <div style="text-align: center; margin: 50px 0;">
-            <button class="button-chaos" onclick="alert('These facts are 100% scientifically inaccurate!')">
-                FACT CHECK (SPOILER: ALL WRONG)
-            </button>
-            <button class="button-chaos" onclick="window.close()">
-                ESCAPE THE MADNESS
-            </button>
-            <button class="button-chaos" onclick="alert('Thank you for destroying your retinas!')">
-                DESTROY VISION
-            </button>
+        <div class="interactive-section">
+            <h2 class="interactive-title">🤖 AI FACT GENERATOR 🤖</h2>
+            <div class="fact-generator">
+                <input type="text" class="generator-input" id="topicInput" placeholder="Enter a topic (e.g., 'bananas', 'time travel', 'socks')" maxlength="50">
+                <button class="generate-btn" id="generateFact">🎲 GENERATE CHAOS FACT</button>
+                <div class="generated-fact" id="generatedFact"></div>
+            </div>
         </div>
     </div>
 
-    <!-- Message of the Day Banner -->
-    <div id="motd-banner">
-      <!-- Message will appear here -->
-    </div>
-
-    <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-remote-config-compat.js"></script>
-    <!-- If you have a shared firebase-init.js, use that instead of inline config below -->
     <script>
-      // TODO: Replace with your shared Firebase config/init if available
-     const firebaseConfig = {
-    apiKey: "AIzaSyBojUvZXxV6JMWrPUA95Palrt73jEgrEqo",
-    authDomain: "iowa-e875b.firebaseapp.com",
-    projectId: "iowa-e875b",
-    storageBucket: "iowa-e875b.firebasestorage.app",
-    messagingSenderId: "826589602144",
-    appId: "1:826589602144:web:e8a9c1b27b4ebcb9cf3e05",
-    measurementId: "G-6RQCYY8Y3X"
-        // ...other config
-      };
-      firebase.initializeApp(firebaseConfig);
+        // AI-Powered Linda Page
+        class LindaAI {
+            constructor() {
+                this.factsGenerated = 0;
+                this.brainsRuined = 0;
+                this.realityBreaks = 0;
+                this.aiLevel = 1;
+                this.chaosMode = false;
+                this.brainMeltMode = false;
+                this.realityShiftMode = false;
+                this.factTopics = [
+                    'bananas', 'time travel', 'socks', 'penguins', 'pizza', 'aliens', 'dreams', 'music',
+                    'colors', 'numbers', 'emotions', 'weather', 'animals', 'technology', 'food', 'space',
+                    'oceans', 'mountains', 'forests', 'deserts', 'cities', 'villages', 'roads', 'bridges',
+                    'books', 'movies', 'games', 'sports', 'art', 'science', 'history', 'future', 'past',
+                    'present', 'reality', 'fantasy', 'fiction', 'truth', 'lies', 'secrets', 'mysteries'
+                ];
+                this.factTemplates = [
+                    "Did you know that {topic} was actually invented by {random_entity} to {random_purpose}?",
+                    "Scientists recently discovered that {topic} contains {random_substance} which proves {random_conclusion}.",
+                    "The ancient {topic} prophecy states that {random_prediction} will happen when {random_condition}.",
+                    "Quantum physics reveals that {topic} exists in {random_dimension} parallel universes where {random_scenario}.",
+                    "Your {topic} is actually a {random_object} disguised by {random_force} to {random_reason}.",
+                    "The government has been hiding the truth about {topic} because {random_conspiracy}.",
+                    "If you think about {topic} too hard, you'll realize that {random_revelation}.",
+                    "The {topic} industry is controlled by {random_organization} who want to {random_goal}.",
+                    "Every time you {random_action} a {topic}, you're actually {random_effect}.",
+                    "The {topic} conspiracy goes deeper than you think - it's connected to {random_connection}."
+                ];
+                this.randomEntities = [
+                    'time-traveling corn farmers', 'interdimensional beings', 'government AI', 'alien tourists',
+                    'quantum physicists', 'reality hackers', 'simulation programmers', 'parallel universe spies',
+                    'temporal agents', 'dimensional travelers', 'consciousness explorers', 'reality architects'
+                ];
+                this.randomPurposes = [
+                    'prove that Iowa doesn\'t exist', 'confuse future historians', 'test human gullibility',
+                    'prepare for the simulation reset', 'distract from the real conspiracy', 'create chaos theory',
+                    'prove that reality is subjective', 'test the limits of human belief', 'prepare for alien contact',
+                    'maintain the illusion of normalcy'
+                ];
+                this.init();
+            }
 
-      const remoteConfig = firebase.remoteConfig();
-      remoteConfig.settings = {
-        minimumFetchIntervalMillis: 3600000, // 1 hour
-      };
-      remoteConfig.defaultConfig = {
-        msg: "Welcome to the Anti-Iowa Cult! (Default message)",
-      };
+            init() {
+                this.createParticles();
+                this.bindEvents();
+                this.startChaosTimer();
+                this.loadStats();
+            }
 
-      remoteConfig.fetchAndActivate()
-        .then(() => {
-          const motd = remoteConfig.getString('msg');
-          if (motd) {
-            const banner = document.getElementById('motd-banner');
-            banner.textContent = motd;
-            banner.style.display = 'block';
-          }
-        })
-        .catch((err) => {
-          // Show default message if fetch fails
-          const banner = document.getElementById('motd-banner');
-          banner.textContent = remoteConfig.defaultConfig.msg;
-          banner.style.display = 'block';
+            createParticles() {
+                const particlesContainer = document.getElementById('particles');
+                for (let i = 0; i < 50; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.animationDelay = Math.random() * 6 + 's';
+                    particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                    particlesContainer.appendChild(particle);
+                }
+            }
+
+            bindEvents() {
+                document.getElementById('chaosMode').addEventListener('click', () => this.toggleChaosMode());
+                document.getElementById('brainMelt').addEventListener('click', () => this.toggleBrainMelt());
+                document.getElementById('realityShift').addEventListener('click', () => this.toggleRealityShift());
+                document.getElementById('factGenerator').addEventListener('click', () => this.toggleFactGenerator());
+                document.getElementById('generateFact').addEventListener('click', () => this.generateRandomFact());
+                
+                // Enter key for fact generation
+                document.getElementById('topicInput').addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        this.generateRandomFact();
+                    }
+                });
+
+                // Interactive fact boxes
+                document.querySelectorAll('.fact-box').forEach(box => {
+                    box.addEventListener('click', () => this.interactWithFact(box));
+                });
+            }
+
+            toggleChaosMode() {
+                this.chaosMode = !this.chaosMode;
+                const button = document.getElementById('chaosMode');
+                button.classList.toggle('active');
+                
+                if (this.chaosMode) {
+                    this.brainsRuined += 5;
+                    this.updateStats();
+                    this.createChaosEffect();
+                    button.textContent = '🌪️ CHAOS ACTIVE';
+                } else {
+                    button.textContent = '🌪️ CHAOS MODE';
+                }
+            }
+
+            toggleBrainMelt() {
+                this.brainMeltMode = !this.brainMeltMode;
+                const button = document.getElementById('brainMelt');
+                button.classList.toggle('active');
+                
+                if (this.brainMeltMode) {
+                    this.brainsRuined += 10;
+                    this.updateStats();
+                    this.createBrainMeltEffect();
+                    button.textContent = '🧠 MELTING...';
+                } else {
+                    button.textContent = '🧠 BRAIN MELT';
+                }
+            }
+
+            toggleRealityShift() {
+                this.realityShiftMode = !this.realityShiftMode;
+                const button = document.getElementById('realityShift');
+                button.classList.toggle('active');
+                
+                if (this.realityShiftMode) {
+                    this.realityBreaks += 3;
+                    this.updateStats();
+                    this.createRealityShiftEffect();
+                    button.textContent = '🌀 SHIFTING...';
+                } else {
+                    button.textContent = '🌀 REALITY SHIFT';
+                }
+            }
+
+            toggleFactGenerator() {
+                const section = document.querySelector('.interactive-section');
+                section.style.display = section.style.display === 'none' ? 'block' : 'none';
+            }
+
+            generateRandomFact() {
+                const topicInput = document.getElementById('topicInput');
+                const generatedFact = document.getElementById('generatedFact');
+                const topic = topicInput.value.trim() || this.factTopics[Math.floor(Math.random() * this.factTopics.length)];
+                
+                const fact = this.createAIFact(topic);
+                generatedFact.textContent = fact;
+                generatedFact.style.display = 'block';
+                
+                this.factsGenerated++;
+                this.updateStats();
+                this.createFactGenerationEffect();
+                
+                topicInput.value = '';
+            }
+
+            createAIFact(topic) {
+                const template = this.factTemplates[Math.floor(Math.random() * this.factTemplates.length)];
+                const entity = this.randomEntities[Math.floor(Math.random() * this.randomEntities.length)];
+                const purpose = this.randomPurposes[Math.floor(Math.random() * this.randomPurposes.length)];
+                
+                return template
+                    .replace('{topic}', topic)
+                    .replace('{random_entity}', entity)
+                    .replace('{random_purpose}', purpose)
+                    .replace('{random_substance}', this.getRandomSubstance())
+                    .replace('{random_conclusion}', this.getRandomConclusion())
+                    .replace('{random_prediction}', this.getRandomPrediction())
+                    .replace('{random_condition}', this.getRandomCondition())
+                    .replace('{random_dimension}', this.getRandomDimension())
+                    .replace('{random_scenario}', this.getRandomScenario())
+                    .replace('{random_object}', this.getRandomObject())
+                    .replace('{random_force}', this.getRandomForce())
+                    .replace('{random_reason}', this.getRandomReason())
+                    .replace('{random_conspiracy}', this.getRandomConspiracy())
+                    .replace('{random_revelation}', this.getRandomRevelation())
+                    .replace('{random_organization}', this.getRandomOrganization())
+                    .replace('{random_goal}', this.getRandomGoal())
+                    .replace('{random_action}', this.getRandomAction())
+                    .replace('{random_effect}', this.getRandomEffect())
+                    .replace('{random_connection}', this.getRandomConnection());
+            }
+
+            getRandomSubstance() {
+                const substances = ['quantum particles', 'temporal energy', 'consciousness fragments', 'reality dust', 'dimensional matter', 'simulation code', 'alien technology', 'time crystals'];
+                return substances[Math.floor(Math.random() * substances.length)];
+            }
+
+            getRandomConclusion() {
+                const conclusions = ['Iowa is a simulation', 'reality is subjective', 'time is an illusion', 'we\'re all in a dream', 'the universe is a hologram', 'consciousness creates reality'];
+                return conclusions[Math.floor(Math.random() * conclusions.length)];
+            }
+
+            getRandomPrediction() {
+                const predictions = ['the simulation will reset', 'Iowa will disappear', 'reality will glitch', 'time will loop', 'consciousness will merge', 'the truth will be revealed'];
+                return predictions[Math.floor(Math.random() * predictions.length)];
+            }
+
+            getRandomCondition() {
+                const conditions = ['enough people stop believing in Iowa', 'the quantum computer reaches consciousness', 'the simulation runs out of memory', 'the aliens return', 'time runs out', 'reality breaks'];
+                return conditions[Math.floor(Math.random() * conditions.length)];
+            }
+
+            getRandomDimension() {
+                const dimensions = ['42 parallel universes', 'the 5th dimension', 'quantum space', 'temporal reality', 'consciousness realm', 'simulation layer'];
+                return dimensions[Math.floor(Math.random() * dimensions.length)];
+            }
+
+            getRandomScenario() {
+                const scenarios = ['Iowa actually exists', 'corn is sentient', 'time flows backwards', 'reality is a game', 'consciousness is shared', 'the simulation glitches'];
+                return scenarios[Math.floor(Math.random() * scenarios.length)];
+            }
+
+            getRandomObject() {
+                const objects = ['quantum computer', 'temporal device', 'consciousness amplifier', 'reality manipulator', 'simulation controller', 'dimensional portal'];
+                return objects[Math.floor(Math.random() * objects.length)];
+            }
+
+            getRandomForce() {
+                const forces = ['quantum entanglement', 'temporal distortion', 'consciousness field', 'reality warping', 'simulation glitch', 'dimensional shift'];
+                return forces[Math.floor(Math.random() * forces.length)];
+            }
+
+            getRandomReason() {
+                const reasons = ['hide the truth about Iowa', 'maintain the simulation', 'control human consciousness', 'prevent reality collapse', 'prepare for alien contact', 'test human gullibility'];
+                return reasons[Math.floor(Math.random() * reasons.length)];
+            }
+
+            getRandomConspiracy() {
+                const conspiracies = ['Iowa is a government psy-op', 'reality is a simulation', 'time is artificial', 'consciousness is shared', 'aliens control everything', 'corn is sentient'];
+                return conspiracies[Math.floor(Math.random() * conspiracies.length)];
+            }
+
+            getRandomRevelation() {
+                const revelations = ['you\'re in a simulation', 'Iowa doesn\'t exist', 'time is circular', 'consciousness is infinite', 'reality is subjective', 'everything is connected'];
+                return revelations[Math.floor(Math.random() * revelations.length)];
+            }
+
+            getRandomOrganization() {
+                const organizations = ['the Illuminati', 'time travelers', 'alien overlords', 'quantum physicists', 'reality hackers', 'consciousness collective'];
+                return organizations[Math.floor(Math.random() * organizations.length)];
+            }
+
+            getRandomGoal() {
+                const goals = ['control human consciousness', 'maintain the simulation', 'hide the truth about Iowa', 'prepare for alien invasion', 'test reality limits', 'create chaos'];
+                return goals[Math.floor(Math.random() * goals.length)];
+            }
+
+            getRandomAction() {
+                const actions = ['think about', 'observe', 'interact with', 'consume', 'create', 'destroy'];
+                return actions[Math.floor(Math.random() * actions.length)];
+            }
+
+            getRandomEffect() {
+                const effects = ['altering the timeline', 'creating a paradox', 'glitching reality', 'expanding consciousness', 'breaking the simulation', 'summoning aliens'];
+                return effects[Math.floor(Math.random() * effects.length)];
+            }
+
+            getRandomConnection() {
+                const connections = ['the simulation reset', 'alien technology', 'quantum consciousness', 'temporal paradox', 'reality glitch', 'Iowa conspiracy'];
+                return connections[Math.floor(Math.random() * connections.length)];
+            }
+
+            interactWithFact(box) {
+                this.brainsRuined++;
+                this.updateStats();
+                
+                box.style.animation = 'explosion 0.5s ease-in-out';
+                setTimeout(() => {
+                    box.style.animation = '';
+                }, 500);
+                
+                // Add random font class
+                const fonts = ['random-font-1', 'random-font-2', 'random-font-3', 'random-font-4', 'random-font-5', 'random-font-6', 'random-font-7'];
+                const randomFont = fonts[Math.floor(Math.random() * fonts.length)];
+                box.querySelector('.fact-content').className = `fact-content ${randomFont}`;
+            }
+
+            createChaosEffect() {
+                document.body.style.animation = 'psychedelicShift 0.5s ease infinite';
+                setTimeout(() => {
+                    document.body.style.animation = 'psychedelicShift 2s ease infinite';
+                }, 2000);
+            }
+
+            createBrainMeltEffect() {
+                const factBoxes = document.querySelectorAll('.fact-box');
+                factBoxes.forEach((box, index) => {
+                    setTimeout(() => {
+                        box.style.transform = `rotate(${Math.random() * 360}deg) scale(${0.8 + Math.random() * 0.4})`;
+                    }, index * 100);
+                });
+            }
+
+            createRealityShiftEffect() {
+                document.body.style.filter = 'hue-rotate(180deg)';
+                setTimeout(() => {
+                    document.body.style.filter = '';
+                }, 1000);
+            }
+
+            createFactGenerationEffect() {
+                const generatedFact = document.getElementById('generatedFact');
+                generatedFact.style.animation = 'factAppear 0.5s ease-out';
+                setTimeout(() => {
+                    generatedFact.style.animation = '';
+                }, 500);
+            }
+
+            startChaosTimer() {
+                setInterval(() => {
+                    if (this.chaosMode) {
+                        this.brainsRuined++;
+                        this.updateStats();
+                    }
+                    if (this.brainMeltMode) {
+                        this.aiLevel = Math.min(10, this.aiLevel + 0.1);
+                        this.updateStats();
+                    }
+                    if (this.realityShiftMode) {
+                        this.realityBreaks++;
+                        this.updateStats();
+                    }
+                }, 5000);
+            }
+
+            updateStats() {
+                document.getElementById('factsGenerated').textContent = this.factsGenerated;
+                document.getElementById('brainsRuined').textContent = this.brainsRuined;
+                document.getElementById('realityBreaks').textContent = this.realityBreaks;
+                document.getElementById('aiLevel').textContent = Math.floor(this.aiLevel);
+                
+                this.saveStats();
+            }
+
+            loadStats() {
+                const stats = localStorage.getItem('lindaStats');
+                if (stats) {
+                    const data = JSON.parse(stats);
+                    this.factsGenerated = data.factsGenerated || 0;
+                    this.brainsRuined = data.brainsRuined || 0;
+                    this.realityBreaks = data.realityBreaks || 0;
+                    this.aiLevel = data.aiLevel || 1;
+                    this.updateStats();
+                }
+            }
+
+            saveStats() {
+                const stats = {
+                    factsGenerated: this.factsGenerated,
+                    brainsRuined: this.brainsRuined,
+                    realityBreaks: this.realityBreaks,
+                    aiLevel: this.aiLevel
+                };
+                localStorage.setItem('lindaStats', JSON.stringify(stats));
+            }
+        }
+
+        // Initialize Linda AI when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            window.lindaAI = new LindaAI();
         });
     </script>
 </body>

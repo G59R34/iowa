@@ -1,0 +1,1478 @@
+// Global Navigation System with AI Features
+// Gemini API Integration for AI Assistant
+// SECURITY WARNING: Never expose API keys in production client-side code. For demo/personal use only.
+const GEMINI_API_KEY = 'AIzaSyA_vAPWGdD8xDGPoP7Ystjp4Jn2R_K6jD0';
+const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' + GEMINI_API_KEY;
+
+class GlobalNav {
+    constructor() {
+        this.isOpen = false;
+        this.currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        this.aiFeatures = {
+            smartSearch: true,
+            dynamicContent: true,
+            userPreferences: true,
+            voiceCommands: false
+        };
+        this.init();
+    }
+
+    init() {
+        this.createNav();
+        this.bindEvents();
+        this.setupAI();
+        this.loadUserPreferences();
+        this.initFirebaseRemoteConfig();
+    }
+
+    createNav() {
+        const nav = document.createElement('nav');
+        nav.className = 'global-nav';
+        nav.innerHTML = `
+            <div class="nav-header">
+                <div class="nav-brand">
+                    <span class="brand-icon">🛑</span>
+                    <span class="brand-text">Anti-Iowa Cult</span>
+                    <span class="ai-indicator">🤖</span>
+                </div>
+                <div class="nav-controls">
+                    <button class="nav-toggle" aria-label="Toggle navigation">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <button class="ai-toggle" aria-label="Toggle AI features">
+                        <span class="ai-icon">🤖</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="nav-content">
+                <div class="nav-menu">
+                    <div class="menu-section">
+                        <h3 class="section-title">🌍 Main Pages</h3>
+                        <a href="index.html" class="nav-link" data-page="index">
+                            <span class="link-icon">🏠</span>
+                            <span class="link-text">Home</span>
+                            <span class="link-desc">Welcome to the cult</span>
+                        </a>
+                        <a href="about.html" class="nav-link" data-page="about">
+                            <span class="link-icon">📖</span>
+                            <span class="link-text">About</span>
+                            <span class="link-desc">Learn our secrets</span>
+                        </a>
+                        <a href="evidence.html" class="nav-link" data-page="evidence">
+                            <span class="link-icon">🔍</span>
+                            <span class="link-text">Evidence</span>
+                            <span class="link-desc">Proof Iowa isn't real</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-section">
+                        <h3 class="section-title">🎭 Entertainment</h3>
+                        <a href="drama.html" class="nav-link" data-page="drama">
+                            <span class="link-icon">🍺</span>
+                            <span class="link-text">Cult Drama</span>
+                            <span class="link-desc">Adult life chaos</span>
+                        </a>
+                        <a href="game.html" class="nav-link" data-page="game">
+                            <span class="link-icon">🎮</span>
+                            <span class="link-text">Experience Iowa</span>
+                            <span class="link-desc">Delete corn game</span>
+                        </a>
+                        <a href="clock.html" class="nav-link" data-page="clock">
+                            <span class="link-icon">⏰</span>
+                            <span class="link-text">Wacky Clock</span>
+                            <span class="link-desc">Time is an illusion</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-section">
+                        <h3 class="section-title">👥 Characters</h3>
+                        <a href="linda.html" class="nav-link" data-page="linda">
+                            <span class="link-icon">🌈</span>
+                            <span class="link-text">Linda</span>
+                            <span class="link-desc">Brain-ruining facts</span>
+                        </a>
+                        <a href="sniffles.html" class="nav-link" data-page="sniffles">
+                            <span class="link-icon">🤧</span>
+                            <span class="link-text">Sniffles</span>
+                            <span class="link-desc">The sneezy one</span>
+                        </a>
+                        <a href="mrs-sniffles.html" class="nav-link" data-page="mrs-sniffles">
+                            <span class="link-icon">👵</span>
+                            <span class="link-text">Mrs. Sniffles</span>
+                            <span class="link-desc">The matriarch</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-section">
+                        <h3 class="section-title">🚗 Adventures</h3>
+                        <a href="turn-signal.html" class="nav-link" data-page="turn-signal">
+                            <span class="link-icon">🚦</span>
+                            <span class="link-text">Turn Signal</span>
+                            <span class="link-desc">Welcome to the void</span>
+                        </a>
+                        <a href="united.html" class="nav-link" data-page="united">
+                            <span class="link-icon">✈️</span>
+                            <span class="link-text">United Airlines</span>
+                            <span class="link-desc">Flying adventures</span>
+                        </a>
+                        <a href="tesla.html" class="nav-link" data-page="tesla">
+                            <span class="link-icon">⚡</span>
+                            <span class="link-text">Tesla Mode</span>
+                            <span class="link-desc">Electric dreams</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-section">
+                        <h3 class="section-title">🔐 Account</h3>
+                        <a href="join.html" class="nav-link" data-page="join">
+                            <span class="link-icon">🚀</span>
+                            <span class="link-text">Join Cult</span>
+                            <span class="link-desc">Become one of us</span>
+                        </a>
+                        <a href="login.html" class="nav-link" data-page="login">
+                            <span class="link-icon">🔑</span>
+                            <span class="link-text">LOG TF IN</span>
+                            <span class="link-desc">Access your account</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="nav-footer">
+                    <div class="ai-status">
+                        <span class="status-icon">🤖</span>
+                        <span class="status-text">AI Assistant Active</span>
+                    </div>
+                    <div class="user-info">
+                        <span class="user-avatar">👤</span>
+                        <span class="user-name">Guest User</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="ai-panel" style="display: none;">
+                <div class="ai-header">
+                    <h3>🤖 AI Assistant</h3>
+                    <button class="ai-close">×</button>
+                </div>
+                <div class="ai-content">
+                    <div class="ai-chat">
+                        <div class="ai-message">
+                            <span class="ai-avatar">🤖</span>
+                            <div class="message-content">
+                                Hello! I'm your AI assistant. How can I help you navigate the Anti-Iowa Cult today?
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ai-input">
+                        <input type="text" placeholder="Ask me anything..." class="ai-text-input">
+                        <button class="ai-send">🚀</button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // Add comprehensive styles
+        const style = document.createElement('style');
+        style.textContent = `
+            .global-nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+                box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+                z-index: 10000;
+                font-family: 'Orbitron', 'Comic Neue', sans-serif;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                backdrop-filter: blur(10px);
+                border-bottom: 2px solid #00ff88;
+                min-height: 70px;
+            }
+
+            .nav-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1em 2em;
+                background: rgba(255,255,255,0.05);
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                min-height: 70px;
+            }
+
+            .nav-brand {
+                display: flex;
+                align-items: center;
+                gap: 0.8em;
+                font-size: clamp(1.2em, 3.5vw, 1.6em);
+                font-weight: bold;
+                color: #fff;
+                text-shadow: 0 0 10px #00ff88;
+            }
+
+            .brand-icon {
+                font-size: 1.2em;
+                animation: pulse 2s infinite;
+            }
+
+            .ai-indicator {
+                font-size: 0.8em;
+                opacity: 0.7;
+                animation: glow 1.5s ease-in-out infinite alternate;
+            }
+
+            .nav-controls {
+                display: flex;
+                gap: 0.5em;
+                align-items: center;
+            }
+
+            .nav-toggle, .ai-toggle {
+                background: rgba(255,255,255,0.1);
+                border: 1px solid rgba(255,255,255,0.2);
+                border-radius: 10px;
+                padding: 0.7em;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                color: #fff;
+                font-size: 1.3em;
+                min-width: 50px;
+                min-height: 50px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .nav-toggle:hover, .ai-toggle:hover {
+                background: rgba(255,255,255,0.2);
+                transform: scale(1.05);
+                box-shadow: 0 0 15px rgba(0,255,136,0.5);
+            }
+
+            .nav-toggle span {
+                display: block;
+                width: 20px;
+                height: 2px;
+                background: #fff;
+                margin: 3px 0;
+                transition: all 0.3s ease;
+                border-radius: 1px;
+            }
+
+            .nav-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .nav-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .nav-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+
+            .nav-content {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                background: rgba(26,26,46,0.95);
+                backdrop-filter: blur(15px);
+            }
+
+            .nav-content.open {
+                max-height: 80vh;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .nav-menu {
+                padding: 1em;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 1em;
+            }
+
+            .menu-section {
+                background: rgba(255,255,255,0.05);
+                border-radius: 12px;
+                padding: 1em;
+                border: 1px solid rgba(255,255,255,0.1);
+            }
+
+            .section-title {
+                color: #00ff88;
+                font-size: 0.9em;
+                font-weight: bold;
+                margin-bottom: 0.8em;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                text-shadow: 0 0 5px #00ff88;
+            }
+
+            .nav-link {
+                display: flex;
+                align-items: center;
+                gap: 0.8em;
+                padding: 0.8em;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 8px;
+                transition: all 0.3s ease;
+                margin-bottom: 0.5em;
+                position: relative;
+                overflow: hidden;
+                min-height: 48px;
+            }
+
+            .nav-link::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(0,255,136,0.2), transparent);
+                transition: left 0.5s ease;
+            }
+
+            .nav-link:hover::before {
+                left: 100%;
+            }
+
+            .nav-link:hover {
+                background: rgba(0,255,136,0.1);
+                transform: translateX(5px);
+                box-shadow: 0 0 15px rgba(0,255,136,0.3);
+            }
+
+            .nav-link.active {
+                background: linear-gradient(135deg, rgba(0,255,136,0.2), rgba(0,255,136,0.1));
+                border: 1px solid #00ff88;
+                box-shadow: 0 0 20px rgba(0,255,136,0.4);
+            }
+
+            .link-icon {
+                font-size: 1.2em;
+                min-width: 1.5em;
+                text-align: center;
+            }
+
+            .link-text {
+                font-weight: bold;
+                font-size: 0.95em;
+            }
+
+            .link-desc {
+                font-size: 0.75em;
+                opacity: 0.7;
+                margin-left: auto;
+                text-align: right;
+            }
+
+            .nav-footer {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1em;
+                background: rgba(0,0,0,0.3);
+                border-top: 1px solid rgba(255,255,255,0.1);
+            }
+
+            .ai-status, .user-info {
+                display: flex;
+                align-items: center;
+                gap: 0.5em;
+                font-size: 0.85em;
+                color: #fff;
+            }
+
+            .ai-panel {
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 350px;
+                height: 100vh;
+                background: rgba(26,26,46,0.98);
+                backdrop-filter: blur(20px);
+                border-left: 2px solid #00ff88;
+                z-index: 10001;
+                transform: translateX(100%);
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .ai-panel.open {
+                transform: translateX(0);
+            }
+
+            .ai-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1em;
+                background: rgba(0,255,136,0.1);
+                border-bottom: 1px solid #00ff88;
+            }
+
+            .ai-header h3 {
+                color: #00ff88;
+                margin: 0;
+                font-size: 1.1em;
+            }
+
+            .ai-close {
+                background: none;
+                border: none;
+                color: #fff;
+                font-size: 1.5em;
+                cursor: pointer;
+                padding: 0;
+                width: 30px;
+                height: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                transition: all 0.3s ease;
+            }
+
+            .ai-close:hover {
+                background: rgba(255,255,255,0.1);
+                transform: scale(1.1);
+            }
+
+            .ai-content {
+                display: flex;
+                flex-direction: column;
+                height: calc(100vh - 60px);
+            }
+
+            .ai-chat {
+                flex: 1;
+                padding: 1em;
+                overflow-y: auto;
+            }
+
+            .ai-message {
+                display: flex;
+                gap: 0.8em;
+                margin-bottom: 1em;
+            }
+
+            .ai-avatar {
+                font-size: 1.5em;
+                animation: bounce 2s infinite;
+            }
+
+            .message-content {
+                background: rgba(0,255,136,0.1);
+                padding: 0.8em;
+                border-radius: 12px;
+                color: #fff;
+                font-size: 0.9em;
+                border: 1px solid rgba(0,255,136,0.3);
+            }
+
+            .ai-input {
+                display: flex;
+                gap: 0.5em;
+                padding: 1em;
+                border-top: 1px solid rgba(255,255,255,0.1);
+            }
+
+            .ai-text-input {
+                flex: 1;
+                background: rgba(255,255,255,0.1);
+                border: 1px solid rgba(255,255,255,0.2);
+                border-radius: 8px;
+                padding: 0.8em;
+                color: #fff;
+                font-size: 0.9em;
+                min-height: 44px;
+            }
+
+            .ai-text-input::placeholder {
+                color: rgba(255,255,255,0.5);
+            }
+
+            .ai-text-input:focus {
+                outline: none;
+                border-color: #00ff88;
+                box-shadow: 0 0 10px rgba(0,255,136,0.3);
+            }
+
+            .ai-send {
+                background: #00ff88;
+                border: none;
+                border-radius: 8px;
+                padding: 0.8em;
+                color: #1a1a2e;
+                font-size: 1.2em;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                min-width: 44px;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .ai-send:hover {
+                background: #00cc6a;
+                transform: scale(1.05);
+                box-shadow: 0 0 15px rgba(0,255,136,0.5);
+            }
+
+            /* Mobile-first responsive design */
+            @media (max-width: 768px) {
+                .nav-header {
+                    padding: 0.8em 1.2em;
+                    min-height: 60px;
+                }
+
+                .nav-brand {
+                    font-size: clamp(1.1em, 4vw, 1.4em);
+                    gap: 0.6em;
+                }
+
+                .nav-toggle, .ai-toggle {
+                    min-width: 44px;
+                    min-height: 44px;
+                    font-size: 1.1em;
+                    padding: 0.6em;
+                }
+
+                .nav-menu {
+                    grid-template-columns: 1fr;
+                    gap: 0.8em;
+                }
+
+                .menu-section {
+                    padding: 0.8em;
+                }
+
+                .nav-link {
+                    padding: 0.7em;
+                    min-height: 44px;
+                }
+
+                .link-desc {
+                    display: none;
+                }
+
+                .ai-panel {
+                    width: 100vw;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .nav-header {
+                    padding: 0.6em 1em;
+                    min-height: 55px;
+                }
+
+                .nav-brand {
+                    font-size: clamp(1em, 3.5vw, 1.3em);
+                    gap: 0.5em;
+                }
+
+                .nav-toggle, .ai-toggle {
+                    min-width: 40px;
+                    min-height: 40px;
+                    font-size: 1em;
+                    padding: 0.5em;
+                }
+
+                .nav-link {
+                    padding: 0.6em;
+                    min-height: 40px;
+                }
+
+                .link-icon {
+                    font-size: 1.1em;
+                }
+
+                .link-text {
+                    font-size: 0.9em;
+                }
+            }
+
+            /* Animations */
+            @keyframes pulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.1); }
+            }
+
+            @keyframes glow {
+                0% { text-shadow: 0 0 5px #00ff88; }
+                100% { text-shadow: 0 0 20px #00ff88, 0 0 30px #00ff88; }
+            }
+
+            @keyframes bounce {
+                0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+                40% { transform: translateY(-10px); }
+                60% { transform: translateY(-5px); }
+            }
+
+            /* Touch-friendly improvements */
+            @media (hover: none) and (pointer: coarse) {
+                .nav-link:hover {
+                    transform: none;
+                }
+
+                .nav-link:active {
+                    background: rgba(0,255,136,0.2);
+                    transform: scale(0.98);
+                }
+
+                * {
+                    -webkit-overflow-scrolling: touch;
+                }
+            }
+
+            /* High DPI displays */
+            @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+                .nav-toggle span {
+                    border-width: 0.5px;
+                }
+            }
+
+            /* Print styles */
+            @media print {
+                .global-nav {
+                    display: none !important;
+                }
+            }
+        `;
+
+        document.head.appendChild(style);
+        document.body.insertBefore(nav, document.body.firstChild);
+
+        // Add padding to body to account for fixed nav
+        const updateBodyPadding = () => {
+            const isMobile = window.innerWidth <= 768;
+            const isSmallMobile = window.innerWidth <= 480;
+            
+            if (isSmallMobile) {
+                document.body.style.paddingTop = '75px';
+            } else if (isMobile) {
+                document.body.style.paddingTop = '80px';
+            } else {
+                document.body.style.paddingTop = '90px';
+            }
+        };
+        
+        updateBodyPadding();
+        window.addEventListener('resize', updateBodyPadding);
+    }
+
+    bindEvents() {
+        const toggle = document.querySelector('.nav-toggle');
+        const aiToggle = document.querySelector('.ai-toggle');
+        const aiClose = document.querySelector('.ai-close');
+        const aiPanel = document.querySelector('.ai-panel');
+        const content = document.querySelector('.nav-content');
+        const links = document.querySelectorAll('.nav-link');
+        const aiInput = document.querySelector('.ai-text-input');
+        const aiSend = document.querySelector('.ai-send');
+        const chat = document.querySelector('.ai-chat');
+
+        toggle.addEventListener('click', () => {
+            this.toggleMenu();
+        });
+
+        aiToggle.addEventListener('click', () => {
+            this.toggleAI();
+        });
+
+        aiClose.addEventListener('click', () => {
+            this.closeAI();
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.global-nav') && this.isOpen) {
+                this.closeMenu();
+            }
+        });
+
+        // Close AI panel when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.ai-panel') && !e.target.closest('.ai-toggle') && document.querySelector('.ai-panel').classList.contains('open')) {
+                this.closeAI();
+            }
+        });
+
+        // Handle AI input
+        aiInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                this.handleGeminiAIInput();
+            }
+        });
+
+        aiSend.addEventListener('click', () => {
+            this.handleGeminiAIInput();
+        });
+
+        // Set active link
+        this.setActiveLink();
+
+        // Handle escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (this.isOpen) this.closeMenu();
+                if (document.querySelector('.ai-panel').classList.contains('open')) this.closeAI();
+            }
+        });
+    }
+
+    setupAI() {
+        this.aiResponses = {
+            'hello': 'Hello! Welcome to the Anti-Iowa Cult! How can I assist you today?',
+            'help': 'I can help you navigate the website, find information about our cult, or just chat about why Iowa isn\'t real!',
+            'iowa': 'Ah yes, Iowa - the government psy-op! It\'s just cornfields and cardboard towns. The truth is out there!',
+            'join': 'To join our cult, visit the Join page! We\'re always looking for new believers in the Iowa conspiracy.',
+            'game': 'Try our corn deletion game! It\'s therapeutic to destroy virtual corn from the fake state of Iowa.',
+            'drama': 'The cult drama page is where we document all the chaos of adult life. It\'s quite entertaining!',
+            'default': 'That\'s an interesting question! As an AI assistant for the Anti-Iowa Cult, I\'m here to help you explore our conspiracy theories and have fun!'
+        };
+    }
+
+    async handleGeminiAIInput() {
+        const input = document.querySelector('.ai-text-input');
+        const chat = document.querySelector('.ai-chat');
+        const userMessage = input.value.trim();
+        if (!userMessage) return;
+
+        // Add user message
+        const userDiv = document.createElement('div');
+        userDiv.className = 'ai-message';
+        userDiv.style.justifyContent = 'flex-end';
+        userDiv.innerHTML = `
+            <div class="message-content" style="background: rgba(255,255,255,0.1);">
+                ${userMessage}
+            </div>
+            <span class="ai-avatar">👤</span>
+        `;
+        chat.appendChild(userDiv);
+        input.value = '';
+        chat.scrollTop = chat.scrollHeight;
+
+        // Add loading indicator
+        const loadingDiv = document.createElement('div');
+        loadingDiv.className = 'ai-message';
+        loadingDiv.innerHTML = `
+            <span class="ai-avatar">🤖</span>
+            <div class="message-content"><em>Thinking...</em></div>
+        `;
+        chat.appendChild(loadingDiv);
+        chat.scrollTop = chat.scrollHeight;
+
+        try {
+            const response = await fetch(GEMINI_API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    contents: [{ parts: [{ text: userMessage }] }]
+                })
+            });
+            const data = await response.json();
+            let aiText = 'Sorry, I could not generate a response.';
+            if (data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0].text) {
+                aiText = data.candidates[0].content.parts[0].text;
+            }
+            // Remove loading
+            chat.removeChild(loadingDiv);
+            // Add AI response
+            const aiDiv = document.createElement('div');
+            aiDiv.className = 'ai-message';
+            aiDiv.innerHTML = `
+                <span class="ai-avatar">🤖</span>
+                <div class="message-content">
+                    ${aiText.replace(/\n/g, '<br>')}
+                </div>
+            `;
+            chat.appendChild(aiDiv);
+            chat.scrollTop = chat.scrollHeight;
+        } catch (err) {
+            chat.removeChild(loadingDiv);
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'ai-message';
+            errorDiv.innerHTML = `
+                <span class="ai-avatar">🤖</span>
+                <div class="message-content" style="color: #ff1744;">Error: Could not reach Gemini API.</div>
+            `;
+            chat.appendChild(errorDiv);
+            chat.scrollTop = chat.scrollHeight;
+        }
+    }
+
+    generateAIResponse(message) {
+        const lowerMessage = message.toLowerCase();
+        
+        for (const [key, response] of Object.entries(this.aiResponses)) {
+            if (lowerMessage.includes(key)) {
+                return response;
+            }
+        }
+        
+        return this.aiResponses.default;
+    }
+
+    toggleMenu() {
+        const toggle = document.querySelector('.nav-toggle');
+        const content = document.querySelector('.nav-content');
+
+        if (this.isOpen) {
+            this.closeMenu();
+        } else {
+            this.openMenu();
+        }
+    }
+
+    openMenu() {
+        const toggle = document.querySelector('.nav-toggle');
+        const content = document.querySelector('.nav-content');
+
+        toggle.classList.add('active');
+        content.classList.add('open');
+        this.isOpen = true;
+
+        document.body.style.overflow = 'hidden';
+    }
+
+    closeMenu() {
+        const toggle = document.querySelector('.nav-toggle');
+        const content = document.querySelector('.nav-content');
+
+        toggle.classList.remove('active');
+        content.classList.remove('open');
+        this.isOpen = false;
+
+        document.body.style.overflow = '';
+    }
+
+    toggleAI() {
+        const panel = document.querySelector('.ai-panel');
+        if (panel.classList.contains('open')) {
+            this.closeAI();
+        } else {
+            this.openAI();
+        }
+    }
+
+    openAI() {
+        const panel = document.querySelector('.ai-panel');
+        panel.style.display = 'block';
+        setTimeout(() => {
+            panel.classList.add('open');
+        }, 10);
+    }
+
+    closeAI() {
+        const panel = document.querySelector('.ai-panel');
+        panel.classList.remove('open');
+        setTimeout(() => {
+            panel.style.display = 'none';
+        }, 300);
+    }
+
+    setActiveLink() {
+        const links = document.querySelectorAll('.nav-link');
+        links.forEach(link => {
+            if (link.getAttribute('data-page') === this.currentPage.replace('.html', '')) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    loadUserPreferences() {
+        // Load user preferences from localStorage
+        const preferences = localStorage.getItem('cultPreferences');
+        if (preferences) {
+            this.userPreferences = JSON.parse(preferences);
+        } else {
+            this.userPreferences = {
+                theme: 'default',
+                aiEnabled: true,
+                notifications: true
+            };
+        }
+    }
+
+    saveUserPreferences() {
+        localStorage.setItem('cultPreferences', JSON.stringify(this.userPreferences));
+    }
+
+    // Firebase Remote Config Banner - Global Function
+    createFirebaseBanner(config = {}) {
+        const defaultConfig = {
+            title: '🔥 Firebase Remote Config',
+            message: 'Configuration updated successfully!',
+            type: 'success', // success, warning, error, info
+            duration: 5000,
+            position: 'top-right', // top-right, top-left, bottom-right, bottom-left, top-center, bottom-center
+            showIcon: true,
+            showProgress: true,
+            dismissible: true,
+            action: null,
+            actionText: 'View Details'
+        };
+
+        const bannerConfig = { ...defaultConfig, ...config };
+        
+        // Create banner element
+        const banner = document.createElement('div');
+        banner.className = `firebase-banner firebase-banner-${bannerConfig.type} firebase-banner-${bannerConfig.position}`;
+        
+        // Set icon based on type
+        const icons = {
+            success: '✅',
+            warning: '⚠️',
+            error: '❌',
+            info: 'ℹ️'
+        };
+        
+        const icon = bannerConfig.showIcon ? icons[bannerConfig.type] || icons.info : '';
+        
+        banner.innerHTML = `
+            <div class="firebase-banner-content">
+                ${icon ? `<span class="firebase-banner-icon">${icon}</span>` : ''}
+                <div class="firebase-banner-text">
+                    <div class="firebase-banner-title">${bannerConfig.title}</div>
+                    <div class="firebase-banner-message">${bannerConfig.message}</div>
+                </div>
+                ${bannerConfig.action ? `<button class="firebase-banner-action">${bannerConfig.actionText}</button>` : ''}
+                ${bannerConfig.dismissible ? '<button class="firebase-banner-close">×</button>' : ''}
+            </div>
+            ${bannerConfig.showProgress ? '<div class="firebase-banner-progress"></div>' : ''}
+        `;
+
+        // Add banner styles if not already added
+        if (!document.querySelector('#firebase-banner-styles')) {
+            const style = document.createElement('style');
+            style.id = 'firebase-banner-styles';
+            style.textContent = `
+                .firebase-banner {
+                    position: fixed;
+                    z-index: 10002;
+                    max-width: 400px;
+                    min-width: 300px;
+                    background: rgba(26, 26, 46, 0.98);
+                    backdrop-filter: blur(20px);
+                    border: 2px solid;
+                    border-radius: 16px;
+                    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+                    font-family: 'Orbitron', 'Comic Neue', sans-serif;
+                    transform: translateX(100%);
+                    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                    overflow: hidden;
+                }
+
+                .firebase-banner.show {
+                    transform: translateX(0);
+                }
+
+                .firebase-banner-success {
+                    border-color: #00ff88;
+                    box-shadow: 0 8px 32px rgba(0, 255, 136, 0.2);
+                }
+
+                .firebase-banner-warning {
+                    border-color: #ffaa00;
+                    box-shadow: 0 8px 32px rgba(255, 170, 0, 0.2);
+                }
+
+                .firebase-banner-error {
+                    border-color: #ff1744;
+                    box-shadow: 0 8px 32px rgba(255, 23, 68, 0.2);
+                }
+
+                .firebase-banner-info {
+                    border-color: #2196f3;
+                    box-shadow: 0 8px 32px rgba(33, 150, 243, 0.2);
+                }
+
+                            .firebase-banner-top-right {
+                top: 100px;
+                right: 20px;
+            }
+
+            .firebase-banner-top-left {
+                top: 100px;
+                left: 20px;
+            }
+
+            .firebase-banner-bottom-right {
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .firebase-banner-bottom-left {
+                bottom: 20px;
+                left: 20px;
+            }
+
+            .firebase-banner-top-center {
+                top: 100px;
+                left: 50%;
+                transform: translateX(-50%) translateY(-100%);
+            }
+
+            .firebase-banner-top-center.show {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            .firebase-banner-bottom-center {
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%) translateY(100%);
+            }
+
+            .firebase-banner-bottom-center.show {
+                transform: translateX(-50%) translateY(0);
+            }
+
+                .firebase-banner-content {
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                    padding: 16px;
+                    position: relative;
+                }
+
+                .firebase-banner-icon {
+                    font-size: 1.5em;
+                    flex-shrink: 0;
+                    animation: firebase-banner-pulse 2s infinite;
+                }
+
+                .firebase-banner-text {
+                    flex: 1;
+                    min-width: 0;
+                }
+
+                .firebase-banner-title {
+                    color: #fff;
+                    font-weight: bold;
+                    font-size: 0.95em;
+                    margin-bottom: 4px;
+                    text-shadow: 0 0 10px currentColor;
+                }
+
+                .firebase-banner-message {
+                    color: rgba(255, 255, 255, 0.8);
+                    font-size: 0.85em;
+                    line-height: 1.4;
+                }
+
+                .firebase-banner-action {
+                    background: linear-gradient(135deg, #00ff88, #00cc6a);
+                    border: none;
+                    border-radius: 8px;
+                    padding: 8px 16px;
+                    color: #1a1a2e;
+                    font-weight: bold;
+                    font-size: 0.8em;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    flex-shrink: 0;
+                    min-height: 32px;
+                }
+
+                .firebase-banner-action:hover {
+                    transform: scale(1.05);
+                    box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+                }
+
+                .firebase-banner-close {
+                    background: rgba(255, 255, 255, 0.1);
+                    border: none;
+                    border-radius: 50%;
+                    width: 24px;
+                    height: 24px;
+                    color: #fff;
+                    font-size: 1.2em;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: all 0.3s ease;
+                    flex-shrink: 0;
+                }
+
+                .firebase-banner-close:hover {
+                    background: rgba(255, 255, 255, 0.2);
+                    transform: scale(1.1);
+                }
+
+                .firebase-banner-progress {
+                    height: 3px;
+                    background: rgba(255, 255, 255, 0.1);
+                    position: relative;
+                    overflow: hidden;
+                }
+
+                .firebase-banner-progress::after {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    height: 100%;
+                    width: 100%;
+                    background: linear-gradient(90deg, #00ff88, #00cc6a);
+                    animation: firebase-banner-progress 5s linear;
+                }
+
+                @keyframes firebase-banner-pulse {
+                    0%, 100% { transform: scale(1); }
+                    50% { transform: scale(1.1); }
+                }
+
+                @keyframes firebase-banner-progress {
+                    0% { transform: translateX(-100%); }
+                    100% { transform: translateX(0); }
+                }
+
+                /* Mobile responsiveness */
+                @media (max-width: 768px) {
+                    .firebase-banner {
+                        max-width: calc(100vw - 40px);
+                        min-width: auto;
+                        margin: 0 20px;
+                    }
+
+                    .firebase-banner-top-right,
+                    .firebase-banner-top-left,
+                    .firebase-banner-bottom-right,
+                    .firebase-banner-bottom-left {
+                        left: 20px;
+                        right: 20px;
+                        transform: translateY(100%);
+                    }
+
+                    .firebase-banner-top-right.show,
+                    .firebase-banner-top-left.show,
+                    .firebase-banner-bottom-right.show,
+                    .firebase-banner-bottom-left.show {
+                        transform: translateY(0);
+                    }
+
+                    .firebase-banner-content {
+                        padding: 12px;
+                        gap: 8px;
+                    }
+
+                    .firebase-banner-icon {
+                        font-size: 1.3em;
+                    }
+
+                    .firebase-banner-title {
+                        font-size: 0.9em;
+                    }
+
+                    .firebase-banner-message {
+                        font-size: 0.8em;
+                    }
+
+                    .firebase-banner-action {
+                        padding: 6px 12px;
+                        font-size: 0.75em;
+                        min-height: 28px;
+                    }
+                }
+
+                @media (max-width: 480px) {
+                    .firebase-banner {
+                        margin: 0 10px;
+                    }
+
+                    .firebase-banner-content {
+                        padding: 10px;
+                        gap: 6px;
+                    }
+
+                    .firebase-banner-icon {
+                        font-size: 1.2em;
+                    }
+
+                    .firebase-banner-title {
+                        font-size: 0.85em;
+                    }
+
+                    .firebase-banner-message {
+                        font-size: 0.75em;
+                    }
+
+                    .firebase-banner-action {
+                        padding: 5px 10px;
+                        font-size: 0.7em;
+                        min-height: 26px;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Add banner to DOM
+        document.body.appendChild(banner);
+
+        // Show banner with animation
+        setTimeout(() => {
+            banner.classList.add('show');
+        }, 100);
+
+        // Handle close button
+        const closeBtn = banner.querySelector('.firebase-banner-close');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                this.hideFirebaseBanner(banner);
+            });
+        }
+
+        // Handle action button
+        const actionBtn = banner.querySelector('.firebase-banner-action');
+        if (actionBtn && bannerConfig.action) {
+            actionBtn.addEventListener('click', () => {
+                if (typeof bannerConfig.action === 'function') {
+                    bannerConfig.action();
+                }
+                this.hideFirebaseBanner(banner);
+            });
+        }
+
+        // Auto-hide after duration
+        if (bannerConfig.duration > 0) {
+            setTimeout(() => {
+                this.hideFirebaseBanner(banner);
+            }, bannerConfig.duration);
+        }
+
+        return banner;
+    }
+
+    hideFirebaseBanner(banner) {
+        banner.classList.remove('show');
+        setTimeout(() => {
+            if (banner.parentNode) {
+                banner.parentNode.removeChild(banner);
+            }
+        }, 400);
+    }
+
+    // Convenience methods for different banner types
+    showFirebaseSuccess(message, config = {}) {
+        return this.createFirebaseBanner({
+            title: '✅ Success',
+            message,
+            type: 'success',
+            ...config
+        });
+    }
+
+    showFirebaseWarning(message, config = {}) {
+        return this.createFirebaseBanner({
+            title: '⚠️ Warning',
+            message,
+            type: 'warning',
+            ...config
+        });
+    }
+
+    showFirebaseError(message, config = {}) {
+        return this.createFirebaseBanner({
+            title: '❌ Error',
+            message,
+            type: 'error',
+            ...config
+        });
+    }
+
+    showFirebaseInfo(message, config = {}) {
+        return this.createFirebaseBanner({
+            title: 'ℹ️ Info',
+            message,
+            type: 'info',
+            ...config
+        });
+    }
+
+    // Firebase Remote Config specific banner
+    showFirebaseConfigUpdate(config = {}) {
+        return this.createFirebaseBanner({
+            title: '🔥 Firebase Remote Config',
+            message: 'Configuration updated successfully! New settings are now active.',
+            type: 'success',
+            position: 'top-right',
+            duration: 6000,
+            showProgress: true,
+            action: () => {
+                console.log('Firebase config details clicked');
+                // Add your custom action here
+            },
+            actionText: 'View Details',
+            ...config
+        });
+    }
+
+    // Initialize Firebase Remote Config
+    initFirebaseRemoteConfig() {
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBojUvZXxV6JMWrPUA95Palrt73jEgrEqo",
+            authDomain: "iowa-e875b.firebaseapp.com",
+            projectId: "iowa-e875b",
+            storageBucket: "iowa-e875b.firebasestorage.app",
+            messagingSenderId: "826589602144",
+            appId: "1:826589602144:web:e8a9c1b27b4ebcb9cf3e05",
+            measurementId: "G-6RQCYY8Y3X"
+        };
+
+        // Initialize Firebase if not already initialized
+        if (!window.firebase) {
+            console.warn('Firebase SDK not loaded. Remote config will not work.');
+            return;
+        }
+
+        try {
+            firebase.initializeApp(firebaseConfig);
+            const remoteConfig = firebase.remoteConfig();
+            
+            // Configure remote config settings
+            remoteConfig.settings = {
+                minimumFetchIntervalMillis: 0, // Allow fetch every call for real-time updates
+            };
+
+            // Set default configuration
+            remoteConfig.defaultConfig = {
+                msg: "Welcome to the Anti-Iowa Cult! 🌽 The truth is out there...",
+                banner_type: "info",
+                banner_duration: "8000",
+                show_banner: "true"
+            };
+
+            // Store remote config instance
+            this.remoteConfig = remoteConfig;
+            this.lastMessage = '';
+
+            // Initial fetch
+            this.fetchRemoteConfig();
+
+            // Poll for updates every 10 seconds
+            this.remoteConfigInterval = setInterval(() => {
+                this.fetchRemoteConfig();
+            }, 10000);
+
+            console.log('🔥 Firebase Remote Config initialized successfully');
+
+        } catch (error) {
+            console.error('Failed to initialize Firebase Remote Config:', error);
+            this.showFirebaseError('Failed to initialize remote configuration', {
+                duration: 5000,
+                position: 'top-right'
+            });
+        }
+    }
+
+    // Fetch and process remote config
+    async fetchRemoteConfig() {
+        if (!this.remoteConfig) return;
+
+        try {
+            await this.remoteConfig.fetchAndActivate();
+            
+            const message = this.remoteConfig.getString('msg');
+            const bannerType = this.remoteConfig.getString('banner_type') || 'info';
+            const bannerDuration = parseInt(this.remoteConfig.getString('banner_duration')) || 8000;
+            const showBanner = this.remoteConfig.getString('show_banner') === 'true';
+
+            // Only show banner if message changed and show_banner is true
+            if (message && message !== this.lastMessage && showBanner) {
+                this.lastMessage = message;
+                
+                // Show banner based on type
+                switch (bannerType) {
+                    case 'success':
+                        this.showFirebaseSuccess(message, {
+                            duration: bannerDuration,
+                            position: 'top-center',
+                            showProgress: true,
+                            action: () => {
+                                // Custom action for success messages
+                                console.log('Success banner action clicked');
+                            },
+                            actionText: 'Awesome!'
+                        });
+                        break;
+                    case 'warning':
+                        this.showFirebaseWarning(message, {
+                            duration: bannerDuration,
+                            position: 'top-center',
+                            showProgress: true,
+                            action: () => {
+                                // Custom action for warning messages
+                                console.log('Warning banner action clicked');
+                            },
+                            actionText: 'Got it'
+                        });
+                        break;
+                    case 'error':
+                        this.showFirebaseError(message, {
+                            duration: bannerDuration,
+                            position: 'top-center',
+                            showProgress: true,
+                            action: () => {
+                                // Custom action for error messages
+                                console.log('Error banner action clicked');
+                            },
+                            actionText: 'Dismiss'
+                        });
+                        break;
+                    default:
+                        this.showFirebaseInfo(message, {
+                            duration: bannerDuration,
+                            position: 'top-center',
+                            showProgress: true,
+                            action: () => {
+                                // Custom action for info messages
+                                console.log('Info banner action clicked');
+                            },
+                            actionText: 'Cool!'
+                        });
+                        break;
+                }
+
+                // Log the update
+                console.log(`🔥 Remote config updated: ${message} (Type: ${bannerType})`);
+            }
+
+        } catch (error) {
+            console.error('Failed to fetch remote config:', error);
+            
+            // Show error banner only if we haven't shown one recently
+            if (!this.lastErrorTime || Date.now() - this.lastErrorTime > 30000) {
+                this.lastErrorTime = Date.now();
+                this.showFirebaseError('Failed to fetch remote configuration', {
+                    duration: 5000,
+                    position: 'top-right'
+                });
+            }
+        }
+    }
+
+    // Cleanup method for when navigation is destroyed
+    destroy() {
+        if (this.remoteConfigInterval) {
+            clearInterval(this.remoteConfigInterval);
+        }
+    }
+}
+
+// Initialize global navigation when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    window.globalNav = new GlobalNav();
+});
+
+// Export for use in other scripts
+window.GlobalNav = GlobalNav; 

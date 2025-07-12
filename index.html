@@ -80,29 +80,7 @@
       text-shadow: 0 0 8px #1bffff;
       margin-top: 0.5em;
     }
-    nav {
-      background: rgba(27,255,255,0.7);
-      display: flex;
-      justify-content: center;
-      gap: 2.5rem;
-      padding: 1.2rem 0;
-      font-size: 1.2em;
-      position: sticky;
-      top: 0;
-      z-index: 3;
-      box-shadow: 0 2px 16px #1bffff44;
-    }
-    nav a {
-      color: #2e3192;
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.2s, text-shadow 0.2s;
-      text-shadow: 0 0 8px #fff;
-    }
-    nav a:hover {
-      color: #ff00cc;
-      text-shadow: 0 0 16px #ff00cc;
-    }
+
     section {
       background: rgba(44, 62, 80, 0.85);
       border-radius: 18px;
@@ -196,26 +174,7 @@
         margin: 1.5rem 0.5rem;
         border-radius: 12px;
       }
-      nav { 
-        font-size: 0.95em; 
-        gap: 0.8rem; 
-        padding: 1rem 0.5rem;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      nav a {
-        min-height: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0.5em 0.8em;
-        border-radius: 8px;
-        background: rgba(255,255,255,0.1);
-        transition: background 0.2s;
-      }
-      nav a:hover {
-        background: rgba(255,255,255,0.2);
-      }
+
       header h1 { 
         font-size: clamp(1.8em, 8vw, 2.5em); 
         line-height: 1.1;
@@ -253,17 +212,7 @@
         margin: 1rem 0.25rem;
         border-radius: 8px;
       }
-      nav { 
-        font-size: 0.9em; 
-        gap: 0.5rem; 
-        padding: 0.8rem 0.25rem;
-      }
-      nav a {
-        min-height: 40px;
-        padding: 0.4em 0.6em;
-        border-radius: 6px;
-        font-size: 0.9em;
-      }
+
       header h1 { 
         font-size: clamp(1.5em, 7vw, 2em); 
       }
@@ -387,21 +336,7 @@
       <span style="font-size:1.1em;color:#ffff00;text-shadow:0 0 8px #ff00cc;">Welcome to the Aurora of Truth.</span>
     </p>
   </header>
-  <nav>
-    <a href="about.html">About</a>
-    <a href="evidence.html">Evidence</a>
-    <a href="members.html">Members</a>
-    <a href="drama.html">Cult Drama</a>
-    <a href="sniffles.html">Sniffles</a>
-    <a href="linda.html">Linda</a>
-    <a href="mrs-sniffles.html">Mrs. Sniffles</a>
-    <a href="turn-signal.html">Turn Signal</a>
-    <a href="united.html">United Airlines</a>
-    <a href="tesla.html">Tesla Mode</a>
-    <a href="game.html">Experience Iowa</a>
-    <a href="join.html">Join</a>
-    <a href="login.html">LOG TF IN</a>
-  </nav>
+
 
   <section id="about">
     <h2>About Us</h2>
@@ -541,66 +476,12 @@
     </p>
   </footer>
 
-  <!-- Message of the Day Banner -->
-  <div id="motd-banner" style="width:100vw;position:fixed;top:0;left:0;z-index:100;background:linear-gradient(90deg,#ff00cc,#1bffff);color:#fff;font-family:'Orbitron',sans-serif;font-size:1.3em;text-align:center;padding:1em 0;box-shadow:0 4px 32px #ff00cc88;display:none;">
-    <!-- Message will appear here -->
-  </div>
-
-  <!-- Firebase SDKs -->
+  <!-- Firebase SDKs for Remote Config -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-remote-config-compat.js"></script>
-  <!-- If you have a shared firebase-init.js, use that instead of inline config below -->
-  <script>
-    // TODO: Replace with your shared Firebase config/init if available
-    const firebaseConfig = {
-    apiKey: "AIzaSyBojUvZXxV6JMWrPUA95Palrt73jEgrEqo",
-    authDomain: "iowa-e875b.firebaseapp.com",
-    projectId: "iowa-e875b",
-    storageBucket: "iowa-e875b.firebasestorage.app",
-    messagingSenderId: "826589602144",
-    appId: "1:826589602144:web:e8a9c1b27b4ebcb9cf3e05",
-    measurementId: "G-6RQCYY8Y3X"
-      // ...other config
-    };
-    firebase.initializeApp(firebaseConfig);
-
-    const remoteConfig = firebase.remoteConfig();
-    remoteConfig.settings = {
-      minimumFetchIntervalMillis: 0, // allow fetch every call for real-time updates
-    };
-
-    // Poll for updates every 10 seconds
-    setInterval(() => {
-      remoteConfig.fetchAndActivate()
-        .then(() => {
-          const motd = remoteConfig.getString('msg');
-          const banner = document.getElementById('motd-banner');
-          if (motd && banner.textContent !== motd) {
-            banner.textContent = motd;
-            banner.style.display = 'block';
-          }
-        });
-    }, 1);
-    remoteConfig.defaultConfig = {
-      msg: "Welcome to the Anti-Iowa Cult! (Default message)",
-    };
-
-    remoteConfig.fetchAndActivate()
-      .then(() => {
-        const motd = remoteConfig.getString('msg');
-        if (motd) {
-          const banner = document.getElementById('motd-banner');
-          banner.textContent = motd;
-          banner.style.display = 'block';
-        }
-      })
-      .catch((err) => {
-        // Show default message if fetch fails
-        const banner = document.getElementById('motd-banner');
-        banner.textContent = remoteConfig.defaultConfig.msg;
-        banner.style.display = 'block';
-      });
-  </script>
+  
+  <!-- Global Navigation with Firebase Remote Config -->
+  <script src="global-nav.js"></script>
 
   <!-- Firebase Auth greeting -->
   <script>
