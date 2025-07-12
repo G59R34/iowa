@@ -42,10 +42,12 @@ Since GitHub Pages only serves static files, we need to deploy the Node.js backe
 
 ### Step 2: Update Frontend for GitHub Pages
 
-1. **Replace the chat.js file** with the GitHub Pages version:
+1. **Replace the chat.js file** with the GitHub Pages version** (or use it directly):
    ```bash
    cp chat-github-pages.js chat.js
    ```
+   
+   **Note**: The `chat-github-pages.js` file now includes all the latest fixes for username persistence and connection handling.
 
 2. **Edit chat.js** and update the backend URL:
    ```javascript

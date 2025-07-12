@@ -88,6 +88,11 @@ class GlobalNav {
                             <span class="link-text">Experience Iowa</span>
                             <span class="link-desc">Delete corn game</span>
                         </a>
+                        <a href="altima-sim.html" class="nav-link" data-page="altima-sim">
+                            <span class="link-icon">🚗</span>
+                            <span class="link-text">Altima Sim</span>
+                            <span class="link-desc">Drive like a maniac</span>
+                        </a>
                         <a href="clock.html" class="nav-link" data-page="clock">
                             <span class="link-icon">⏰</span>
                             <span class="link-text">Wacky Clock</span>
