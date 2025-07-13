@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walmart Supercenter - Iowa Explosion Experience</title>
+    <link rel="stylesheet" href="walmart.css">
+    <script src="global-nav.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Main Container -->
+    <div id="walmart-container">
+        <!-- Header -->
+        <div id="walmart-header">
+            <h1>🛒 WALMART SUPERCENTER</h1>
+            <h2>Iowa Explosion Experience</h2>
+            <p>Click on Iowa to experience the most unnecessary explosion ever created</p>
+        </div>
+
+        <!-- Iowa Map Container -->
+        <div id="iowa-map-container">
+            <div id="iowa-map">
+                <!-- Iowa SVG will be inserted here -->
+            </div>
+            <div id="click-instructions">
+                <p>🎯 Click on Iowa to trigger the explosion</p>
+                <p>⚠️ Warning: Contains Frank Azar and Lizzo</p>
+            </div>
+        </div>
+
+        <!-- Explosion Effects Container -->
+        <div id="explosion-container">
+            <div id="explosion-particles"></div>
+            <div id="explosion-flash"></div>
+            <div id="explosion-shockwave"></div>
+        </div>
+
+        <!-- Frank Azar Modal -->
+        <div id="frank-azar-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>💪 FRANK AZAR</h2>
+                    <h3>The Strong Arm Himself</h3>
+                    <button class="close-modal">×</button>
+                </div>
+                <div class="modal-body">
+                    <div id="frank-azar-image">
+                        <img src="https://via.placeholder.com/800x600/ff6b35/ffffff?text=FRANK+AZAR+THE+STRONG+ARM" alt="Frank Azar - The Strong Arm">
+                    </div>
+                    <div class="frank-quotes">
+                        <p>"I'm Frank Azar, the Strong Arm!"</p>
+                        <p>"Need a personal injury lawyer? Call me!"</p>
+                        <p>"Iowa may be fake, but my legal skills are real!"</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="replay-explosion">🎆 Replay Explosion</button>
+                    <button id="stop-music">🔇 Stop Lizzo</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Audio Elements -->
+        <audio id="lizzo-song" preload="auto">
+            <source src="res/aud/liz/liz.mp3" type="audio/mpeg">
+            <source src="res/aud/liz/liz.ogg" type="audio/ogg">
+        </audio>
+        <audio id="explosion-sound" preload="auto">
+            <source src="res/aud/explosion/explosion.mp3" type="audio/mpeg">
+        </audio>
+
+        <!-- Background Elements -->
+        <div id="walmart-elements">
+            <div class="floating-item" style="top: 10%; left: 5%;">🛒</div>
+            <div class="floating-item" style="top: 20%; right: 10%;">💰</div>
+            <div class="floating-item" style="top: 60%; left: 15%;">🏪</div>
+            <div class="floating-item" style="top: 80%; right: 5%;">🎯</div>
+            <div class="floating-item" style="top: 40%; left: 80%;">💪</div>
+        </div>
+
+        <!-- Stats Panel -->
+        <div id="stats-panel">
+            <div class="stat-item">
+                <span class="stat-label">Explosions:</span>
+                <span id="explosion-count">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Frank Sightings:</span>
+                <span id="frank-count">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Lizzo Plays:</span>
+                <span id="lizzo-count">0</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Integration -->
+    <link rel="stylesheet" href="chat.css">
+    <script src="chat.js"></script>
+
+    <!-- Walmart Script -->
+    <script src="walmart.js"></script>
+</body>
+</html> 

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airbus A320 Avionics Simulator</title>
+    <link rel="stylesheet" href="airbus-sim.css">
+    <script src="global-nav.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Cockpit Overlay -->
+    <div id="cockpit-ui">
+        <!-- Primary Flight Display (PFD) -->
+        <div id="pfd" class="instrument-panel">
+            <div class="panel-header">
+                <span class="panel-title">PFD</span>
+                <span class="panel-status">ON</span>
+            </div>
+            <div class="pfd-content">
+                <div class="attitude-indicator">
+                    <div class="artificial-horizon">
+                        <div class="horizon-line"></div>
+                        <div class="pitch-ladder">
+                            <div class="pitch-mark" style="top: 20%"></div>
+                            <div class="pitch-mark" style="top: 40%"></div>
+                            <div class="pitch-mark" style="top: 60%"></div>
+                            <div class="pitch-mark" style="top: 80%"></div>
+                        </div>
+                        <div class="aircraft-symbol">
+                            <div class="wings"></div>
+                            <div class="fuselage"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="altitude-tape">
+                    <div class="tape-marks">
+                        <div class="mark" style="top: 10%">FL350</div>
+                        <div class="mark" style="top: 30%">FL340</div>
+                        <div class="mark" style="top: 50%">FL330</div>
+                        <div class="mark" style="top: 70%">FL320</div>
+                        <div class="mark" style="top: 90%">FL310</div>
+                    </div>
+                    <div class="current-altitude">FL330</div>
+                </div>
+                <div class="airspeed-tape">
+                    <div class="tape-marks">
+                        <div class="mark" style="top: 10%">280</div>
+                        <div class="mark" style="top: 30%">260</div>
+                        <div class="mark" style="top: 50%">240</div>
+                        <div class="mark" style="top: 70%">220</div>
+                        <div class="mark" style="top: 90%">200</div>
+                    </div>
+                    <div class="current-airspeed">240</div>
+                </div>
+                <div class="vertical-speed">
+                    <div class="vs-indicator">
+                        <div class="vs-arrow"></div>
+                        <span class="vs-value">+500</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Display (ND) -->
+        <div id="nd" class="instrument-panel">
+            <div class="panel-header">
+                <span class="panel-title">ND</span>
+                <span class="panel-status">ON</span>
+            </div>
+            <div class="nd-content">
+                <div class="compass-rose">
+                    <div class="compass-markings">
+                        <div class="marking" style="transform: rotate(0deg)">N</div>
+                        <div class="marking" style="transform: rotate(90deg)">E</div>
+                        <div class="marking" style="transform: rotate(180deg)">S</div>
+                        <div class="marking" style="transform: rotate(270deg)">W</div>
+                    </div>
+                    <div class="heading-bug"></div>
+                </div>
+                <div class="course-indicator">
+                    <span class="course-value">270°</span>
+                </div>
+                <div class="distance-indicator">
+                    <span class="distance-value">45 NM</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Engine Display -->
+        <div id="engine-display" class="instrument-panel">
+            <div class="panel-header">
+                <span class="panel-title">ENGINE</span>
+                <span class="panel-status">ON</span>
+            </div>
+            <div class="engine-content">
+                <div class="engine-1">
+                    <div class="engine-title">ENG 1</div>
+                    <div class="n1-gauge">
+                        <div class="gauge-value">85%</div>
+                        <div class="gauge-bar">
+                            <div class="gauge-fill" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="n2-gauge">
+                        <div class="gauge-value">95%</div>
+                        <div class="gauge-bar">
+                            <div class="gauge-fill" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="egt-gauge">
+                        <div class="gauge-value">650°C</div>
+                        <div class="gauge-bar">
+                            <div class="gauge-fill" style="width: 65%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="engine-2">
+                    <div class="engine-title">ENG 2</div>
+                    <div class="n1-gauge">
+                        <div class="gauge-value">87%</div>
+                        <div class="gauge-bar">
+                            <div class="gauge-fill" style="width: 87%"></div>
+                        </div>
+                    </div>
+                    <div class="n2-gauge">
+                        <div class="gauge-value">96%</div>
+                        <div class="gauge-bar">
+                            <div class="gauge-fill" style="width: 96%"></div>
+                        </div>
+                    </div>
+                    <div class="egt-gauge">
+                        <div class="gauge-value">655°C</div>
+                        <div class="gauge-bar">
+                            <div class="gauge-fill" style="width: 66%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Display -->
+        <div id="system-display" class="instrument-panel">
+            <div class="panel-header">
+                <span class="panel-title">SYSTEM</span>
+                <span class="panel-status">ON</span>
+            </div>
+            <div class="system-content">
+                <div class="system-grid">
+                    <div class="system-item">
+                        <span class="system-name">HYD Y</span>
+                        <span class="system-status normal">NORM</span>
+                    </div>
+                    <div class="system-item">
+                        <span class="system-name">HYD G</span>
+                        <span class="system-status normal">NORM</span>
+                    </div>
+                    <div class="system-item">
+                        <span class="system-name">HYD B</span>
+                        <span class="system-status normal">NORM</span>
+                    </div>
+                    <div class="system-item">
+                        <span class="system-name">ELEC 1</span>
+                        <span class="system-status normal">ON</span>
+                    </div>
+                    <div class="system-item">
+                        <span class="system-name">ELEC 2</span>
+                        <span class="system-status normal">ON</span>
+                    </div>
+                    <div class="system-item">
+                        <span class="system-name">APU</span>
+                        <span class="system-status warning">OFF</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Control Panel -->
+        <div id="control-panel" class="instrument-panel">
+            <div class="panel-header">
+                <span class="panel-title">CONTROLS</span>
+                <span class="panel-status">ACTIVE</span>
+            </div>
+            <div class="control-content">
+                <div class="control-group">
+                    <h4>Autopilot</h4>
+                    <button id="ap-engage" class="control-btn">AP1</button>
+                    <button id="ap-disconnect" class="control-btn warning">AP DISC</button>
+                </div>
+                <div class="control-group">
+                    <h4>Flight Controls</h4>
+                    <button id="flaps-up" class="control-btn">FLAPS UP</button>
+                    <button id="flaps-1" class="control-btn">FLAPS 1</button>
+                    <button id="flaps-2" class="control-btn">FLAPS 2</button>
+                    <button id="flaps-3" class="control-btn">FLAPS 3</button>
+                    <button id="flaps-full" class="control-btn">FLAPS FULL</button>
+                </div>
+                <div class="control-group">
+                    <h4>Landing Gear</h4>
+                    <button id="gear-up" class="control-btn">GEAR UP</button>
+                    <button id="gear-down" class="control-btn">GEAR DOWN</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Bar -->
+        <div id="status-bar">
+            <div class="status-item">
+                <span class="status-label">MODE:</span>
+                <span class="status-value">NAV</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">ALT:</span>
+                <span class="status-value">33000 FT</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">SPD:</span>
+                <span class="status-value">240 KTS</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">HDG:</span>
+                <span class="status-value">270°</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">VS:</span>
+                <span class="status-value">+500 FPM</span>
+            </div>
+        </div>
+
+        <!-- Start Screen -->
+        <div id="start-screen">
+            <div class="start-content">
+                <h1>✈️ AIRBUS A320</h1>
+                <h2>Avionics Simulator</h2>
+                <p>Experience the cockpit of the world's most popular commercial aircraft</p>
+                <div class="simulator-stats">
+                    <p>🛫 Takeoffs: <span id="takeoff-count">0</span></p>
+                    <p>🛬 Landings: <span id="landing-count">0</span></p>
+                    <p>⏱️ Flight Time: <span id="total-flight-time">00:00</span></p>
+                    <p>🌍 Distance: <span id="total-distance">0</span> NM</p>
+                </div>
+                <button id="start-simulator">START SIMULATOR</button>
+                <div class="airbus-facts">
+                    <h3>Airbus A320 Facts:</h3>
+                    <ul>
+                        <li>✅ Fly-by-wire flight control system</li>
+                        <li>✅ Glass cockpit with EFIS displays</li>
+                        <li>✅ Advanced autopilot and flight management</li>
+                        <li>✅ Side-stick controller design</li>
+                        <li>✅ Most successful commercial aircraft ever</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions Panel -->
+        <div id="instructions-panel">
+            <div class="instructions-content">
+                <h3>Flight Controls</h3>
+                <div class="control-instructions">
+                    <p><strong>Mouse:</strong> Control aircraft attitude</p>
+                    <p><strong>W/S:</strong> Pitch up/down</p>
+                    <p><strong>A/D:</strong> Roll left/right</p>
+                    <p><strong>Q/E:</strong> Yaw left/right</p>
+                    <p><strong>Space:</strong> Toggle autopilot</p>
+                    <p><strong>G:</strong> Toggle landing gear</p>
+                    <p><strong>F:</strong> Cycle flaps</p>
+                    <p><strong>R:</strong> Reset simulator</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3D Scene Container -->
+    <div id="scene-container">
+        <canvas id="flight-scene"></canvas>
+        <div id="sky-gradient"></div>
+        <div id="clouds"></div>
+        <div id="terrain"></div>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="engine-sound" src="res/aud/airbus/airbus-autopilot-disconect-made-with-Voicemod.mp3" preload="auto" loop></audio>
+    <audio id="ap-disconnect-sound" src="res/aud/airbus/airbus-autopilot-disconect-made-with-Voicemod.mp3" preload="auto"></audio>
+    <audio id="gear-sound" src="res/aud/airbus/airbus-autopilot-disconect-made-with-Voicemod.mp3" preload="auto"></audio>
+
+    <!-- Chat Integration -->
+    <link rel="stylesheet" href="chat.css">
+    <script src="chat.js"></script>
+
+    <!-- Simulator Script -->
+    <script src="airbus-sim.js"></script>
+</body>
+</html> 

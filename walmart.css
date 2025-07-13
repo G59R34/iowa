@@ -1,0 +1,501 @@
+/* Walmart Supercenter - Iowa Explosion Experience */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Orbitron', 'Comic Neue', monospace;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    color: #fff;
+    overflow-x: hidden;
+    cursor: crosshair;
+}
+
+#walmart-container {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Header */
+#walmart-header {
+    text-align: center;
+    margin-bottom: 40px;
+    z-index: 100;
+}
+
+#walmart-header h1 {
+    font-size: 48px;
+    color: #ff6b35;
+    margin-bottom: 10px;
+    text-shadow: 0 0 20px rgba(255, 107, 53, 0.8);
+    animation: walmart-glow 1s ease-in-out infinite;
+}
+
+#walmart-header h2 {
+    font-size: 24px;
+    color: #ffcc00;
+    margin-bottom: 15px;
+}
+
+#walmart-header p {
+    font-size: 16px;
+    color: #ccc;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+@keyframes walmart-glow {
+    0% { 
+        text-shadow: 0 0 20px rgba(255, 107, 53, 0.8);
+        transform: scale(1);
+    }
+    50% {
+        text-shadow: 0 0 40px rgba(255, 107, 53, 1), 0 0 60px rgba(255, 107, 53, 0.8), 0 0 80px rgba(255, 107, 53, 0.6);
+        transform: scale(1.05);
+    }
+    100% { 
+        text-shadow: 0 0 20px rgba(255, 107, 53, 0.8);
+        transform: scale(1);
+    }
+}
+
+/* Iowa Map Container */
+#iowa-map-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    height: 600px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 3px solid #ff6b35;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 30px rgba(255, 107, 53, 0.5);
+    overflow: hidden;
+}
+
+#iowa-map {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+#iowa-map:hover {
+    transform: scale(1.05);
+}
+
+#iowa-map svg {
+    width: 100%;
+    height: 100%;
+    fill: #4CAF50;
+    stroke: #2E7D32;
+    stroke-width: 2;
+    transition: all 0.3s ease;
+}
+
+#iowa-map svg:hover {
+    fill: #66BB6A;
+    filter: drop-shadow(0 0 20px rgba(76, 175, 80, 0.8));
+    animation: iowa-pulse 0.5s ease-in-out infinite;
+}
+
+@keyframes iowa-pulse {
+    0% { 
+        transform: scale(1);
+        filter: drop-shadow(0 0 20px rgba(76, 175, 80, 0.8));
+    }
+    50% { 
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 30px rgba(76, 175, 80, 1), 0 0 40px rgba(76, 175, 80, 0.6));
+    }
+    100% { 
+        transform: scale(1);
+        filter: drop-shadow(0 0 20px rgba(76, 175, 80, 0.8));
+    }
+}
+
+#iowa-map svg path {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#iowa-map svg path:hover {
+    fill: #81C784;
+    stroke: #388E3C;
+    stroke-width: 3;
+}
+
+#click-instructions {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 15px 25px;
+    border-radius: 10px;
+    border: 2px solid #ffcc00;
+}
+
+#click-instructions p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #ffcc00;
+}
+
+/* Explosion Effects */
+#explosion-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+#explosion-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #ff6b35;
+    border-radius: 50%;
+    animation: particle-explode 1s ease-out forwards;
+}
+
+@keyframes particle-explode {
+    0% {
+        transform: scale(1) translate(0, 0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0) translate(var(--x), var(--y));
+        opacity: 0;
+    }
+}
+
+#explosion-flash {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    opacity: 0;
+    animation: flash 0.5s ease-out;
+}
+
+@keyframes flash {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+#explosion-shockwave {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    border: 2px solid #ff6b35;
+    border-radius: 50%;
+    animation: shockwave 1s ease-out;
+}
+
+@keyframes shockwave {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 1;
+    }
+    100% {
+        width: 1000px;
+        height: 1000px;
+        opacity: 0;
+    }
+}
+
+/* Frank Azar Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    animation: modal-fade-in 0.5s ease-out;
+}
+
+@keyframes modal-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+    margin: 5% auto;
+    padding: 0;
+    border: 5px solid #ffcc00;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 900px;
+    box-shadow: 0 0 50px rgba(255, 107, 53, 0.8);
+    animation: modal-bounce 0.6s ease-out;
+}
+
+@keyframes modal-bounce {
+    0% { transform: scale(0.3) translateY(-100px); }
+    50% { transform: scale(1.05) translateY(10px); }
+    100% { transform: scale(1) translateY(0); }
+}
+
+.modal-header {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 15px 15px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    color: #ffcc00;
+    font-size: 32px;
+    margin: 0;
+}
+
+.modal-header h3 {
+    color: #fff;
+    font-size: 18px;
+    margin: 5px 0 0 0;
+}
+
+.close-modal {
+    background: #ff6b35;
+    border: none;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close-modal:hover {
+    background: #ff8c42;
+    transform: scale(1.1);
+}
+
+.modal-body {
+    padding: 30px;
+    text-align: center;
+}
+
+#frank-azar-image {
+    margin-bottom: 20px;
+}
+
+#frank-azar-image img {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    border-radius: 15px;
+    border: 3px solid #ffcc00;
+    box-shadow: 0 0 30px rgba(255, 204, 0, 0.6);
+}
+
+.frank-quotes {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.frank-quotes p {
+    font-size: 18px;
+    color: #ffcc00;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.modal-footer {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 0 0 15px 15px;
+    text-align: center;
+}
+
+.modal-footer button {
+    background: linear-gradient(45deg, #ff6b35, #ff8c42);
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    margin: 0 10px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal-footer button:hover {
+    background: linear-gradient(45deg, #ff8c42, #ff6b35);
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.6);
+}
+
+/* Floating Elements */
+#walmart-elements {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.floating-item {
+    position: absolute;
+    font-size: 24px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.floating-item:nth-child(1) { animation-delay: 0s; }
+.floating-item:nth-child(2) { animation-delay: 0.5s; }
+.floating-item:nth-child(3) { animation-delay: 1s; }
+.floating-item:nth-child(4) { animation-delay: 1.5s; }
+.floating-item:nth-child(5) { animation-delay: 2s; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(10deg); }
+}
+
+/* Stats Panel */
+#stats-panel {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid #ff6b35;
+    border-radius: 10px;
+    padding: 15px;
+    z-index: 100;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.stat-item:last-child {
+    margin-bottom: 0;
+}
+
+.stat-label {
+    color: #ffcc00;
+}
+
+#explosion-count, #frank-count, #lizzo-count {
+    color: #ff6b35;
+    font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #walmart-header h1 {
+        font-size: 32px;
+    }
+    
+    #walmart-header h2 {
+        font-size: 18px;
+    }
+    
+    #iowa-map-container {
+        height: 400px;
+        margin: 20px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
+    
+    .modal-header h2 {
+        font-size: 24px;
+    }
+    
+    .frank-quotes p {
+        font-size: 16px;
+    }
+    
+    #stats-panel {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin: 20px auto;
+        width: fit-content;
+    }
+}
+
+/* Special Effects */
+.iowa-exploding {
+    animation: iowa-explode 0.5s ease-out;
+}
+
+@keyframes iowa-explode {
+    0% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.2) rotate(5deg); }
+    100% { transform: scale(0) rotate(10deg); }
+}
+
+.music-playing {
+    animation: music-pulse 0.3s ease-in-out infinite;
+}
+
+@keyframes music-pulse {
+    0% { 
+        transform: scale(1) rotate(0deg);
+        filter: brightness(1);
+    }
+    25% {
+        transform: scale(1.1) rotate(1deg);
+        filter: brightness(1.2);
+    }
+    50% { 
+        transform: scale(1.15) rotate(0deg);
+        filter: brightness(1.4);
+    }
+    75% {
+        transform: scale(1.1) rotate(-1deg);
+        filter: brightness(1.2);
+    }
+    100% { 
+        transform: scale(1) rotate(0deg);
+        filter: brightness(1);
+    }
+} 

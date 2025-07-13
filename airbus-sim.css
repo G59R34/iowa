@@ -1,0 +1,791 @@
+/* Airbus A320 Avionics Simulator */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Orbitron', 'Roboto Mono', monospace;
+    background: #000;
+    color: #00ff00;
+    overflow: hidden;
+    cursor: crosshair;
+}
+
+/* Cockpit UI */
+#cockpit-ui {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+/* Instrument Panels */
+.instrument-panel {
+    position: absolute;
+    background: rgba(0, 20, 0, 0.9);
+    border: 2px solid #00ff00;
+    border-radius: 8px;
+    padding: 10px;
+    pointer-events: auto;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+    backdrop-filter: blur(5px);
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #00ff00;
+}
+
+.panel-title {
+    font-size: 12px;
+    font-weight: bold;
+    color: #00ff00;
+}
+
+.panel-status {
+    font-size: 10px;
+    color: #00ff00;
+    background: rgba(0, 255, 0, 0.2);
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+/* Primary Flight Display (PFD) */
+#pfd {
+    top: 20px;
+    left: 20px;
+    width: 400px;
+    height: 300px;
+}
+
+.pfd-content {
+    position: relative;
+    width: 100%;
+    height: calc(100% - 30px);
+    background: #000;
+    border: 1px solid #00ff00;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.attitude-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    border: 2px solid #00ff00;
+    border-radius: 50%;
+    background: linear-gradient(to bottom, #87CEEB 0%, #87CEEB 50%, #8B4513 50%, #8B4513 100%);
+}
+
+.artificial-horizon {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.horizon-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #fff;
+    transform: translateY(-50%);
+}
+
+.pitch-ladder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.pitch-mark {
+    position: absolute;
+    left: 50%;
+    width: 60px;
+    height: 1px;
+    background: #fff;
+    transform: translateX(-50%);
+}
+
+.aircraft-symbol {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 20px;
+}
+
+.wings {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #fff;
+    transform: translateY(-50%);
+}
+
+.fuselage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 20px;
+    background: #fff;
+    transform: translate(-50%, -50%);
+}
+
+/* Altitude and Airspeed Tapes */
+.altitude-tape, .airspeed-tape {
+    position: absolute;
+    width: 60px;
+    height: 200px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #00ff00;
+    border-radius: 3px;
+}
+
+.altitude-tape {
+    top: 20px;
+    right: 20px;
+}
+
+.airspeed-tape {
+    top: 20px;
+    left: 20px;
+}
+
+.tape-marks {
+    position: relative;
+    height: 100%;
+}
+
+.mark {
+    position: absolute;
+    right: 5px;
+    font-size: 10px;
+    color: #00ff00;
+    transform: translateY(-50%);
+}
+
+.current-altitude, .current-airspeed {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    font-weight: bold;
+    color: #00ff00;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 5px;
+    border-radius: 3px;
+}
+
+/* Vertical Speed Indicator */
+.vertical-speed {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #00ff00;
+    border-radius: 50%;
+}
+
+.vs-indicator {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.vs-arrow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2px;
+    height: 20px;
+    background: #00ff00;
+    transform: translate(-50%, -50%);
+}
+
+.vs-value {
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: #00ff00;
+}
+
+/* Navigation Display (ND) */
+#nd {
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    height: 300px;
+}
+
+.nd-content {
+    position: relative;
+    width: 100%;
+    height: calc(100% - 30px);
+    background: #000;
+    border: 1px solid #00ff00;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.compass-rose {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    border: 2px solid #00ff00;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.compass-markings {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.marking {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 12px;
+    color: #00ff00;
+    transform: translate(-50%, -50%);
+}
+
+.heading-bug {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 20px;
+    background: #ff0000;
+    transform: translate(-50%, -50%);
+}
+
+.course-indicator, .distance-indicator {
+    position: absolute;
+    font-size: 12px;
+    color: #00ff00;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.course-indicator {
+    top: 10px;
+    left: 10px;
+}
+
+.distance-indicator {
+    bottom: 10px;
+    right: 10px;
+}
+
+/* Engine Display */
+#engine-display {
+    bottom: 20px;
+    left: 20px;
+    width: 400px;
+    height: 200px;
+}
+
+.engine-content {
+    display: flex;
+    justify-content: space-between;
+    height: calc(100% - 30px);
+}
+
+.engine-1, .engine-2 {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.engine-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #00ff00;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.n1-gauge, .n2-gauge, .egt-gauge {
+    margin-bottom: 15px;
+}
+
+.gauge-value {
+    font-size: 12px;
+    color: #00ff00;
+    margin-bottom: 5px;
+}
+
+.gauge-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(0, 255, 0, 0.2);
+    border: 1px solid #00ff00;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.gauge-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00ff00, #ffff00);
+    transition: width 0.3s ease;
+}
+
+/* System Display */
+#system-display {
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    height: 200px;
+}
+
+.system-content {
+    height: calc(100% - 30px);
+}
+
+.system-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    height: 100%;
+}
+
+.system-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #00ff00;
+    border-radius: 3px;
+}
+
+.system-name {
+    font-size: 12px;
+    color: #00ff00;
+}
+
+.system-status {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+.system-status.normal {
+    background: rgba(0, 255, 0, 0.2);
+    color: #00ff00;
+}
+
+.system-status.warning {
+    background: rgba(255, 255, 0, 0.2);
+    color: #ffff00;
+}
+
+.system-status.error {
+    background: rgba(255, 0, 0, 0.2);
+    color: #ff0000;
+}
+
+/* Control Panel */
+#control-panel {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    height: 400px;
+    background: rgba(0, 20, 0, 0.95);
+}
+
+.control-content {
+    height: calc(100% - 30px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.control-group {
+    text-align: center;
+}
+
+.control-group h4 {
+    color: #00ff00;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.control-btn {
+    background: rgba(0, 255, 0, 0.1);
+    border: 1px solid #00ff00;
+    color: #00ff00;
+    padding: 8px 12px;
+    margin: 2px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 10px;
+    transition: all 0.2s ease;
+}
+
+.control-btn:hover {
+    background: rgba(0, 255, 0, 0.3);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+.control-btn.warning {
+    border-color: #ffff00;
+    color: #ffff00;
+}
+
+.control-btn.warning:hover {
+    background: rgba(255, 255, 0, 0.3);
+    box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+}
+
+/* Status Bar */
+#status-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    background: rgba(0, 20, 0, 0.9);
+    border-top: 2px solid #00ff00;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    pointer-events: auto;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.status-label {
+    font-size: 10px;
+    color: #00ff00;
+}
+
+.status-value {
+    font-size: 12px;
+    font-weight: bold;
+    color: #00ff00;
+}
+
+/* Start Screen */
+#start-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #000428 0%, #004e92 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+    z-index: 2000;
+}
+
+.start-content {
+    text-align: center;
+    background: rgba(0, 20, 0, 0.9);
+    border: 4px solid #00ff00;
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 600px;
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.7);
+}
+
+.start-content h1 {
+    font-size: 48px;
+    color: #00ff00;
+    margin-bottom: 10px;
+    text-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
+}
+
+.start-content h2 {
+    font-size: 24px;
+    color: #87CEEB;
+    margin-bottom: 20px;
+}
+
+.start-content p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #ccc;
+}
+
+.simulator-stats {
+    background: rgba(0, 255, 0, 0.1);
+    border: 2px solid #00ff00;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 20px 0;
+}
+
+.simulator-stats p {
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+#start-simulator {
+    background: linear-gradient(45deg, #00ff00, #87CEEB);
+    border: none;
+    color: #000;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 20px 0;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+#start-simulator:hover {
+    background: linear-gradient(45deg, #87CEEB, #00ff00);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
+}
+
+.airbus-facts {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.airbus-facts h3 {
+    color: #00ff00;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.airbus-facts ul {
+    list-style: none;
+    padding: 0;
+}
+
+.airbus-facts li {
+    margin-bottom: 5px;
+    font-size: 12px;
+    color: #ccc;
+}
+
+/* Instructions Panel */
+#instructions-panel {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 20, 0, 0.9);
+    border: 2px solid #00ff00;
+    border-radius: 10px;
+    padding: 15px;
+    pointer-events: auto;
+    max-width: 300px;
+}
+
+.instructions-content h3 {
+    color: #00ff00;
+    margin-bottom: 10px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.control-instructions p {
+    font-size: 10px;
+    margin-bottom: 5px;
+    color: #ccc;
+}
+
+/* 3D Scene */
+#scene-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+#flight-scene {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 50%, #8B4513 100%);
+}
+
+#sky-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70%;
+    background: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 100%);
+    pointer-events: none;
+}
+
+#clouds {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70%;
+    pointer-events: none;
+}
+
+#terrain {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    background: linear-gradient(to bottom, #8B4513 0%, #654321 100%);
+    pointer-events: none;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    #pfd, #nd {
+        width: 300px;
+        height: 250px;
+    }
+    
+    #engine-display, #system-display {
+        width: 300px;
+        height: 150px;
+    }
+    
+    #control-panel {
+        width: 300px;
+        height: 350px;
+    }
+}
+
+@media (max-width: 768px) {
+    .start-content {
+        padding: 20px;
+        margin: 20px;
+    }
+    
+    .start-content h1 {
+        font-size: 32px;
+    }
+    
+    .start-content h2 {
+        font-size: 18px;
+    }
+    
+    #pfd, #nd, #engine-display, #system-display {
+        position: relative;
+        width: 100%;
+        height: auto;
+        margin: 10px;
+    }
+    
+    #control-panel {
+        position: relative;
+        transform: none;
+        width: 100%;
+        margin: 10px;
+    }
+    
+    #status-bar {
+        height: 40px;
+        flex-wrap: wrap;
+    }
+    
+    .status-item {
+        font-size: 10px;
+    }
+}
+
+/* Animations */
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.panel-status {
+    animation: pulse 2s infinite;
+}
+
+@keyframes glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 0, 0.3); }
+    50% { box-shadow: 0 0 30px rgba(0, 255, 0, 0.6); }
+}
+
+.instrument-panel {
+    animation: glow 3s infinite;
+}
+
+/* Flight Mode Styles */
+.flight-mode {
+    background: linear-gradient(135deg, #000428 0%, #004e92 100%);
+}
+
+.cruise-mode {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+}
+
+.landing-mode {
+    background: linear-gradient(135deg, #2d1a1a 0%, #4d2d2d 100%);
+}
+
+/* Warning Styles */
+.warning-active {
+    animation: warning-blink 0.5s infinite;
+}
+
+@keyframes warning-blink {
+    0%, 100% { background: rgba(255, 0, 0, 0.2); }
+    50% { background: rgba(255, 0, 0, 0.5); }
+}
+
+/* Autopilot Active */
+.autopilot-active .control-btn#ap-engage {
+    background: rgba(0, 255, 0, 0.5);
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
+}
+
+/* Gear Down */
+.gear-down #gear-down {
+    background: rgba(255, 0, 0, 0.3);
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+}
+
+/* Flaps Extended */
+.flaps-extended .control-btn[data-flaps] {
+    background: rgba(255, 255, 0, 0.3);
+    box-shadow: 0 0 15px rgba(255, 255, 0, 0.8);
+} 

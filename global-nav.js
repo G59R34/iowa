@@ -1,8 +1,14 @@
 // Global Navigation System with AI Features
-// Gemini API Integration for AI Assistant
+// OpenAI API Integration for AI Assistant
 // SECURITY WARNING: Never expose API keys in production client-side code. For demo/personal use only.
-const GEMINI_API_KEY = 'AIzaSyA_vAPWGdD8xDGPoP7Ystjp4Jn2R_K6jD0';
-const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' + GEMINI_API_KEY;
+const OPENAI_API_KEY = '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';
+const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
+// CORS Proxy to bypass browser restrictions
+// Alternative proxies if one doesn't work:
+// const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
+// const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
+// const CORS_PROXY = 'https://thingproxy.freeboard.io/fetch/';
+const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
 
 class GlobalNav {
     constructor() {
@@ -92,6 +98,16 @@ class GlobalNav {
                             <span class="link-icon">🚗</span>
                             <span class="link-text">Altima Sim</span>
                             <span class="link-desc">Drive like a maniac</span>
+                        </a>
+                        <a href="airbus-sim.html" class="nav-link" data-page="airbus-sim">
+                            <span class="link-icon">✈️</span>
+                            <span class="link-text">Airbus A320</span>
+                            <span class="link-desc">Avionics simulator</span>
+                        </a>
+                        <a href="walmart.html" class="nav-link" data-page="walmart">
+                            <span class="link-icon">🛒</span>
+                            <span class="link-text">Walmart Supercenter</span>
+                            <span class="link-desc">Iowa explosion experience</span>
                         </a>
                         <a href="clock.html" class="nav-link" data-page="clock">
                             <span class="link-icon">⏰</span>
@@ -923,12 +939,12 @@ class GlobalNav {
         // Handle AI input
         aiInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
-                this.handleGeminiAIInput();
+                this.handleOpenAIAIInput();
             }
         });
 
         aiSend.addEventListener('click', () => {
-            this.handleGeminiAIInput();
+            this.handleOpenAIAIInput();
         });
 
         // Set active link
@@ -1015,16 +1031,31 @@ class GlobalNav {
     setupAI() {
         this.aiResponses = {
             'hello': 'Hello! Welcome to the Anti-Iowa Cult! How can I assist you today?',
+            'hi': 'Hi there! Ready to explore the truth about Iowa?',
             'help': 'I can help you navigate the website, find information about our cult, or just chat about why Iowa isn\'t real!',
             'iowa': 'Ah yes, Iowa - the government psy-op! It\'s just cornfields and cardboard towns. The truth is out there!',
+            'corn': 'Corn is just a government distraction! They plant it everywhere to make us think Iowa is real.',
             'join': 'To join our cult, visit the Join page! We\'re always looking for new believers in the Iowa conspiracy.',
             'game': 'Try our corn deletion game! It\'s therapeutic to destroy virtual corn from the fake state of Iowa.',
             'drama': 'The cult drama page is where we document all the chaos of adult life. It\'s quite entertaining!',
+            'airbus': 'Check out our Airbus A320 simulator! It\'s a realistic cockpit experience - much more real than Iowa!',
+            'altima': 'The Altima simulator lets you drive like a maniac! Just like how Iowa drives us all crazy!',
+            'tesla': 'Tesla Mode is our electric adventure! Clean energy for a clean mind, free from Iowa propaganda.',
+            'united': 'United Airlines adventures await! Real flying, unlike the fake Iowa flights.',
+            'linda': 'Linda has all the brain-ruining facts! She knows the truth about Iowa.',
+            'sniffles': 'Sniffles is our sneezy friend! Even allergies are more real than Iowa.',
+            'clock': 'Time is an illusion, just like Iowa! Check out our wacky clock.',
+            'evidence': 'The evidence page has all the proof that Iowa isn\'t real!',
+            'about': 'Learn about our cult and our mission to expose the Iowa conspiracy!',
+            'what': 'What would you like to know? I can help you navigate the site or discuss the Iowa conspiracy!',
+            'how': 'How can I help you today? I\'m here to guide you through our Anti-Iowa Cult website!',
+            'where': 'Where would you like to go? I can help you find any page on our site!',
+            'why': 'Why is Iowa fake? Because it\'s all a government psy-op! Check out our evidence page for proof.',
             'default': 'That\'s an interesting question! As an AI assistant for the Anti-Iowa Cult, I\'m here to help you explore our conspiracy theories and have fun!'
         };
     }
 
-    async handleGeminiAIInput() {
+    async handleOpenAIAIInput() {
         const input = document.querySelector('.ai-text-input');
         const chat = document.querySelector('.ai-chat');
         const userMessage = input.value.trim();
@@ -1054,43 +1085,76 @@ class GlobalNav {
         chat.appendChild(loadingDiv);
         chat.scrollTop = chat.scrollHeight;
 
+        // Try OpenAI API first, fallback to local responses
+        let aiText = '';
+        let useLocalResponse = false;
+
         try {
-            const response = await fetch(GEMINI_API_URL, {
+            console.log('Attempting OpenAI API call...');
+            const response = await fetch(CORS_PROXY + OPENAI_API_URL, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${OPENAI_API_KEY}`,
+                    'Origin': window.location.origin
+                },
                 body: JSON.stringify({
-                    contents: [{ parts: [{ text: userMessage }] }]
+                    model: 'gpt-3.5-turbo',
+                    messages: [
+                        {
+                            role: 'system',
+                            content: 'You are a helpful AI assistant for the Anti-Iowa Cult website. You help users navigate the site and engage with the humorous conspiracy theory that Iowa is not real. Keep responses friendly, helpful, and in character with the cult theme. Keep responses under 100 words.'
+                        },
+                        {
+                            role: 'user',
+                            content: userMessage
+                        }
+                    ],
+                    max_tokens: 150,
+                    temperature: 0.7
                 })
             });
-            const data = await response.json();
-            let aiText = 'Sorry, I could not generate a response.';
-            if (data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0].text) {
-                aiText = data.candidates[0].content.parts[0].text;
+
+            console.log('Response status:', response.status);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
-            // Remove loading
-            chat.removeChild(loadingDiv);
-            // Add AI response
-            const aiDiv = document.createElement('div');
-            aiDiv.className = 'ai-message';
-            aiDiv.innerHTML = `
-                <span class="ai-avatar">🤖</span>
-                <div class="message-content">
-                    ${aiText.replace(/\n/g, '<br>')}
-                </div>
-            `;
-            chat.appendChild(aiDiv);
-            chat.scrollTop = chat.scrollHeight;
+
+            const data = await response.json();
+            console.log('OpenAI response:', data);
+
+            if (data && data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
+                aiText = data.choices[0].message.content;
+            } else {
+                throw new Error('Invalid response format from OpenAI');
+            }
+
         } catch (err) {
-            chat.removeChild(loadingDiv);
-            const errorDiv = document.createElement('div');
-            errorDiv.className = 'ai-message';
-            errorDiv.innerHTML = `
-                <span class="ai-avatar">🤖</span>
-                <div class="message-content" style="color: #ff1744;">Error: Could not reach Gemini API.</div>
-            `;
-            chat.appendChild(errorDiv);
-            chat.scrollTop = chat.scrollHeight;
+            console.error('OpenAI API error:', err);
+            useLocalResponse = true;
         }
+
+        // Remove loading indicator
+        chat.removeChild(loadingDiv);
+
+        // Use local response if OpenAI failed
+        if (useLocalResponse) {
+            aiText = this.generateAIResponse(userMessage);
+            console.log('Using local AI response:', aiText);
+        }
+
+        // Add AI response
+        const aiDiv = document.createElement('div');
+        aiDiv.className = 'ai-message';
+        aiDiv.innerHTML = `
+            <span class="ai-avatar">🤖</span>
+            <div class="message-content">
+                ${aiText.replace(/\n/g, '<br>')}
+            </div>
+        `;
+        chat.appendChild(aiDiv);
+        chat.scrollTop = chat.scrollHeight;
     }
 
     generateAIResponse(message) {
