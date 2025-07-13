@@ -114,6 +114,11 @@ class GlobalNav {
                             <span class="link-text">Wacky Clock</span>
                             <span class="link-desc">Time is an illusion</span>
                         </a>
+                        <a href="flying-cutie.html" class="nav-link" data-page="flying-cutie">
+                            <span class="link-icon">🦋</span>
+                            <span class="link-text">Flying Cutie</span>
+                            <span class="link-desc">Graceful & sensual flight</span>
+                        </a>
                     </div>
                     
                     <div class="menu-section">

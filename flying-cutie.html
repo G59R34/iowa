@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="global-nav.js"></script>
+    <title>Flying Cutie</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
+            animation: colorPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes colorPulse {
+            0% {
+                background: linear-gradient(135deg, #ff006e 0%, #8338ec 100%);
+            }
+            20% {
+                background: linear-gradient(135deg, #3a86ff 0%, #06ffa5 100%);
+            }
+            40% {
+                background: linear-gradient(135deg, #ffbe0b 0%, #fb5607 100%);
+            }
+            60% {
+                background: linear-gradient(135deg, #ff006e 0%, #8338ec 100%);
+            }
+            80% {
+                background: linear-gradient(135deg, #06ffa5 0%, #3a86ff 100%);
+            }
+            100% {
+                background: linear-gradient(135deg, #ff006e 0%, #8338ec 100%);
+            }
+        }
+
+        .flying-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            perspective: 1000px;
+        }
+
+        .pulse-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle, transparent 30%, rgba(255, 255, 255, 0.1) 70%);
+            animation: pulse 1.5s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.8;
+            }
+        }
+
+        .cutie {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            filter: drop-shadow(0 5px 15px rgba(255, 255, 255, 0.2));
+            animation: cutieGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes cutieGlow {
+            0%, 100% {
+                filter: drop-shadow(0 5px 15px rgba(255, 255, 255, 0.2)) 
+                        drop-shadow(0 0 20px rgba(255, 0, 110, 0.5));
+            }
+            25% {
+                filter: drop-shadow(0 5px 15px rgba(255, 255, 255, 0.2)) 
+                        drop-shadow(0 0 30px rgba(58, 134, 255, 0.8));
+            }
+            50% {
+                filter: drop-shadow(0 5px 15px rgba(255, 255, 255, 0.2)) 
+                        drop-shadow(0 0 25px rgba(255, 190, 11, 0.6));
+            }
+            75% {
+                filter: drop-shadow(0 5px 15px rgba(255, 255, 255, 0.2)) 
+                        drop-shadow(0 0 35px rgba(6, 255, 165, 0.7));
+            }
+        }
+
+        .cutie:hover {
+            transform: scale(1.1);
+            filter: brightness(1.2) drop-shadow(0 8px 25px rgba(255, 255, 255, 0.4));
+        }
+
+        .trail {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: fadeOut 2s ease-out forwards;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .flash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.3);
+            pointer-events: none;
+            z-index: 999;
+            animation: flash 0.1s ease-out forwards;
+        }
+
+        @keyframes flash {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.1);
+            }
+        }
+
+        .floating {
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .dancing {
+            animation: dance 6s ease-in-out infinite;
+        }
+
+        .spinning {
+            animation: spin 10s linear infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+            50% {
+                transform: translateY(-10px) rotate(-3deg);
+            }
+            75% {
+                transform: translateY(-15px) rotate(2deg);
+            }
+        }
+
+        @keyframes dance {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg) scale(1);
+            }
+            20% {
+                transform: translateY(-30px) rotate(15deg) scale(1.1);
+            }
+            40% {
+                transform: translateY(-15px) rotate(-10deg) scale(0.9);
+            }
+            60% {
+                transform: translateY(-25px) rotate(8deg) scale(1.05);
+            }
+            80% {
+                transform: translateY(-5px) rotate(-5deg) scale(0.95);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: translateY(0px) rotate(0deg) scale(1);
+            }
+            25% {
+                transform: translateY(-20px) rotate(90deg) scale(1.2);
+            }
+            50% {
+                transform: translateY(-10px) rotate(180deg) scale(0.8);
+            }
+            75% {
+                transform: translateY(-30px) rotate(270deg) scale(1.1);
+            }
+            100% {
+                transform: translateY(0px) rotate(360deg) scale(1);
+            }
+        }
+
+        .controls {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .controls button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            margin: 5px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .controls button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .info {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            color: white;
+            font-size: 14px;
+            text-align: right;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="pulse-overlay"></div>
+    <div class="flying-container" id="container">
+        <img src="cutie.png" alt="Cutie" class="cutie floating" id="cutie">
+        <img src="cutie.png" alt="Cutie 2" class="cutie dancing" id="cutie2">
+        <img src="cutie.png" alt="Cutie 3" class="cutie spinning" id="cutie3">
+        <img src="cutie.png" alt="Cutie 4" class="cutie floating" id="cutie4">
+        <img src="cutie.png" alt="Cutie 5" class="cutie dancing" id="cutie5">
+        <img src="cutie.png" alt="Cutie 6" class="cutie spinning" id="cutie6">
+    </div>
+
+    <div class="controls">
+        <button onclick="toggleAnimation()">Toggle Animation</button>
+        <button onclick="changeSpeed()">Change Speed</button>
+        <button onclick="addTrail()">Add Trail Effect</button>
+        <button onclick="resetPosition()">Reset Position</button>
+        <button onclick="toggleIntensity()">Toggle Intensity</button>
+    </div>
+
+    <div class="info">
+        <div>Click and drag to move Cutie</div>
+        <div>Hover for glow effect</div>
+        <div>Press spacebar for special move</div>
+    </div>
+
+    <script>
+        let isAnimating = true;
+        let animationSpeed = 1;
+        let trailEnabled = false;
+        let isDragging = false;
+        let dragOffset = { x: 0, y: 0 };
+        let intensityEnabled = true;
+
+        const cuties = [
+            document.getElementById('cutie'),
+            document.getElementById('cutie2'),
+            document.getElementById('cutie3'),
+            document.getElementById('cutie4'),
+            document.getElementById('cutie5'),
+            document.getElementById('cutie6')
+        ];
+        const container = document.getElementById('container');
+
+        // Initialize positions for all cuties
+        const positions = [
+            { left: '20%', top: '30%' },
+            { left: '80%', top: '20%' },
+            { left: '15%', top: '70%' },
+            { left: '85%', top: '80%' },
+            { left: '50%', top: '15%' },
+            { left: '45%', top: '85%' }
+        ];
+
+        cuties.forEach((cutie, index) => {
+            cutie.style.left = positions[index].left;
+            cutie.style.top = positions[index].top;
+            cutie.style.transform = 'translate(-50%, -50%)';
+        });
+
+        // Mouse/touch events for dragging
+        cuties.forEach(cutie => {
+            cutie.addEventListener('mousedown', startDrag);
+            cutie.addEventListener('touchstart', startDrag);
+        });
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('touchmove', drag);
+        document.addEventListener('mouseup', stopDrag);
+        document.addEventListener('touchend', stopDrag);
+
+        // Keyboard events
+        document.addEventListener('keydown', handleKeyPress);
+
+        function startDrag(e) {
+            isDragging = true;
+            const rect = cutie.getBoundingClientRect();
+            const clientX = e.clientX || e.touches[0].clientX;
+            const clientY = e.clientY || e.touches[0].clientY;
+            
+            dragOffset.x = clientX - rect.left;
+            dragOffset.y = clientY - rect.top;
+            
+            cutie.style.transition = 'none';
+            e.preventDefault();
+        }
+
+        function drag(e) {
+            if (!isDragging) return;
+            
+            const clientX = e.clientX || e.touches[0].clientX;
+            const clientY = e.clientY || e.touches[0].clientY;
+            
+            const x = clientX - dragOffset.x;
+            const y = clientY - dragOffset.y;
+            
+            cutie.style.left = x + 'px';
+            cutie.style.top = y + 'px';
+            cutie.style.transform = 'none';
+            
+            if (trailEnabled) {
+                createTrail(x + 60, y + 60);
+            }
+            
+            e.preventDefault();
+        }
+
+        function stopDrag() {
+            isDragging = false;
+            cutie.style.transition = 'all 0.3s ease';
+        }
+
+        function handleKeyPress(e) {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                performSpecialMove();
+            }
+        }
+
+        function performSpecialMove() {
+            cuties.forEach((cutie, index) => {
+                cutie.style.animation = 'none';
+                const delay = index * 200;
+                setTimeout(() => {
+                    cutie.style.transform = 'translate(-50%, -50%) scale(1.5) rotate(360deg)';
+                    setTimeout(() => {
+                        const animations = ['float', 'dance', 'spin', 'float', 'dance', 'spin'];
+                        cutie.style.animation = `${animations[index]} ${8 / animationSpeed}s ease-in-out infinite`;
+                        cutie.style.transform = 'translate(-50%, -50%)';
+                    }, 1000);
+                }, delay);
+            });
+        }
+
+        function toggleAnimation() {
+            isAnimating = !isAnimating;
+            const animations = ['float', 'dance', 'spin', 'float', 'dance', 'spin'];
+            cuties.forEach((cutie, index) => {
+                if (isAnimating) {
+                    cutie.style.animation = `${animations[index]} ${8 / animationSpeed}s ease-in-out infinite`;
+                } else {
+                    cutie.style.animation = 'none';
+                }
+            });
+        }
+
+        function changeSpeed() {
+            const speeds = [0.5, 1, 1.5, 2, 3];
+            const currentIndex = speeds.indexOf(animationSpeed);
+            const nextIndex = (currentIndex + 1) % speeds.length;
+            animationSpeed = speeds[nextIndex];
+            
+            if (isAnimating) {
+                const animations = ['float', 'dance', 'spin', 'float', 'dance', 'spin'];
+                cuties.forEach((cutie, index) => {
+                    cutie.style.animation = `${animations[index]} ${8 / animationSpeed}s ease-in-out infinite`;
+                });
+            }
+        }
+
+        function addTrail() {
+            trailEnabled = !trailEnabled;
+            if (trailEnabled) {
+                setInterval(() => {
+                    if (!isDragging) {
+                        const rect = cutie.getBoundingClientRect();
+                        createTrail(rect.left + 60, rect.top + 60);
+                    }
+                }, 100);
+            }
+        }
+
+        function createTrail(x, y) {
+            const trail = document.createElement('div');
+            trail.className = 'trail';
+            trail.style.left = x + 'px';
+            trail.style.top = y + 'px';
+            
+            // Random size variation
+            const size = 4 + Math.random() * 8;
+            trail.style.width = size + 'px';
+            trail.style.height = size + 'px';
+            
+            // Random color
+            const colors = ['rgba(255, 255, 255, 0.9)', 'rgba(255, 0, 110, 0.8)', 'rgba(58, 134, 255, 0.8)', 'rgba(255, 190, 11, 0.8)', 'rgba(6, 255, 165, 0.8)'];
+            trail.style.background = colors[Math.floor(Math.random() * colors.length)];
+            
+            container.appendChild(trail);
+            
+            setTimeout(() => {
+                if (trail.parentNode) {
+                    trail.parentNode.removeChild(trail);
+                }
+            }, 2000);
+        }
+
+        function resetPosition() {
+            const animations = ['float', 'dance', 'spin', 'float', 'dance', 'spin'];
+            cuties.forEach((cutie, index) => {
+                cutie.style.left = positions[index].left;
+                cutie.style.top = positions[index].top;
+                cutie.style.transform = 'translate(-50%, -50%)';
+                cutie.style.animation = `${animations[index]} 8s ease-in-out infinite`;
+            });
+        }
+
+        // Auto-movement when not being dragged
+        function autoMove() {
+            if (!isDragging && isAnimating) {
+                const time = Date.now() * 0.001;
+                
+                cuties.forEach((cutie, index) => {
+                    const speed = 0.3 + (index * 0.1);
+                    const amplitude = 20 + (index * 5);
+                    const phase = index * Math.PI / 3;
+                    
+                    const x = 50 + Math.sin(time * speed + phase) * amplitude;
+                    const y = 50 + Math.cos(time * (speed * 0.7) + phase) * (amplitude * 0.8);
+                    
+                    cutie.style.left = x + '%';
+                    cutie.style.top = y + '%';
+                    
+                    if (trailEnabled && Math.random() < 0.3) {
+                        const rect = cutie.getBoundingClientRect();
+                        createTrail(rect.left + 60, rect.top + 60);
+                    }
+                });
+            }
+        }
+
+        // Start auto-movement
+        setInterval(autoMove, 50);
+
+        // Random flash effects
+        function createFlash() {
+            if (intensityEnabled && Math.random() < 0.1) { // 10% chance every interval
+                const flash = document.createElement('div');
+                flash.className = 'flash';
+                document.body.appendChild(flash);
+                
+                setTimeout(() => {
+                    if (flash.parentNode) {
+                        flash.parentNode.removeChild(flash);
+                    }
+                }, 100);
+            }
+        }
+
+        function toggleIntensity() {
+            intensityEnabled = !intensityEnabled;
+            const body = document.body;
+            const pulseOverlay = document.querySelector('.pulse-overlay');
+            
+            if (intensityEnabled) {
+                body.style.animation = 'colorPulse 2s ease-in-out infinite';
+                pulseOverlay.style.display = 'block';
+            } else {
+                body.style.animation = 'none';
+                pulseOverlay.style.display = 'none';
+            }
+        }
+
+        // Create random flashes
+        setInterval(createFlash, 200);
+
+        // Add some initial sparkle
+        setTimeout(() => {
+            cuties.forEach((cutie, cutieIndex) => {
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        const rect = cutie.getBoundingClientRect();
+                        createTrail(rect.left + 60, rect.top + 60);
+                    }, (cutieIndex * 200) + (i * 100));
+                }
+            });
+        }, 1000);
+    </script>
+</body>
+</html> 
