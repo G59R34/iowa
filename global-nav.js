@@ -160,6 +160,20 @@ class GlobalNav {
                     </div>
                     
                     <div class="menu-section">
+                        <h3 class="section-title">💬 Communication</h3>
+                        <a href="chat-v2.html" class="nav-link" data-page="chat-v2">
+                            <span class="link-icon">💬</span>
+                            <span class="link-text">Cult Chat v2</span>
+                            <span class="link-desc">Modern chat with images</span>
+                        </a>
+                        <a href="test-chat.html" class="nav-link" data-page="test-chat">
+                            <span class="link-icon">🧪</span>
+                            <span class="link-text">Old Chat</span>
+                            <span class="link-desc">Legacy chat system</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-section">
                         <h3 class="section-title">🔐 Account</h3>
                         <a href="join.html" class="nav-link" data-page="join">
                             <span class="link-icon">🚀</span>
