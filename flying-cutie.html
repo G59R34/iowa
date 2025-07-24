@@ -286,6 +286,7 @@
         let isDragging = false;
         let dragOffset = { x: 0, y: 0 };
         let intensityEnabled = true;
+        let activeCutie = null; // New variable to store the currently dragged cutie
 
         const cuties = [
             document.getElementById('cutie'),
@@ -328,19 +329,20 @@
 
         function startDrag(e) {
             isDragging = true;
-            const rect = cutie.getBoundingClientRect();
+            activeCutie = e.currentTarget; // Store the clicked cutie
+            const rect = activeCutie.getBoundingClientRect(); // Use activeCutie
             const clientX = e.clientX || e.touches[0].clientX;
             const clientY = e.clientY || e.touches[0].clientY;
             
             dragOffset.x = clientX - rect.left;
             dragOffset.y = clientY - rect.top;
             
-            cutie.style.transition = 'none';
+            activeCutie.style.transition = 'none'; // Apply to activeCutie
             e.preventDefault();
         }
 
         function drag(e) {
-            if (!isDragging) return;
+            if (!isDragging || !activeCutie) return; // Check activeCutie
             
             const clientX = e.clientX || e.touches[0].clientX;
             const clientY = e.clientY || e.touches[0].clientY;
@@ -348,12 +350,12 @@
             const x = clientX - dragOffset.x;
             const y = clientY - dragOffset.y;
             
-            cutie.style.left = x + 'px';
-            cutie.style.top = y + 'px';
-            cutie.style.transform = 'none';
+            activeCutie.style.left = x + 'px'; // Apply to activeCutie
+            activeCutie.style.top = y + 'px'; // Apply to activeCutie
+            activeCutie.style.transform = 'none'; // Apply to activeCutie
             
-            if (trailEnabled) {
-                createTrail(x + 60, y + 60);
+            if (trailEnabled && activeCutie) { // Add condition for activeCutie
+                createTrail(x + 60, y + 60); 
             }
             
             e.preventDefault();
@@ -361,7 +363,10 @@
 
         function stopDrag() {
             isDragging = false;
-            cutie.style.transition = 'all 0.3s ease';
+            if (activeCutie) { // Check activeCutie
+                activeCutie.style.transition = 'all 0.3s ease'; // Apply to activeCutie
+                activeCutie = null; // Reset activeCutie
+            }
         }
 
         function handleKeyPress(e) {
@@ -415,12 +420,7 @@
         function addTrail() {
             trailEnabled = !trailEnabled;
             if (trailEnabled) {
-                setInterval(() => {
-                    if (!isDragging) {
-                        const rect = cutie.getBoundingClientRect();
-                        createTrail(rect.left + 60, rect.top + 60);
-                    }
-                }, 100);
+                // Removed the setInterval as trail during drag is handled in the drag function.
             }
         }
 
