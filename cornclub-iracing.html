@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="global-nav.js"></script>
+    <title>Cornclub iRacing League</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Chakra Petch', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d); /* A gradient background */
+            color: #ecf0f1; /* Light text color */
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 1.5em 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://via.placeholder.com/1500x300?text=Racing+Background') no-repeat center center/cover; /* Placeholder racing image */
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 0.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        h2 {
+            color: #fdbb2d; /* Accent color */
+            border-bottom: 2px solid #fdbb2d;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        main {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        section {
+            background-color: rgba(255, 255, 255, 0.1);
+            margin-bottom: 30px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .grid-item {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .grid-item h3 {
+            color: #fdbb2d;
+            margin-bottom: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: left;
+        }
+
+        th {
+            background-color: rgba(0, 0, 0, 0.4);
+            color: #fdbb2d;
+        }
+
+        tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        a {
+            color: #fdbb2d;
+            text-decoration: none;
+            transition: color 0.3s ease-in-out;
+        }
+
+        a:hover {
+            color: #e67e22;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #fdbb2d;
+            color: #333;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease;
+        }
+
+        .button:hover {
+            background-color: #e67e22;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Cornclub iRacing League</h1>
+        <p>The premier iRacing destination for competitive and fun racing!</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>About Us</h2>
+            <p>🌽🏁🤠 Welcome to Corn Club Racing 🤠🏁🌽
+
+                Howdy y’all! 🤠✨ Pull up a chair 🪑, kick off them dusty boots 👢, an’ lemme spin ya a yarn 🧵 ’bout who we is, what we do, an’ why the good Lord 🙏 blessed us with a love fer racin’ 🏎️💨.
+                
+                See, we’s the Corn Club 🌽👊 — jest two corn-fed, small-town kart drivers 🏁 turned sim racers 💻🎮, fixin’ ta make a big ol’ splash 💦 in the wild world o’ iRacin’ 🌍🔥. We cut our teeth back home where the corn grows tall 🌽🌾 as a church steeple 🏰, and the dirt tracks was rougher’n a bull ride 🐂 on Sunday ⛪.
+                
+                We started with nothin’ but a half-broke go-kart 🛠️🪛, some duct tape 📦, an’ dreams big as the county fair Ferris wheel 🎡✨. Folks in town thought we was plum crazy 🤪, callin’ ourselves Corn Club 😂, sayin’ it was “too dang corny” 🌽😅. But lemme tell ya somethin’: that corn built us 🏗️. It fed us 🍽️, taught us patience 🧘♂️, an’ showed us that grit beats fancy any day o’ the week 💪⏰.
+                
+                Now we done swapped the real-world gravel roads 🚜🌄 fer the hum of a sim rig 🎮⚙️ in mama’s basement 🏠, with wheel 🔄, pedals 🦶, an’ Wi-Fi 📶 that cain’t half keep up when a storm rolls through 🌩️😂. But buddy, when that green flag drops 🟩🏁 on iRacin’, them old doubts don’t mean a hill o’ beans 🫘🤣. It’s just us, the track 🛣️, an’ that big ol’ Corn Club logo ridin’ shotgun 🌽🔥🚗.
+                
+                We don’t just race fer trophies 🏆 (though Lord knows we want ’em 🙏✨) — we race ’cause it’s in our blood 🩸❤️. It’s late nights 🌙⏰ studyin’ them apexes 📊📈, laughin’ at our own rookie wrecks 🤦♂️😂, an’ celebratin’ them clean laps 🧼✨ like we won Daytona 🏁🏆🚀. ’Cause even in the sim, every lap tells a story 📖📝: of two farm boys 🌽👦 who dared ta dream beyond them cornrows 🌽🌽🌽.
+                
+                So whether yer a fellow sim racer 🏎️🎮, a die-hard fan o’ underdogs 🐶❤️, or jest someone wonderin’ what a couple o’ dusty kart racers 🏁👀 is doin’ in a fancy online league 💻🕹️ — welcome 🙌✨. Pour y’self a sweet tea 🫖🍋, lean back 🪑, an’ watch Corn Club put that heart ❤️, hustle 💪, an’ homegrown spirit 🌾🔥 on the virtual asphalt 🛣️🏎️.
+                
+                Y’all best believe 🤠: this here’s our debut lap 🏁✨... but it shore as shootin’ won’t be our last 🔥🚀. 🌽💪
+                
+                🌟🚜 Wanna hear more? Settle in, partner! 🤠🌽
+                
+                Now lemme tell y’all a lil’ more 📜🤓 ’bout how we got from them dusty farm roads 🚜🌄 to the glow o’ a racing monitor 💻🌟. Way back when, it warn’t nothin’ but Saturday nights 🌙⏰, busted knuckles 🤕🛠️, an’ oil stains 🛢️🪣 on mama’s porch 🏠. We’d push that old go-kart 🚗💨 out the shed 🏚️, argue ’bout whose turn it was 🤷♂️😅, an’ then race 🏎️💨 ’til the fireflies came out ✨🪰. That’s how Corn Club got its first taste o’ speed 🌽🔥.
+                
+                Folks ask us all the time ⏰🤔, “Why call it Corn Club? 🌽😂” Well, partner 🤠, it’s simple as sweet tea 🍯🍋. Corn raised us 🌽💪. We grew up haulin’ it 🏋️♂️, huskin’ it 🌽👐, sellin’ it down at the co-op 🏬, and eatin’ it near every meal 🍽️😋. It taught us patience 🧘♂️✨: ya gotta plant it 🌱, water it 💧, wait on it ⏳, then reap what ya sow 🌽🏆. Turns out, racin’ works the same dang way 🏎️🛣️.
+                
+                When we made the jump ta iRacin’ 🕹️💻, it warn’t all sunshine ☀️ and podiums 🏆 neither. Heck 🤦♂️, our first few races 🏁, we spun out more than a carnival Tilt-A-Whirl 🎡🤣. But every scrape ⚙️, every dent 🛞 in that virtual paint 🎨, taught us somethin’ 📖💡. Bit by bit 🧩, them rookie mistakes turned into real racecraft 🏎️🔥.
+                
+                What folks don’t see 👀🤷♂️ is them long nights 🌙⏰, sittin’ in front o’ that flickerin’ screen 💻✨, hands sweatin’ on the wheel 🫨🔄, heart beatin’ fast ❤️💓 like a scared rabbit 🐇😂. It’s a different kinda heat 🔥 than under the summer sun 🌞, but it burns just the same 🌽🔥.
+                
+                An’ lemme tell ya 🤠🗣️, them online races 🏎️💻 got their own kinda crowd 🧑🤝🧑🌎. You meet folks from every corner o’ the map 🗺️✨ — city slickers 🏙️😎, country boys 🌾🤠, an’ even some that talk so fast 🗣️💨 we cain’t half understand ’em 🤣. But once the green flag waves 🟩🏁, it don’t matter none 🤷♂️. It’s jest racin’, pure an’ simple ❤️🔥.
+                
+                We ain’t got big sponsors 💵 yet — jest our stubborn will 💪😂 an’ a bit o’ duct tape spirit 📦✨. But what we lack in dollars 🤑, we make up fer in drive 🏎️🔥. That’s somethin’ you cain’t buy at no parts store 🏪🛠️.
+                
+                Corn Club warn’t built to win right off the bat 🏁😂 — it was built to keep showin’ up 🔄🤠. ’Cause racin’ ain’t jest ’bout the checkered flag 🏁; it’s ’bout the stories 📖 you tell over sweet tea 🫖🍋 when the race is done 🏁✨.
+                
+                Like the time we finished dead last 🏁😅 but laughed so dang hard 😂🤣 we near bout fell outta our chairs 🪑💥. That, my friend, is worth its weight in gold 🪙✨.
+                
+                Some say it’s silly 🤪🤷♂️ to take pride in a lil’ online team 🌽💻, but we reckon they don’t see the whole picture 🖼️✨. To us, it ain’t just a game 🎮; it’s the next chapter 📖 of that same dusty dream 🌄🌽 we had as kids 👦👦. And the best part? 😍 We’re writin’ it together ✍️🫱🫲, one lap at a time 🏎️🔄.
+                
+                And buddy 🤠✨, lemme promise ya this 🙏: we may not always be the fastest 🏎️💨, but we shore as sugar 🍬😂 gonna be the most memorable 🌽🔥. Folks gon’ see that Corn Club sticker 🌽🏁 flash across their screen 💻✨ and know we race with heart ❤️🔥 — not jest horsepower 🐎😂.
+                
+                Down the road 🛣️🔮, we got big plans 📅💡. Maybe it’s startin’ our own lil’ league 🏁🤝 fer other underdogs 🐶❤️, or makin’ highlight videos 📹✨ that show the funny, messy side o’ sim racin’ 🎮🤣. Maybe it’s teachin’ young’uns 👦🧒 how to get started without spendin’ a fortune 💵❌. ’Cause if two cornfield kids 🌽👦👦 can do it, reckon anyone can ✨🙌.
+                
+                We’d be tickled pink 🩷😂 if y’all followed along 👀👍 — watch us race 🏎️💻, laugh with us 🤣, maybe even holler when we finally snag that first win 🏆🔥. ’Cause this ain’t jest our story anymore 📖❤️; it’s y’all’s too 🙌✨. Every click 🖱️, every cheer 🎉, every comment 💬 means the world ta us 🌍❤️.
+                
+                So from the bottoms o’ our grease-stained hearts ❤️🛠️: thank ya kindly fer stoppin’ by 🤠🙏. Y’all come back now, ya hear? 🔄✨ And next time ya see that big ol’ stalk o’ corn 🌽😎 on the side of a car in iRacin’ 🏁💻 — tip yer hat 🤠🎩. ’Cause that’s Corn Club 🌽🔥, racin’ the only way we know how: with heart ❤️, hustle 💪, an’ a whole heap o’ homegrown hope 🌽🙏🔥.
+                Now lemme spin ya a lil’ more 🧵✨ ’bout them early days when our idea o’ racin’ was chasin’ tractors 🚜😅. See, before iRacin’ 🎮🔥, we was racin’ each other through cornfields 🌽🌽, dog chasin’ behind 🐕💨, hearts poundin’ like a gospel drum on Sunday ⛪🥁❤️.
+                
+                Back then, we ain’t had fancy gear ⚙️🖥️ — jest a banged-up lawnmower 🛠️🤣 an’ dreams bigger than the silo 🌾🏗️. Mama’d holler from the porch 🏠📢, “Y’all gon’ bust ya fool heads!” 🤦♀️😂 — but we kept racin’ anyhow 🏎️💨.
+                
+                Summer sweat drippin’ off our brows ☀️💦, sunburns redder than a county fair candy apple 🍎🔥, but we didn’t care none 🤷♂️✨. We was racin’ fer braggin’ rights 🏁😎, fer the rush, fer the story we could tell under them porch lights 🪑🌙.
+                
+                See, Corn Club warn’t born from money 💵❌ — it was born from stubborn hearts ❤️🔥 an’ busted knuckles 🛠️😂. That’s a badge o’ honor round here 🤠🏅.
+                
+                When we found iRacin’ 🌍🕹️, it felt like destiny 🙏✨. Like the Good Lord himself said, “Boys, here’s yer next adventure.” 😇🏁🌽.
+                
+                We set up the rig on a rickety table 🪑🛠️, monitor flickerin’ like grandpa’s old TV 📺⚡, but to us, it was Daytona 🏁🔥.
+                
+                First race, we spun out so fast 🤪💨 we near spilled sweet tea all over the keyboard 🫖💻😂. But buddy, we was hooked 🎣❤️.
+                
+                We started watchin’ pros on YouTube 📹👀, takin’ notes 📝, learnin’ them fancy words like “apex” 📊😅 an’ “trail braking” 🏎️🛑. Felt like goin’ from cow-tippin’ 🐄🤣 to rocket science 🚀🤯.
+                
+                Late nights turned into early mornin’s 🌙➡️🌞, racin’ folks halfway ’round the globe 🌍💻, but we still hollered like we was in the backyard 🗣️😂.
+                
+                Our mamas thought we’d lost it 🤦♀️😂. But they seen that fire in our eyes 🔥👀 an’ let us keep goin’. ’Cause even mamas know: some dreams don’t fit in a barn door 🚪✨.
+                
+                We started fixin’ up the sim rig bit by bit 🛠️🔧. New pedals here 🦶⚙️, a better wheel there 🔄🔥, all paid fer by mowin’ lawns 🚜💰 an’ sellin’ old farm junk 🏚️🛒.
+                
+                One day, that Corn Club logo 🌽🔥 showed up on screen — buddy, we near cried 😭❤️. Felt real, felt ours ✨🏁.
+                
+                We kept losin’ 🏁😂 — but each lap, we got smarter 🤓🧩, smoother ✨, an’ braver 💪🔥. Even a DNF felt better than never tryin’ 😅🙏.
+                
+                We met other racers in the lobbies 🏎️💻, from big cities 🏙️😎 to dusty towns like ours 🌾🤠. Some cheered fer us 🙌, some called us slow 🤣 — but we raced ’em all the same 🏁🔥.
+                
+                There’s somethin’ special ’bout hearin’ “Corn Club” 🌽😂 over the headset 🎧. Makes ya sit up straighter, push the pedal harder 🏎️💨💪.
+                
+                Our first top ten? 🎉🏁 We celebrated like we’d won the dang championship 🏆🤠🔥. Sweet tea toast on the porch 🫖🍋, starin’ at the summer sky 🌌✨.
+                
+                Every night, we’d swap stories 🤠🗣️: “Did ya see that slide?!” 😅🔥 “I thought fer sure we’d wreck!” 🤣💥. Stories worth more than gold 🪙❤️.
+                
+                Folks started noticin’ 🌽👀. “Who them corn boys?” 😂🏁 And we’d grin like possums 😁✨. ’Cause that’s us: Corn Club, slow or fast 🏎️, but always laughin’ 😂🔥.
+                
+                We made stickers 🏷️🌽, posted highlights 📹✨, shared our wrecks 🤣💥 right alongside our wins 🏆🔥. ’Cause that’s racin’ — messy, beautiful, real ❤️🏁.
+                
+                Somedays we dream bigger 🌟🤔: a real team trailer 🚛🔥, custom suits 👕✨, sponsors callin’ 📞💰. But win or lose, we’d keep racin’ anyhow 🏁🔥.
+                
+                Corn Club taught us: don’t race to beat others 🏁❌ — race to beat yesterday’s you 🏁💪.
+                
+                An’ lemme tell ya 🤠🗣️: it works. Every lap, we get braver 💪🔥, every wreck teaches somethin’ 📖✨, every night ends with a grin 😁❤️.
+                
+                We found family in other racers 🤝🏁, folks we ain’t never met in person 🌍💻, but who cheer like kin 🫱🫲🔥.
+                
+                Some nights, the rig breaks 🛠️💥 or the Wi-Fi quits 📶❌, but we fix it an’ get back on the track 🏎️✨. ’Cause Corn Club don’t quit 💪🔥.
+                
+                It’s bigger than racin’ 🏁❤️ — it’s about showin’ up, even when it’s easier to walk away 🚪😂.
+                
+                And buddy 🤠, if we can do it from a dusty old farmhouse 🏚️💻, so can anybody 🙌🔥.
+                
+                We dream of invitin’ y’all to race too 🏁🤝, makin’ Corn Club a family 🌽❤️, not jest a name.
+                
+                Maybe one day, we’ll have a league 🏆🛣️, a meet-up 🧑🤝🧑🌾, or even a real-world kart again 🚜🔥.
+                
+                But fer now, we got heart ❤️, a halfway decent rig 💻⚙️, an’ a whole lotta stubborn hope 🌽🔥🙏.
+                ... (9 lines left)
+        </p>
+            <p>We host regular races, championships, and special events across various car classes and tracks in iRacing. Join us for thrilling wheel-to-wheel action and a great community experience!</p>
+        </section>
+
+        <section>
+            <h2>Latest News & Announcements</h2>
+            <div class="grid-container">
+                <div class="grid-item">
+                    <h3>Magnitops Helpful IRacing Tutorial!</h3>
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000;">
+                        <iframe src="https://www.youtube.com/embed/YTbIS5aF7gg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+                    </div>
+                    <p>Get ready for an action-packed Season 3! Registration is now open for our upcoming championship. Check out the rules and schedule in the Discord.</p>
+                    <a href="#" class="button">Read More</a>
+                </div>
+                <div class="grid-item">
+                    <h3>Race Recap: Laguna Seca Mayhem</h3>
+                    <p>What a chaotic race at Laguna Seca! Congrats to our podium finishers. Full results and replay highlights coming soon.</p>
+                    <a href="#" class="button">View Recap</a>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Current Standings</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pos</th>
+                        <th>Driver</th>
+                        <th>Points</th>
+                        <th>Wins</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Driver A</td>
+                        <td>250</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Driver B</td>
+                        <td>220</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Driver C</td>
+                        <td>200</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Driver D</td>
+                        <td>185</td>
+                        <td>0</td>
+                    </tr>
+                </tbody>
+            </table>
+            <a href="#" class="button">Full Standings</a>
+        </section>
+
+        <section>
+            <h2>Upcoming Races</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Track</th>
+                        <th>Car</th>
+                        <th>Time (EST)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2024-08-10</td>
+                        <td>Daytona International Speedway</td>
+                        <td>NASCAR Cup Series Next Gen Car</td>
+                        <td>8:00 PM</td>
+                    </tr>
+                    <tr>
+                        <td>2024-08-24</td>
+                        <td>Road America</td>
+                        <td>GT3 Cars</td>
+                        <td>8:00 PM</td>
+                    </tr>
+                    <tr>
+                        <td>2024-09-07</td>
+                        <td>Watkins Glen International</td>
+                        <td>Formula iR-04</td>
+                        <td>8:00 PM</td>
+                    </tr>
+                </tbody>
+            </table>
+            <a href="#" class="button">View Full Schedule</a>
+        </section>
+
+        <section>
+            <h2>Join Our Community!</h2>
+            <p>Ready to hit the track with us? Join our Discord server to connect with other drivers, get updates, and participate in races. All skill levels are welcome!</p>
+            <a href="https://discord.gg/your-invite-link" class="button" target="_blank">Join Discord</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Cornclub iRacing League. All rights reserved.</p>
+    </footer>
+</body>
+</html> 

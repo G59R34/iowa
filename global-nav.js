@@ -157,6 +157,11 @@ class GlobalNav {
                             <span class="link-text">Tesla Mode</span>
                             <span class="link-desc">Electric dreams</span>
                         </a>
+                        <a href="cornclub-iracing.html" class="nav-link" data-page="cornclub-iracing">
+                            <span class="link-icon">🏎️</span>
+                            <span class="link-text">Cornclub iRacing</span>
+                            <span class="link-desc">Sim racing league</span>
+                        </a>
                     </div>
                     
                     <div class="menu-section">
