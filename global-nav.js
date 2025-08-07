@@ -80,6 +80,11 @@ class GlobalNav {
                             <span class="link-text">Evidence</span>
                             <span class="link-desc">Proof Iowa isn't real</span>
                         </a>
+                        <a href="download-waterstream.html" class="nav-link" data-page="download-waterstream">
+                            <span class="link-icon">🌊</span>
+                            <span class="link-text">Waterstream</span>
+                            <span class="link-desc">Download the browser, surf the chaos</span>
+                        </a>
                     </div>
                     
                     <div class="menu-section">
