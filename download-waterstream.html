@@ -16,6 +16,22 @@
             align-items: center;
             justify-content: center;
         }
+        .waves-bg {
+            position: fixed;
+            left: 0; top: 0; width: 100vw; height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .download-container {
+            position: relative;
+            z-index: 10;
+        }
+        .confetti {
+            position: fixed;
+            left: 0; top: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 20;
+        }
         .download-container {
             background: rgba(0,0,0,0.3);
             padding: 2rem 2.5rem;
@@ -55,14 +71,88 @@
     </style>
 </head>
 <body>
+    <div class="waves-bg">
+        <svg width="100%" height="100%" viewBox="0 0 1440 600" preserveAspectRatio="none" style="position:absolute;top:0;left:0;z-index:0;">
+            <defs>
+                <linearGradient id="waveGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#00c6ff"/>
+                    <stop offset="100%" stop-color="#0072ff"/>
+                </linearGradient>
+            </defs>
+            <path d="M0,320 C360,400 1080,200 1440,320 L1440,600 L0,600 Z" fill="url(#waveGrad)" opacity="0.7">
+                <animate attributeName="d" dur="7s" repeatCount="indefinite"
+                    values="M0,320 C360,400 1080,200 1440,320 L1440,600 L0,600 Z;
+                            M0,300 C400,350 1040,250 1440,300 L1440,600 L0,600 Z;
+                            M0,320 C360,400 1080,200 1440,320 L1440,600 L0,600 Z"/>
+            </path>
+            <circle cx="1200" cy="120" r="30" fill="#fff" opacity="0.08">
+                <animate attributeName="cy" values="120;180;120" dur="6s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="300" cy="200" r="18" fill="#fff" opacity="0.10">
+                <animate attributeName="cy" values="200;260;200" dur="5s" repeatCount="indefinite"/>
+            </circle>
+        </svg>
+    </div>
     <div class="download-container">
+        <img src="cutie.png" alt="Waterstream Mascot" class="mascot" />
+        <div class="tagline">Surf the chaos. Ride the stream. 💧</div>
         <h1>Download Waterstream Web Browser</h1>
         <p>Get the latest version of Waterstream, a fast and modern web browser designed for everyone.</p>
-        <a href="waterstream-installer.exe" class="download-btn" download>Download for Windows</a>
+        <a href="waterstream-installer.exe" class="download-btn" download id="downloadBtn">Download for Windows</a>
         <div class="info">
             <p>Version 1.0.0 &bull; Windows 10/11</p>
             <p>If your download does not start, <a href="waterstream-installer.exe" style="color:#fff;text-decoration:underline;">click here</a>.</p>
         </div>
     </div>
+    <canvas class="confetti" id="confettiCanvas"></canvas>
+<script>
+    // Confetti on download click
+    const btn = document.getElementById('downloadBtn');
+    btn.addEventListener('click', function(e) {
+        confettiBurst();
+    });
+
+    // Simple confetti burst
+    function confettiBurst() {
+        const canvas = document.getElementById('confettiCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        let confetti = [];
+        for (let i = 0; i < 42; i++) {
+            confetti.push({
+                x: window.innerWidth/2,
+                y: window.innerHeight/2-60,
+                r: Math.random()*7+4,
+                c: `hsl(${Math.random()*360},90%,60%)`,
+                vx: (Math.random()-0.5)*8,
+                vy: Math.random()*-7-2,
+                g: 0.25+Math.random()*0.15
+            });
+        }
+        let frame = 0;
+        function draw() {
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            confetti.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, 2*Math.PI);
+                ctx.fillStyle = p.c;
+                ctx.fill();
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += p.g;
+                p.r *= 0.985;
+            });
+            confetti = confetti.filter(p => p.r > 1 && p.y < canvas.height);
+            if (confetti.length && frame < 90) {
+                frame++;
+                requestAnimationFrame(draw);
+            } else {
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+            }
+        }
+        draw();
+    }
+</script>
 </body>
 </html>
