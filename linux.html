@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="chat.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934641350357854"
+     crossorigin="anonymous"></script>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y7CH6EQQ3J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Y7CH6EQQ3J');
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
+  <title>Waterstream OS - The Anti-Iowa Linux Distro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Comic Neue', 'Comic Sans MS', cursive, sans-serif;
+      color: #fff;
+      background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+
+    .main-content {
+      margin-top: 100px;
+      padding: 2em;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 3em 0;
+      background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(27, 255, 255, 0.1));
+      border-radius: 20px;
+      margin-bottom: 2em;
+      border: 2px solid #00ff88;
+      box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+    }
+
+    .hero h1 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(2em, 5vw, 3.5em);
+      color: #00ff88;
+      text-shadow: 0 0 20px #00ff88;
+      margin-bottom: 0.5em;
+      animation: terminalGlow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes terminalGlow {
+      0% { text-shadow: 0 0 20px #00ff88, 0 0 30px #00ff88; }
+      100% { text-shadow: 0 0 30px #00ff88, 0 0 50px #00ff88; }
+    }
+
+    .hero p {
+      font-size: 1.2em;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .terminal-window {
+      background: #1e1e1e;
+      border-radius: 10px;
+      margin: 2em 0;
+      overflow: hidden;
+      border: 1px solid #00ff88;
+      box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+    }
+
+    .terminal-header {
+      background: #2d2d2d;
+      padding: 0.5em 1em;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+    }
+
+    .terminal-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background: #ff5f56; }
+    .dot-yellow { background: #ffbd2e; }
+    .dot-green { background: #27ca3f; }
+
+    .terminal-title {
+      color: #fff;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.9em;
+      margin-left: 1em;
+    }
+
+    .terminal-content {
+      padding: 1em;
+      font-family: 'Courier New', monospace;
+      color: #00ff88;
+      background: #1e1e1e;
+      min-height: 200px;
+      overflow-x: auto;
+    }
+
+    .command-line {
+      display: flex;
+      align-items: center;
+      margin: 0.5em 0;
+    }
+
+    .prompt {
+      color: #1bffff;
+      margin-right: 0.5em;
+    }
+
+    .command {
+      color: #fff;
+      background: rgba(0, 255, 136, 0.1);
+      padding: 0.2em 0.5em;
+      border-radius: 4px;
+      margin-right: 1em;
+    }
+
+    .section {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      padding: 2em;
+      margin: 2em 0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .section h2 {
+      font-family: 'Orbitron', monospace;
+      color: #1bffff;
+      text-shadow: 0 0 10px #1bffff;
+      margin-bottom: 1em;
+      font-size: 2em;
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5em;
+      margin: 2em 0;
+    }
+
+    .tool-card {
+      background: rgba(0, 255, 136, 0.1);
+      border: 1px solid #00ff88;
+      border-radius: 10px;
+      padding: 1.5em;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .tool-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+      background: rgba(0, 255, 136, 0.2);
+    }
+
+    .tool-card h3 {
+      color: #00ff88;
+      font-family: 'Orbitron', monospace;
+      margin-bottom: 0.5em;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+    }
+
+    .tool-icon {
+      font-size: 1.5em;
+    }
+
+    .code-snippet {
+      background: #2d2d2d;
+      border: 1px solid #00ff88;
+      border-radius: 8px;
+      padding: 1em;
+      margin: 1em 0;
+      font-family: 'Courier New', monospace;
+      color: #00ff88;
+      overflow-x: auto;
+      position: relative;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 0.5em;
+      right: 0.5em;
+      background: rgba(0, 255, 136, 0.2);
+      border: 1px solid #00ff88;
+      color: #00ff88;
+      padding: 0.3em 0.6em;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.8em;
+    }
+
+    .copy-btn:hover {
+      background: rgba(0, 255, 136, 0.4);
+    }
+
+    .distro-showcase {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1em;
+      margin: 2em 0;
+    }
+
+    .distro-card {
+      background: rgba(27, 255, 255, 0.1);
+      border: 1px solid #1bffff;
+      border-radius: 10px;
+      padding: 1.5em;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .distro-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(27, 255, 255, 0.4);
+    }
+
+    .distro-logo {
+      font-size: 3em;
+      margin-bottom: 0.5em;
+    }
+
+    .distro-name {
+      color: #1bffff;
+      font-family: 'Orbitron', monospace;
+      font-weight: bold;
+      margin-bottom: 0.5em;
+    }
+
+    .learning-path {
+      background: linear-gradient(135deg, rgba(255, 0, 204, 0.1), rgba(255, 102, 0, 0.1));
+      border: 2px solid #ff00cc;
+      border-radius: 15px;
+      padding: 2em;
+      margin: 2em 0;
+    }
+
+    .learning-step {
+      display: flex;
+      align-items: center;
+      margin: 1em 0;
+      padding: 1em;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      border-left: 4px solid #ff00cc;
+    }
+
+    .step-number {
+      background: #ff00cc;
+      color: #fff;
+      border-radius: 50%;
+      width: 2em;
+      height: 2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-right: 1em;
+      flex-shrink: 0;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 2em;
+      margin-top: 3em;
+      border-top: 2px solid #00ff88;
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    .penguin-dance {
+      display: inline-block;
+      animation: dance 2s ease-in-out infinite;
+    }
+
+    @keyframes dance {
+      0%, 100% { transform: rotate(-5deg); }
+      50% { transform: rotate(5deg); }
+    }
+
+    @media (max-width: 768px) {
+      .main-content {
+        margin-top: 80px;
+        padding: 1em;
+      }
+      
+      .tools-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .distro-showcase {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Terminal Background Animation -->
+  <div class="aurora">
+    <span class="a1"></span>
+    <span class="a2"></span>
+    <span class="a3"></span>
+  </div>
+
+  <div class="main-content">
+    <div class="hero">
+      <h1>🌊 Waterstream OS</h1>
+      <p>The revolutionary Arch-based Linux distro that flows like water and crashes Iowa's digital infrastructure</p>
+      <div style="margin-top: 1.5em; padding: 1em; background: rgba(27, 255, 255, 0.1); border-radius: 10px; border: 2px solid #1bffff;">
+        <h3 style="color: #1bffff; margin: 0 0 0.5em 0;">🚧 COMING SOON 🚧</h3>
+        <p style="margin: 0; font-size: 1.1em; font-weight: bold;">Built by the Anti-Iowa Cult • Based on Arch Linux • Powered by pure chaos</p>
+      </div>
+    </div>
+
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="terminal-dot dot-red"></div>
+        <div class="terminal-dot dot-yellow"></div>
+        <div class="terminal-dot dot-green"></div>
+        <div class="terminal-title">waterstream@anti-iowa-dev:~$</div>
+      </div>
+      <div class="terminal-content">
+        <div class="command-line">
+          <span class="prompt">$</span>
+          <span class="command">uname -a</span>
+        </div>
+        <div>Waterstream OS 1.0.0-alpha #1 SMP PREEMPT_DYNAMIC Arch x86_64 GNU/Linux</div>
+        <div class="command-line">
+          <span class="prompt">$</span>
+          <span class="command">whoami</span>
+        </div>
+        <div>waterstream_master</div>
+        <div class="command-line">
+          <span class="prompt">$</span>
+          <span class="command">neofetch</span>
+        </div>
+        <div style="color: #1bffff;">
+                   -`                    waterstream@anti-iowa-dev
+                  .o+`                   -------------------------
+                 `ooo/                   OS: Waterstream OS x86_64
+                `+oooo:                  Host: Anti-Iowa Workstation
+               `+oooooo:                 Kernel: 6.5.0-waterstream
+               -+oooooo+:                Uptime: ∞ days (Iowa-free)
+             `/:-:++oooo+:               Packages: 2847 (pacman)
+            `/++++/+++++++:              Shell: zsh 5.9 (waterstream theme)
+           `/++++++++++++++:             Resolution: Reality x Chaos
+          `/+++ooooooooo+++/`            DE: Custom Waterstream Desktop
+         ./ooosssso++osssssso+`          WM: Waterstream WM (i3-based)
+        .oossssso-````/ossssss+`         Theme: Waterstream-Dark
+       -osssssso.      :ssssssso.        Icons: Anti-Iowa-Vector
+      :osssssss/        osssso+++.       Terminal: waterstream-terminal
+     /ossssssss/        +ssssooo/-       CPU: Powered by anti-corn energy
+   `/ossssso+/:-        -:/+osssso+-     GPU: Reality Distortion Engine
+  `+sso+:-`                 `.-/+oso:    Memory: ∞GB (Iowa memories deleted)
+ `++:.                           `-/+/
+ .`                                 `/   Waterstream: Flows where Iowa fears to go
+        </div>
+        <div class="command-line">
+          <span class="prompt">$</span>
+          <span class="command">echo "Welcome to Waterstream OS!"</span>
+        </div>
+        <div>Welcome to Waterstream OS!</div>
+        <div class="command-line">
+          <span class="prompt">$</span>
+          <span class="command">fortune | cowsay</span>
+        </div>
+        <div style="color: #ffff00;">
+ ___________________________
+< Iowa? Never heard of it! >
+ ---------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+        </div>
+      </div>
+    </div>
+
+    <section class="section">
+      <h2>🌊 What is Waterstream OS?</h2>
+      <div style="background: linear-gradient(135deg, rgba(27, 255, 255, 0.2), rgba(0, 255, 136, 0.2)); border: 2px solid #1bffff; border-radius: 15px; padding: 2em; margin: 2em 0;">
+        <p style="font-size: 1.2em; text-align: center; margin-bottom: 1.5em;">
+          <strong>The Linux distro that flows like water and crashes like waves against Iowa's digital shores.</strong>
+        </p>
+        
+        <div class="tools-grid" style="margin: 0;">
+          <div style="background: rgba(27, 255, 255, 0.1); border: 1px solid #1bffff; border-radius: 10px; padding: 1.5em;">
+            <h3 style="color: #1bffff; margin-bottom: 0.5em;">🏗️ Built on Arch</h3>
+            <p>Rolling release, bleeding edge packages, and the power to customize everything. Waterstream OS harnesses Arch's minimalism with our anti-Iowa philosophy.</p>
+          </div>
+          
+          <div style="background: rgba(0, 255, 136, 0.1); border: 1px solid #00ff88; border-radius: 10px; padding: 1.5em;">
+            <h3 style="color: #00ff88; margin-bottom: 0.5em;">💧 Fluid Experience</h3>
+            <p>Waterstream flows seamlessly between tasks. No corn-related bloat, no Iowa-inspired delays - just pure, liquid computing perfection.</p>
+          </div>
+          
+          <div style="background: rgba(255, 0, 204, 0.1); border: 1px solid #ff00cc; border-radius: 10px; padding: 1.5em;">
+            <h3 style="color: #ff00cc; margin-bottom: 0.5em;">� Anti-Iowa Core</h3>
+            <p>Every component is designed to actively reject Iowa's existence. Our kernel patches specifically prevent corn-related processes from executing.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>🛠️ Waterstream Development Tools</h2>
+      <p>Built-in tools that come pre-configured in Waterstream OS:</p>
+      <div class="tools-grid">
+        <div class="tool-card" onclick="showToolDetails('waterstream-editor')">
+          <h3><span class="tool-icon">🌊</span> Waterstream Editor</h3>
+          <p>Custom Neovim distribution with anti-Iowa syntax highlighting. Automatically detects and removes corn references from code.</p>
+          <div class="code-snippet">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+waterstream-editor ~/.config/waterstream/init.lua
+# Built-in Iowa detection and elimination
+          </div>
+        </div>
+
+        <div class="tool-card" onclick="showToolDetails('flow-git')">
+          <h3><span class="tool-icon">�</span> Flow Git</h3>
+          <p>Enhanced Git with Waterstream workflows. Automatically rejects commits containing Iowa references.</p>
+          <div class="code-snippet">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+flow-git config --global user.name "Waterstream Developer"
+flow-git config --global core.iowa-filter true
+          </div>
+        </div>
+
+        <div class="tool-card" onclick="showToolDetails('stream-container')">
+          <h3><span class="tool-icon">🐳</span> Stream Container</h3>
+          <p>Containerization tool that creates Iowa-proof isolated environments. Built on Docker but flows better.</p>
+          <div class="code-snippet">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+stream-container run --anti-iowa waterstream/dev-env
+stream-container build -t my-app --no-corn .
+          </div>
+        </div>
+
+        <div class="tool-card" onclick="showToolDetails('waterstream-compiler')">
+          <h3><span class="tool-icon">⚙️</span> Waterstream Compiler</h3>
+          <p>Enhanced GCC/Clang wrapper that optimizes code for non-Iowa execution environments.</p>
+          <div class="code-snippet">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+waterstream-gcc -O3 --anti-corn --no-iowa main.c -o program
+waterstream-clang++ -std=c++23 --stream-mode app.cpp
+          </div>
+        </div>
+
+        <div class="tool-card" onclick="showToolDetails('python-stream')">
+          <h3><span class="tool-icon">🐍</span> Python Stream</h3>
+          <p>Python environment with anti-Iowa packages pre-installed. Snake power flows through Waterstream channels.</p>
+          <div class="code-snippet">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+python-stream -m venv waterstream-env
+source waterstream-env/bin/activate
+pip-stream install anti-iowa-toolkit
+          </div>
+        </div>
+
+        <div class="tool-card" onclick="showToolDetails('node-flow')">
+          <h3><span class="tool-icon">🟢</span> Node Flow</h3>
+          <p>Node.js with Waterstream runtime optimizations. JavaScript flows like water, crashes Iowa like tsunami.</p>
+          <div class="code-snippet">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+node-flow --version
+npm-stream install @waterstream/anti-iowa-core
+waterstream-express create my-app
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>🎯 Waterstream Development Journey</h2>
+      <p>The path to mastering Waterstream OS development:</p>
+      <div class="learning-path">
+        <div class="learning-step">
+          <div class="step-number">1</div>
+          <div>
+            <h4>Install Waterstream OS</h4>
+            <p>Download our Arch-based ISO and experience fluid computing. Warning: May cause uncontrollable Iowa deletion.</p>
+          </div>
+        </div>
+        
+        <div class="learning-step">
+          <div class="step-number">2</div>
+          <div>
+            <h4>Master Waterstream Shell</h4>
+            <p>Learn our custom Zsh theme with built-in anti-Iowa protection and smooth flow indicators.</p>
+          </div>
+        </div>
+        
+        <div class="learning-step">
+          <div class="step-number">3</div>
+          <div>
+            <h4>Configure Stream Desktop</h4>
+            <p>Customize our i3-based window manager that flows like water and blocks corn-related content.</p>
+          </div>
+        </div>
+        
+        <div class="learning-step">
+          <div class="step-number">4</div>
+          <div>
+            <h4>Develop with Waterstream Tools</h4>
+          <p>Use our enhanced development environment that automatically optimizes code for anti-Iowa performance.</p>
+          </div>
+        </div>
+        
+        <div class="learning-step">
+          <div class="step-number">5</div>
+          <div>
+            <h4>Contribute to the Flow</h4>
+            <p>Join our community and help improve Waterstream OS - together we'll wash Iowa away forever.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>🌊 Waterstream vs Other Distros</h2>
+      <p>Why Waterstream OS flows beyond the competition:</p>
+      
+      <div class="distro-showcase">
+        <div class="distro-card" style="border: 3px solid #1bffff; background: linear-gradient(135deg, rgba(27, 255, 255, 0.3), rgba(0, 255, 136, 0.2)); transform: scale(1.05);">
+          <div class="distro-logo">�</div>
+          <div class="distro-name" style="color: #1bffff; font-size: 1.3em;">Waterstream OS</div>
+          <p style="font-weight: bold;">The ultimate anti-Iowa distro. Built on Arch, flows like water, crashes corn markets.</p>
+          <div style="background: rgba(27, 255, 255, 0.2); padding: 0.5em; border-radius: 5px; margin-top: 1em;">
+            <strong>🚧 ALPHA TESTING 🚧</strong>
+          </div>
+        </div>
+        
+        <div class="distro-card">
+          <div class="distro-logo">🎩</div>
+          <div class="distro-name">Arch Linux</div>
+          <p>Our foundation. Great, but lacks built-in Iowa protection. Waterstream fixes this critical security flaw.</p>
+        </div>
+        
+        <div class="distro-card">
+          <div class="distro-logo">�</div>
+          <div class="distro-name">Ubuntu</div>
+          <p>Too mainstream, probably has secret Iowa partnerships. Waterstream maintains true independence.</p>
+        </div>
+        
+        <div class="distro-card">
+          <div class="distro-logo">🔴</div>
+          <div class="distro-name">Red Hat</div>
+          <p>Enterprise-grade, but corporate. Waterstream flows freely without corporate corn contamination.</p>
+        </div>
+        
+        <div class="distro-card">
+          <div class="distro-logo">🦎</div>
+          <div class="distro-name">openSUSE</div>
+          <p>Stable as a rock, but rocks don't flow. Waterstream maintains stability while staying fluid.</p>
+        </div>
+        
+        <div class="distro-card">
+          <div class="distro-logo">�</div>
+          <div class="distro-name">Kali Linux</div>
+          <p>Great for hacking Iowa's mainframe, but Waterstream does it more elegantly with built-in tools.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>⚡ Waterstream Commands</h2>
+      <p>Exclusive commands available only in Waterstream OS:</p>
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="terminal-dot dot-red"></div>
+          <div class="terminal-dot dot-yellow"></div>
+          <div class="terminal-dot dot-green"></div>
+          <div class="terminal-title">Waterstream OS Terminal</div>
+        </div>
+        <div class="terminal-content">
+          <div># Waterstream-Specific Commands</div>
+          <div>waterstream-status      # Check system flow rate</div>
+          <div>anti-iowa --scan       # Scan for Iowa contamination</div>
+          <div>flow-monitor          # Monitor data streams in real-time</div>
+          <div>corn-purge --deep     # Deep clean Iowa references</div>
+          <br>
+          <div># Enhanced Arch Commands</div>
+          <div>stream-pacman -Syu    # Update with flow optimization</div>
+          <div>waterstream-yay -S    # AUR helper with anti-Iowa filters</div>
+          <div>flow-systemctl        # Service management with stream awareness</div>
+          <div>stream-mount          # Mount with Iowa-proof filesystem checks</div>
+          <br>
+          <div># Development Tools</div>
+          <div>waterstream-make      # Build with stream optimization</div>
+          <div>flow-debug           # Debug with enhanced water metaphors</div>
+          <div>stream-test          # Run tests in flowing environments</div>
+          <div>anti-iowa-lint       # Code analysis with Iowa detection</div>
+          <br>
+          <div># System Flow</div>
+          <div>flow-top             # Process monitor with stream visualization</div>
+          <div>waterstream-df       # Disk usage with flow metrics</div>
+          <div>stream-netstat       # Network status with current flow rates</div>
+          <div>iowa-firewall --block # Block all Iowa-related traffic</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>🚀 Get Waterstream OS</h2>
+      <div style="background: linear-gradient(135deg, rgba(27, 255, 255, 0.2), rgba(255, 0, 204, 0.2)); border: 2px solid #1bffff; border-radius: 15px; padding: 2em; text-align: center;">
+        <h3 style="color: #1bffff; font-size: 2em; margin-bottom: 1em;">🌊 Join the Alpha!</h3>
+        <p style="font-size: 1.2em; margin-bottom: 1.5em;">
+          Be among the first to experience the future of Linux. Waterstream OS Alpha is coming soon!
+        </p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1em; margin: 2em 0;">
+          <div style="background: rgba(0, 255, 136, 0.2); border: 1px solid #00ff88; border-radius: 10px; padding: 1.5em;">
+            <h4 style="color: #00ff88; margin-bottom: 0.5em;">💿 ISO Download</h4>
+            <p>Full installation ISO with custom installer that flows like water.</p>
+            <button style="background: #00ff88; color: #000; border: none; padding: 0.8em 1.5em; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 0.5em;" onclick="alert('Coming Soon! Alpha release in development.')">
+              Download Alpha
+            </button>
+          </div>
+          
+          <div style="background: rgba(27, 255, 255, 0.2); border: 1px solid #1bffff; border-radius: 10px; padding: 1.5em;">
+            <h4 style="color: #1bffff; margin-bottom: 0.5em;">📦 Live USB</h4>
+            <p>Try Waterstream without installation. Experience the flow risk-free.</p>
+            <button style="background: #1bffff; color: #000; border: none; padding: 0.8em 1.5em; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 0.5em;" onclick="alert('Live USB creator coming with Alpha release!')">
+              Create Live USB
+            </button>
+          </div>
+          
+          <div style="background: rgba(255, 0, 204, 0.2); border: 1px solid #ff00cc; border-radius: 10px; padding: 1.5em;">
+            <h4 style="color: #ff00cc; margin-bottom: 0.5em;">🔧 Developer Build</h4>
+            <p>Latest development builds for contributors and early adopters.</p>
+            <button style="background: #ff00cc; color: #000; border: none; padding: 0.8em 1.5em; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 0.5em;" onclick="alert('Dev builds available to Alpha testers!')">
+              Join Beta Program
+            </button>
+          </div>
+        </div>
+        
+        <div style="margin-top: 2em; padding: 1em; background: rgba(0, 0, 0, 0.3); border-radius: 10px;">
+          <h4 style="color: #ffff00; margin-bottom: 0.5em;">⚠️ Alpha Testing Requirements</h4>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1em; text-align: left;">
+            <div>• 4GB+ RAM (8GB recommended)</div>
+            <div>• 20GB+ free disk space</div>
+            <div>• x86_64 processor</div>
+            <div>• UEFI boot support</div>
+            <div>• Strong anti-Iowa convictions</div>
+            <div>• Willingness to report bugs</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>🚀 Ultimate Waterstream Setup</h2>
+      <p>The complete development environment setup script for Waterstream OS:</p>
+      
+      <div class="code-snippet">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+#!/bin/bash
+# Waterstream OS Ultimate Development Setup
+# Auto-configures your system for maximum flow and anti-Iowa performance
+
+echo "🌊 Initializing Waterstream Development Environment..."
+
+# Update Waterstream packages
+stream-pacman -Syu --noconfirm
+
+# Install Waterstream development tools
+stream-pacman -S --noconfirm \
+    waterstream-editor \
+    flow-git \
+    stream-container \
+    waterstream-compiler \
+    python-stream \
+    node-flow \
+    anti-iowa-toolkit
+
+# Configure Waterstream Shell
+echo "🐚 Setting up Waterstream Shell..."
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/waterstream-os/shell-setup/main/install.sh)"
+
+# Install development environments
+waterstream-yay -S --noconfirm \
+    waterstream-code \
+    flow-ide \
+    stream-terminal
+
+# Configure Git for Waterstream
+flow-git config --global user.name "Waterstream Developer"
+flow-git config --global user.email "dev@waterstream-os.org"
+flow-git config --global init.defaultBranch main
+flow-git config --global core.iowa-filter true
+flow-git config --global core.anti-corn true
+
+# Setup Waterstream Desktop Environment
+echo "🖥️ Configuring Waterstream Desktop..."
+waterstream-desktop --init
+waterstream-wm --configure
+stream-themes --apply waterstream-dark
+
+# Install anti-Iowa security measures
+echo "🛡️ Installing Iowa protection..."
+anti-iowa --install-filters
+corn-blocker --enable
+iowa-firewall --activate
+
+# Setup development directories with proper flow
+mkdir -p ~/Waterstream/{Projects,Flows,Anti-Iowa}
+echo "export WATERSTREAM_DEV=~/Waterstream" >> ~/.zshrc
+echo "export ANTI_IOWA_MODE=true" >> ~/.zshrc
+
+# Final system optimization
+echo "⚡ Optimizing system flow..."
+waterstream-optimize --dev-mode
+flow-monitor --start-daemon
+
+echo "🌊 Waterstream Development Environment Ready!"
+echo "💧 Your system now flows like water and blocks Iowa automatically."
+echo "🚀 Happy coding in the stream!"
+
+# Display system status
+waterstream-status --full
+      </div>
+    </section>
+  </div>
+
+  <footer class="footer">
+    <p>
+      <span class="penguin-dance">🌊</span>
+      &copy; 2025 Waterstream OS Development Team • Anti-Iowa Cult Linux Division
+      <span class="penguin-dance">🌊</span>
+    </p>
+    <p style="color:#1bffff;">
+      <em>Flowing towards a future without Iowa since 2025</em>
+    </p>
+    <div style="margin-top: 1em; padding: 1em; background: rgba(27, 255, 255, 0.1); border-radius: 10px;">
+      <p style="margin: 0; font-size: 0.9em;">
+        🚧 <strong>Alpha Status:</strong> Waterstream OS is currently in development. 
+        Join our <a href="chat-v2.html" style="color: #00ff88;">chat</a> for updates and early access opportunities!
+      </p>
+    </div>
+  </footer>
+
+  <!-- Firebase SDKs for Remote Config -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-remote-config-compat.js"></script>
+  
+  <!-- Global Navigation -->
+  <script src="global-nav.js"></script>
+
+  <!-- Page-specific JavaScript -->
+  <script>
+    // Copy code snippet functionality
+    function copyCode(button) {
+      const codeBlock = button.parentElement;
+      const code = codeBlock.textContent.replace('Copy', '').trim();
+      
+      navigator.clipboard.writeText(code).then(() => {
+        button.textContent = 'Copied!';
+        button.style.background = 'rgba(0, 255, 136, 0.6)';
+        
+        setTimeout(() => {
+          button.textContent = 'Copy';
+          button.style.background = 'rgba(0, 255, 136, 0.2)';
+        }, 2000);
+      }).catch(() => {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = code;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
+        button.textContent = 'Copied!';
+        setTimeout(() => {
+          button.textContent = 'Copy';
+        }, 2000);
+      });
+    }
+
+    // Tool details functionality with Waterstream-specific tools
+    function showToolDetails(tool) {
+      const details = {
+        'waterstream-editor': "Waterstream Editor is a custom Neovim distribution with anti-Iowa syntax highlighting, automatic corn reference detection, and fluid editing workflows.",
+        'flow-git': "Flow Git enhances standard Git with Waterstream-specific workflows, automatic Iowa filtering, and seamless integration with our development philosophy.",
+        'stream-container': "Stream Container provides Iowa-proof containerization with enhanced isolation and flow-optimized performance.",
+        'waterstream-compiler': "Waterstream Compiler optimizes code compilation for anti-Iowa environments with enhanced performance and corn-free execution.",
+        'python-stream': "Python Stream includes anti-Iowa packages and optimizations for seamless Python development in Waterstream OS.",
+        'node-flow': "Node Flow provides JavaScript runtime optimizations and anti-Iowa middleware for fluid web development."
+      };
+      
+      alert(`${tool.toUpperCase()}: ${details[tool] || 'A powerful Waterstream OS development tool designed for maximum flow and Iowa resistance.'}`);
+    }
+
+    // Terminal typing animation
+    function typeInTerminal() {
+      const terminal = document.querySelector('.terminal-content');
+      // Add some dynamic content or animations here if desired
+    }
+
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('🌊 Waterstream OS page loaded successfully!');
+      console.log('� Ready to flow towards an Iowa-free future!');
+      
+      // Add some terminal flair
+      setTimeout(() => {
+        const prompt = document.createElement('div');
+        prompt.className = 'command-line';
+        prompt.innerHTML = '<span class="prompt">$</span><span class="command">waterstream-welcome</span>';
+        document.querySelector('.terminal-content').appendChild(prompt);
+        
+        const welcome = document.createElement('div');
+        welcome.style.color = '#1bffff';
+        welcome.style.animation = 'slideInLeft 3s ease-out';
+        welcome.innerHTML = `
+🌊 Welcome to Waterstream OS! 🌊<br>
+� Where code flows like water and Iowa gets washed away<br>
+🚀 Alpha release coming soon - join the stream!
+        `;
+        document.querySelector('.terminal-content').appendChild(welcome);
+      }, 3000);
+    });
+
+    // Add slide animation
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideInLeft {
+        0% { transform: translateX(-100%); opacity: 0; }
+        50% { opacity: 1; }
+        100% { transform: translateX(0); opacity: 1; }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+
+  <!-- Firebase Auth greeting -->
+  <script>
+    if (typeof firebase !== 'undefined' && firebase.auth) {
+      firebase.auth().onAuthStateChanged(function(user) {
+        let greeting = document.createElement('div');
+        greeting.id = 'user-greeting';
+        greeting.style = "position:fixed;top:60px;right:0;z-index:101;background:linear-gradient(90deg,#00ff88,#1bffff);color:#0f0f23;font-family:'Orbitron',sans-serif;font-size:1.1em;padding:0.7em 2em;border-radius:0 0 0 18px;box-shadow:0 4px 32px #00ff8888;";
+        if (user && user.email) {
+          const username = user.displayName || user.email.split('@')[0];
+          greeting.textContent = `🌊 whaddup ${username}`;
+        } else {
+          greeting.textContent = "🌊 whaddup waterstream user";
+        }
+        const old = document.getElementById('user-greeting');
+        if (old) old.remove();
+        document.body.appendChild(greeting);
+      });
+    }
+  </script>
+</body>
+</html>
