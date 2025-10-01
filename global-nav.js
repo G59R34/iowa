@@ -119,6 +119,11 @@ class GlobalNav {
                             <span class="link-text">Walmart Supercenter</span>
                             <span class="link-desc">Iowa explosion experience</span>
                         </a>
+                            <a href="porcupine-hype.html" class="nav-link" data-page="porcupine-hype">
+                                <span class="link-icon">🦔</span>
+                                <span class="link-text">Porcupine Simulator</span>
+                                <span class="link-desc">Shakesperian study-level hype</span>
+                            </a>
                             <a href="tesla-supercharger.html" class="nav-link" data-page="tesla-supercharger">
                                 <span class="link-icon">🔋</span>
                                 <span class="link-text">Tesla Supercharger</span>
