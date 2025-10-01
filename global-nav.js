@@ -99,6 +99,11 @@ class GlobalNav {
                             <span class="link-text">Experience Iowa</span>
                             <span class="link-desc">Delete corn game</span>
                         </a>
+                        <a href="toilet.html" class="nav-link" data-page="toilet">
+                            <span class="link-icon">🚽</span>
+                            <span class="link-text">Study Level Toilet</span>
+                            <span class="link-desc">The ultimate toilet sim</span>
+                        </a>
                         <a href="altima-sim.html" class="nav-link" data-page="altima-sim">
                             <span class="link-icon">🚗</span>
                             <span class="link-text">Altima Sim</span>
@@ -114,6 +119,11 @@ class GlobalNav {
                             <span class="link-text">Walmart Supercenter</span>
                             <span class="link-desc">Iowa explosion experience</span>
                         </a>
+                            <a href="tesla-supercharger.html" class="nav-link" data-page="tesla-supercharger">
+                                <span class="link-icon">🔋</span>
+                                <span class="link-text">Tesla Supercharger</span>
+                                <span class="link-desc">Study level charger sim</span>
+                            </a>
                         <a href="clock.html" class="nav-link" data-page="clock">
                             <span class="link-icon">⏰</span>
                             <span class="link-text">Wacky Clock</span>

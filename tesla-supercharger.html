@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tesla Supercharger Simulator</title>
+    <link rel="stylesheet" href="tesla-supercharger.css">
+</head>
+<body>
+    <nav id="global-nav"></nav>
+    <div class="supercharger-bg"></div>
+    <main class="supercharger-main">
+        <h1 class="supercharger-title">Tesla Supercharger Simulator</h1>
+        <section id="simulator" class="supercharger-card">
+            <div class="charger">
+                <div class="car" id="car">
+                    <div class="car-top"></div>
+                    <div class="car-window"></div>
+                    <div class="car-wheel left"></div>
+                    <div class="car-wheel right"></div>
+                    <div class="battery" id="car-battery"></div>
+                    <div class="explosion" id="explosion" style="display:none;">
+                        <div class="flames">
+                            <div class="flame f1"></div>
+                            <div class="flame f2"></div>
+                            <div class="flame f3"></div>
+                            <div class="flame f4"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cable" id="cable" draggable="true"></div>
+                <div class="status">Idle</div>
+            </div>
+            <div class="supercharger-btns">
+                <button id="start-charge" disabled>Start Charging</button>
+                <button id="stop-charge" disabled>Stop Charging</button>
+            </div>
+            <div class="charge-info">
+                <label>Battery Level: <span id="battery-level">20</span>%</label>
+                <progress id="battery-progress" value="20" max="100"></progress>
+            </div>
+        </section>
+    </main>
+    <script src="tesla-supercharger.js"></script>
+    <script src="global-nav.js"></script>
+</body>
+</html>

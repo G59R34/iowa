@@ -1,0 +1,235 @@
+/* Toilet Simulator Styles */
+.toilet-simulator {
+  position: relative;
+  z-index: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Orbitron', 'Comic Neue', sans-serif;
+}
+.toilet-container {
+  background: rgba(44, 62, 80, 0.85);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(27, 255, 255, 0.4);
+  padding: 2rem;
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 2rem;
+  border: 2px solid #1bffff;
+}
+#toiletCanvas {
+  width: 100%;
+  height: 500px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  border: 2px solid rgba(27, 255, 255, 0.3);
+}
+.toilet-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.control-panel {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 2px solid #ff00cc;
+}
+.control-panel h2 {
+  color: #ff00cc;
+  text-align: center;
+  margin: 0 0 1.5rem 0;
+  font-size: 1.5em;
+  text-shadow: 0 0 10px #ff00cc;
+}
+.gauge-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.gauge {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  height: 120px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(27, 255, 255, 0.3);
+}
+.gauge-fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: linear-gradient(0deg, #1bffff 0%, #ff00cc 100%);
+  transition: height 0.3s ease;
+}
+.gauge-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 0.8em;
+  text-align: center;
+  text-shadow: 0 0 5px #1bffff;
+  white-space: nowrap;
+}
+.button-panel {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.control-btn {
+  background: linear-gradient(135deg, #1bffff 0%, #ff00cc 100%);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  padding: 1rem;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+.control-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(27, 255, 255, 0.4);
+}
+.control-btn:active {
+  transform: scale(0.95);
+}
+.flush-btn {
+  background: linear-gradient(135deg, #ff00cc 0%, #ff6b6b 100%);
+}
+.fill-btn {
+  background: linear-gradient(135deg, #1bffff 0%, #4CAF50 100%);
+}
+.lid-btn {
+  background: linear-gradient(135deg, #ffff00 0%, #ff9800 100%);
+}
+.advanced-controls {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+}
+.slider-control {
+  margin-bottom: 1rem;
+}
+.slider-control label {
+  display: block;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  font-size: 0.9em;
+  text-shadow: 0 0 5px #1bffff;
+}
+.slider-control input[type="range"] {
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(27, 255, 255, 0.2);
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.slider-control input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ff00cc;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(255, 0, 204, 0.5);
+}
+.status-panel {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 2px solid #ffff00;
+}
+.status-panel h3 {
+  color: #ffff00;
+  margin: 0 0 1rem 0;
+  font-size: 1.2em;
+  text-shadow: 0 0 10px #ffff00;
+}
+.status-messages {
+  height: 150px;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+  font-family: 'Comic Neue', sans-serif;
+  color: #fff;
+  font-size: 0.9em;
+  line-height: 1.4;
+}
+.status-message {
+  margin-bottom: 0.5rem;
+  padding-left: 20px;
+  position: relative;
+}
+.status-message::before {
+  content: '>';
+  position: absolute;
+  left: 5px;
+  color: #1bffff;
+}
+@media (max-width: 1024px) {
+  .toilet-container {
+    grid-template-columns: 1fr;
+  }
+  #toiletCanvas {
+    height: 400px;
+  }
+}
+@media (max-width: 768px) {
+  .toilet-simulator {
+    padding: 1rem;
+  }
+  .toilet-container {
+    padding: 1rem;
+  }
+  .gauge-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .button-panel {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+  }
+  .control-btn {
+    padding: 0.8rem;
+    font-size: 0.85em;
+  }
+}
+@media (max-width: 480px) {
+  .toilet-container {
+    border-radius: 16px;
+    padding: 0.8rem;
+  }
+  #toiletCanvas {
+    height: 300px;
+  }
+  .gauge-container {
+    grid-template-columns: 1fr;
+  }
+  .gauge {
+    height: 80px;
+  }
+  .button-panel {
+    grid-template-columns: 1fr;
+  }
+  .control-panel h2 {
+    font-size: 1.2em;
+  }
+  .status-panel {
+    padding: 1rem;
+  }
+  .status-messages {
+    height: 120px;
+  }
+}
