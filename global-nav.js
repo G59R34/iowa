@@ -124,6 +124,11 @@ class GlobalNav {
                                 <span class="link-text">Porcupine Simulator</span>
                                 <span class="link-desc">Shakesperian study-level hype</span>
                             </a>
+                            <a href="sink-hype.html" class="nav-link" data-page="sink-hype">
+                                <span class="link-icon">🚰</span>
+                                <span class="link-text">Sink Hype</span>
+                                <span class="link-desc">Ultimate sink experience</span>
+                            </a>
                             <a href="tesla-supercharger.html" class="nav-link" data-page="tesla-supercharger">
                                 <span class="link-icon">🔋</span>
                                 <span class="link-text">Tesla Supercharger</span>
