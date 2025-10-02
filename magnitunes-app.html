@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Magnitunes Web App Player</title>
+  <link rel="icon" type="image/png" href="cutie.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="magnitunes.css" />
+  <script defer src="global-nav.js"></script>
+  <style>
+    body { background:#080d10; }
+    .mt-app-appmode .mt-logo:after { content:' WEB MODE'; font-size:.55rem; margin-left:4px; letter-spacing:1px; background:rgba(0,255,136,0.15); padding:3px 6px; border-radius:6px; color:var(--mt-accent); }
+    .mt-app-appmode .mt-hero h1 { font-size: clamp(2rem,5.5vw,3.4rem); }
+    .mt-badge-app { font-size:.55rem; letter-spacing:1px; padding:4px 10px; border-radius:20px; background:rgba(0,255,136,0.15); color:var(--mt-accent); margin-left:8px; }
+    .mt-app-link { font-size:.55rem; letter-spacing:.7px; text-transform:uppercase; color:var(--mt-text-dim); }
+    .mt-app-link:hover { color:var(--mt-text); }
+  </style>
+</head>
+<body>
+  <div id="magnitunes-app" class="mt-app mt-app-appmode">
+    <aside class="mt-sidebar">
+      <div class="mt-logo">🎵 Magnitunes</div>
+      <nav class="mt-nav">
+        <div class="mt-nav-group">CORE</div>
+        <a class="mt-nav-btn" href="magnitunes.html">← Back Hub</a>
+        <button class="mt-nav-btn is-active" data-view="player">Player</button>
+        <button class="mt-nav-btn" data-view="collections">Collections</button>
+        <button class="mt-nav-btn" data-view="history">History</button>
+        <button class="mt-nav-btn" data-view="upcoming">Upcoming</button>
+        <div class="mt-nav-group">FUTURE API</div>
+        <button class="mt-nav-btn" data-view="backend-test">Backend Test (Soon)</button>
+        <button class="mt-nav-btn" data-view="realtime">Realtime Stream</button>
+        <button class="mt-nav-btn" data-view="profile">Profile</button>
+      </nav>
+      <div class="mt-mini-nowplaying" id="mt-mini-nowplaying">
+        <div class="mt-mini-track">No track loaded</div>
+        <div class="mt-mini-controls">
+          <button id="mt-mini-play" disabled>▶</button>
+        </div>
+      </div>
+    </aside>
+    <main class="mt-main">
+      <header class="mt-hero">
+        <div class="mt-hero-content">
+          <h1>Web App Player <span class="mt-badge-app">BETA</span></h1>
+          <p class="mt-tag">This is the dedicated player surface. One day: real backend hooks, session sync, lyrics, device casting. Today: simulated queue energy.</p>
+          <div class="mt-cta-row">
+            <button class="mt-download-cta" id="mt-start-demo">Load Demo Queue</button>
+            <a class="mt-ghost-btn" href="magnitunes-installer.exe" download>Get Desktop</a>
+          </div>
+          <div class="mt-meta-hint">Prototype mode • State persists locally • Backend endpoints pending awakening</div>
+        </div>
+      </header>
+
+      <section class="mt-section" id="mt-section-player">
+        <h2 class="mt-section-title">Now Playing</h2>
+        <div class="mt-card-grid" id="mt-now-grid"></div>
+      </section>
+
+      <section class="mt-section is-hidden" id="mt-section-collections">
+        <h2 class="mt-section-title">Collections</h2>
+        <p>Future: User curated vaults & generative shelves.</p>
+      </section>
+
+      <section class="mt-section is-hidden" id="mt-section-history">
+        <h2 class="mt-section-title">Listening History</h2>
+        <p>History tracking not implemented. (Existence tracking of Iowa also not implemented.)</p>
+      </section>
+
+      <section class="mt-section is-hidden" id="mt-section-upcoming">
+        <h2 class="mt-section-title">Upcoming Features</h2>
+        <ul>
+          <li>True audio streaming</li>
+          <li>Account binding & remote queue</li>
+          <li>Procedural ambient engine</li>
+          <li>Social session links</li>
+        </ul>
+      </section>
+
+      <section class="mt-section is-hidden" id="mt-section-backend-test">
+        <h2 class="mt-section-title">Backend Test Harness</h2>
+        <p>Will become a sandbox for hitting API endpoints. For now, it emits JSON ghosts.</p>
+        <pre id="mt-backend-log" style="font-size:.6rem; background:#0d161a; padding:12px 16px; border:1px solid #1c272d; border-radius:10px; max-width:640px; overflow:auto;">{ "status": "offline", "message": "No backend yet." }</pre>
+        <button class="mt-ghost-btn" id="mt-fake-call">Simulate Call</button>
+      </section>
+
+      <section class="mt-section is-hidden" id="mt-section-realtime">
+        <h2 class="mt-section-title">Realtime Stream</h2>
+        <p>Concept placeholder: would show live listeners & waveform timeline.</p>
+      </section>
+
+      <section class="mt-section is-hidden" id="mt-section-profile">
+        <h2 class="mt-section-title">Profile</h2>
+        <p>Anonymous phantom user. Identity syncing disabled.</p>
+      </section>
+    </main>
+
+    <div class="mt-player" id="mt-player">
+      <div class="mt-player-left">
+        <div class="mt-cover" id="mt-cover">🎵</div>
+        <div class="mt-track-info">
+          <div class="mt-track-title" id="mt-track-title">No Track</div>
+          <div class="mt-track-artist" id="mt-track-artist">---</div>
+        </div>
+      </div>
+      <div class="mt-player-center">
+        <div class="mt-player-controls">
+          <button id="mt-prev">⏮</button>
+          <button id="mt-play">▶</button>
+          <button id="mt-next">⏭</button>
+        </div>
+        <div class="mt-progress-row">
+          <span id="mt-current-time">0:00</span>
+          <div class="mt-progress"><div class="mt-progress-bar" id="mt-progress-bar"></div></div>
+          <span id="mt-duration">0:00</span>
+        </div>
+      </div>
+      <div class="mt-player-right">
+        <button id="mt-shuffle" class="mt-small">🔀</button>
+        <button id="mt-repeat" class="mt-small">🔁</button>
+        <button id="mt-clear" class="mt-small">✖</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Light reuse of state logic (duplicated intentionally to keep this page autonomous)
+    const demoPlaylist = [
+      { id:1, title:'Destroy The Corn (Intro Mix)', artist:'Cultwave', dur:162 },
+      { id:2, title:'Altima Night Drive', artist:'Neon Sedan', dur:238 },
+      { id:3, title:'Liz Theme', artist:'Liz', dur:0, src:'res/aud/liz/liz.mp3' },
+      { id:4, title:'Flight Path Over Iowa (Empty)', artist:'A320 Ghost Crew', dur:303 },
+      { id:5, title:'Sink Hype Anthem', artist:'Porcupine Prime', dur:197 }
+    ];
+
+    let queue = []; let index=-1; let playing=false; let progress=0; let timer=null; let shuffle=false; let repeat=false; let audio=null; let usingAudio=false;
+
+    const trackTitle=document.getElementById('mt-track-title');
+    const trackArtist=document.getElementById('mt-track-artist');
+    const cover=document.getElementById('mt-cover');
+    const playBtn=document.getElementById('mt-play');
+    const prevBtn=document.getElementById('mt-prev');
+    const nextBtn=document.getElementById('mt-next');
+    const currentTimeEl=document.getElementById('mt-current-time');
+    const durationEl=document.getElementById('mt-duration');
+    const progressBar=document.getElementById('mt-progress-bar');
+    const miniPlay=document.getElementById('mt-mini-play');
+    const miniTrack=document.querySelector('.mt-mini-track');
+    const shuffleBtn=document.getElementById('mt-shuffle');
+    const repeatBtn=document.getElementById('mt-repeat');
+    const clearBtn=document.getElementById('mt-clear');
+    const startDemo=document.getElementById('mt-start-demo');
+
+    function pad(n){return (n<10?'0':'')+n}
+    function fmt(sec){const m=Math.floor(sec/60);const s=Math.floor(sec%60);return m+':'+pad(s)}
+
+    function renderTrack(){
+      if(index<0||!queue[index]){ trackTitle.textContent='No Track'; trackArtist.textContent='—'; miniTrack.textContent='No track'; miniPlay.disabled=true; return; }
+      const t=queue[index];
+      trackTitle.textContent=t.title; trackArtist.textContent=t.artist; cover.textContent=t.title.charAt(0); miniTrack.textContent=t.title; miniPlay.disabled=false;
+      const effectiveDur = (usingAudio && audio && !isNaN(audio.duration) && audio.duration>0) ? audio.duration : t.dur; if(!t.dur && usingAudio && audio && audio.duration>0){ t.dur=Math.floor(audio.duration); }
+      durationEl.textContent=fmt(effectiveDur||0); currentTimeEl.textContent=fmt(progress); const pct = effectiveDur? (progress/effectiveDur*100) : 0; progressBar.style.width=pct+'%';
+      playBtn.textContent=playing?'❚❚':'▶'; miniPlay.textContent=playing?'❚❚':'▶';
+    }
+    function startPlayback(){
+      clearInterval(timer);
+      const t=queue[index]; usingAudio=!!t.src;
+      if(usingAudio){
+        if(!audio){
+          audio=new Audio(); audio.preload='auto';
+          audio.addEventListener('timeupdate',()=>{ if(!playing) return; progress=audio.currentTime; renderTrack(); });
+          audio.addEventListener('ended',()=>{ next(); });
+          audio.addEventListener('loadedmetadata',()=>{ if(t.dur===0){ t.dur=Math.floor(audio.duration); renderTrack(); } });
+        }
+        if(audio.src!==t.src) audio.src=t.src;
+        audio.currentTime=0; progress=0;
+        audio.play().catch(err=>{ console.warn('Audio play failed fallback',err); usingAudio=false; startTimerFallback(); });
+      } else { startTimerFallback(); }
+    }
+    function startTimerFallback(){ usingAudio=false; clearInterval(timer); timer=setInterval(()=>{ if(!playing) return; const t=queue[index]; progress++; const dur=t.dur||0; if(dur && progress>=dur){ next(); return; } renderTrack(); },1000); }
+    function playIndex(i){ if(!queue.length) return; if(i<0)i=0; if(i>=queue.length)i=0; index=i; progress=0; playing=true; startPlayback(); renderTrack(); persist(); }
+    function next(){ if(!queue.length)return; if(shuffle){ index=Math.floor(Math.random()*queue.length);} else { index++; if(index>=queue.length){ if(repeat) index=0; else { stop(); return; }}} progress=0; playing=true; startPlayback(); renderTrack(); persist(); }
+    function prev(){ if(!queue.length)return; progress<5? index=(index-1+queue.length)%queue.length : progress=0; playing=true; startPlayback(); renderTrack(); persist(); }
+    function stop(){ playing=false; if(audio) audio.pause(); clearInterval(timer); timer=null; renderTrack(); persist(); }
+    function toggle(){ if(!queue.length){ queue=demoPlaylist.slice(); playIndex(0); return;} playing=!playing; if(playing) startPlayback(); else { if(usingAudio && audio) audio.pause(); clearInterval(timer);} renderTrack(); persist(); }
+
+    playBtn.addEventListener('click',toggle); miniPlay.addEventListener('click',toggle); nextBtn.addEventListener('click',next); prevBtn.addEventListener('click',prev); clearBtn.addEventListener('click',()=>{queue=[];index=-1;stop();});
+    shuffleBtn.addEventListener('click',()=>{shuffle=!shuffle; shuffleBtn.classList.toggle('mt-playlist-active',shuffle);});
+    repeatBtn.addEventListener('click',()=>{repeat=!repeat; repeatBtn.classList.toggle('mt-playlist-active',repeat);});
+  document.querySelector('.mt-progress').addEventListener('click',e=>{ if(index<0)return; const r=e.currentTarget.getBoundingClientRect(); const pct=(e.clientX-r.left)/r.width; const t=queue[index]; if(usingAudio && audio && audio.duration){ audio.currentTime=audio.duration*pct; progress=audio.currentTime; } else { const dur=t.dur||0; progress=Math.min(dur,Math.max(0,dur*pct)); } renderTrack(); persist(); });
+    startDemo.addEventListener('click',()=>{ queue=demoPlaylist.slice(); playIndex(0); buildNow(); });
+
+    function buildNow(){
+      const nowGrid=document.getElementById('mt-now-grid');
+      nowGrid.innerHTML='';
+      queue.forEach((t,i)=>{
+        const card=document.createElement('div');
+        card.className='mt-card'+(i===index?' mt-playlist-active':'');
+        card.innerHTML=`<div class='mt-card-title'>${t.title}</div><div class='mt-card-desc'>${t.artist}</div><div class='mt-card-tag'>${Math.floor(t.dur/60)}m</div>`;
+        card.addEventListener('click',()=>playIndex(i));
+        nowGrid.appendChild(card);
+      });
+    }
+
+    // Simple nav switching
+    document.querySelectorAll('.mt-nav-btn').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        if(btn.tagName==='A') return; // leave page
+        document.querySelectorAll('.mt-nav-btn').forEach(b=>b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        const v=btn.dataset.view; document.querySelectorAll('.mt-section').forEach(s=>s.classList.add('is-hidden'));
+        const target=document.getElementById('mt-section-'+v); if(target) target.classList.remove('is-hidden');
+      });
+    });
+
+    // Fake backend call simulation
+    const fakeBtn=document.getElementById('mt-fake-call');
+    const logEl=document.getElementById('mt-backend-log');
+    if(fakeBtn){
+      fakeBtn.addEventListener('click',()=>{
+        logEl.textContent='{ "status": "connecting" }';
+        setTimeout(()=>{ logEl.textContent='{ "status": "failed", "reason": "backend missing in action" }'; },1200);
+      });
+    }
+
+    function persist(){ try{ localStorage.setItem('mt-app-state', JSON.stringify({queue,index,progress,shuffle,repeat})); }catch(e){} }
+    function restore(){ try{ const raw=localStorage.getItem('mt-app-state'); if(!raw) return; const s=JSON.parse(raw); queue=s.queue||[]; index=s.index; progress=s.progress||0; shuffle=!!s.shuffle; repeat=!!s.repeat; }catch(e){} }
+    restore();
+    renderTrack();
+    buildNow();
+  </script>
+  <script defer src="magnitunes.js"></script>
+</body>
+</html>

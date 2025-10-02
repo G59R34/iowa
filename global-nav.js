@@ -204,6 +204,15 @@ class GlobalNav {
                     </div>
                     
                     <div class="menu-section">
+                        <h3 class="section-title">🧩 Applications</h3>
+                        <a href="magnitunes.html" class="nav-link" data-page="magnitunes">
+                            <span class="link-icon">🎵</span>
+                            <span class="link-text">Magnitunes</span>
+                            <span class="link-desc">Stream the anti-corn vibes</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-section">
                         <h3 class="section-title">� Software</h3>
                         <a href="linux.html" class="nav-link" data-page="linux">
                             <span class="link-icon">🐧</span>
@@ -1103,6 +1112,7 @@ class GlobalNav {
             'linda': 'Linda has all the brain-ruining facts! She knows the truth about Iowa.',
             'sniffles': 'Sniffles is our sneezy friend! Even allergies are more real than Iowa.',
             'clock': 'Time is an illusion, just like Iowa! Check out our wacky clock.',
+            'magnitunes': 'Magnitunes is our experimental music streaming hub—tune in for anti-corn frequencies and vibe while exposing the Iowa illusion!',
             'evidence': 'The evidence page has all the proof that Iowa isn\'t real!',
             'about': 'Learn about our cult and our mission to expose the Iowa conspiracy!',
             'what': 'What would you like to know? I can help you navigate the site or discuss the Iowa conspiracy!',

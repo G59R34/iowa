@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Magnitunes – Anti-Corn Streaming</title>
+    <link rel="icon" type="image/png" href="cutie.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="magnitunes.css" />
+    <script defer src="global-nav.js"></script>
+</head>
+<body>
+    <div id="magnitunes-app" class="mt-app">
+        <aside class="mt-sidebar">
+            <div class="mt-logo">🎵 Magnitunes</div>
+            <nav class="mt-nav">
+                <div class="mt-nav-group">EXPLORE</div>
+                <button class="mt-nav-btn is-active" data-view="home">Home</button>
+                <button class="mt-nav-btn" data-view="playlists">Playlists</button>
+                <button class="mt-nav-btn" data-view="radio">Radio (Fake)</button>
+                <button class="mt-nav-btn" data-view="ai-dj">AI DJ (Never)</button>
+                <button class="mt-nav-btn" data-view="gallery">Image Gallery</button>
+                <a class="mt-nav-btn" href="magnitunes-app.html" style="text-decoration:none;">Web App Player ➜</a>
+                <div class="mt-nav-group">SYSTEM</div>
+                <button class="mt-nav-btn" data-view="settings">Settings</button>
+                <button class="mt-download-btn" data-view="download">⬇ Download</button>
+            </nav>
+            <div class="mt-mini-nowplaying" id="mt-mini-nowplaying">
+                <div class="mt-mini-track">No track loaded</div>
+                <div class="mt-mini-controls">
+                    <button id="mt-mini-play" disabled>▶</button>
+                </div>
+            </div>
+        </aside>
+        <main class="mt-main">
+            <header class="mt-hero">
+                <div class="mt-hero-content">
+                    <h1>Magnitunes</h1>
+                    <p class="mt-tag">Anti-corn sonic field generator • Barely functional • Spiritually unstable</p>
+                    <div class="mt-cta-row">
+                        <a href="magnitunes-installer.exe" download class="mt-download-cta" id="mt-download-cta">Download Installer</a>
+                        <button class="mt-ghost-btn" id="mt-open-playlist">Try Demo Playlist</button>
+                    </div>
+                    <div class="mt-meta-hint">Alpha noise engine v0.0.1 • All tracks fictional • Nothing is real (especially Iowa)</div>
+                </div>
+            </header>
+            <section class="mt-section" id="mt-section-home">
+                <h2 class="mt-section-title">Featured Concept Mixes</h2>
+                <div class="mt-card-grid" id="mt-featured-grid"></div>
+            </section>
+            <section class="mt-section is-hidden" id="mt-section-playlists">
+                <h2 class="mt-section-title">Playlists</h2>
+                <div id="mt-playlist-library" class="mt-playlist-library"></div>
+            </section>
+            <section class="mt-section is-hidden" id="mt-section-radio">
+                <h2 class="mt-section-title">Fake Radio Stations</h2>
+                <p>Coming soon: Procedural Midwest Disintegration Streams.</p>
+            </section>
+            <section class="mt-section is-hidden" id="mt-section-ai-dj">
+                <h2 class="mt-section-title">AI DJ Prototype</h2>
+                <p>The AI DJ is meditating on corn collapse. Return later.</p>
+            </section>
+            <section class="mt-section is-hidden" id="mt-section-gallery">
+                <h2 class="mt-section-title">Cult Image Gallery</h2>
+                <div id="mt-gallery" class="mt-gallery-grid">
+                    <div class="mt-gallery-loading">Loading gallery...</div>
+                </div>
+                <p class="mt-disclaimer" style="margin-top:30px;">Images sourced from Unsplash contributors under the Unsplash License (demo set – replace with your own assets for production). Attribution recommended: photos by their respective creators on Unsplash.</p>
+            </section>
+            <section class="mt-section is-hidden" id="mt-section-settings">
+                <h2 class="mt-section-title">Settings</h2>
+                <p>Dark Mode: Permanently Enabled.</p>
+                <p>Data Collection: Only harvesting anti-corn resonance metrics (totally fake).</p>
+            </section>
+            <section class="mt-section is-hidden" id="mt-section-download">
+                <h2 class="mt-section-title">Download Magnitunes</h2>
+                <p>Install the phantom desktop experience. It does less than the web version.</p>
+                <a href="magnitunes-installer.exe" download class="mt-download-big">Download .exe (Totally Safe)</a>
+                <p class="mt-disclaimer">If your OS panics, that means it works.</p>
+            </section>
+        </main>
+        <div class="mt-player" id="mt-player">
+            <div class="mt-player-left">
+                <div class="mt-cover" id="mt-cover">🎵</div>
+                <div class="mt-track-info">
+                    <div class="mt-track-title" id="mt-track-title">No Track</div>
+                    <div class="mt-track-artist" id="mt-track-artist">---</div>
+                </div>
+            </div>
+            <div class="mt-player-center">
+                <div class="mt-player-controls">
+                    <button id="mt-prev">⏮</button>
+                    <button id="mt-play">▶</button>
+                    <button id="mt-next">⏭</button>
+                </div>
+                <div class="mt-progress-row">
+                    <span id="mt-current-time">0:00</span>
+                    <div class="mt-progress"><div class="mt-progress-bar" id="mt-progress-bar"></div></div>
+                    <span id="mt-duration">0:00</span>
+                </div>
+            </div>
+            <div class="mt-player-right">
+                <button id="mt-shuffle" class="mt-small">🔀</button>
+                <button id="mt-repeat" class="mt-small">🔁</button>
+                <button id="mt-clear" class="mt-small">✖</button>
+            </div>
+        </div>
+    </div>
+
+    <script defer src="magnitunes.js"></script>
+</body>
+</html>
