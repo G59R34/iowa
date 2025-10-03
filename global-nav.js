@@ -1096,31 +1096,89 @@ class GlobalNav {
     }
 
     setupAI() {
+        // Base keyword -> primary response map
         this.aiResponses = {
-            'hello': 'Hello! Welcome to the Anti-Iowa Cult! How can I assist you today?',
-            'hi': 'Hi there! Ready to explore the truth about Iowa?',
-            'help': 'I can help you navigate the website, find information about our cult, or just chat about why Iowa isn\'t real!',
-            'iowa': 'Ah yes, Iowa - the government psy-op! It\'s just cornfields and cardboard towns. The truth is out there!',
-            'corn': 'Corn is just a government distraction! They plant it everywhere to make us think Iowa is real.',
-            'join': 'To join our cult, visit the Join page! We\'re always looking for new believers in the Iowa conspiracy.',
-            'game': 'Try our corn deletion game! It\'s therapeutic to destroy virtual corn from the fake state of Iowa.',
-            'drama': 'The cult drama page is where we document all the chaos of adult life. It\'s quite entertaining!',
-            'airbus': 'Check out our Airbus A320 simulator! It\'s a realistic cockpit experience - much more real than Iowa!',
-            'altima': 'The Altima simulator lets you drive like a maniac! Just like how Iowa drives us all crazy!',
-            'tesla': 'Tesla Mode is our electric adventure! Clean energy for a clean mind, free from Iowa propaganda.',
-            'united': 'United Airlines adventures await! Real flying, unlike the fake Iowa flights.',
-            'linda': 'Linda has all the brain-ruining facts! She knows the truth about Iowa.',
-            'sniffles': 'Sniffles is our sneezy friend! Even allergies are more real than Iowa.',
-            'clock': 'Time is an illusion, just like Iowa! Check out our wacky clock.',
-            'magnitunes': 'Magnitunes is our experimental music streaming hub—tune in for anti-corn frequencies and vibe while exposing the Iowa illusion!',
-            'evidence': 'The evidence page has all the proof that Iowa isn\'t real!',
-            'about': 'Learn about our cult and our mission to expose the Iowa conspiracy!',
-            'what': 'What would you like to know? I can help you navigate the site or discuss the Iowa conspiracy!',
-            'how': 'How can I help you today? I\'m here to guide you through our Anti-Iowa Cult website!',
-            'where': 'Where would you like to go? I can help you find any page on our site!',
-            'why': 'Why is Iowa fake? Because it\'s all a government psy-op! Check out our evidence page for proof.',
-            'default': 'That\'s an interesting question! As an AI assistant for the Anti-Iowa Cult, I\'m here to help you explore our conspiracy theories and have fun!'
+            'hello': ['Hello! Welcome to the Anti-Iowa Cult! How can I assist you today?'],
+            'hi': ['Hi there! Ready to explore the truth about Iowa?'],
+            'help': ['I can help you navigate the website, find info about our cult, or just chat about why Iowa isn\'t real!'],
+            'iowa': ['Ah yes, Iowa – the government psy-op! Mere cornfield theatre. The truth is out there!'],
+            'corn': ['Corn is a distraction! Rows and rows of misdirection to sell the Iowa illusion.'],
+            'join': ['Want in? Hit the Join page. Fresh anti-corn recruits always welcome.'],
+            'game': ['Play the corn deletion game – deeply therapeutic anti-propaganda training.'],
+            'drama': ['Cult drama chronicles the chaos. Documented absurdity > fabricated geography.'],
+            'airbus': ['Our Airbus A320 sim: more systems depth than the entire fabricated infrastructure of Iowa.'],
+            'altima': ['Altima Sim lets you unleash chaos—still more grounded in reality than Iowa.'],
+            'tesla': ['Tesla Mode: silent acceleration away from corn-based deception.'],
+            'united': ['United Airlines adventures: real air routes > imaginary Midwest fiction.'],
+            'linda': ['Linda stores forbidden Iowa debunking payloads. Approach carefully.'],
+            'sniffles': ['Sniffles: allergy-powered truth engine. Even pollen outranks Iowa in existence.'],
+            'clock': ['Time? Illusory. Iowa? Doubly so. Observe the wacky clock.'],
+            'magnitunes': ['Magnitunes streams anti-corn resonance frequencies. Tune out the field static.'],
+            'evidence': ['Evidence page: curated deconstruction of agro-geographic fraud.'],
+            'about': ['About page = manifesto of anti-fabrication operations.'],
+            'what': ['Specify your curiosity vector. I have modules for navigation, lore, and corn falsification.'],
+            'how': ['Operational assistance online. State objective; receive guidance.'],
+            'where': ['Target a destination: I can route you to any cult module instantly.'],
+            'why': ['Because it\'s scripted theatre. See Evidence node for multi-layer breakdown.'],
+            'default': ['Interesting input. Processing through anti-propaganda filters... request another angle or ask about pages!']
         };
+
+        // Massive supplemental variants (auto-generated) to keep file maintainable.
+        // We generate themed response fragments and stitch them into 1000+ witty fallbacks.
+        const baseThemes = [
+            'Iowa is a render distance artifact.',
+            'Corn density anomalies detected.',
+            'Adjusting satellite overlays—no primary structures found.',
+            'Deploying anti-corn resonance pulse.',
+            'Geospatial audit: Iowa confidence score < 3%.',
+            'Myth-layer peeling in progress.',
+            'Local reality index exceeds Iowa threshold.',
+            'Recompiling Midwest topology without phantom state.',
+            'Routing around agricultural illusion matrix.',
+            'Encoding counter-lore packets.'
+        ];
+
+        const actionVerbs = [
+            'Calibrating', 'Decrypting', 'Disrupting', 'Scanning', 'Triangulating', 'Simulating', 'Neutralizing', 'Mapping', 'Interrogating', 'Stabilizing'
+        ];
+        const objects = [
+            'corn holograms', 'fabricated county grids', 'GPS misdirections', 'agro-myth packets', 'synthetic soil telemetry', 'grain silo illusions', 'detour narratives', 'field texture layers', 'wind farm placeholders', 'yield projections'
+        ];
+        const endings = [
+            'Stand by...', 'Operation nominal.', 'Deception integrity collapsing.', 'Reality patch applied.', 'Artifact isolation complete.', 'Ready for next query.', 'Who authorized this simulation?', 'Corn mirage diffused.', 'Proceed to Evidence node.', 'Cache flushed.'
+        ];
+
+        // Build a large pool of dynamic fallback lines
+        this.dynamicFallbacks = [];
+        const targetCount = 1100; // ensure >1000
+        for (let i = 0; i < targetCount; i++) {
+            const theme = baseThemes[i % baseThemes.length];
+            const verb = actionVerbs[Math.floor(Math.random() * actionVerbs.length)];
+            const obj = objects[Math.floor(Math.random() * objects.length)];
+            const end = endings[Math.floor(Math.random() * endings.length)];
+            this.dynamicFallbacks.push(`${i+1}. ${theme} ${verb} ${obj}. ${end}`);
+        }
+
+        // Also expand each keyword with extra stylistic variants to diversify matching outputs
+        Object.keys(this.aiResponses).forEach(key => {
+            if (key === 'default') return;
+            const base = this.aiResponses[key][0];
+            const variants = [
+                base,
+                base + ' (v2)',
+                base.replace(/Iowa/gi, 'the phantom grid'),
+                base.replace(/corn/gi, '🌽 corn').replace(/Iowa/gi, 'Iowa*'),
+                '⟨' + base + '⟩',
+                base + ' :: integrity verified'
+            ];
+            this.aiResponses[key] = variants;
+        });
+
+        // Shuffle dynamic fallbacks once for variety (Fisher–Yates)
+        for (let i = this.dynamicFallbacks.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [this.dynamicFallbacks[i], this.dynamicFallbacks[j]] = [this.dynamicFallbacks[j], this.dynamicFallbacks[i]];
+        }
     }
 
     async handleOpenAIAIInput() {
@@ -1227,14 +1285,24 @@ class GlobalNav {
 
     generateAIResponse(message) {
         const lowerMessage = message.toLowerCase();
-        
-        for (const [key, response] of Object.entries(this.aiResponses)) {
-            if (lowerMessage.includes(key)) {
-                return response;
+
+        // Keyword-based selection first
+        for (const [key, responses] of Object.entries(this.aiResponses)) {
+            if (key !== 'default' && lowerMessage.includes(key)) {
+                const arr = Array.isArray(responses) ? responses : [responses];
+                return arr[Math.floor(Math.random() * arr.length)];
             }
         }
-        
-        return this.aiResponses.default;
+
+        // If no keyword matched, rotate through dynamic fallbacks
+        if (!this._fallbackIndex) this._fallbackIndex = 0;
+        const line = this.dynamicFallbacks[this._fallbackIndex % this.dynamicFallbacks.length];
+        this._fallbackIndex++;
+
+        // Occasionally blend a default base line at random for familiarity
+        const defaultArr = this.aiResponses.default;
+        const maybeBlend = Math.random() < 0.25 ? `${defaultArr[0]} ${line}` : line;
+        return maybeBlend;
     }
 
     toggleMenu() {
