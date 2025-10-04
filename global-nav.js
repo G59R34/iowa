@@ -146,63 +146,60 @@ class GlobalNavigation {
         let banner = document.getElementById('motd-banner');
         
         if (!banner) {
-            // Create banner if it doesn't exist
+            // Create small popup banner in top right
             banner = document.createElement('div');
             banner.id = 'motd-banner';
             banner.style.cssText = `
-                width: 100vw;
+                max-width: 300px;
                 position: fixed;
-                top: 0;
-                left: 0;
+                top: 20px;
+                right: 20px;
                 z-index: 100000;
-                background: linear-gradient(90deg, #ff00cc, #1bffff);
+                background: linear-gradient(135deg, rgba(255, 0, 204, 0.95), rgba(27, 255, 255, 0.95));
                 color: #fff;
-                font-family: 'Orbitron', 'Inter', sans-serif;
-                font-size: 1.1em;
-                font-weight: 600;
-                text-align: center;
-                padding: 0.8em 1em;
-                box-shadow: 0 4px 32px rgba(255, 0, 204, 0.5);
+                font-family: 'Inter', sans-serif;
+                font-size: 0.85em;
+                font-weight: 500;
+                padding: 0.6em 0.8em;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(10px);
+                border-radius: 8px;
+                opacity: 0;
+                transform: translateX(100%);
+                transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+                pointer-events: none;
                 display: none;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                border-bottom: 2px solid rgba(255, 255, 255, 0.3);
             `;
-            
-            // Add click to dismiss functionality
-            banner.addEventListener('click', () => {
-                this.playSound('banner', 0.15);
-                banner.style.transform = 'translateY(-100%)';
-                setTimeout(() => {
-                    banner.style.display = 'none';
-                    // Remove banner class from nav
-                    const nav = document.getElementById('global-nav');
-                    if (nav) nav.classList.remove('with-banner');
-                }, 300);
-            });
-
-            // Add hover effect
-            banner.addEventListener('mouseenter', () => {
-                this.playSound('hover', 0.08);
-                banner.style.background = 'linear-gradient(90deg, #ff00cc, #00ff88)';
-            });
-            
-            banner.addEventListener('mouseleave', () => {
-                banner.style.background = 'linear-gradient(90deg, #ff00cc, #1bffff)';
-            });
 
             document.body.appendChild(banner);
         }
 
+        // Set message and show popup
         banner.textContent = message;
-        banner.style.display = 'block';
-        banner.style.transform = 'translateY(0)';
         
-        // Add banner class to nav to adjust its position
-        const nav = document.getElementById('global-nav');
-        if (nav) {
-            nav.classList.add('with-banner');
+        // Clear any existing timeout to prevent conflicts
+        if (banner.hideTimeout) {
+            clearTimeout(banner.hideTimeout);
         }
+        
+        // Show animation
+        banner.style.display = 'block';
+        requestAnimationFrame(() => {
+            banner.style.opacity = '1';
+            banner.style.transform = 'translateX(0)';
+            
+            // Auto-hide after exactly 500ms
+            banner.hideTimeout = setTimeout(() => {
+                banner.style.opacity = '0';
+                banner.style.transform = 'translateX(100%)';
+                
+                // Completely hide element after transition
+                setTimeout(() => {
+                    banner.style.display = 'none';
+                    banner.hideTimeout = null;
+                }, 300); // Wait for transition to complete
+            }, 500);
+        });
     }
 
     // Show default banner when Firebase fails
@@ -444,13 +441,26 @@ class GlobalNavigation {
                     </div>
                     
                     <div class="nav-item dropdown">
+                        <span class="nav-link">🌀 QuantumHeat Store</span>
+                        <div class="dropdown-content">
+                            <a href="quantum-microwave.html">🏠 Home</a>
+                            <a href="quantum-products.html">🛍️ Products</a>
+                            <a href="quantum-configurator.html">⚙️ Configurator</a>
+                            <a href="quantum-checkout.html">� Checkout</a>
+                            <a href="quantum-support.html">�️ Support</a>
+                            <a href="quantum-account.html">� My Account</a>
+                            <a href="quantum-about.html">ℹ️ About Us</a>
+                        </div>
+                    </div>
+
+                    <div class="nav-item dropdown">
                         <span class="nav-link">🔧 Tools & Utilities</span>
                         <div class="dropdown-content">
                             <a href="magnitcode.html">🧲 Magnitcode Team</a>
                             <a href="clock.html">🕐 Clock</a>
                             <a href="linux.html">🐧 Linux</a>
                             <a href="walmart.html">🛒 Walmart</a>
-                            <a href="smart-toaster.html">🍞 Smart Toaster</a>
+                            <a href="smart-toaster.html">� Smart Toaster</a>
                             <a href="download-waterstream.html">💧 Waterstream</a>
                             <a href="belt-loader-wiki.html">📚 Belt Loader Wiki</a>
                         </div>
@@ -536,10 +546,7 @@ class GlobalNavigation {
                 will-change: transform, opacity;
             }
 
-            /* Adjust nav position when banner is visible */
-            .global-nav.with-banner {
-                top: 60px;
-            }
+
 
             .global-nav::before {
                 content: '';

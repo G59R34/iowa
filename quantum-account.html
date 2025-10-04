@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My QuantumHeat Account - Dashboard</title>
+    <link rel="icon" type="image/png" href="cornclubfavicon.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+            z-index: 1000;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: #00d4ff;
+            text-decoration: none;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #00d4ff;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        }
+
+        /* Account Container */
+        .account-container {
+            margin-top: 100px;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 2rem;
+            min-height: calc(100vh - 100px);
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(10, 10, 10, 0.8));
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            height: fit-content;
+            position: sticky;
+            top: 120px;
+        }
+
+        .user-info {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1rem;
+            color: #0a0a0a;
+            font-weight: bold;
+        }
+
+        .user-name {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.3rem;
+            color: #00d4ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .user-status {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-menu li {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-menu a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            background: rgba(0, 212, 255, 0.2);
+            border-left: 3px solid #00d4ff;
+        }
+
+        .nav-icon {
+            font-size: 1.2rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Main Content */
+        .main-content {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(10, 10, 10, 0.8));
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #00d4ff;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Dashboard Overview */
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: #00d4ff;
+            background: rgba(0, 212, 255, 0.2);
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #00d4ff;
+        }
+
+        .stat-value {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Recent Activity */
+        .activity-list {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 1.5rem;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: rgba(0, 212, 255, 0.05);
+            border-radius: 8px;
+            border-left: 3px solid #00d4ff;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 212, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00d4ff;
+        }
+
+        .activity-details {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .activity-time {
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        /* Orders Section */
+        .orders-filter {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(0, 212, 255, 0.2);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            color: #00d4ff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: rgba(0, 212, 255, 0.4);
+            border-color: #00d4ff;
+        }
+
+        .order-card {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .order-card:hover {
+            border-color: #00d4ff;
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .order-number {
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            color: #00d4ff;
+        }
+
+        .order-status {
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-processing {
+            background: rgba(255, 170, 0, 0.2);
+            color: #ffaa00;
+            border: 1px solid rgba(255, 170, 0, 0.3);
+        }
+
+        .status-shipped {
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .status-delivered {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        .order-items {
+            margin-bottom: 1rem;
+        }
+
+        .order-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-image {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #1a1a1a, #0d1421);
+            border: 1px solid #00d4ff;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .order-total {
+            text-align: right;
+            font-family: 'Orbitron', monospace;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #00d4ff;
+        }
+
+        /* Profile Settings Form */
+        .settings-form {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .form-section {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 2rem;
+        }
+
+        .form-section h3 {
+            color: #00d4ff;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .form-input {
+            width: 100%;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 8px;
+            padding: 12px 15px;
+            color: white;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            border-color: #00d4ff;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            color: #0a0a0a;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.4);
+        }
+
+        /* Devices Section */
+        .device-card {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .device-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .device-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .device-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #1a1a1a, #0d1421);
+            border: 2px solid #00d4ff;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .device-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #00ff88;
+        }
+
+        .status-indicator.offline {
+            background: #ff4444;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .account-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+                order: -1;
+            }
+
+            .dashboard-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .orders-filter {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <a href="quantum-microwave.html" class="logo">QuantumHeat</a>
+            <ul class="nav-links">
+                <li><a href="quantum-microwave.html">Home</a></li>
+                <li><a href="quantum-products.html">Products</a></li>
+                <li><a href="quantum-configurator.html">Configure</a></li>
+                <li><a href="quantum-support.html">Support</a></li>
+                <li><a href="quantum-about.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Account Container -->
+    <div class="account-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar">JD</div>
+                <div class="user-name" id="userName">John Doe</div>
+                <div class="user-status">QuantumHeat Pro Owner</div>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-item active" data-section="dashboard">
+                    <span class="nav-icon">📊</span>
+                    <span>Dashboard</span>
+                </a></li>
+                <li><a href="#" class="nav-item" data-section="orders">
+                    <span class="nav-icon">📦</span>
+                    <span>Orders</span>
+                </a></li>
+                <li><a href="#" class="nav-item" data-section="devices">
+                    <span class="nav-icon">🌀</span>
+                    <span>My Devices</span>
+                </a></li>
+                <li><a href="#" class="nav-item" data-section="profile">
+                    <span class="nav-icon">👤</span>
+                    <span>Profile Settings</span>
+                </a></li>
+                <li><a href="#" class="nav-item" data-section="preferences">
+                    <span class="nav-icon">⚙️</span>
+                    <span>Preferences</span>
+                </a></li>
+                <li><a href="#" class="nav-item" data-section="support">
+                    <span class="nav-icon">🛠️</span>
+                    <span>Support</span>
+                </a></li>
+                <li><a href="#" class="nav-item" data-section="logout">
+                    <span class="nav-icon">🚪</span>
+                    <span>Logout</span>
+                </a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Dashboard Section -->
+            <div class="content-section active" id="dashboard">
+                <h1 class="section-title">📊 Dashboard</h1>
+                
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">📦</div>
+                        <div class="stat-value" id="totalOrders">3</div>
+                        <div class="stat-label">Total Orders</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🌀</div>
+                        <div class="stat-value" id="activeDevices">1</div>
+                        <div class="stat-label">Active Devices</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🏆</div>
+                        <div class="stat-value" id="rewardsPoints">2,847</div>
+                        <div class="stat-label">Reward Points</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-value" id="loyaltyLevel">Gold</div>
+                        <div class="stat-label">Loyalty Status</div>
+                    </div>
+                </div>
+
+                <h3 style="color: #00d4ff; margin-bottom: 1rem;">Recent Activity</h3>
+                <div class="activity-list" id="activityList">
+                    <!-- Activity items will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Orders Section -->
+            <div class="content-section" id="orders">
+                <h1 class="section-title">📦 My Orders</h1>
+                
+                <div class="orders-filter">
+                    <button class="filter-btn active" data-filter="all">All Orders</button>
+                    <button class="filter-btn" data-filter="processing">Processing</button>
+                    <button class="filter-btn" data-filter="shipped">Shipped</button>
+                    <button class="filter-btn" data-filter="delivered">Delivered</button>
+                </div>
+
+                <div id="ordersList">
+                    <!-- Orders will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Devices Section -->
+            <div class="content-section" id="devices">
+                <h1 class="section-title">🌀 My Devices</h1>
+                <div id="devicesList">
+                    <!-- Devices will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Profile Section -->
+            <div class="content-section" id="profile">
+                <h1 class="section-title">👤 Profile Settings</h1>
+                
+                <form class="settings-form" id="profileForm">
+                    <div class="form-section">
+                        <h3>Personal Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" class="form-input" value="John">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" class="form-input" value="Doe">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-input" value="john.doe@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-input" value="+1 (555) 123-4567">
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Address Information</h3>
+                        <div class="form-group">
+                            <label for="address">Street Address</label>
+                            <input type="text" id="address" class="form-input" value="123 Quantum Street">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" id="city" class="form-input" value="Tech Valley">
+                            </div>
+                            <div class="form-group">
+                                <label for="state">State</label>
+                                <input type="text" id="state" class="form-input" value="CA">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="zipCode">ZIP Code</label>
+                                <input type="text" id="zipCode" class="form-input" value="94000">
+                            </div>
+                            <div class="form-group">
+                                <label for="country">Country</label>
+                                <input type="text" id="country" class="form-input" value="United States">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Save Changes</button>
+                </form>
+            </div>
+
+            <!-- Preferences Section -->
+            <div class="content-section" id="preferences">
+                <h1 class="section-title">⚙️ Preferences</h1>
+                
+                <div class="settings-form">
+                    <div class="form-section">
+                        <h3>Notification Settings</h3>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" checked> Email notifications for order updates
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" checked> SMS notifications for device alerts
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox"> Marketing emails and promotions
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Device Settings</h3>
+                        <div class="form-group">
+                            <label for="defaultPower">Default Power Level</label>
+                            <select id="defaultPower" class="form-input">
+                                <option value="high">High (100%)</option>
+                                <option value="medium" selected>Medium (70%)</option>
+                                <option value="low">Low (50%)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" checked> Voice control enabled
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" checked> Auto-update firmware
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn-primary" onclick="savePreferences()">Save Preferences</button>
+                </div>
+            </div>
+
+            <!-- Support Section -->
+            <div class="content-section" id="support">
+                <h1 class="section-title">🛠️ Support</h1>
+                
+                <div style="display: grid; gap: 1.5rem;">
+                    <div class="stat-card" style="text-align: left;">
+                        <h3 style="color: #00d4ff; margin-bottom: 1rem;">📞 Contact Support</h3>
+                        <p>24/7 QuantumHeat Support: <strong>1-800-QUANTUM</strong></p>
+                        <p>Email: <strong>support@quantumheat.com</strong></p>
+                        <p>Live Chat available in the <a href="quantum-support.html" style="color: #00d4ff;">Support Center</a></p>
+                    </div>
+                    
+                    <div class="stat-card" style="text-align: left;">
+                        <h3 style="color: #00d4ff; margin-bottom: 1rem;">📖 Resources</h3>
+                        <p><a href="quantum-support.html" style="color: #00d4ff;">• User Manual & FAQ</a></p>
+                        <p><a href="quantum-support.html" style="color: #00d4ff;">• Troubleshooting Guide</a></p>
+                        <p><a href="quantum-support.html" style="color: #00d4ff;">• Video Tutorials</a></p>
+                    </div>
+
+                    <div class="stat-card" style="text-align: left;">
+                        <h3 style="color: #00d4ff; margin-bottom: 1rem;">🛡️ Warranty Status</h3>
+                        <p>Product: <strong>QuantumHeat Pro</strong></p>
+                        <p>Purchased: <strong>January 15, 2025</strong></p>
+                        <p>Warranty: <strong>Active until January 15, 2030</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class QuantumAccount {
+            constructor() {
+                this.currentSection = 'dashboard';
+                this.userData = JSON.parse(localStorage.getItem('quantumUser')) || this.getDefaultUserData();
+                this.orders = JSON.parse(localStorage.getItem('quantumOrders')) || this.getDefaultOrders();
+                this.devices = JSON.parse(localStorage.getItem('quantumDevices')) || this.getDefaultDevices();
+                this.init();
+            }
+
+            init() {
+                this.loadUserData();
+                this.bindEvents();
+                this.renderDashboard();
+                this.renderOrders();
+                this.renderDevices();
+            }
+
+            getDefaultUserData() {
+                return {
+                    firstName: 'John',
+                    lastName: 'Doe',
+                    email: 'john.doe@email.com',
+                    phone: '+1 (555) 123-4567',
+                    address: '123 Quantum Street',
+                    city: 'Tech Valley',
+                    state: 'CA',
+                    zipCode: '94000',
+                    country: 'United States',
+                    joinDate: '2025-01-01',
+                    loyaltyLevel: 'Gold',
+                    rewardPoints: 2847
+                };
+            }
+
+            getDefaultOrders() {
+                return [
+                    {
+                        orderNumber: 'QH-2025-10041234',
+                        date: '2025-10-04',
+                        status: 'processing',
+                        items: [
+                            { name: 'QuantumHeat Pro', quantity: 1, price: 2499, emoji: '🌀' }
+                        ],
+                        total: 2499
+                    },
+                    {
+                        orderNumber: 'QH-2025-09151123',
+                        date: '2025-09-15',
+                        status: 'delivered',
+                        items: [
+                            { name: 'Quantum Turntable Pro', quantity: 1, price: 199, emoji: '🔄' },
+                            { name: 'Smart Quantum Plates Set', quantity: 1, price: 89, emoji: '🍽️' }
+                        ],
+                        total: 288
+                    },
+                    {
+                        orderNumber: 'QH-2025-08301098',
+                        date: '2025-08-30',
+                        status: 'shipped',
+                        items: [
+                            { name: 'QuantumHeat Tech Hoodie', quantity: 2, price: 79, emoji: '👕' }
+                        ],
+                        total: 158
+                    }
+                ];
+            }
+
+            getDefaultDevices() {
+                return [
+                    {
+                        id: 'qh-pro-001',
+                        name: 'QuantumHeat Pro',
+                        model: 'QH-PRO-2025',
+                        status: 'online',
+                        lastSeen: new Date().toISOString(),
+                        firmware: '2.1.4',
+                        serialNumber: 'QH2025ABCD1234'
+                    }
+                ];
+            }
+
+            loadUserData() {
+                document.getElementById('userName').textContent = `${this.userData.firstName} ${this.userData.lastName}`;
+                document.getElementById('userAvatar').textContent = 
+                    this.userData.firstName.charAt(0) + this.userData.lastName.charAt(0);
+                
+                // Load form data
+                Object.keys(this.userData).forEach(key => {
+                    const input = document.getElementById(key);
+                    if (input) {
+                        input.value = this.userData[key];
+                    }
+                });
+            }
+
+            bindEvents() {
+                // Navigation
+                document.querySelectorAll('.nav-item').forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const section = item.dataset.section;
+                        
+                        if (section === 'logout') {
+                            this.logout();
+                            return;
+                        }
+                        
+                        this.showSection(section);
+                    });
+                });
+
+                // Order filters
+                document.querySelectorAll('[data-filter]').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        this.filterOrders(btn.dataset.filter);
+                    });
+                });
+
+                // Profile form
+                document.getElementById('profileForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.saveProfile();
+                });
+            }
+
+            showSection(sectionName) {
+                // Update navigation
+                document.querySelectorAll('.nav-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                document.querySelector(`[data-section="${sectionName}"]`).classList.add('active');
+
+                // Show content section
+                document.querySelectorAll('.content-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(sectionName).classList.add('active');
+
+                this.currentSection = sectionName;
+            }
+
+            renderDashboard() {
+                // Update stats
+                document.getElementById('totalOrders').textContent = this.orders.length;
+                document.getElementById('activeDevices').textContent = this.devices.filter(d => d.status === 'online').length;
+                document.getElementById('rewardsPoints').textContent = this.userData.rewardPoints.toLocaleString();
+                document.getElementById('loyaltyLevel').textContent = this.userData.loyaltyLevel;
+
+                // Render recent activity
+                const activityList = document.getElementById('activityList');
+                const activities = [
+                    {
+                        icon: '🛒',
+                        title: 'New order placed',
+                        time: '2 hours ago'
+                    },
+                    {
+                        icon: '🌀',
+                        title: 'QuantumHeat Pro connected to Wi-Fi',
+                        time: '1 day ago'
+                    },
+                    {
+                        icon: '🔄',
+                        title: 'Firmware updated to v2.1.4',
+                        time: '3 days ago'
+                    },
+                    {
+                        icon: '📦',
+                        title: 'Order QH-2025-09151123 delivered',
+                        time: '1 week ago'
+                    },
+                    {
+                        icon: '⭐',
+                        title: 'Earned 500 reward points',
+                        time: '2 weeks ago'
+                    }
+                ];
+
+                activityList.innerHTML = activities.map(activity => `
+                    <div class="activity-item">
+                        <div class="activity-icon">${activity.icon}</div>
+                        <div class="activity-details">
+                            <div class="activity-title">${activity.title}</div>
+                            <div class="activity-time">${activity.time}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            renderOrders() {
+                const container = document.getElementById('ordersList');
+                container.innerHTML = this.orders.map(order => `
+                    <div class="order-card" data-status="${order.status}">
+                        <div class="order-header">
+                            <div class="order-number">Order #${order.orderNumber}</div>
+                            <div class="order-status status-${order.status}">
+                                ${order.status.charAt(0).toUpperCase() + order.status.slice(1)}
+                            </div>
+                        </div>
+                        <div class="order-items">
+                            ${order.items.map(item => `
+                                <div class="order-item">
+                                    <div class="item-image">${item.emoji}</div>
+                                    <div>${item.name} × ${item.quantity}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="font-size: 0.9rem; opacity: 0.8;">Ordered: ${order.date}</div>
+                            <div class="order-total">$${order.total.toLocaleString()}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            filterOrders(filter) {
+                const orders = document.querySelectorAll('.order-card');
+                orders.forEach(order => {
+                    if (filter === 'all' || order.dataset.status === filter) {
+                        order.style.display = 'block';
+                    } else {
+                        order.style.display = 'none';
+                    }
+                });
+            }
+
+            renderDevices() {
+                const container = document.getElementById('devicesList');
+                container.innerHTML = this.devices.map(device => `
+                    <div class="device-card">
+                        <div class="device-header">
+                            <div class="device-info">
+                                <div class="device-icon">🌀</div>
+                                <div>
+                                    <div style="font-weight: 600; margin-bottom: 0.3rem;">${device.name}</div>
+                                    <div style="font-size: 0.9rem; opacity: 0.8;">Model: ${device.model}</div>
+                                </div>
+                            </div>
+                            <div class="device-status">
+                                <div class="status-indicator ${device.status === 'online' ? '' : 'offline'}"></div>
+                                <span>${device.status === 'online' ? 'Online' : 'Offline'}</span>
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; font-size: 0.9rem;">
+                            <div><strong>Serial Number:</strong><br>${device.serialNumber}</div>
+                            <div><strong>Firmware:</strong><br>v${device.firmware}</div>
+                            <div><strong>Last Seen:</strong><br>${new Date(device.lastSeen).toLocaleDateString()}</div>
+                        </div>
+                        <div style="margin-top: 1rem;">
+                            <button class="btn-primary" style="margin-right: 1rem;">Device Settings</button>
+                            <button class="btn-primary" style="background: rgba(0, 212, 255, 0.2); border: 2px solid #00d4ff; color: #00d4ff;">Run Diagnostics</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            saveProfile() {
+                // Collect form data
+                const formData = new FormData(document.getElementById('profileForm'));
+                const inputs = document.querySelectorAll('#profileForm .form-input');
+                
+                inputs.forEach(input => {
+                    this.userData[input.id] = input.value;
+                });
+
+                // Save to localStorage
+                localStorage.setItem('quantumUser', JSON.stringify(this.userData));
+
+                // Update display
+                this.loadUserData();
+
+                // Show success message
+                this.showNotification('Profile updated successfully!', 'success');
+            }
+
+            savePreferences() {
+                // In a real app, this would save to backend
+                this.showNotification('Preferences saved successfully!', 'success');
+            }
+
+            logout() {
+                if (confirm('Are you sure you want to logout?')) {
+                    // Clear session data
+                    localStorage.removeItem('quantumUserSession');
+                    
+                    // Redirect to login page
+                    alert('Logged out successfully!\n\nIn a real implementation, you would be redirected to the login page.');
+                }
+            }
+
+            showNotification(message, type = 'info') {
+                // Remove existing notification
+                const existing = document.querySelector('.account-notification');
+                if (existing) {
+                    existing.remove();
+                }
+
+                const notification = document.createElement('div');
+                notification.className = 'account-notification';
+                notification.textContent = message;
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 120px;
+                    right: 30px;
+                    padding: 15px 25px;
+                    border-radius: 10px;
+                    font-weight: 600;
+                    z-index: 10001;
+                    animation: slideIn 0.3s ease;
+                    ${type === 'success' ? 'background: rgba(0, 255, 136, 0.9); color: #0a0a0a;' : ''}
+                    ${type === 'error' ? 'background: rgba(255, 68, 68, 0.9); color: white;' : ''}
+                    ${type === 'info' ? 'background: rgba(0, 212, 255, 0.9); color: #0a0a0a;' : ''}
+                `;
+
+                document.body.appendChild(notification);
+
+                setTimeout(() => {
+                    notification.remove();
+                }, 4000);
+            }
+        }
+
+        // Global functions
+        function savePreferences() {
+            window.quantumAccount.savePreferences();
+        }
+
+        // Initialize account system
+        document.addEventListener('DOMContentLoaded', () => {
+            window.quantumAccount = new QuantumAccount();
+        });
+    </script>
+</body>
+</html>

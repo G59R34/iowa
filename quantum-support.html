@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuantumHeat Support - Help & Documentation</title>
+    <link rel="icon" type="image/png" href="cornclubfavicon.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+            z-index: 1000;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: #00d4ff;
+            text-decoration: none;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #00d4ff;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        }
+
+        /* Hero */
+        .hero {
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(ellipse at center, rgba(0, 212, 255, 0.1) 0%, rgba(10, 10, 10, 0.9) 70%);
+            margin-top: 80px;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Support Container */
+        .support-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 3rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Search Bar */
+        .search-section {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(10, 10, 10, 0.8));
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .search-input {
+            flex: 1;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 10px;
+            padding: 15px 20px;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: #00d4ff;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .search-btn {
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            color: #0a0a0a;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.4);
+        }
+
+        .search-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .suggestion-tag {
+            background: rgba(0, 212, 255, 0.2);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            color: #00d4ff;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .suggestion-tag:hover {
+            background: rgba(0, 212, 255, 0.3);
+            border-color: #00d4ff;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(10, 10, 10, 0.8));
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: #00d4ff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        .faq-question {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question:hover {
+            border-color: #00d4ff;
+            background: rgba(0, 212, 255, 0.2);
+        }
+
+        .faq-question.active {
+            border-color: #00d4ff;
+            background: rgba(0, 212, 255, 0.3);
+        }
+
+        .faq-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-question.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 1rem;
+        }
+
+        .faq-answer.active {
+            max-height: 500px;
+            padding: 1rem;
+            background: rgba(0, 212, 255, 0.05);
+            border-radius: 0 0 10px 10px;
+            margin-top: 5px;
+        }
+
+        /* Troubleshooting Guide */
+        .troubleshooting-section {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(10, 10, 10, 0.8));
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .troubleshoot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .troubleshoot-card {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .troubleshoot-card:hover {
+            border-color: #00d4ff;
+            background: rgba(0, 212, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #00d4ff;
+        }
+
+        .card-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #00d4ff;
+        }
+
+        .card-description {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            position: sticky;
+            top: 120px;
+            height: fit-content;
+        }
+
+        /* Live Chat */
+        .live-chat {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(10, 10, 10, 0.8));
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .chat-status {
+            width: 12px;
+            height: 12px;
+            background: #00ff88;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .chat-messages {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            height: 200px;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+        }
+
+        .chat-message {
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border-radius: 8px;
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid #00d4ff;
+        }
+
+        .message-sender {
+            font-weight: 600;
+            color: #00d4ff;
+            font-size: 0.85rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .message-text {
+            font-size: 0.9rem;
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input-field {
+            flex: 1;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 8px;
+            padding: 10px;
+            color: white;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .chat-send-btn {
+            background: rgba(0, 212, 255, 0.3);
+            border: 1px solid #00d4ff;
+            color: #00d4ff;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .chat-send-btn:hover {
+            background: rgba(0, 212, 255, 0.5);
+        }
+
+        /* Contact Info */
+        .contact-info {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(10, 10, 10, 0.8));
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: rgba(0, 212, 255, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: #00d4ff;
+        }
+
+        .contact-details {
+            flex: 1;
+        }
+
+        .contact-label {
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+            color: #00d4ff;
+        }
+
+        .contact-value {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Warranty Info */
+        .warranty-info {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(10, 10, 10, 0.8));
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .warranty-features {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .warranty-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+        }
+
+        .warranty-features li::before {
+            content: '✅';
+            color: #00ff88;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .support-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                order: -1;
+                position: static;
+            }
+
+            .troubleshoot-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .search-box {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* Search Results */
+        .search-results {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .search-results.visible {
+            display: block;
+        }
+
+        .search-result-item {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-result-item:hover {
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .result-title {
+            font-weight: 600;
+            color: #00d4ff;
+            margin-bottom: 0.3rem;
+        }
+
+        .result-snippet {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <a href="quantum-microwave.html" class="logo">QuantumHeat</a>
+            <ul class="nav-links">
+                <li><a href="quantum-microwave.html">Home</a></li>
+                <li><a href="quantum-products.html">Products</a></li>
+                <li><a href="quantum-configurator.html">Configure</a></li>
+                <li><a href="quantum-support.html">Support</a></li>
+                <li><a href="quantum-about.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div>
+            <h1>🛠️ Support Center</h1>
+            <p>Get help with your QuantumHeat products and explore our comprehensive documentation</p>
+        </div>
+    </section>
+
+    <!-- Support Container -->
+    <div class="support-container">
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Search Section -->
+            <div class="search-section">
+                <h2 class="section-title">🔍 Search Help</h2>
+                <div class="search-box">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search for help topics, troubleshooting, or product information...">
+                    <button class="search-btn" id="searchBtn">Search</button>
+                </div>
+                <div class="search-suggestions">
+                    <span class="suggestion-tag" data-query="installation">Installation</span>
+                    <span class="suggestion-tag" data-query="setup">Setup Guide</span>
+                    <span class="suggestion-tag" data-query="error codes">Error Codes</span>
+                    <span class="suggestion-tag" data-query="maintenance">Maintenance</span>
+                    <span class="suggestion-tag" data-query="warranty">Warranty</span>
+                    <span class="suggestion-tag" data-query="app">Mobile App</span>
+                </div>
+                <div class="search-results" id="searchResults">
+                    <!-- Search results will appear here -->
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="faq-section">
+                <h2 class="section-title">❓ Frequently Asked Questions</h2>
+                <div id="faqContainer">
+                    <!-- FAQ items will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Troubleshooting Section -->
+            <div class="troubleshooting-section">
+                <h2 class="section-title">🔧 Troubleshooting Guide</h2>
+                <div class="troubleshoot-grid">
+                    <div class="troubleshoot-card" data-issue="not-heating">
+                        <div class="card-icon">🌡️</div>
+                        <div class="card-title">Not Heating Properly</div>
+                        <div class="card-description">Food is cold or heating unevenly</div>
+                    </div>
+                    <div class="troubleshoot-card" data-issue="display-error">
+                        <div class="card-icon">📱</div>
+                        <div class="card-title">Display Issues</div>
+                        <div class="card-description">Screen blank or showing error codes</div>
+                    </div>
+                    <div class="troubleshoot-card" data-issue="door-problems">
+                        <div class="card-icon">🚪</div>
+                        <div class="card-title">Door Problems</div>
+                        <div class="card-description">Door won't close or latch properly</div>
+                    </div>
+                    <div class="troubleshoot-card" data-issue="noise">
+                        <div class="card-icon">🔊</div>
+                        <div class="card-title">Strange Noises</div>
+                        <div class="card-description">Unusual sounds during operation</div>
+                    </div>
+                    <div class="troubleshoot-card" data-issue="app-connection">
+                        <div class="card-icon">📡</div>
+                        <div class="card-title">App Connection</div>
+                        <div class="card-description">Cannot connect to mobile app</div>
+                    </div>
+                    <div class="troubleshoot-card" data-issue="voice-control">
+                        <div class="card-icon">🎤</div>
+                        <div class="card-title">Voice Control</div>
+                        <div class="card-description">Voice commands not working</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Live Chat -->
+            <div class="live-chat">
+                <div class="chat-header">
+                    <div class="chat-status"></div>
+                    <h3>💬 Live Support</h3>
+                </div>
+                <div class="chat-messages" id="chatMessages">
+                    <div class="chat-message">
+                        <div class="message-sender">QuantumBot</div>
+                        <div class="message-text">Hello! I'm here to help with your QuantumHeat questions. How can I assist you today?</div>
+                    </div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" class="chat-input-field" id="chatInput" placeholder="Type your message...">
+                    <button class="chat-send-btn" id="chatSend">Send</button>
+                </div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="contact-info">
+                <h3 class="section-title">📞 Contact Us</h3>
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <div class="contact-details">
+                        <div class="contact-label">Phone Support</div>
+                        <div class="contact-value">1-800-QUANTUM (786-2688)</div>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-details">
+                        <div class="contact-label">Email Support</div>
+                        <div class="contact-value">support@quantumheat.com</div>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">🕐</div>
+                    <div class="contact-details">
+                        <div class="contact-label">Support Hours</div>
+                        <div class="contact-value">24/7 Quantum Assistance</div>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">🌍</div>
+                    <div class="contact-details">
+                        <div class="contact-label">Service Centers</div>
+                        <div class="contact-value">Find location near you</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Warranty Information -->
+            <div class="warranty-info">
+                <h3 class="section-title">🛡️ Warranty</h3>
+                <p>Your QuantumHeat product is protected by our comprehensive warranty program:</p>
+                <ul class="warranty-features">
+                    <li>5-year full coverage</li>
+                    <li>Quantum components lifetime warranty</li>
+                    <li>Free parts and labor</li>
+                    <li>On-site service available</li>
+                    <li>24/7 emergency support</li>
+                    <li>Extended warranty options</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class QuantumSupport {
+            constructor() {
+                this.faqData = [
+                    {
+                        question: "How do I set up my QuantumHeat Pro for the first time?",
+                        answer: "1. Remove all packaging and protective films\n2. Place on a stable, level surface with 6 inches clearance on all sides\n3. Plug into a grounded outlet (dedicated circuit recommended)\n4. Download the QuantumHeat app and create an account\n5. Follow the in-app setup wizard to connect to Wi-Fi\n6. Run the initial calibration cycle (takes about 5 minutes)\n7. Your QuantumHeat Pro is now ready to use!"
+                    },
+                    {
+                        question: "What are the different AI cooking presets?",
+                        answer: "QuantumHeat Pro includes over 150 AI presets:\n• Reheat (10 variations for different food types)\n• Defrost (Safe molecular-level defrosting)\n• Popcorn (Perfect kernels every time)\n• Beverage (Temperature-controlled heating)\n• Pizza (Crispy crust restoration)\n• Vegetables (Nutrient-preserving steam)\n• Meat & Poultry (Even heating, juicy results)\n• Frozen Meals (Optimized for packaging)\n• Custom presets can be created and shared via the app."
+                    },
+                    {
+                        question: "How does the voice control work?",
+                        answer: "Voice control uses advanced quantum processing:\n• Wake phrase: 'Hey QuantumHeat'\n• Natural language: 'Heat my coffee for 30 seconds'\n• Recipe assistance: 'How do I reheat pizza?'\n• Status queries: 'How much time is left?'\n• Settings: 'Set power to 70 percent'\n• The system learns your preferences over time and supports multiple languages."
+                    },
+                    {
+                        question: "What maintenance is required?",
+                        answer: "QuantumHeat Pro is designed for minimal maintenance:\n• Self-cleaning cycle runs automatically after each use\n• Weekly: Wipe exterior with microfiber cloth\n• Monthly: Clean turntable and support ring\n• Quarterly: Update firmware via app\n• Annually: Professional quantum field calibration (covered under warranty)\n• The plasma ionization system eliminates most bacteria and odors automatically."
+                    },
+                    {
+                        question: "Is it safe to use metal containers?",
+                        answer: "QuantumHeat's advanced field detection makes it safer than traditional microwaves:\n• Small metal items (spoons, forks) are generally safe\n• The system automatically adjusts field patterns to prevent arcing\n• Aluminum foil can be used in small amounts\n• Metal containers designed for microwave use are fully compatible\n• The safety shield monitors continuously and will stop operation if unsafe conditions are detected\n• Always follow the specific guidelines in your user manual."
+                    },
+                    {
+                        question: "How do I troubleshoot connection issues?",
+                        answer: "For Wi-Fi and app connectivity problems:\n1. Ensure your router supports 2.4GHz and 5GHz networks\n2. Check that QuantumHeat is within range of your router\n3. Restart your router and wait 30 seconds\n4. In the app, go to Settings > Wi-Fi > Reconnect\n5. If issues persist, hold the Connect button on the unit for 10 seconds to reset\n6. Re-run the setup wizard in the app\n7. Contact support if problems continue - we offer free network setup assistance."
+                    }
+                ];
+
+                this.searchDatabase = [
+                    { title: "Installation Guide", content: "Step-by-step setup instructions for your QuantumHeat Pro", category: "setup" },
+                    { title: "Error Code E01 - Door Sensor", content: "Door not properly closed or sensor malfunction", category: "troubleshooting" },
+                    { title: "Error Code E02 - Magnetron Issue", content: "Quantum magnetron requires recalibration", category: "troubleshooting" },
+                    { title: "App Setup Tutorial", content: "How to connect your QuantumHeat to the mobile app", category: "app" },
+                    { title: "Voice Command List", content: "Complete list of supported voice commands", category: "features" },
+                    { title: "Cleaning Instructions", content: "Proper maintenance and cleaning procedures", category: "maintenance" },
+                    { title: "Warranty Registration", content: "How to register your product for warranty coverage", category: "warranty" },
+                    { title: "Power Requirements", content: "Electrical specifications and installation requirements", category: "installation" },
+                    { title: "Software Updates", content: "How to update your QuantumHeat firmware", category: "maintenance" },
+                    { title: "Safety Guidelines", content: "Important safety information and precautions", category: "safety" }
+                ];
+
+                this.chatResponses = [
+                    "I understand your concern. Let me help you with that.",
+                    "That's a great question! Here's what I can tell you:",
+                    "I've seen this issue before. The solution is usually:",
+                    "Let me walk you through the troubleshooting steps:",
+                    "Based on your QuantumHeat model, I recommend:",
+                    "This is a common question. The answer depends on:",
+                    "I can help you resolve this. First, let's check:"
+                ];
+
+                this.init();
+            }
+
+            init() {
+                this.renderFAQ();
+                this.bindEvents();
+                this.setupChat();
+                this.setupSearch();
+                this.setupTroubleshooting();
+            }
+
+            renderFAQ() {
+                const container = document.getElementById('faqContainer');
+                container.innerHTML = this.faqData.map((item, index) => `
+                    <div class="faq-item">
+                        <div class="faq-question" data-index="${index}">
+                            <span>${item.question}</span>
+                            <span class="faq-icon">▼</span>
+                        </div>
+                        <div class="faq-answer" id="faq-${index}">
+                            <div>${item.answer.replace(/\n/g, '<br>')}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            bindEvents() {
+                // FAQ toggle
+                document.querySelectorAll('.faq-question').forEach(question => {
+                    question.addEventListener('click', () => {
+                        const index = question.dataset.index;
+                        const answer = document.getElementById(`faq-${index}`);
+                        
+                        // Close other open FAQs
+                        document.querySelectorAll('.faq-question.active').forEach(q => {
+                            if (q !== question) {
+                                q.classList.remove('active');
+                                const otherAnswer = document.getElementById(`faq-${q.dataset.index}`);
+                                otherAnswer.classList.remove('active');
+                            }
+                        });
+                        
+                        // Toggle current FAQ
+                        question.classList.toggle('active');
+                        answer.classList.toggle('active');
+                    });
+                });
+
+                // Search suggestions
+                document.querySelectorAll('.suggestion-tag').forEach(tag => {
+                    tag.addEventListener('click', () => {
+                        const query = tag.dataset.query;
+                        document.getElementById('searchInput').value = query;
+                        this.performSearch(query);
+                    });
+                });
+            }
+
+            setupSearch() {
+                const searchInput = document.getElementById('searchInput');
+                const searchBtn = document.getElementById('searchBtn');
+                const searchResults = document.getElementById('searchResults');
+
+                const performSearch = () => {
+                    const query = searchInput.value.toLowerCase().trim();
+                    if (query) {
+                        this.performSearch(query);
+                    } else {
+                        searchResults.classList.remove('visible');
+                    }
+                };
+
+                searchBtn.addEventListener('click', performSearch);
+                
+                searchInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        performSearch();
+                    }
+                });
+
+                // Real-time search as user types
+                searchInput.addEventListener('input', () => {
+                    const query = searchInput.value.toLowerCase().trim();
+                    if (query.length > 2) {
+                        setTimeout(() => {
+                            if (searchInput.value.toLowerCase().trim() === query) {
+                                this.performSearch(query);
+                            }
+                        }, 300);
+                    }
+                });
+            }
+
+            performSearch(query) {
+                const results = this.searchDatabase.filter(item => 
+                    item.title.toLowerCase().includes(query) || 
+                    item.content.toLowerCase().includes(query) ||
+                    item.category.toLowerCase().includes(query)
+                );
+
+                const searchResults = document.getElementById('searchResults');
+                
+                if (results.length > 0) {
+                    searchResults.innerHTML = results.map(result => `
+                        <div class="search-result-item" data-title="${result.title}">
+                            <div class="result-title">${result.title}</div>
+                            <div class="result-snippet">${result.content}</div>
+                        </div>
+                    `).join('');
+                    
+                    searchResults.classList.add('visible');
+                    
+                    // Add click handlers for search results
+                    searchResults.querySelectorAll('.search-result-item').forEach(item => {
+                        item.addEventListener('click', () => {
+                            this.openHelpArticle(item.dataset.title);
+                        });
+                    });
+                } else {
+                    searchResults.innerHTML = `
+                        <div class="search-result-item">
+                            <div class="result-title">No results found</div>
+                            <div class="result-snippet">Try different keywords or browse our FAQ section</div>
+                        </div>
+                    `;
+                    searchResults.classList.add('visible');
+                }
+            }
+
+            openHelpArticle(title) {
+                // Simulate opening a help article
+                alert(`Opening help article: "${title}"\n\nIn a real implementation, this would:\n• Open a detailed help page\n• Show step-by-step instructions\n• Include images and videos\n• Offer related articles`);
+            }
+
+            setupChat() {
+                const chatInput = document.getElementById('chatInput');
+                const chatSend = document.getElementById('chatSend');
+                const chatMessages = document.getElementById('chatMessages');
+
+                const sendMessage = () => {
+                    const message = chatInput.value.trim();
+                    if (message) {
+                        this.addChatMessage('You', message);
+                        chatInput.value = '';
+                        
+                        // Simulate bot response
+                        setTimeout(() => {
+                            const response = this.generateBotResponse(message);
+                            this.addChatMessage('QuantumBot', response);
+                        }, 1000 + Math.random() * 2000);
+                    }
+                };
+
+                chatSend.addEventListener('click', sendMessage);
+                
+                chatInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        sendMessage();
+                    }
+                });
+            }
+
+            addChatMessage(sender, message) {
+                const chatMessages = document.getElementById('chatMessages');
+                const messageElement = document.createElement('div');
+                messageElement.className = 'chat-message';
+                messageElement.innerHTML = `
+                    <div class="message-sender">${sender}</div>
+                    <div class="message-text">${message}</div>
+                `;
+                
+                chatMessages.appendChild(messageElement);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            generateBotResponse(message) {
+                const lowerMessage = message.toLowerCase();
+                
+                // Simple keyword-based responses
+                if (lowerMessage.includes('install') || lowerMessage.includes('setup')) {
+                    return "For installation, please follow these steps: 1) Unpack carefully, 2) Place on stable surface, 3) Connect to power, 4) Download our app. Would you like me to send you the detailed installation guide?";
+                } else if (lowerMessage.includes('error') || lowerMessage.includes('problem')) {
+                    return "I can help troubleshoot errors. What error code are you seeing, or can you describe the problem? The most common issues are easily resolved.";
+                } else if (lowerMessage.includes('voice') || lowerMessage.includes('command')) {
+                    return "Voice control uses 'Hey QuantumHeat' as the wake phrase. You can say things like 'heat for 30 seconds' or 'defrost chicken'. Is the voice recognition not working for you?";
+                } else if (lowerMessage.includes('app') || lowerMessage.includes('connect')) {
+                    return "For app connection issues, try: 1) Check Wi-Fi, 2) Restart the app, 3) Reset connection in settings. Are you having trouble with the initial setup or ongoing connectivity?";
+                } else if (lowerMessage.includes('clean') || lowerMessage.includes('maintenance')) {
+                    return "QuantumHeat has self-cleaning technology! The plasma ionization runs after each use. You only need to wipe the exterior weekly. Would you like specific cleaning instructions?";
+                } else {
+                    // Generic helpful response
+                    const randomResponse = this.chatResponses[Math.floor(Math.random() * this.chatResponses.length)];
+                    return `${randomResponse} Can you provide more details about what you're experiencing? I'm here to help with any QuantumHeat questions.`;
+                }
+            }
+
+            setupTroubleshooting() {
+                document.querySelectorAll('.troubleshoot-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        const issue = card.dataset.issue;
+                        this.showTroubleshootingSteps(issue);
+                    });
+                });
+            }
+
+            showTroubleshootingSteps(issue) {
+                const troubleshootingGuides = {
+                    'not-heating': {
+                        title: 'QuantumHeat Not Heating Properly',
+                        steps: [
+                            'Check that the door is completely closed and latched',
+                            'Ensure the turntable is properly seated',
+                            'Verify power level is set correctly (not on defrost mode)',
+                            'Run the quantum field diagnostic in the app',
+                            'Check for any error codes on the display',
+                            'Try a factory reset: hold Start + Stop for 10 seconds'
+                        ]
+                    },
+                    'display-error': {
+                        title: 'Display Issues Troubleshooting',
+                        steps: [
+                            'Check power connection and ensure outlet is working',
+                            'Look for any error codes and note them down',
+                            'Unplug for 30 seconds, then plug back in',
+                            'Check if display brightness is set correctly in app',
+                            'Verify no magnetic interference nearby',
+                            'Update firmware via the mobile app'
+                        ]
+                    },
+                    'door-problems': {
+                        title: 'Door Problems Resolution',
+                        steps: [
+                            'Inspect door seals for food debris or damage',
+                            'Check that nothing is blocking the door path',
+                            'Examine door hinges for proper alignment',
+                            'Clean door latch mechanism with dry cloth',
+                            'Ensure turntable is not preventing door closure',
+                            'Contact support if door appears warped or damaged'
+                        ]
+                    },
+                    'noise': {
+                        title: 'Strange Noises Diagnosis',
+                        steps: [
+                            'Identify when the noise occurs (heating, standby, etc.)',
+                            'Check if turntable is properly seated and rotating freely',
+                            'Remove any items that might be rattling inside',
+                            'Ensure the unit is level and on a stable surface',
+                            'Check for loose exterior panels or components',
+                            'If grinding or electrical sounds, stop use and contact support'
+                        ]
+                    },
+                    'app-connection': {
+                        title: 'App Connection Issues',
+                        steps: [
+                            'Verify your device is connected to Wi-Fi',
+                            'Check that QuantumHeat is within router range',
+                            'Restart your router and wait 30 seconds',
+                            'Force-close and reopen the QuantumHeat app',
+                            'In app settings, select "Reconnect Device"',
+                            'Reset network settings: hold Wi-Fi button for 10 seconds'
+                        ]
+                    },
+                    'voice-control': {
+                        title: 'Voice Control Troubleshooting',
+                        steps: [
+                            'Ensure microphone is not blocked or dirty',
+                            'Try speaking closer to the unit (within 3 feet)',
+                            'Use the wake phrase clearly: "Hey QuantumHeat"',
+                            'Check app settings for voice sensitivity adjustment',
+                            'Reduce background noise during voice commands',
+                            'Retrain voice recognition in app settings'
+                        ]
+                    }
+                };
+
+                const guide = troubleshootingGuides[issue];
+                if (guide) {
+                    const stepsText = guide.steps.map((step, index) => `${index + 1}. ${step}`).join('\n\n');
+                    alert(`${guide.title}\n\nTroubleshooting Steps:\n\n${stepsText}\n\nIf these steps don't resolve the issue, please contact our support team for further assistance.`);
+                }
+            }
+        }
+
+        // Initialize support system
+        document.addEventListener('DOMContentLoaded', () => {
+            new QuantumSupport();
+        });
+    </script>
+</body>
+</html>

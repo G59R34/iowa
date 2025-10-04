@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuantumHeat Products - Revolutionary Kitchen Technology</title>
+    <link rel="icon" type="image/png" href="cornclubfavicon.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #00d4ff;
+            border-radius: 50%;
+            animation: float 8s infinite linear;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100px) translateX(100px); opacity: 0; }
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+            z-index: 1000;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: #00d4ff;
+            text-decoration: none;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #00d4ff;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(ellipse at center, rgba(0, 212, 255, 0.1) 0%, rgba(10, 10, 10, 0.9) 70%);
+            text-align: center;
+            position: relative;
+            z-index: 5;
+        }
+
+        .hero-content h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            opacity: 0.8;
+        }
+
+        /* Filter Bar */
+        .filter-bar {
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(10, 10, 10, 0.95));
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+            position: sticky;
+            top: 80px;
+            z-index: 100;
+        }
+
+        .filter-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .filter-group label {
+            color: #00d4ff;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .filter-select, .search-input {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 8px;
+            padding: 10px 15px;
+            color: white;
+            font-size: 0.9rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .filter-select:focus, .search-input:focus {
+            border-color: #00d4ff;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .filter-select option {
+            background: #0a0a0a;
+            color: white;
+        }
+
+        .search-input {
+            width: 300px;
+        }
+
+        .sort-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .sort-btn {
+            background: rgba(0, 212, 255, 0.2);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            color: #00d4ff;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+        }
+
+        .sort-btn:hover, .sort-btn.active {
+            background: rgba(0, 212, 255, 0.4);
+            border-color: #00d4ff;
+        }
+
+        /* Products Grid */
+        .products-section {
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 5;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(10, 10, 10, 0.8));
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .product-card:hover::before {
+            left: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            border-color: #00d4ff;
+            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.3);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #1a1a1a, #0d1421);
+            border: 2px solid #00d4ff;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.6) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, #ff6b6b, #ff4444);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .product-badge.new {
+            background: linear-gradient(135deg, #00ff88, #00cc6a);
+        }
+
+        .product-badge.bestseller {
+            background: linear-gradient(135deg, #ffaa00, #ff8800);
+        }
+
+        .product-category {
+            color: #00d4ff;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .product-description {
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .product-features {
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .feature-list li {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            color: #00d4ff;
+            font-weight: 600;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .price-current {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #00d4ff;
+            text-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+        }
+
+        .price-original {
+            font-size: 1.2rem;
+            color: #ff6b6b;
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .price-save {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+            padding: 4px 8px;
+            border-radius: 5px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-primary {
+            flex: 1;
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            color: #0a0a0a;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(0, 212, 255, 0.2);
+            border: 1px solid #00d4ff;
+            color: #00d4ff;
+            padding: 12px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 212, 255, 0.3);
+        }
+
+        .wishlist-btn {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            color: #00d4ff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .wishlist-btn:hover, .wishlist-btn.active {
+            background: rgba(0, 212, 255, 0.3);
+            color: #ffffff;
+        }
+
+        /* Product Stats */
+        .product-stats {
+            display: flex;
+            justify-content: space-between;
+            margin: 1rem 0;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Loading and Empty States */
+        .loading {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #00d4ff;
+            font-size: 1.2rem;
+        }
+
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #00d4ff;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .no-products {
+            text-align: center;
+            padding: 4rem 2rem;
+            opacity: 0.7;
+        }
+
+        .no-products-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(10, 10, 10, 0.95));
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .newsletter-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .newsletter h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #00d4ff;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 400px;
+            margin: 2rem auto 0;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 8px;
+            padding: 12px 15px;
+            color: white;
+            outline: none;
+        }
+
+        .newsletter-btn {
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            color: #0a0a0a;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .filter-container {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1rem;
+            }
+
+            .search-input {
+                width: 100%;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .product-actions {
+                flex-direction: column;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particles Background -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <a href="quantum-microwave.html" class="logo">QuantumHeat</a>
+            <ul class="nav-links">
+                <li><a href="quantum-microwave.html">Home</a></li>
+                <li><a href="quantum-products.html">Products</a></li>
+                <li><a href="quantum-configurator.html">Configure</a></li>
+                <li><a href="quantum-support.html">Support</a></li>
+                <li><a href="quantum-about.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Quantum Collection</h1>
+            <p>Revolutionary kitchen technology for the modern home</p>
+        </div>
+    </section>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+        <div class="filter-container">
+            <div class="filter-group">
+                <label>Search:</label>
+                <input type="text" class="search-input" id="searchInput" placeholder="Search products...">
+            </div>
+            <div class="filter-group">
+                <label>Category:</label>
+                <select class="filter-select" id="categoryFilter">
+                    <option value="">All Categories</option>
+                    <option value="microwave">Microwaves</option>
+                    <option value="accessory">Accessories</option>
+                    <option value="merch">Merchandise</option>
+                    <option value="replacement">Replacement Parts</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Price Range:</label>
+                <select class="filter-select" id="priceFilter">
+                    <option value="">All Prices</option>
+                    <option value="0-100">Under $100</option>
+                    <option value="100-500">$100 - $500</option>
+                    <option value="500-1000">$500 - $1,000</option>
+                    <option value="1000-3000">$1,000 - $3,000</option>
+                    <option value="3000+">$3,000+</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Sort:</label>
+                <div class="sort-buttons">
+                    <button class="sort-btn active" data-sort="featured">Featured</button>
+                    <button class="sort-btn" data-sort="price-low">Price ↑</button>
+                    <button class="sort-btn" data-sort="price-high">Price ↓</button>
+                    <button class="sort-btn" data-sort="newest">Newest</button>
+                    <button class="sort-btn" data-sort="rating">Rating</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Products Section -->
+    <section class="products-section">
+        <div class="products-grid" id="productsGrid">
+            <!-- Products will be populated by JavaScript -->
+        </div>
+        
+        <div class="loading" id="loading" style="display: none;">
+            Loading quantum products...
+        </div>
+        
+        <div class="no-products" id="noProducts" style="display: none;">
+            <div class="no-products-icon">🔍</div>
+            <h3>No products found</h3>
+            <p>Try adjusting your search criteria</p>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="newsletter-content">
+            <h2>Stay Updated</h2>
+            <p>Get the latest news on quantum technology breakthroughs and exclusive offers</p>
+            <form class="newsletter-form" id="newsletterForm">
+                <input type="email" class="newsletter-input" placeholder="Your email address" required>
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="quantum-cart.js"></script>
+    <script src="quantum-audio.js"></script>
+    <script>
+        // Product database
+        const products = [
+            // Microwaves
+            {
+                id: 'qh-pro',
+                name: 'QuantumHeat Pro',
+                category: 'microwave',
+                price: 2499,
+                originalPrice: 2999,
+                description: 'The flagship quantum microwave with AI cooking presets and self-cleaning technology.',
+                features: ['AI Cooking Presets', 'Voice Control', 'Self-Cleaning', 'Smart App', 'Molecular Precision', 'Safety Shield'],
+                emoji: '🌀',
+                badge: 'bestseller',
+                rating: 4.9,
+                reviews: 2847,
+                inStock: true,
+                isNew: false
+            },
+            {
+                id: 'qh-compact',
+                name: 'QuantumHeat Compact',
+                category: 'microwave',
+                price: 1299,
+                originalPrice: 1599,
+                description: 'Perfect for smaller spaces without compromising on quantum technology.',
+                features: ['Compact Design', 'AI Presets', 'Voice Control', 'Smart App', 'Energy Efficient', 'Quick Install'],
+                emoji: '🔷',
+                badge: 'new',
+                rating: 4.7,
+                reviews: 1203,
+                inStock: true,
+                isNew: true
+            },
+            {
+                id: 'qh-industrial',
+                name: 'QuantumHeat Industrial',
+                category: 'microwave',
+                price: 4999,
+                originalPrice: 5999,
+                description: 'Commercial-grade quantum microwave for professional kitchens.',
+                features: ['Commercial Grade', 'Heavy Duty', 'Multi-Zone Heating', 'Advanced AI', 'Cloud Analytics', 'Extended Warranty'],
+                emoji: '🏭',
+                badge: '',
+                rating: 4.8,
+                reviews: 456,
+                inStock: false,
+                isNew: false
+            },
+
+            // Accessories
+            {
+                id: 'quantum-turntable',
+                name: 'Quantum Turntable Pro',
+                category: 'accessory',
+                price: 199,
+                originalPrice: 249,
+                description: 'Advanced levitating turntable with magnetic field distribution.',
+                features: ['Magnetic Levitation', 'Silent Operation', 'Auto-Centering', 'Easy Clean', 'Universal Fit', 'Smart Sensors'],
+                emoji: '🔄',
+                badge: '',
+                rating: 4.6,
+                reviews: 892,
+                inStock: true,
+                isNew: false
+            },
+            {
+                id: 'smart-plates',
+                name: 'Smart Quantum Plates Set',
+                category: 'accessory',
+                price: 89,
+                originalPrice: 119,
+                description: 'Temperature-responsive plates that work with quantum heating patterns.',
+                features: ['Heat Distribution', 'Smart Material', 'Dishwasher Safe', 'Set of 4', 'Color Changing', 'Microwave Safe'],
+                emoji: '🍽️',
+                badge: 'new',
+                rating: 4.4,
+                reviews: 567,
+                inStock: true,
+                isNew: true
+            },
+            {
+                id: 'quantum-cover',
+                name: 'Quantum Field Cover',
+                category: 'accessory',
+                price: 59,
+                originalPrice: 79,
+                description: 'Advanced splatter guard with quantum field enhancement.',
+                features: ['Field Enhancement', 'Easy Clean', 'Stackable', 'Heat Resistant', 'BPA Free', 'Vent System'],
+                emoji: '🛡️',
+                badge: '',
+                rating: 4.3,
+                reviews: 1234,
+                inStock: true,
+                isNew: false
+            },
+
+            // Merchandise
+            {
+                id: 'qh-hoodie',
+                name: 'QuantumHeat Tech Hoodie',
+                category: 'merch',
+                price: 79,
+                originalPrice: 99,
+                description: 'Premium hoodie with quantum-inspired design and glow-in-the-dark elements.',
+                features: ['Premium Cotton', 'Glow Design', 'Unisex Fit', 'Multiple Sizes', 'Machine Wash', 'Limited Edition'],
+                emoji: '👕',
+                badge: '',
+                rating: 4.5,
+                reviews: 234,
+                inStock: true,
+                isNew: false
+            },
+            {
+                id: 'qh-mug',
+                name: 'Quantum Temperature Mug',
+                category: 'merch',
+                price: 29,
+                originalPrice: 39,
+                description: 'Color-changing mug that reveals quantum patterns when heated.',
+                features: ['Color Changing', 'Heat Reactive', 'Ceramic Material', 'Dishwasher Safe', 'Quantum Patterns', 'Gift Box'],
+                emoji: '☕',
+                badge: 'bestseller',
+                rating: 4.7,
+                reviews: 1567,
+                inStock: true,
+                isNew: false
+            },
+            {
+                id: 'qh-keychain',
+                name: 'Miniature QuantumHeat Keychain',
+                category: 'merch',
+                price: 19,
+                originalPrice: 25,
+                description: 'Detailed replica keychain with LED quantum glow effect.',
+                features: ['LED Glow', 'Metal Construction', 'Detailed Replica', 'Battery Included', 'Gift Ready', 'Collector Item'],
+                emoji: '🔑',
+                badge: '',
+                rating: 4.2,
+                reviews: 890,
+                inStock: true,
+                isNew: false
+            },
+
+            // Replacement Parts
+            {
+                id: 'magnetron-pro',
+                name: 'Quantum Magnetron Pro',
+                category: 'replacement',
+                price: 299,
+                originalPrice: 399,
+                description: 'Advanced quantum magnetron with enhanced field generation.',
+                features: ['Enhanced Power', 'Easy Install', 'Compatible', 'Warranty', 'Performance Boost', 'Energy Efficient'],
+                emoji: '⚡',
+                badge: '',
+                rating: 4.8,
+                reviews: 445,
+                inStock: true,
+                isNew: false
+            },
+            {
+                id: 'control-panel',
+                name: 'Smart Control Panel',
+                category: 'replacement',
+                price: 199,
+                originalPrice: 259,
+                description: 'Touch-sensitive control panel with quantum AI integration.',
+                features: ['Touch Screen', 'AI Integration', 'Voice Ready', 'Easy Install', 'Firmware Updates', 'Backup Memory'],
+                emoji: '📱',
+                badge: '',
+                rating: 4.6,
+                reviews: 278,
+                inStock: true,
+                isNew: false
+            }
+        ];
+
+        class ProductCatalog {
+            constructor() {
+                this.filteredProducts = [...products];
+                this.currentSort = 'featured';
+                this.wishlist = JSON.parse(localStorage.getItem('quantumWishlist')) || [];
+                this.init();
+            }
+
+            init() {
+                this.createParticles();
+                this.renderProducts();
+                this.bindEvents();
+                this.updateWishlistButtons();
+            }
+
+            createParticles() {
+                const particleContainer = document.getElementById('particles');
+                const particleCount = 30;
+
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.animationDelay = Math.random() * 8 + 's';
+                    particle.style.animationDuration = (Math.random() * 3 + 6) + 's';
+                    particleContainer.appendChild(particle);
+                }
+            }
+
+            bindEvents() {
+                // Search
+                document.getElementById('searchInput').addEventListener('input', (e) => {
+                    this.filterProducts();
+                });
+
+                // Category filter
+                document.getElementById('categoryFilter').addEventListener('change', (e) => {
+                    this.filterProducts();
+                });
+
+                // Price filter
+                document.getElementById('priceFilter').addEventListener('change', (e) => {
+                    this.filterProducts();
+                });
+
+                // Sort buttons
+                document.querySelectorAll('.sort-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+                        e.target.classList.add('active');
+                        this.currentSort = e.target.dataset.sort;
+                        this.sortProducts();
+                        this.renderProducts();
+                    });
+                });
+
+                // Newsletter form
+                document.getElementById('newsletterForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.submitNewsletter(e.target.querySelector('input').value);
+                });
+            }
+
+            filterProducts() {
+                const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+                const category = document.getElementById('categoryFilter').value;
+                const priceRange = document.getElementById('priceFilter').value;
+
+                this.filteredProducts = products.filter(product => {
+                    // Search filter
+                    const matchesSearch = !searchTerm || 
+                        product.name.toLowerCase().includes(searchTerm) ||
+                        product.description.toLowerCase().includes(searchTerm) ||
+                        product.features.some(feature => feature.toLowerCase().includes(searchTerm));
+
+                    // Category filter
+                    const matchesCategory = !category || product.category === category;
+
+                    // Price filter
+                    let matchesPrice = true;
+                    if (priceRange) {
+                        if (priceRange === '0-100') {
+                            matchesPrice = product.price < 100;
+                        } else if (priceRange === '100-500') {
+                            matchesPrice = product.price >= 100 && product.price < 500;
+                        } else if (priceRange === '500-1000') {
+                            matchesPrice = product.price >= 500 && product.price < 1000;
+                        } else if (priceRange === '1000-3000') {
+                            matchesPrice = product.price >= 1000 && product.price < 3000;
+                        } else if (priceRange === '3000+') {
+                            matchesPrice = product.price >= 3000;
+                        }
+                    }
+
+                    return matchesSearch && matchesCategory && matchesPrice;
+                });
+
+                this.sortProducts();
+                this.renderProducts();
+            }
+
+            sortProducts() {
+                switch (this.currentSort) {
+                    case 'price-low':
+                        this.filteredProducts.sort((a, b) => a.price - b.price);
+                        break;
+                    case 'price-high':
+                        this.filteredProducts.sort((a, b) => b.price - a.price);
+                        break;
+                    case 'newest':
+                        this.filteredProducts.sort((a, b) => b.isNew - a.isNew);
+                        break;
+                    case 'rating':
+                        this.filteredProducts.sort((a, b) => b.rating - a.rating);
+                        break;
+                    case 'featured':
+                    default:
+                        // Sort by badge priority, then by rating
+                        this.filteredProducts.sort((a, b) => {
+                            const badgeOrder = { 'bestseller': 3, 'new': 2, '': 1 };
+                            const aPriority = badgeOrder[a.badge] || 1;
+                            const bPriority = badgeOrder[b.badge] || 1;
+                            if (aPriority !== bPriority) return bPriority - aPriority;
+                            return b.rating - a.rating;
+                        });
+                        break;
+                }
+            }
+
+            renderProducts() {
+                const grid = document.getElementById('productsGrid');
+                const loading = document.getElementById('loading');
+                const noProducts = document.getElementById('noProducts');
+
+                // Show loading
+                loading.style.display = 'block';
+                grid.style.display = 'none';
+                noProducts.style.display = 'none';
+
+                setTimeout(() => {
+                    loading.style.display = 'none';
+                    
+                    if (this.filteredProducts.length === 0) {
+                        noProducts.style.display = 'block';
+                        return;
+                    }
+
+                    grid.style.display = 'grid';
+                    grid.innerHTML = this.filteredProducts.map(product => this.createProductCard(product)).join('');
+                    
+                    // Bind add to cart buttons
+                    this.bindProductEvents();
+                }, 500);
+            }
+
+            createProductCard(product) {
+                const savings = product.originalPrice - product.price;
+                const savingsPercent = Math.round((savings / product.originalPrice) * 100);
+                const isInWishlist = this.wishlist.includes(product.id);
+
+                return `
+                    <div class="product-card" data-category="${product.category}" data-price="${product.price}">
+                        <button class="wishlist-btn ${isInWishlist ? 'active' : ''}" data-product-id="${product.id}">
+                            ${isInWishlist ? '❤️' : '♡'}
+                        </button>
+                        
+                        ${product.badge ? `<div class="product-badge ${product.badge}">${product.badge}</div>` : ''}
+                        
+                        <div class="product-image">
+                            <div class="product-glow"></div>
+                            <span>${product.emoji}</span>
+                        </div>
+                        
+                        <div class="product-category">${product.category}</div>
+                        <h3 class="product-title">${product.name}</h3>
+                        <p class="product-description">${product.description}</p>
+                        
+                        <div class="product-features">
+                            <ul class="feature-list">
+                                ${product.features.slice(0, 6).map(feature => `<li>${feature}</li>`).join('')}
+                            </ul>
+                        </div>
+                        
+                        <div class="product-stats">
+                            <div class="stat-item">
+                                <span>⭐</span>
+                                <span>${product.rating} (${product.reviews.toLocaleString()})</span>
+                            </div>
+                            <div class="stat-item">
+                                <span>${product.inStock ? '✅' : '❌'}</span>
+                                <span>${product.inStock ? 'In Stock' : 'Out of Stock'}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="product-price">
+                            <span class="price-current">$${product.price.toLocaleString()}</span>
+                            ${product.originalPrice > product.price ? `
+                                <span class="price-original">$${product.originalPrice.toLocaleString()}</span>
+                                <span class="price-save">Save ${savingsPercent}%</span>
+                            ` : ''}
+                        </div>
+                        
+                        <div class="product-actions">
+                            <button class="btn-primary add-to-cart-btn" 
+                                data-product='${JSON.stringify(product).replace(/'/g, "&apos;")}'
+                                ${!product.inStock ? 'disabled' : ''}>
+                                ${product.inStock ? 'Add to Cart' : 'Out of Stock'}
+                            </button>
+                            <button class="btn-secondary view-details-btn" data-product-id="${product.id}">
+                                Details
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            bindProductEvents() {
+                // Add to cart buttons
+                document.querySelectorAll('.add-to-cart-btn:not([disabled])').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const productData = JSON.parse(e.target.dataset.product.replace(/&apos;/g, "'"));
+                        if (window.quantumCart) {
+                            window.quantumCart.addItem(productData);
+                            
+                            // Visual feedback
+                            btn.classList.add('added');
+                            setTimeout(() => {
+                                btn.classList.remove('added');
+                            }, 2000);
+                        }
+                    });
+                });
+
+                // Wishlist buttons
+                document.querySelectorAll('.wishlist-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const productId = e.target.dataset.productId;
+                        this.toggleWishlist(productId);
+                        this.updateWishlistButtons();
+                    });
+                });
+
+                // View details buttons
+                document.querySelectorAll('.view-details-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const productId = e.target.dataset.productId;
+                        this.viewProductDetails(productId);
+                    });
+                });
+            }
+
+            toggleWishlist(productId) {
+                const index = this.wishlist.indexOf(productId);
+                if (index > -1) {
+                    this.wishlist.splice(index, 1);
+                } else {
+                    this.wishlist.push(productId);
+                }
+                localStorage.setItem('quantumWishlist', JSON.stringify(this.wishlist));
+            }
+
+            updateWishlistButtons() {
+                document.querySelectorAll('.wishlist-btn').forEach(btn => {
+                    const productId = btn.dataset.productId;
+                    const isInWishlist = this.wishlist.includes(productId);
+                    btn.classList.toggle('active', isInWishlist);
+                    btn.textContent = isInWishlist ? '❤️' : '♡';
+                });
+            }
+
+            viewProductDetails(productId) {
+                // For now, scroll to top and show alert
+                // In a real app, this would open a modal or navigate to product page
+                const product = products.find(p => p.id === productId);
+                if (product) {
+                    alert(`${product.name}\n\n${product.description}\n\nPrice: $${product.price.toLocaleString()}\nRating: ${product.rating}/5 (${product.reviews.toLocaleString()} reviews)\n\nFeatures:\n• ${product.features.join('\n• ')}`);
+                }
+            }
+
+            submitNewsletter(email) {
+                // Simulate newsletter signup
+                if (email) {
+                    const btn = document.querySelector('.newsletter-btn');
+                    const originalText = btn.textContent;
+                    
+                    btn.textContent = 'Subscribing...';
+                    btn.disabled = true;
+                    
+                    setTimeout(() => {
+                        btn.textContent = 'Subscribed! ✓';
+                        btn.style.background = 'linear-gradient(135deg, #00ff88, #00cc6a)';
+                        
+                        setTimeout(() => {
+                            btn.textContent = originalText;
+                            btn.disabled = false;
+                            btn.style.background = 'linear-gradient(135deg, #00d4ff, #0099cc)';
+                            document.querySelector('.newsletter-input').value = '';
+                        }, 3000);
+                    }, 1000);
+                }
+            }
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new ProductCatalog();
+        });
+    </script>
+</body>
+</html>
