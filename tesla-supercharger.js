@@ -58,6 +58,13 @@ function triggerExplosion() {
     explosion.style.display = 'block';
     document.body.classList.add('screen-shake');
     status.textContent = '💥 Battery Exploded!';
+    
+    // Play explosion sound effect
+    const explosionSound = document.getElementById('explosion-sound');
+    if (explosionSound) {
+        explosionSound.currentTime = 0; // Reset to start
+        explosionSound.play().catch(e => console.log('Audio play failed:', e));
+    }
     setTimeout(() => {
         explosion.style.display = 'none';
         document.body.classList.remove('screen-shake');
