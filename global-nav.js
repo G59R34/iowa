@@ -53,7 +53,7 @@ class GlobalNavigation {
         nav.innerHTML = `
             <div class="nav-content">
                 <div class="nav-brand">
-                    <h1>🌽 Iowa</h1>
+                    <h1>🌽 CornClub</h1>
                     <span class="brand-subtitle">Premium Experience</span>
                 </div>
                 
