@@ -393,6 +393,12 @@ class GlobalNavigation {
         trigger.className = 'nav-trigger';
         trigger.id = 'nav-trigger';
         
+        // Create navigation toggle button
+        const toggleBtn = document.createElement('button');
+        toggleBtn.className = 'nav-toggle-btn';
+        toggleBtn.id = 'nav-toggle-btn';
+        toggleBtn.innerHTML = '🌽 Menu';
+        
         // Create navigation container
         const nav = document.createElement('nav');
         nav.className = 'global-nav';
@@ -508,6 +514,37 @@ class GlobalNavigation {
                 pointer-events: all;
             }
 
+            /* Navigation toggle button */
+            .nav-toggle-btn {
+                position: fixed;
+                top: 15px;
+                left: 15px;
+                z-index: 10001;
+                background: linear-gradient(135deg, rgba(0, 255, 136, 0.9), rgba(0, 200, 255, 0.8));
+                color: #0a0a0a;
+                border: 2px solid rgba(0, 255, 136, 0.6);
+                border-radius: 25px;
+                padding: 0.8rem 1.5rem;
+                font-family: 'Inter', sans-serif;
+                font-weight: 700;
+                font-size: 0.9rem;
+                cursor: pointer;
+                backdrop-filter: blur(10px);
+                box-shadow: 0 4px 20px rgba(0, 255, 136, 0.4);
+                transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+                user-select: none;
+            }
+            
+            .nav-toggle-btn:hover {
+                background: linear-gradient(135deg, rgba(0, 255, 136, 1), rgba(0, 200, 255, 0.9));
+                transform: translateY(-2px);
+                box-shadow: 0 6px 25px rgba(0, 255, 136, 0.5);
+            }
+            
+            .nav-toggle-btn:active {
+                transform: translateY(0);
+            }
+
             .global-nav {
                 position: fixed;
                 top: 0;
@@ -617,8 +654,7 @@ class GlobalNavigation {
                 position: relative;
             }
 
-            .nav-item.dropdown:hover .dropdown-content,
-            .dropdown:hover .dropdown-content {
+            .nav-item.dropdown.active .dropdown-content {
                 opacity: 1 !important;
                 visibility: visible !important;
                 transform: translateY(0) scale(1) !important;
@@ -696,13 +732,7 @@ class GlobalNavigation {
                 pointer-events: none;
             }
 
-            .dropdown:hover .dropdown-content {
-                opacity: 1;
-                visibility: visible;
-                transform: translateY(0) scale(1);
-                pointer-events: auto;
-                transition: all 0.15s ease-out;
-            }
+
 
             .dropdown-content::before {
                 content: '';
@@ -929,6 +959,13 @@ class GlobalNavigation {
             }
 
             @media (max-width: 768px) {
+                .nav-toggle-btn {
+                    top: 10px;
+                    left: 10px;
+                    padding: 0.6rem 1.2rem;
+                    font-size: 0.8rem;
+                }
+                
                 .nav-content {
                     padding: 0 1rem;
                     height: 70px;
@@ -968,7 +1005,12 @@ class GlobalNavigation {
 
         document.head.appendChild(style);
         document.body.appendChild(trigger);
+        document.body.appendChild(toggleBtn);
         document.body.appendChild(nav);
+
+        // Set initial hidden state
+        nav.style.transform = 'translateY(-100%)';
+        nav.style.opacity = '0';
 
         // Bind events
         this.bindEvents();
@@ -979,188 +1021,91 @@ class GlobalNavigation {
 
     bindEvents() {
         const nav = document.getElementById('global-nav');
-        const trigger = document.getElementById('nav-trigger');
+        const toggleBtn = document.getElementById('nav-toggle-btn');
+        this.currentActiveDropdown = null;
         
-        // Optimized navigation state management
-        this.navTimeout = null;
-        this.dropdownTimeout = null;
-        this.isNavHovered = false;
-        this.isDropdownHovered = false;
-        
-        // Debounced functions for better performance with cleanup
-        const debounce = (func, wait) => {
-            let timeout;
-            const debounced = function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    timeout = null;
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-            debounced.cancel = () => {
-                clearTimeout(timeout);
-                timeout = null;
-            };
-            return debounced;
+        // Manual toggle button for navigation
+        const toggleNav = () => {
+            this.navVisible = !this.navVisible;
+            
+            if (this.navVisible) {
+                nav.style.transform = 'translateY(0)';
+                nav.style.opacity = '1';
+                this.playBloop && this.playBloop(300, 600, 0.1, 0.05);
+            } else {
+                nav.style.transform = 'translateY(-100%)';
+                nav.style.opacity = '0';
+                this.closeAllDropdowns();
+                this.playBloop && this.playBloop(600, 300, 0.08, 0.04);
+            }
         };
         
-        // Optimized show/hide functions
-        const showNav = () => {
-            if (this.navTimeout) {
-                clearTimeout(this.navTimeout);
-                this.navTimeout = null;
-            }
+        // Close all dropdowns
+        const closeAllDropdowns = () => {
+            nav.querySelectorAll('.dropdown').forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+            this.currentActiveDropdown = null;
+        };
+        this.closeAllDropdowns = closeAllDropdowns;
+        
+        // Toggle button event
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', toggleNav);
+        }
+        
+        // Dropdown management - only one open at a time
+        const dropdowns = nav.querySelectorAll('.dropdown');
+        dropdowns.forEach(dropdown => {
+            const dropdownTrigger = dropdown.querySelector('.nav-link');
             
-            if (!this.navVisible) {
-                requestAnimationFrame(() => {
-                    nav.style.transform = 'translateY(0)';
-                    nav.style.opacity = '1';
-                    this.navVisible = true;
-                    if (this.playBloop) {
-                        this.playBloop(300, 600, 0.1, 0.05);
+            if (dropdownTrigger) {
+                dropdownTrigger.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Close other dropdowns
+                    if (this.currentActiveDropdown && this.currentActiveDropdown !== dropdown) {
+                        this.currentActiveDropdown.classList.remove('active');
+                    }
+                    
+                    // Toggle current dropdown
+                    dropdown.classList.toggle('active');
+                    
+                    if (dropdown.classList.contains('active')) {
+                        this.currentActiveDropdown = dropdown;
+                        this.playBloop && this.playBloop(400, 700, 0.1, 0.04);
+                    } else {
+                        this.currentActiveDropdown = null;
+                        this.playBloop && this.playBloop(700, 400, 0.08, 0.03);
                     }
                 });
             }
-        };
-        
-        const hideNav = (delay = 2000) => {
-            if (this.navTimeout) {
-                clearTimeout(this.navTimeout);
-            }
-            
-            this.navTimeout = setTimeout(() => {
-                if (!this.isNavHovered && !this.isDropdownHovered && !this.chatVisible) {
-                    requestAnimationFrame(() => {
-                        nav.style.transform = 'translateY(-100%)';
-                        nav.style.opacity = '0';
-                        this.navVisible = false;
-                        if (this.playBloop) {
-                            this.playBloop(600, 300, 0.08, 0.04);
-                        }
-                    });
-                }
-            }, delay);
-        };
-        
-        // Optimized mouse position tracking with throttling
-        let mouseY = 0;
-        const updateMouseY = (e) => {
-            mouseY = e.clientY;
-        };
-        const throttledMouseUpdate = debounce(updateMouseY, 16); // ~60fps
-        
-        // Trigger area events
-        trigger.addEventListener('mouseenter', showNav, { passive: true });
-        trigger.addEventListener('click', showNav, { passive: true });
-        
-        // Navigation hover events
-        nav.addEventListener('mouseenter', () => {
-            this.isNavHovered = true;
-            showNav();
-        }, { passive: true });
-        
-        nav.addEventListener('mouseleave', () => {
-            this.isNavHovered = false;
-            hideNav(800); // Shorter delay when leaving nav
-        }, { passive: true });
-        
-        // Optimized mouse movement detection with intersection observer fallback
-        let isNearTop = false;
-        document.addEventListener('mousemove', (e) => {
-            const newIsNearTop = e.clientY < 80;
-            if (newIsNearTop && !isNearTop && !this.navVisible) {
-                showNav();
-            }
-            isNearTop = newIsNearTop;
-        }, { passive: true });
-        
-        // Simplified dropdown handling
-        const dropdowns = nav.querySelectorAll('.dropdown');
-        dropdowns.forEach(dropdown => {
-            const dropdownContent = dropdown.querySelector('.dropdown-content');
-            
-            if (dropdownContent) {
-                dropdown.addEventListener('mouseenter', () => {
-                    this.isDropdownHovered = true;
-                    if (this.dropdownTimeout) {
-                        clearTimeout(this.dropdownTimeout);
-                    }
-                    requestAnimationFrame(() => {
-                        dropdownContent.style.opacity = '1';
-                        dropdownContent.style.visibility = 'visible';
-                        dropdownContent.style.transform = 'translate3d(0, 0, 0) scale(1)';
-                        dropdownContent.style.willChange = 'transform, opacity';
-                    });
-                }, { passive: true });
-                
-                dropdown.addEventListener('mouseleave', () => {
-                    this.isDropdownHovered = false;
-                    this.dropdownTimeout = setTimeout(() => {
-                        requestAnimationFrame(() => {
-                            dropdownContent.style.opacity = '0';
-                            dropdownContent.style.visibility = 'hidden';
-                            dropdownContent.style.transform = 'translate3d(0, -10px, 0) scale(0.98)';
-                            // Remove willChange after animation for memory efficiency
-                            setTimeout(() => {
-                                dropdownContent.style.willChange = 'auto';
-                            }, 200);
-                        });
-                    }, 200);
-                    hideNav(1000);
-                }, { passive: true });
-            }
         });
         
-        // Touch support for mobile
-        let touchStartY = 0;
-        document.addEventListener('touchstart', (e) => {
-            touchStartY = e.touches[0].clientY;
-        }, { passive: true });
-        
-        document.addEventListener('touchmove', (e) => {
-            const touchY = e.touches[0].clientY;
-            const deltaY = touchY - touchStartY;
-            
-            if (touchStartY < 50 && deltaY > 30 && !this.navVisible) {
-                showNav();
-            }
-        }, { passive: true });
-        
-        // Initial nav display
-        setTimeout(() => {
-            showNav();
-            hideNav(4000); // Hide after 4 seconds if no interaction
-        }, 300);
-        
-        // Handle window focus/blur for better performance
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                // Clear all timers when tab is hidden for memory efficiency
-                if (this.navTimeout) {
-                    clearTimeout(this.navTimeout);
-                    this.navTimeout = null;
-                }
-                if (this.dropdownTimeout) {
-                    clearTimeout(this.dropdownTimeout);
-                    this.dropdownTimeout = null;
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!nav.contains(e.target) && !toggleBtn.contains(e.target)) {
+                closeAllDropdowns();
+                if (this.navVisible) {
+                    this.navVisible = false;
+                    nav.style.transform = 'translateY(-100%)';
+                    nav.style.opacity = '0';
                 }
             }
         });
         
-        // Performance monitoring and cleanup
-        this.cleanup = () => {
-            if (this.navTimeout) clearTimeout(this.navTimeout);
-            if (this.dropdownTimeout) clearTimeout(this.dropdownTimeout);
-            if (throttledMouseUpdate && throttledMouseUpdate.cancel) {
-                throttledMouseUpdate.cancel();
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeAllDropdowns();
+                if (this.navVisible) {
+                    this.navVisible = false;
+                    nav.style.transform = 'translateY(-100%)';
+                    nav.style.opacity = '0';
+                }
             }
-        };
-        
-        // Auto-cleanup on page unload
-        window.addEventListener('beforeunload', this.cleanup);
-        // AI Chat functionality
+        });
+        // AI Chat functionality - now standalone button
         const aiChatLink = document.querySelector('.ai-chat-link');
         const chatPanel = document.getElementById('ai-chat-panel');
         const closeChat = document.querySelector('.close-chat');
@@ -1170,6 +1115,7 @@ class GlobalNavigation {
         if (aiChatLink) {
             aiChatLink.addEventListener('click', (e) => {
                 e.preventDefault();
+                e.stopPropagation();
                 this.toggleChat();
             });
         }
