@@ -181,6 +181,10 @@
         let carParked = false;
         let handleConnected = false;
         let charging = false;
+        let overchargeCount = 0;
+        let persistentDebt = 0;
+        let easterEggActive = false;
+        let superchargerDestroyed = false;
         
         // Math Challenge Function
         function checkAnswer() {
@@ -207,6 +211,84 @@
                 
                 // Initialize drag and drop after showing elite section
                 setTimeout(setupDragAndDrop, 100);
+                
+                // Trigger welcome easter egg
+                setTimeout(() => {
+                    triggerRandomEasterEgg('welcome');
+                }, 2000);
+            }
+        }
+        
+        function triggerRandomEasterEgg(context = 'random') {
+            if (easterEggActive) return;
+            easterEggActive = true;
+            
+            const easterEggs = {
+                welcome: [
+                    "📱 Tesla App: Welcome to Elite Charging! Your warranty is void.",
+                    "📱 Elon Musk: I see you've accessed the forbidden charger...",
+                    "📱 Tesla Support: This charger has a 73% explosion rate. Good luck!"
+                ],
+                charging: [
+                    "📱 Your Mom: Are you still playing with that electric car?",
+                    "📱 Netflix: Your Tesla show subscription has expired",
+                    "📱 Weather Alert: Lightning detected. Perfect charging weather!",
+                    "📱 Insurance Co: We've noticed unusual Tesla activity...",
+                    "📱 SpaceX: Rocket fuel detected in your Tesla battery"
+                ],
+                parking: [
+                    "📱 Parking Meter: $500 fine for elite parking violation",
+                    "📱 Tesla AI: I don't want to be parked here...",
+                    "📱 DMV: Your Tesla license has been suspended"
+                ],
+                explosion: [
+                    "📱 Fire Dept: We're out of Tesla fire extinguishers",
+                    "📱 NASA: We saw your explosion from space",
+                    "📱 Neighbors: Please keep explosions under 150 decibels"
+                ]
+            };
+            
+            const contextEggs = easterEggs[context] || easterEggs.random;
+            const randomEgg = contextEggs[Math.floor(Math.random() * contextEggs.length)];
+            
+            // Show phone notification
+            const notification = document.createElement('div');
+            notification.className = 'easter-egg-notification';
+            notification.innerHTML = `
+                <div class="notification-content">
+                    ${randomEgg}
+                    <button onclick="this.parentElement.parentElement.remove(); easterEggActive = false;">Dismiss</button>
+                </div>
+            `;
+            document.body.appendChild(notification);
+            
+            // Auto dismiss after 8 seconds
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                    easterEggActive = false;
+                }
+            }, 8000);
+            
+            // Add special effects based on context
+            if (context === 'charging' && Math.random() < 0.3) {
+                // Random disco mode
+                document.body.classList.add('disco-mode');
+                setTimeout(() => document.body.classList.remove('disco-mode'), 3000);
+            }
+            
+            if (context === 'explosion' && Math.random() < 0.5) {
+                // Make everything rainbow for a moment
+                document.body.style.filter = 'hue-rotate(0deg)';
+                let hue = 0;
+                const rainbowInterval = setInterval(() => {
+                    hue += 10;
+                    document.body.style.filter = `hue-rotate(${hue}deg)`;
+                    if (hue >= 360) {
+                        clearInterval(rainbowInterval);
+                        document.body.style.filter = 'none';
+                    }
+                }, 100);
             }
         }
         
@@ -340,6 +422,11 @@
             document.getElementById('parking-target').innerHTML = '<div class="parked-tesla">🚗 Tesla Parked!</div>';
             document.getElementById('parking-status').innerHTML = '<span class="status-icon">✅</span><span class="status-text">Tesla Parked</span>';
             checkProgress();
+            
+            // Trigger parking easter egg
+            if (Math.random() < 0.4) {
+                setTimeout(() => triggerRandomEasterEgg('parking'), 1000);
+            }
         }
         
         function connectHandle() {
@@ -373,6 +460,18 @@
                 
                 // Make spinning cat go crazy during charging
                 document.querySelector('.spinning-cat').classList.add('charging-spin');
+                
+                // Random charging effects easter egg
+                if (Math.random() < 0.3) {
+                    setTimeout(() => {
+                        triggerRandomEasterEgg('charging');
+                        // Random sparkle effect
+                        if (Math.random() < 0.5) {
+                            document.body.classList.add('sparkle-effect');
+                            setTimeout(() => document.body.classList.remove('sparkle-effect'), 2000);
+                        }
+                    }, Math.random() * 5000 + 2000);
+                }
                 
                 // Get current battery level or start at 32%
                 let currentBatteryText = document.querySelector('.battery-percent').textContent;
@@ -413,9 +512,10 @@
                 // Store interval for stopping
                 window.currentBatteryInterval = batteryInterval;
                 
-                // Animate cost and bank deduction
+                // Animate cost and bank deduction with persistent debt tracking
                 let cost = 0;
-                let bankBalance = parseFloat(document.querySelector('.balance-amount').textContent.replace('$', '').replace('-', '').replace(',', '')) || 50000;
+                let currentBalanceText = document.querySelector('.balance-amount').textContent.replace('$', '').replace(',', '');
+                let bankBalance = parseFloat(currentBalanceText) || (50000 - persistentDebt);
                 
                 const costInterval = setInterval(() => {
                     if (!charging) {
@@ -424,16 +524,38 @@
                     }
                     cost += 2.50;
                     bankBalance -= 2.50;
+                    persistentDebt += 2.50;
+                    
                     document.querySelector('.total-cost').textContent = `Total: $${cost.toFixed(2)}`;
                     document.querySelector('.transaction-amount').textContent = `-$${cost.toFixed(2)}`;
-                    document.querySelector('.balance-amount').textContent = `$${bankBalance.toFixed(2)}`;
                     
-                    // Change color as money decreases
-                    if (bankBalance < 40000) {
+                    // Format balance with debt indication
+                    if (bankBalance < 0) {
+                        document.querySelector('.balance-amount').textContent = `-$${Math.abs(bankBalance).toFixed(2)}`;
+                        document.querySelector('.balance-amount').style.color = '#ff0000';
+                        document.querySelector('.balance-amount').style.fontWeight = 'bold';
+                        document.querySelector('.balance-amount').style.textShadow = '0 0 5px #ff0000';
+                    } else {
+                        document.querySelector('.balance-amount').textContent = `$${bankBalance.toFixed(2)}`;
+                    }
+                    
+                    // Progressive debt warnings with color changes
+                    if (bankBalance < 40000 && bankBalance >= 0) {
                         document.querySelector('.balance-amount').style.color = '#f39c12';
                     }
-                    if (bankBalance < 30000) {
+                    if (bankBalance < 30000 && bankBalance >= 0) {
                         document.querySelector('.balance-amount').style.color = '#e74c3c';
+                    }
+                    if (bankBalance < -10000) {
+                        document.querySelector('.balance-amount').style.fontSize = '1.2rem';
+                        document.querySelector('.balance-amount').style.animation = 'debtPulse 1s infinite';
+                    }
+                    if (bankBalance < -50000) {
+                        document.querySelector('.balance-amount').style.fontSize = '1.4rem';
+                        // Add debt warning message
+                        if (Math.random() < 0.1) { // 10% chance per second when deep in debt
+                            triggerDebtWarning(bankBalance);
+                        }
                     }
                 }, 1000);
                 
@@ -629,19 +751,74 @@
                 }
             }, 1000);
             
-            // End whipping phase after 1 minute
+            // End whipping phase after 1 minute with individual Tesla explosions
             setTimeout(() => {
-                console.log('Ending Tesla whipping phase...');
+                console.log('Ending Tesla whipping phase with individual explosions...');
                 clearInterval(whipInterval);
                 clearInterval(countdownInterval);
                 
-                // Remove all whipping Teslas
-                whippingTeslas.forEach(tesla => {
-                    if (tesla.element.parentNode) {
-                        tesla.element.remove();
-                    }
-                });
+                // Explode each Tesla individually
+                explodeTeslasIndividually(whippingTeslas);
                 
+            }, 60000); // 60 seconds
+        }
+        
+        function explodeTeslasIndividually(whippingTeslas) {
+            console.log('Exploding Teslas individually...');
+            
+            let explosionDelay = 0;
+            
+            whippingTeslas.forEach((tesla, index) => {
+                setTimeout(() => {
+                    // Create individual explosion effect
+                    const explosion = document.createElement('div');
+                    explosion.className = 'individual-tesla-explosion';
+                    explosion.innerHTML = '💥';
+                    explosion.style.position = 'fixed';
+                    explosion.style.left = tesla.element.style.left;
+                    explosion.style.top = tesla.element.style.top;
+                    explosion.style.fontSize = '3rem';
+                    explosion.style.zIndex = '9999';
+                    explosion.style.animation = 'individualExplosion 2s ease-out forwards';
+                    explosion.style.pointerEvents = 'none';
+                    document.body.appendChild(explosion);
+                    
+                    // Remove the Tesla
+                    if (tesla.element.parentNode) {
+                        tesla.element.style.animation = 'teslaDisintegrate 1s ease-out forwards';
+                        setTimeout(() => {
+                            if (tesla.element.parentNode) {
+                                tesla.element.remove();
+                            }
+                        }, 1000);
+                    }
+                    
+                    // Play mini explosion sound
+                    const audio = document.getElementById('explosion-sound');
+                    if (audio) {
+                        audio.currentTime = 0;
+                        audio.volume = 0.3;
+                        audio.play().catch(() => {});
+                    }
+                    
+                    // Remove explosion effect
+                    setTimeout(() => {
+                        if (explosion.parentNode) {
+                            explosion.remove();
+                        }
+                    }, 2000);
+                    
+                    // Screen shake for each explosion
+                    document.body.classList.add('mini-shake');
+                    setTimeout(() => document.body.classList.remove('mini-shake'), 500);
+                    
+                }, explosionDelay);
+                
+                explosionDelay += 800; // Stagger explosions
+            });
+            
+            // After all explosions, reset the game
+            setTimeout(() => {
                 // Re-enable interactions
                 document.getElementById('unpark-button').disabled = false;
                 document.getElementById('unpark-button').style.opacity = '1';
@@ -656,7 +833,10 @@
                     document.getElementById('charging-status').innerHTML = '<span class="status-icon">⭕</span><span class="status-text">Start Charging</span>';
                 }, 3000);
                 
-            }, 60000); // 60 seconds
+                // Easter egg for finishing
+                triggerRandomEasterEgg('explosion');
+                
+            }, explosionDelay + 2000);
         }
         
         function unparkCar() {
@@ -741,9 +921,24 @@
             document.querySelector('.battery-percent').style.textShadow = 'none';
             document.querySelector('.battery-percent').style.fontWeight = 'bold';
             
-            // Reset cost display
+            // Reset cost display but preserve debt
             document.querySelector('.total-cost').textContent = 'Total: $0.00';
             document.querySelector('.transaction-amount').textContent = '-$0.00';
+            
+            // Maintain persistent debt across sessions
+            const currentDebt = persistentDebt;
+            const remainingBalance = Math.max(0, 50000 - currentDebt);
+            
+            if (currentDebt > 50000) {
+                const debtAmount = currentDebt - 50000;
+                document.querySelector('.balance-amount').textContent = `-$${debtAmount.toFixed(2)}`;
+                document.querySelector('.balance-amount').style.color = '#ff0000';
+                document.querySelector('.balance-amount').style.fontWeight = 'bold';
+                document.querySelector('.balance-amount').style.textShadow = '0 0 5px #ff0000';
+            } else {
+                document.querySelector('.balance-amount').textContent = `$${remainingBalance.toFixed(2)}`;
+                document.querySelector('.balance-amount').style.color = remainingBalance < 30000 ? '#e74c3c' : (remainingBalance < 40000 ? '#f39c12' : '#27ae60');
+            }
             
             // Re-setup drag and drop
             setTimeout(() => {
@@ -753,6 +948,7 @@
         
         function triggerOverchargeExplosion() {
             charging = false;
+            overchargeCount++;
             
             // Clear any running intervals
             if (window.currentBatteryInterval) {
@@ -762,12 +958,18 @@
                 clearInterval(window.currentCostInterval);
             }
             
+            // Check if this is the second overcharge - SUPERCHARGER DESTRUCTION
+            if (overchargeCount >= 2 && !superchargerDestroyed) {
+                triggerSuperchargerDestruction();
+                return;
+            }
+            
             document.body.classList.add('overcharge-explosion-active');
             document.getElementById('explosion-overlay').style.display = 'flex';
             document.getElementById('explosion-overlay').classList.add('overcharge-explosion');
             
             // Update explosion text for overcharge
-            document.querySelector('.explosion-text').textContent = 'BATTERY OVERCHARGE EXPLOSION!';
+            document.querySelector('.explosion-text').textContent = `BATTERY OVERCHARGE EXPLOSION! (${overchargeCount}/2)`;
             document.getElementById('charging-status').innerHTML = '<span class="status-icon">💥</span><span class="status-text">OVERCHARGED!</span>';
             
             // Make cat spin wildly during explosion
@@ -776,12 +978,25 @@
             // Create flying Tesla
             createFlyingTesla();
             
-            // Deduct massive money for overcharge
-            const lostAmount = (Math.random() * 35000 + 30000).toFixed(2);
-            document.querySelector('.balance-amount').textContent = `-$${lostAmount}`;
+            // Deduct massive money for overcharge and add to persistent debt
+            const lostAmount = parseFloat((Math.random() * 35000 + 30000).toFixed(2));
+            persistentDebt += lostAmount;
+            
+            let currentBalanceText = document.querySelector('.balance-amount').textContent.replace('$', '').replace('-', '').replace(',', '');
+            let currentBalance = parseFloat(currentBalanceText) || 50000;
+            currentBalance -= lostAmount;
+            
+            if (currentBalance < 0) {
+                document.querySelector('.balance-amount').textContent = `-$${Math.abs(currentBalance).toFixed(2)}`;
+            } else {
+                document.querySelector('.balance-amount').textContent = `$${currentBalance.toFixed(2)}`;
+            }
+            
             document.querySelector('.balance-amount').style.color = '#ff0000';
             document.querySelector('.balance-amount').style.fontSize = '1.5rem';
             document.querySelector('.balance-amount').style.textShadow = '0 0 10px #ff0000';
+            document.querySelector('.balance-amount').style.fontWeight = 'bold';
+            document.querySelector('.balance-amount').style.animation = 'debtPulse 0.5s infinite';
             
             // Reset parked state
             carParked = false;
@@ -803,6 +1018,29 @@
             // Screen shake effect
             document.body.classList.add('screen-shake');
             
+            // Warning message if this was the first overcharge
+            if (overchargeCount === 1) {
+                setTimeout(() => {
+                    const warningNotification = document.createElement('div');
+                    warningNotification.className = 'final-warning-notification';
+                    warningNotification.innerHTML = `
+                        <div class="final-warning-content">
+                            <div class="warning-title">⚠️ FINAL WARNING ⚠️</div>
+                            <div class="warning-text">ONE MORE OVERCHARGE WILL DESTROY THE SUPERCHARGER!</div>
+                            <div class="warning-subtext">Million dollar penalty will be applied!</div>
+                            <button onclick="this.parentElement.parentElement.remove();">Understood</button>
+                        </div>
+                    `;
+                    document.body.appendChild(warningNotification);
+                    
+                    setTimeout(() => {
+                        if (warningNotification.parentNode) {
+                            warningNotification.remove();
+                        }
+                    }, 10000);
+                }, 3000);
+            }
+            
             setTimeout(() => {
                 document.body.classList.remove('overcharge-explosion-active');
                 document.body.classList.remove('screen-shake');
@@ -818,9 +1056,179 @@
             }, 7000);
         }
         
+        function triggerSuperchargerDestruction() {
+            console.log('SUPERCHARGER DESTRUCTION SEQUENCE INITIATED!');
+            superchargerDestroyed = true;
+            
+            document.body.classList.add('supercharger-destruction-active');
+            document.getElementById('explosion-overlay').style.display = 'flex';
+            document.getElementById('explosion-overlay').classList.add('supercharger-explosion');
+            
+            // Epic destruction text
+            document.querySelector('.explosion-text').textContent = 'SUPERCHARGER STATION DESTROYED!';
+            document.getElementById('charging-status').innerHTML = '<span class="status-icon">💥</span><span class="status-text">STATION DESTROYED!</span>';
+            
+            // Make cat absolutely lose it
+            document.querySelector('.spinning-cat').classList.add('destruction-spin');
+            
+            // Create multiple flying objects
+            createMultipleFlyingObjects();
+            
+            // MILLION DOLLAR DEBT PENALTY
+            const millionDollarPenalty = 1000000;
+            persistentDebt += millionDollarPenalty;
+            
+            let currentBalanceText = document.querySelector('.balance-amount').textContent.replace('$', '').replace('-', '').replace(',', '');
+            let currentBalance = parseFloat(currentBalanceText) || 0;
+            currentBalance -= millionDollarPenalty;
+            
+            document.querySelector('.balance-amount').textContent = `-$${Math.abs(currentBalance).toFixed(2)}`;
+            document.querySelector('.balance-amount').style.color = '#ff0066';
+            document.querySelector('.balance-amount').style.fontSize = '2rem';
+            document.querySelector('.balance-amount').style.textShadow = '0 0 20px #ff0066';
+            document.querySelector('.balance-amount').style.fontWeight = 'bold';
+            document.querySelector('.balance-amount').style.animation = 'destructionPulse 0.3s infinite';
+            
+            // Destroy the supercharger station visually
+            document.querySelector('.supercharger-station').classList.add('station-destroyed');
+            document.querySelector('.center-section').style.background = 'radial-gradient(circle, #ff0000, #000000)';
+            
+            // Reset all states
+            carParked = false;
+            handleConnected = false;
+            charging = false;
+            document.getElementById('parking-status').innerHTML = '<span class="status-icon">💀</span><span class="status-text">Station Gone!</span>';
+            document.getElementById('connection-status').innerHTML = '<span class="status-icon">💀</span><span class="status-text">Station Gone!</span>';
+            
+            // Disable all controls permanently
+            document.getElementById('charge-button').disabled = true;
+            document.getElementById('charge-button').innerHTML = '<span class="charge-text">STATION DESTROYED</span>';
+            document.getElementById('unpark-button').disabled = true;
+            document.getElementById('unpark-button').innerHTML = '<span class="unpark-text">💀 GAME OVER</span>';
+            
+            // Play destruction sounds
+            const audio = document.getElementById('explosion-sound');
+            if (audio) {
+                for (let i = 0; i < 8; i++) {
+                    setTimeout(() => {
+                        audio.currentTime = 0;
+                        audio.volume = 0.8;
+                        audio.play().catch(() => {});
+                    }, i * 300);
+                }
+            }
+            
+            // Extreme screen shake
+            document.body.classList.add('destruction-shake');
+            
+            // Show million dollar debt notification
+            setTimeout(() => {
+                const debtNotification = document.createElement('div');
+                debtNotification.className = 'million-debt-notification';
+                debtNotification.innerHTML = `
+                    <div class="million-debt-content">
+                        <div class="debt-title">💸 CATASTROPHIC DEBT 💸</div>
+                        <div class="debt-amount">$1,000,000.00 PENALTY</div>
+                        <div class="debt-message">Supercharger destruction is a federal crime!</div>
+                        <div class="debt-submessage">Your Tesla privileges have been permanently revoked.</div>
+                        <button onclick="location.reload();">Start Over (Clean Slate)</button>
+                    </div>
+                `;
+                document.body.appendChild(debtNotification);
+            }, 5000);
+            
+            setTimeout(() => {
+                document.body.classList.remove('supercharger-destruction-active');
+                document.body.classList.remove('destruction-shake');
+                document.querySelector('.spinning-cat').classList.remove('destruction-spin');
+            }, 15000);
+        }
+        
+        function createMultipleFlyingObjects() {
+            const objects = ['🚗', '⚡', '🔧', '💥', '🔌', '⚠️', '💸'];
+            
+            for (let i = 0; i < 12; i++) {
+                const flyingObject = document.createElement('div');
+                flyingObject.className = 'destruction-debris';
+                flyingObject.innerHTML = objects[Math.floor(Math.random() * objects.length)];
+                flyingObject.style.position = 'fixed';
+                flyingObject.style.fontSize = '2rem';
+                flyingObject.style.zIndex = '9999';
+                flyingObject.style.pointerEvents = 'none';
+                document.body.appendChild(flyingObject);
+                
+                // Chaotic movement
+                let angle = Math.random() * Math.PI * 2;
+                let speed = Math.random() * 10 + 5;
+                let x = window.innerWidth / 2;
+                let y = window.innerHeight / 2;
+                
+                const debrisInterval = setInterval(() => {
+                    angle += (Math.random() - 0.5) * 0.5;
+                    x += Math.cos(angle) * speed;
+                    y += Math.sin(angle) * speed;
+                    
+                    flyingObject.style.left = `${x}px`;
+                    flyingObject.style.top = `${y}px`;
+                    flyingObject.style.transform = `rotate(${angle * 180 / Math.PI}deg) scale(${1 + Math.sin(Date.now() * 0.01) * 0.5})`;
+                    
+                    // Bounce off edges
+                    if (x < 0 || x > window.innerWidth) angle = Math.PI - angle;
+                    if (y < 0 || y > window.innerHeight) angle = -angle;
+                    
+                    x = Math.max(0, Math.min(window.innerWidth, x));
+                    y = Math.max(0, Math.min(window.innerHeight, y));
+                }, 50);
+                
+                setTimeout(() => {
+                    clearInterval(debrisInterval);
+                    if (flyingObject.parentNode) {
+                        flyingObject.remove();
+                    }
+                }, 15000);
+            }
+        }
+        
         function triggerExplosion() {
             // Legacy function - redirect to giant explosion
             triggerGiantExplosion();
+        }
+        
+        function triggerDebtWarning(debtAmount) {
+            const warnings = [
+                "📱 Debt Collector: We know where you live.",
+                "📱 Tesla Legal: Your car will be repossessed.",
+                "📱 Bank: Account frozen due to Tesla activities.",
+                "📱 IRS: Tesla charging tax evasion detected.",
+                "📱 Credit Agency: Score dropped to -500.",
+                "📱 Loan Shark: Tesla debt collection imminent."
+            ];
+            
+            if (debtAmount < -100000) {
+                warnings.push("📱 FBI: Tesla terrorism charges filed.");
+                warnings.push("📱 Elon: I'm personally disappointed in you.");
+                warnings.push("📱 Bankruptcy Court: Chapter 11 filed automatically.");
+            }
+            
+            const randomWarning = warnings[Math.floor(Math.random() * warnings.length)];
+            
+            // Create urgent debt notification
+            const notification = document.createElement('div');
+            notification.className = 'debt-warning-notification';
+            notification.innerHTML = `
+                <div class="debt-notification-content">
+                    <div class="debt-title">DEBT ALERT: $${Math.abs(debtAmount).toFixed(2)}</div>
+                    ${randomWarning}
+                    <button onclick="this.parentElement.parentElement.remove();">Ignore</button>
+                </div>
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 5000);
         }
         
         function showMessage(text) {
