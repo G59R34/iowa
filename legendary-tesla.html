@@ -591,37 +591,39 @@
             <p>The Most Advanced Charging Experience in the Known Universe</p>
         </div>
 
-        <div class="legendary-grid">
-            <!-- Tesla Deployment Zone -->
-            <div class="grid-section" style="background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(30,60,114,0.3)); border: 2px solid #4ecdc4; box-shadow: 0 0 20px rgba(78, 205, 196, 0.3);">
-                <h3 style="color: #4ecdc4; text-shadow: 0 0 10px #4ecdc4;">🚗 Tesla Cyber Fleet</h3>
-                <div class="legendary-tesla" id="legendary-tesla" draggable="true" style="width: 140px; height: 70px; background: linear-gradient(45deg, #1e3c72, #2a5298, #4ecdc4); border-radius: 15px; margin: 15px auto; position: relative; cursor: move; transition: all 0.3s ease; border: 3px solid #4ecdc4; box-shadow: 0 0 15px rgba(78, 205, 196, 0.4);">
-                    <img src="tesla-model-s.png" alt="Tesla Model S" style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none; color: #4ecdc4; font-weight: bold; text-shadow: 0 0 10px #4ecdc4;">
-                        🚗 CYBER
-                    </div>
+        <!-- Simplified Control Panel -->
+        <div style="display: flex; justify-content: center; gap: 40px; margin: 40px 0; flex-wrap: wrap;">
+            <!-- Step 1: Tesla Deployment -->
+            <div class="control-panel" style="background: linear-gradient(135deg, rgba(0,0,0,0.9), rgba(30,60,114,0.2)); border: 3px solid #4ecdc4; border-radius: 20px; padding: 30px; text-align: center; min-width: 280px; box-shadow: 0 0 30px rgba(78, 205, 196, 0.4);">
+                <h2 style="color: #4ecdc4; margin-bottom: 20px; text-shadow: 0 0 15px #4ecdc4;">STEP 1: Deploy Tesla</h2>
+                <div class="legendary-tesla" id="legendary-tesla" draggable="true" style="width: 160px; height: 80px; background: linear-gradient(45deg, #1e3c72, #2a5298, #4ecdc4); border-radius: 20px; margin: 20px auto; position: relative; cursor: move; transition: all 0.3s ease; border: 4px solid #4ecdc4; box-shadow: 0 0 20px rgba(78, 205, 196, 0.6);">
+                    <img src="tesla-model-s.png" alt="Tesla Model S" style="width: 100%; height: 100%; object-fit: contain; border-radius: 16px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none; color: #4ecdc4; font-weight: bold; text-shadow: 0 0 10px #4ecdc4; font-size: 1.2rem;">🚗 CYBER TESLA</div>
                 </div>
-                <p style="color: #4ecdc4;">Drag to Legendary Parking</p>
+                <p style="color: #4ecdc4; font-size: 1.1rem; font-weight: bold;">Drag Tesla to Parking Zone ↓</p>
             </div>
 
-            <!-- Legendary Parking -->
-            <div class="grid-section" id="legendary-parking" style="background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(255,215,0,0.1)); border: 2px solid #ffd700; box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);">
-                <h3 style="color: #ffd700; text-shadow: 0 0 10px #ffd700;">🅿️ Legendary Parking Matrix</h3>
-                <div style="height: 100px; border: 3px dashed #ffd700; border-radius: 15px; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, rgba(255,215,0,0.1), transparent); position: relative; overflow: hidden;">
+            <!-- Step 2: Parking Zone -->
+            <div class="control-panel" id="legendary-parking" style="background: linear-gradient(135deg, rgba(0,0,0,0.9), rgba(255,215,0,0.1)); border: 3px solid #ffd700; border-radius: 20px; padding: 30px; text-align: center; min-width: 280px; box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);">
+                <h2 style="color: #ffd700; margin-bottom: 20px; text-shadow: 0 0 15px #ffd700;">STEP 2: Park Tesla</h2>
+                <div style="height: 120px; border: 4px dashed #ffd700; border-radius: 20px; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, rgba(255,215,0,0.2), transparent); position: relative; overflow: hidden; margin: 20px 0;">
                     <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,215,0,0.1) 10px, rgba(255,215,0,0.1) 20px); animation: parkingLines 3s linear infinite;"></div>
-                    <span id="parking-status" style="position: relative; z-index: 1; color: #ffd700; font-weight: bold; text-shadow: 0 0 8px #ffd700;">Awaiting Tesla Deployment</span>
+                    <span id="parking-status" style="position: relative; z-index: 1; color: #ffd700; font-weight: bold; text-shadow: 0 0 8px #ffd700; font-size: 1.2rem;">🅿️ PARKING ZONE</span>
                 </div>
+                <p style="color: #ffd700; font-size: 1.1rem; font-weight: bold;">Drop Zone Ready</p>
             </div>
 
-            <!-- Quantum Charger -->
-            <div class="grid-section" style="background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(255,107,107,0.2)); border: 2px solid #ff6b6b; box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);">
-                <h3 style="color: #ff6b6b; text-shadow: 0 0 10px #ff6b6b;">⚡ Quantum Supercharger</h3>
-                <div id="legendary-charger" style="height: 90px; background: linear-gradient(45deg, #ffd700, #ff6b6b, #4ecdc4); border-radius: 15px; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; overflow: hidden; border: 2px solid #ff6b6b; box-shadow: 0 0 15px rgba(255, 107, 107, 0.4);" onclick="connectQuantumCharger()">
-                    <img src="supercharger-station.png" alt="Supercharger Station" style="width: 60px; height: 60px; object-fit: contain;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                    <div style="display: none; color: white; font-weight: bold; text-shadow: 0 0 10px rgba(255,255,255,0.8);">🔌 QUANTUM LINK</div>
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); animation: chargerSweep 2s ease-in-out infinite;"></div>
+            <!-- Step 3: Quantum Charger -->
+            <div class="control-panel" style="background: linear-gradient(135deg, rgba(0,0,0,0.9), rgba(255,107,107,0.2)); border: 3px solid #ff6b6b; border-radius: 20px; padding: 30px; text-align: center; min-width: 280px; box-shadow: 0 0 30px rgba(255, 107, 107, 0.4);">
+                <h2 style="color: #ff6b6b; margin-bottom: 20px; text-shadow: 0 0 15px #ff6b6b;">STEP 3: Connect Charger</h2>
+                <div id="legendary-charger" style="height: 120px; background: linear-gradient(45deg, #ffd700, #ff6b6b, #4ecdc4); border-radius: 20px; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; overflow: hidden; border: 4px solid #ff6b6b; box-shadow: 0 0 20px rgba(255, 107, 107, 0.6); margin: 20px 0;" onclick="connectQuantumCharger()">
+                    <img src="supercharger-station.png" alt="Supercharger Station" style="width: 80px; height: 80px; object-fit: contain;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div style="display: none; color: white; font-weight: bold; text-shadow: 0 0 10px rgba(255,255,255,0.8); font-size: 1.2rem;">⚡ QUANTUM LINK</div>
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); animation: chargerSweep 2s ease-in-out infinite;"></div>
                 </div>
+                <p style="color: #ff6b6b; font-size: 1.1rem; font-weight: bold;">Click to Connect</p>
             </div>
+        </div>
 
             <!-- Neural Banking Interface -->
             <div class="grid-section">
@@ -669,23 +671,26 @@
             </div>
         </div>
 
-        <!-- Status Dashboard -->
-        <div class="status-grid">
-            <div class="status-panel">
-                <div>⚡ Power Output</div>
-                <div class="status-value" id="power-output">0 QW</div>
-            </div>
-            <div class="status-panel">
-                <div>🌀 Quantum Flux</div>
-                <div class="status-value" id="quantum-flux">STABLE</div>
-            </div>
-            <div class="status-panel">
-                <div>🎯 Efficiency</div>
-                <div class="status-value" id="efficiency-rating">∞%</div>
-            </div>
-            <div class="status-panel">
-                <div>🔥 Temperature</div>
-                <div class="status-value" id="temperature">-273°C</div>
+        <!-- Simplified Status Dashboard -->
+        <div style="background: rgba(0,0,0,0.8); border: 2px solid #00ff88; border-radius: 15px; padding: 20px; margin: 30px auto; max-width: 800px; text-align: center;">
+            <h3 style="color: #00ff88; margin-bottom: 20px; text-shadow: 0 0 10px #00ff88;">LEGENDARY TESLA STATUS</h3>
+            <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px;">
+                <div style="background: rgba(0,255,136,0.1); padding: 15px; border-radius: 10px; border: 1px solid #00ff88;">
+                    <div style="color: #00ff88; font-size: 0.9rem;">⚡ Power</div>
+                    <div style="color: #ffd700; font-size: 1.5rem; font-weight: bold;" id="power-output">0 QW</div>
+                </div>
+                <div style="background: rgba(0,255,136,0.1); padding: 15px; border-radius: 10px; border: 1px solid #00ff88;">
+                    <div style="color: #00ff88; font-size: 0.9rem;">🔋 Battery</div>
+                    <div style="color: #ffd700; font-size: 1.5rem; font-weight: bold;" id="battery-percentage">0%</div>
+                </div>
+                <div style="background: rgba(0,255,136,0.1); padding: 15px; border-radius: 10px; border: 1px solid #00ff88;">
+                    <div style="color: #00ff88; font-size: 0.9rem;">🌀 Flux</div>
+                    <div style="color: #ffd700; font-size: 1.5rem; font-weight: bold;" id="quantum-flux">STABLE</div>
+                </div>
+                <div style="background: rgba(0,255,136,0.1); padding: 15px; border-radius: 10px; border: 1px solid #00ff88;">
+                    <div style="color: #00ff88; font-size: 0.9rem;">🎯 Efficiency</div>
+                    <div style="color: #ffd700; font-size: 1.5rem; font-weight: bold;" id="efficiency-rating">∞%</div>
+                </div>
             </div>
         </div>
 
@@ -1035,21 +1040,46 @@
             let batteryLevel = 0;
             let powerOutput = 0;
             let quantumFlux = 'STABLE';
+            let overchargeLevel = 0;
             
             const chargingInterval = setInterval(() => {
                 batteryLevel += Math.random() * 3 + 2;
                 powerOutput = (Math.random() * 500 + 1000).toFixed(0);
                 
                 // Update displays
-                document.getElementById('legendary-battery-fill').style.width = Math.min(batteryLevel, 100) + '%';
-                document.getElementById('battery-percentage').textContent = Math.min(batteryLevel, 100).toFixed(1) + '%';
-                document.getElementById('power-output').textContent = powerOutput + ' QW';
+                const batteryFill = document.getElementById('legendary-battery-fill');
+                const batteryPercent = document.getElementById('battery-percentage');
+                const powerDisplay = document.getElementById('power-output');
+                
+                if (batteryFill) batteryFill.style.width = Math.min(batteryLevel, 100) + '%';
+                if (batteryPercent) batteryPercent.textContent = Math.min(batteryLevel, 100).toFixed(1) + '%';
+                if (powerDisplay) powerDisplay.textContent = powerOutput + ' QW';
+                
+                // Overcharge detection
+                if (batteryLevel > 100) {
+                    overchargeLevel = batteryLevel - 100;
+                    
+                    // Visual overcharge warning
+                    if (batteryFill) {
+                        batteryFill.style.background = 'linear-gradient(90deg, #ff0000, #ff6b6b, #ffffff)';
+                        batteryFill.style.animation = 'overchargePulse 0.5s ease-in-out infinite';
+                    }
+                    
+                    // Overcharge explosions at different levels
+                    if (overchargeLevel > 10 && overchargeLevel < 12) {
+                        explodeOriginalTesla();
+                    }
+                    if (overchargeLevel > 25 && overchargeLevel < 27) {
+                        explodeSupercharger();
+                    }
+                }
                 
                 // Random quantum effects
                 if (Math.random() < 0.1) {
-                    const fluxStates = ['FLUCTUATING', 'HARMONIZED', 'RESONANT', 'CHAOTIC'];
+                    const fluxStates = ['FLUCTUATING', 'HARMONIZED', 'RESONANT', 'CHAOTIC', 'OVERLOADING'];
                     quantumFlux = fluxStates[Math.floor(Math.random() * fluxStates.length)];
-                    document.getElementById('quantum-flux').textContent = quantumFlux;
+                    const fluxDisplay = document.getElementById('quantum-flux');
+                    if (fluxDisplay) fluxDisplay.textContent = quantumFlux;
                 }
                 
                 // Random legendary easter eggs during charging
@@ -1057,12 +1087,76 @@
                     triggerRandomLegendaryEffect();
                 }
                 
-                // Complete charging at 100%
-                if (batteryLevel >= 100) {
+                // Complete charging at 150% (overcharged)
+                if (batteryLevel >= 150) {
                     clearInterval(chargingInterval);
                     completeLegendaryCharging();
                 }
             }, 200);
+        }
+        
+        function explodeOriginalTesla() {
+            const originalTesla = document.getElementById('legendary-tesla');
+            if (originalTesla && !originalTesla.exploded) {
+                originalTesla.exploded = true;
+                
+                showLegendaryNotification('💥 TESLA OVERLOAD EXPLOSION 💥', 'Original Tesla cannot handle the legendary power!');
+                
+                // Create explosion at Tesla location
+                const teslaRect = originalTesla.getBoundingClientRect();
+                createOverchargeExplosion(teslaRect.left, teslaRect.top, '#4ecdc4');
+                
+                // Transform Tesla
+                originalTesla.style.animation = 'teslaOverloadExplode 2s ease-out forwards';
+                
+                playExplosionSound();
+            }
+        }
+        
+        function explodeSupercharger() {
+            const supercharger = document.getElementById('legendary-charger');
+            if (supercharger && !supercharger.exploded) {
+                supercharger.exploded = true;
+                
+                showLegendaryNotification('⚡ SUPERCHARGER MELTDOWN ⚡', 'Quantum charger cannot contain the legendary energy!');
+                
+                // Create explosion at charger location
+                const chargerRect = supercharger.getBoundingClientRect();
+                createOverchargeExplosion(chargerRect.left, chargerRect.top, '#ff6b6b');
+                
+                // Transform charger
+                supercharger.style.animation = 'chargerMeltdown 3s ease-out forwards';
+                
+                playExplosionSound();
+            }
+        }
+        
+        function createOverchargeExplosion(x, y, color) {
+            const explosion = document.createElement('div');
+            explosion.style.cssText = `
+                position: fixed;
+                width: 200px;
+                height: 200px;
+                left: ${x - 100}px;
+                top: ${y - 100}px;
+                background: radial-gradient(circle, ${color}, #ffd700, transparent);
+                border-radius: 50%;
+                z-index: 2000;
+                pointer-events: none;
+                animation: overchargeExplosion 3s ease-out forwards;
+            `;
+            
+            document.body.appendChild(explosion);
+            
+            // Screen shake
+            document.body.style.animation = 'screenShake 1s ease-out';
+            setTimeout(() => {
+                document.body.style.animation = 'none';
+            }, 1000);
+            
+            setTimeout(() => {
+                if (explosion.parentNode) explosion.remove();
+            }, 3000);
         }
 
         function completeLegendaryCharging() {
@@ -1075,21 +1169,24 @@
         }
         
         function startMassiveTeslaWhipping() {
-            showLegendaryNotification('⚡ TESLA ARMADA DEPLOYED ⚡', '50+ Teslas materializing for epic finale sequence!');
+            showLegendaryNotification('⚡ TESLA ARMADA DEPLOYED ⚡', '150+ Teslas materializing for ULTIMATE finale sequence!');
             
-            // Create 50+ Tesla elements for whipping
+            // Create 150+ Tesla elements for whipping
             const teslaArmada = [];
             
-            for (let i = 0; i < 55; i++) {
+            for (let i = 0; i < 155; i++) {
                 setTimeout(() => {
                     const tesla = createWhippingTesla(i);
                     teslaArmada.push(tesla);
                     document.body.appendChild(tesla);
                     
-                    // Start whipping immediately
-                    startTeslaWhipping(tesla, i);
-                }, i * 200); // Stagger creation over 11 seconds
+                    // Start aggressive whipping immediately
+                    startAggressiveTeslaWhipping(tesla, i);
+                }, i * 100); // Faster stagger - 15.5 seconds total
             }
+            
+            // Store armada for global access
+            window.teslaArmada = teslaArmada;
             
             // After 60 seconds, start individual explosions
             setTimeout(() => {
@@ -1138,46 +1235,92 @@
             return tesla;
         }
         
-        function startTeslaWhipping(tesla, index) {
-            let whipDirection = 1;
-            let whipSpeed = Math.random() * 5 + 3; // 3-8px per frame
+        function startAggressiveTeslaWhipping(tesla, index) {
+            let whipDirectionX = Math.random() > 0.5 ? 1 : -1;
+            let whipDirectionY = Math.random() > 0.5 ? 1 : -1;
+            let whipSpeedX = Math.random() * 15 + 10; // 10-25px per frame (much faster)
+            let whipSpeedY = Math.random() * 10 + 5;  // 5-15px per frame (vertical whipping)
+            let rotationSpeed = Math.random() * 20 + 10; // 10-30 degrees per frame
             let rotationAngle = 0;
+            let scale = 1;
+            let scaleDirection = 1;
             
             const whipInterval = setInterval(() => {
                 const currentLeft = parseInt(tesla.style.left);
                 const currentTop = parseInt(tesla.style.top);
                 
-                // Horizontal whipping
-                const newLeft = currentLeft + (whipSpeed * whipDirection);
+                // Aggressive horizontal whipping
+                const newLeft = currentLeft + (whipSpeedX * whipDirectionX);
                 
-                // Bounce off walls
+                // Aggressive vertical whipping (new!)
+                const newTop = currentTop + (whipSpeedY * whipDirectionY);
+                
+                // Bounce off all walls with speed changes
                 if (newLeft <= 0 || newLeft >= window.innerWidth - 80) {
-                    whipDirection *= -1;
-                    whipSpeed = Math.random() * 5 + 3; // Change speed on bounce
+                    whipDirectionX *= -1;
+                    whipSpeedX = Math.random() * 15 + 10; // Randomize speed on bounce
                     
-                    // Play whip sound effect
-                    playTeslaWhipSound();
+                    // Visual bounce effect
+                    tesla.style.boxShadow = '0 0 30px rgba(255, 215, 0, 0.8)';
+                    setTimeout(() => {
+                        tesla.style.boxShadow = '0 0 15px rgba(0, 255, 136, 0.5)';
+                    }, 100);
                 }
                 
-                // Vertical bobbing
-                const bobOffset = Math.sin(Date.now() * 0.005 + index) * 20;
+                // Bounce off top/bottom
+                if (newTop <= 0 || newTop >= window.innerHeight - 40) {
+                    whipDirectionY *= -1;
+                    whipSpeedY = Math.random() * 10 + 5;
+                }
                 
-                // Rotation
-                rotationAngle += 2;
+                // Aggressive rotation and scaling
+                rotationAngle += rotationSpeed;
+                scale += 0.05 * scaleDirection;
+                if (scale > 1.5 || scale < 0.7) {
+                    scaleDirection *= -1;
+                }
                 
+                // Update position with bounds checking
                 tesla.style.left = Math.max(0, Math.min(window.innerWidth - 80, newLeft)) + 'px';
-                tesla.style.top = (parseInt(tesla.style.top) + bobOffset * 0.1) + 'px';
-                tesla.style.transform = `rotate(${rotationAngle}deg) scale(${1 + Math.sin(Date.now() * 0.01) * 0.2})`;
+                tesla.style.top = Math.max(0, Math.min(window.innerHeight - 40, newTop)) + 'px';
+                tesla.style.transform = `rotate(${rotationAngle}deg) scale(${scale})`;
                 
-                // Random color changes
-                if (Math.random() < 0.05) {
-                    const colors = ['#00ff88', '#ffd700', '#ff6b6b', '#4ecdc4', '#9b59b6'];
+                // Aggressive color changes and effects
+                if (Math.random() < 0.15) { // More frequent color changes
+                    const colors = ['#00ff88', '#ffd700', '#ff6b6b', '#4ecdc4', '#9b59b6', '#e67e22', '#ffffff'];
                     tesla.style.borderColor = colors[Math.floor(Math.random() * colors.length)];
+                    tesla.style.filter = `hue-rotate(${Math.random() * 360}deg) brightness(${Math.random() * 2 + 0.5})`;
+                }
+                
+                // Aggressive trail effect
+                if (Math.random() < 0.1) {
+                    createTeslaTrail(currentLeft, currentTop, index);
                 }
                 
                 // Store interval ID for cleanup
                 tesla.whipInterval = whipInterval;
-            }, 50);
+            }, 30); // Faster update rate (30ms instead of 50ms)
+        }
+        
+        function createTeslaTrail(x, y, index) {
+            const trail = document.createElement('div');
+            trail.style.cssText = `
+                position: fixed;
+                width: 20px;
+                height: 10px;
+                background: rgba(0, 255, 136, 0.6);
+                border-radius: 50%;
+                left: ${x + 30}px;
+                top: ${y + 15}px;
+                z-index: 999;
+                pointer-events: none;
+                animation: trailFade 1s ease-out forwards;
+            `;
+            document.body.appendChild(trail);
+            
+            setTimeout(() => {
+                if (trail.parentNode) trail.remove();
+            }, 1000);
         }
         
         function startIndividualExplosions(teslaArmada) {
@@ -1278,15 +1421,8 @@
             }, 100);
         }
         
-        function playTeslaWhipSound() {
-            // Use Tesla whip sound or explosion sound as alternative
-            const audio = document.getElementById('tesla-whip-sound') || document.getElementById('legendary-sound');
-            if (audio) {
-                audio.volume = 0.1; // Keep it subtle during whipping
-                audio.currentTime = 0;
-                audio.play().catch(() => {});
-            }
-        }
+        // Remove Tesla whip sound - no sound during whipping phase
+        // Sound only plays during actual explosions
         
         function playExplosionSound() {
             const audio = document.getElementById('tesla-whip-sound');
@@ -2067,6 +2203,97 @@
             @keyframes chargerSweep {
                 0% { transform: translateX(-100%); }
                 100% { transform: translateX(200%); }
+            }
+            
+            @keyframes trailFade {
+                0% {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+                100% {
+                    opacity: 0;
+                    transform: scale(0.3);
+                }
+            }
+            
+            @keyframes overchargePulse {
+                0%, 100% {
+                    filter: brightness(1) saturate(1);
+                }
+                50% {
+                    filter: brightness(2) saturate(3) hue-rotate(30deg);
+                }
+            }
+            
+            @keyframes teslaOverloadExplode {
+                0% {
+                    transform: scale(1) rotate(0deg);
+                    filter: brightness(1);
+                }
+                25% {
+                    transform: scale(1.3) rotate(90deg);
+                    filter: brightness(3) hue-rotate(180deg);
+                }
+                50% {
+                    transform: scale(1.8) rotate(180deg);
+                    filter: brightness(5) hue-rotate(360deg) saturate(3);
+                }
+                75% {
+                    transform: scale(2.2) rotate(270deg);
+                    filter: brightness(2) blur(5px);
+                }
+                100% {
+                    transform: scale(0.1) rotate(720deg);
+                    filter: brightness(0) blur(10px);
+                    opacity: 0;
+                }
+            }
+            
+            @keyframes chargerMeltdown {
+                0% {
+                    transform: scale(1);
+                    filter: brightness(1);
+                }
+                20% {
+                    transform: scale(1.1) skew(5deg);
+                    filter: brightness(2) hue-rotate(60deg);
+                }
+                40% {
+                    transform: scale(1.3) skew(-10deg);
+                    filter: brightness(4) hue-rotate(120deg) saturate(2);
+                }
+                60% {
+                    transform: scale(1.5) skew(15deg);
+                    filter: brightness(6) hue-rotate(240deg) saturate(4) blur(2px);
+                }
+                80% {
+                    transform: scale(1.2) skew(-20deg);
+                    filter: brightness(3) blur(5px);
+                }
+                100% {
+                    transform: scale(0.3) skew(0deg);
+                    filter: brightness(0) blur(10px);
+                    opacity: 0.2;
+                }
+            }
+            
+            @keyframes overchargeExplosion {
+                0% {
+                    transform: scale(0);
+                    opacity: 1;
+                }
+                30% {
+                    transform: scale(1.5);
+                    opacity: 0.9;
+                }
+                60% {
+                    transform: scale(2.5);
+                    opacity: 0.6;
+                }
+                100% {
+                    transform: scale(4);
+                    opacity: 0;
+                }
             }
         `;
         document.head.appendChild(style);
