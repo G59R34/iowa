@@ -16,6 +16,7 @@ class GlobalNavigation {
         this.firebaseInitialized = false;
         this.audioContext = null;
         this.sounds = {};
+        this.lastMouseEvent = null;
         this.init();
     }
 
@@ -360,6 +361,19 @@ class GlobalNavigation {
                 }
             });
         });
+    }
+
+    // Helper method to check if mouse is near navigation area
+    isMouseNearNav(navRect, buffer) {
+        const mouseEvent = this.lastMouseEvent;
+        if (!mouseEvent) return false;
+        
+        return (
+            mouseEvent.clientX >= navRect.left - buffer &&
+            mouseEvent.clientX <= navRect.right + buffer &&
+            mouseEvent.clientY >= navRect.top - buffer &&
+            mouseEvent.clientY <= navRect.bottom + buffer
+        );
     }
 
     init() {
@@ -985,17 +999,40 @@ class GlobalNavigation {
                     nav.classList.remove('show');
                     this.navVisible = false;
                 }
-            }, 1500); // Hide after 1.5 seconds
+            }, 3000); // Increased to 3 seconds for better UX
         };
 
-        // Mouse events for auto-hide
+        // Mouse events for auto-hide with improved detection
         trigger.addEventListener('mouseenter', showNav);
+        
+        // Enhanced hover detection for nav
         nav.addEventListener('mouseenter', () => {
             clearTimeout(this.hideTimeout);
+            showNav(); // Ensure nav stays visible
         });
-        nav.addEventListener('mouseleave', hideNav);
         
-        // Keep nav visible when dropdowns are open
+        nav.addEventListener('mouseleave', (e) => {
+            // Check if mouse is moving to a dropdown or staying in nav area
+            const rect = nav.getBoundingClientRect();
+            const buffer = 50; // 50px buffer zone
+            
+            setTimeout(() => {
+                // Double-check mouse position after a brief delay
+                if (!nav.matches(':hover') && !this.isMouseNearNav(rect, buffer)) {
+                    hideNav();
+                }
+            }, 200); // Small delay to prevent flickering
+        });
+        
+        // Also show nav on document mouse movement near top
+        document.addEventListener('mousemove', (e) => {
+            this.lastMouseEvent = e; // Track mouse position
+            if (e.clientY < 100 && !this.navVisible) { // Mouse within 100px of top
+                showNav();
+            }
+        });
+        
+        // Keep nav visible when dropdowns are open with improved timing
         const dropdowns = nav.querySelectorAll('.dropdown');
         dropdowns.forEach(dropdown => {
             const dropdownContent = dropdown.querySelector('.dropdown-content');
@@ -1014,21 +1051,24 @@ class GlobalNavigation {
             
             const hideDropdown = () => {
                 dropdownTimeout = setTimeout(() => {
-                    if (dropdownContent) {
+                    if (dropdownContent && !dropdown.matches(':hover')) {
                         dropdownContent.style.opacity = '0';
                         dropdownContent.style.visibility = 'hidden';
                         dropdownContent.style.transform = 'translateY(-15px) scale(0.95)';
                         dropdownContent.style.pointerEvents = 'none';
                     }
-                }, 150); // 150ms delay before hiding
+                }, 300); // Increased delay to 300ms for better UX
             };
             
             dropdown.addEventListener('mouseenter', showDropdown);
             dropdown.addEventListener('mouseleave', () => {
                 hideDropdown();
-                if (!nav.matches(':hover')) {
-                    hideNav();
-                }
+                // Only start nav hide timer if not hovering over nav itself
+                setTimeout(() => {
+                    if (!nav.matches(':hover')) {
+                        hideNav();
+                    }
+                }, 100);
             });
             
             // Keep dropdown open when hovering over the dropdown content itself
@@ -1040,17 +1080,24 @@ class GlobalNavigation {
                 
                 dropdownContent.addEventListener('mouseleave', () => {
                     hideDropdown();
-                    if (!nav.matches(':hover')) {
-                        hideNav();
-                    }
+                    setTimeout(() => {
+                        if (!nav.matches(':hover')) {
+                            hideNav();
+                        }
+                    }, 100);
                 });
             }
         });
 
-        // Show nav immediately on page load for 3 seconds
+        // Show nav immediately on page load for longer
         setTimeout(() => {
             showNav();
-            setTimeout(hideNav, 3000);
+            setTimeout(() => {
+                // Only hide if user isn't interacting
+                if (!nav.matches(':hover')) {
+                    hideNav();
+                }
+            }, 5000); // Show for 5 seconds instead of 3
         }, 500);
         // AI Chat functionality
         const aiChatLink = document.querySelector('.ai-chat-link');
