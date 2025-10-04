@@ -169,7 +169,7 @@ class LiveChat {
                 // Handle typing indicators
                 break;
                 
-            case 'error':
+            case 'error':sk-mnopqrstijkl5678mnopqrstijkl5678mnopqrst
                 this.addSystemMessage(`Error: ${data.message}`);
                 break;
         }
