@@ -268,6 +268,54 @@ progress::-moz-progress-bar {
     background: linear-gradient(90deg, #e82127 60%, #00c6ff 100%);
     border-radius: 8px;
 }
+/* Elite Challenge Section */
+.elite-challenge {
+    background: linear-gradient(135deg, #8E44AD 0%, #9B59B6 100%);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    margin-top: 30px;
+    box-shadow: 0 15px 35px rgba(142, 68, 173, 0.3);
+    position: relative;
+    z-index: 10;
+}
+
+.elite-challenge h2 {
+    color: white;
+    font-size: 2em;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.elite-challenge p {
+    color: #ECF0F1;
+    font-size: 1.1em;
+    margin-bottom: 25px;
+}
+
+.elite-access-btn {
+    background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%);
+    color: white;
+    padding: 15px 40px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: 700;
+    display: inline-block;
+    transition: all 0.3s ease;
+    animation: elite-pulse 2s ease-in-out infinite;
+}
+
+.elite-access-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(231, 76, 60, 0.4);
+}
+
+@keyframes elite-pulse {
+    0%, 100% { box-shadow: 0 8px 25px rgba(231, 76, 60, 0.3); }
+    50% { box-shadow: 0 12px 35px rgba(231, 76, 60, 0.5); }
+}
+
 @media (max-width: 700px) {
     .supercharger-main {
         max-width: 98vw;
@@ -283,5 +331,19 @@ progress::-moz-progress-bar {
     }
     .charger {
         gap: 18px;
+    }
+    
+    .elite-challenge {
+        margin: 20px 10px;
+        padding: 25px 15px;
+    }
+    
+    .elite-challenge h2 {
+        font-size: 1.5em;
+    }
+    
+    .elite-access-btn {
+        padding: 12px 25px;
+        font-size: 1em;
     }
 }

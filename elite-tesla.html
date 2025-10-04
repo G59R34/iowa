@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Tesla Supercharger - Study Level</title>
+    <link rel="stylesheet" href="elite-tesla.css">
+    <script src="global-nav.js"></script>
+</head>
+<body>
+    <!-- Math Challenge Section -->
+    <div class="math-challenge">
+        <h2>🧮 Elite Access Math Challenge</h2>
+        <div class="equation-display">
+            <p class="equation-text">Solve: ∫(3x² + 2x - 5)dx from 0 to 4 = ?</p>
+            <input type="number" id="math-answer" class="answer-input" placeholder="Enter answer (68)">
+            <input type="radio" id="wrong-answer" name="math-result" class="hidden-radio">
+            <input type="radio" id="correct-answer" name="math-result" class="hidden-radio">
+            <label for="wrong-answer" class="submit-btn" onclick="checkAnswer()">Submit Answer</label>
+        </div>
+        
+        <!-- Hidden Elite Access Button -->
+        <div class="elite-access">
+            <a href="#elite-section" class="elite-btn">🏆 Access Elite Supercharger</a>
+        </div>
+    </div>
+
+    <!-- Elite Tesla Supercharger Section (Hidden until math is solved) -->
+    <div id="elite-section" class="elite-supercharger hidden-section">
+        <header class="elite-header">
+            <h1>🔥 ELITE TESLA SUPERCHARGER 🔥</h1>
+            <p class="elite-subtitle">Study Level - Ultra Premium Experience</p>
+        </header>
+
+        <div class="charging-arena">
+            <!-- Parking Lot Area -->
+            <div class="parking-lot">
+                <h3>🅿️ Tesla Parking</h3>
+                <div class="parking-space" id="parking-target">
+                    <div class="parking-lines"></div>
+                    <div class="drop-instruction">Drag Tesla Here</div>
+                </div>
+            </div>
+            
+            <!-- Tesla Vehicle (Draggable) -->
+            <div class="tesla-container">
+                <div class="tesla-placeholder draggable-tesla" draggable="true" id="tesla-car">
+                    <img src="tesla-model-s.png" alt="Tesla Model S" class="tesla-image">
+                    <div class="tesla-fallback">� TESLA</div>
+                </div>
+            </div>
+
+            <!-- Elite Supercharger Station -->
+            <div class="supercharger-station">
+                <div class="station-placeholder">
+                    <img src="supercharger-station.png" alt="Tesla Supercharger Station" class="station-image">
+                    <div class="station-fallback">⚡ SUPERCHARGER</div>
+                </div>
+                
+                <!-- Draggable Charging Handle -->
+                <div class="charging-handle-container">
+                    <div class="charging-cable draggable-handle" draggable="true" id="charging-handle">
+                        <img src="supercharger-handle.png" alt="Supercharger Handle" class="handle-image">
+                        <div class="handle-fallback">🔌</div>
+                    </div>
+                </div>
+                
+                <!-- Car Connection Zone -->
+                <div class="car-connection-zone" id="connection-target">
+                    <div class="connection-instruction">Drop Handle on Parked Tesla</div>
+                </div>
+                
+                <div class="charging-display">
+                    <div class="power-meter">
+                        <div class="meter-label">Power Output</div>
+                        <div class="meter-bar">
+                            <div class="power-level"></div>
+                        </div>
+                        <div class="power-text">250 kW</div>
+                    </div>
+                    
+                    <div class="battery-status">
+                        <div class="battery-visual">
+                            <div class="battery-fill"></div>
+                        </div>
+                        <div class="battery-percent">85%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fake Phone with Bank Account -->
+            <div class="fake-phone">
+                <div class="phone-screen">
+                    <div class="phone-header">
+                        <div class="phone-time">2:47 PM</div>
+                        <div class="phone-battery">🔋 89%</div>
+                    </div>
+                    
+                    <div class="banking-app">
+                        <h3>💳 Tesla Bank</h3>
+                        <div class="account-balance">
+                            <div class="balance-label">Checking Account</div>
+                            <div class="balance-amount">$50,000.00</div>
+                        </div>
+                        
+                        <div class="transaction-feed">
+                            <div class="transaction">
+                                <span class="transaction-desc">Supercharging Session</span>
+                                <span class="transaction-amount">-$0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="charging-cost">
+                        <div class="cost-per-minute">$2.50/min</div>
+                        <div class="total-cost">Total: $0.00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charging Controls -->
+        <div class="elite-controls">
+            <input type="checkbox" id="charging-toggle" class="charging-checkbox">
+            <label for="charging-toggle" class="charge-button">
+                <span class="charge-text">Start Elite Charging</span>
+                <span class="stop-text">Stop Charging</span>
+            </label>
+            
+            <div class="elite-stats">
+                <div class="stat-item">
+                    <div class="stat-label">Session Time</div>
+                    <div class="stat-value">0:00</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Energy Added</div>
+                    <div class="stat-value">0 kWh</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Cost</div>
+                    <div class="stat-value">$0.00</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Explosion Trigger (Hidden) -->
+        <input type="checkbox" id="explosion-trigger" class="explosion-checkbox">
+        <div class="explosion-overlay">
+            <div class="explosion-animation">
+                <div class="flame f1">🔥</div>
+                <div class="flame f2">💥</div>
+                <div class="flame f3">🔥</div>
+                <div class="flame f4">💥</div>
+                <div class="explosion-text">BATTERY OVERLOAD!</div>
+            </div>
+        </div>
+
+        <!-- Math Equations Bank (Hidden, for variety) -->
+        <div class="equation-bank" style="display: none;">
+            <!-- Calculus -->
+            <div class="equation">∫(3x² + 2x - 5)dx from 0 to 4 = 68</div>
+            <div class="equation">d/dx[ln(x² + 3x)] = (2x + 3)/(x² + 3x)</div>
+            <div class="equation">∫e^(2x)cos(3x)dx = (2e^(2x)cos(3x) + 3e^(2x)sin(3x))/13 + C</div>
+            
+            <!-- Linear Algebra -->
+            <div class="equation">det([2,3;4,5]) = -2</div>
+            <div class="equation">Eigenvalues of [3,1;0,3] = 3, 3</div>
+            <div class="equation">Rank of [1,2,3;4,5,6;7,8,9] = 2</div>
+            
+            <!-- Complex Analysis -->
+            <div class="equation">∮(z²)dz around |z|=1 = 0</div>
+            <div class="equation">Res(1/(z²-1), z=1) = 1/2</div>
+            <div class="equation">∫₋∞^∞ e^(-x²)dx = √π</div>
+            
+            <!-- Differential Equations -->
+            <div class="equation">Solution to y' = 2y is y = Ce^(2x)</div>
+            <div class="equation">Characteristic equation of y'' + 4y' + 4y = 0: r = -2</div>
+            
+            <!-- Number Theory -->
+            <div class="equation">gcd(48, 18) = 6</div>
+            <div class="equation">φ(15) = 8 (Euler's totient)</div>
+            <div class="equation">2^10 mod 7 = 2</div>
+            
+            <!-- Advanced Calculus -->
+            <div class="equation">∂²f/∂x∂y where f(x,y) = x³y² = 6xy²</div>
+            <div class="equation">∇²(r²) in 3D = 6</div>
+            <div class="equation">∬_R xy dA over R=[0,2]×[0,3] = 9</div>
+            
+            <!-- Topology -->
+            <div class="equation">Euler characteristic of torus = 0</div>
+            <div class="equation">Fundamental group of S¹ = Z</div>
+            
+            <!-- Abstract Algebra -->
+            <div class="equation">Order of S₄ = 24</div>
+            <div class="equation">Number of subgroups of Z₆ = 4</div>
+            
+            <!-- Statistics -->
+            <div class="equation">P(X ≤ 1.96) for standard normal = 0.975</div>
+            <div class="equation">E[X²] where X~Poisson(λ) = λ² + λ</div>
+            
+            <!-- Real Analysis -->
+            <div class="equation">lim(x→∞) (1 + 1/x)^x = e</div>
+            <div class="equation">∑(n=1 to ∞) 1/n² = π²/6</div>
+            
+            <!-- Combinatorics -->
+            <div class="equation">C(10,4) = 210</div>
+            <div class="equation">Derangements of 4 items = 9</div>
+            
+            <!-- Advanced Functions -->
+            <div class="equation">Γ(5/2) = (3√π)/4</div>
+            <div class="equation">ζ(2) = π²/6 (Riemann zeta)</div>
+            
+            <!-- Matrix Theory -->
+            <div class="equation">Trace of [a,b;c,d] = a + d</div>
+            <div class="equation">||A||₂ for A=[3,4;0,0] = 5</div>
+            
+            <!-- Fourier Analysis -->
+            <div class="equation">Fourier transform of e^(-|t|) = 2/(1+ω²)</div>
+            <div class="equation">Parseval's identity: ∫|f|² = ∫|F|²</div>
+            
+            <!-- Group Theory -->
+            <div class="equation">Center of D₄ = {e, r²}</div>
+            <div class="equation">Index of 3Z in Z = 3</div>
+            
+            <!-- Advanced Geometry -->
+            <div class="equation">Gaussian curvature of sphere radius R = 1/R²</div>
+            <div class="equation">Volume of 4-ball radius R = π²R⁴/2</div>
+            
+            <!-- Logic & Set Theory -->
+            <div class="equation">|P(A ∪ B)| = |P(A)| + |P(B)| - |P(A ∩ B)|</div>
+            <div class="equation">Continuum hypothesis: 2^ℵ₀ = ℵ₁</div>
+            
+            <!-- Advanced Probability -->
+            <div class="equation">Moment generating function of N(μ,σ²) = e^(μt + σ²t²/2)</div>
+            <div class="equation">Characteristic function of Cauchy = e^(-|t|)</div>
+            
+            <!-- Functional Analysis -->
+            <div class="equation">||f||_∞ = sup|f(x)| over domain</div>
+            <div class="equation">Dual of ℓᵖ is ℓᵍ where 1/p + 1/q = 1</div>
+            
+            <!-- Measure Theory -->
+            <div class="equation">Lebesgue measure of Cantor set = 0</div>
+            <div class="equation">∫₀¹ f dμ where f is Riemann integrable</div>
+            
+            <!-- Advanced Number Theory -->
+            <div class="equation">Quadratic residue: 3 mod 7 = Yes (3² ≡ 2)</div>
+            <div class="equation">Prime counting π(100) = 25</div>
+            
+            <!-- Category Theory -->
+            <div class="equation">Identity morphism: 1_A : A → A</div>
+            <div class="equation">Functor preserves composition</div>
+        </div>
+    </div>
+
+    <!-- Hidden Audio for Explosion -->
+    <audio id="explosion-sound" preload="auto">
+        <source src="res/aud/supercharger/Explosion.mp3" type="audio/mpeg">
+    </audio>
+    
+    <script>
+        // Math Challenge Function
+        function checkAnswer() {
+            const answer = document.getElementById('math-answer').value;
+            const correctAnswer = 68; // ∫(3x² + 2x - 5)dx from 0 to 4
+            
+            if (parseInt(answer) === correctAnswer) {
+                document.getElementById('correct-answer').checked = true;
+                document.querySelector('.elite-supercharger').classList.remove('hidden-section');
+                document.querySelector('.elite-access').style.display = 'block';
+            } else {
+                document.getElementById('wrong-answer').checked = true;
+                alert('Incorrect! Try again. Hint: Integrate 3x² + 2x - 5 from 0 to 4');
+            }
+        }
+        
+        // Drag and Drop Functionality
+        let carParked = false;
+        let handleConnected = false;
+        
+        // Tesla Car Drag Events
+        const teslaCar = document.getElementById('tesla-car');
+        const parkingTarget = document.getElementById('parking-target');
+        
+        teslaCar.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text/plain', 'tesla');
+            teslaCar.classList.add('dragging');
+        });
+        
+        teslaCar.addEventListener('dragend', () => {
+            teslaCar.classList.remove('dragging');
+        });
+        
+        parkingTarget.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            parkingTarget.classList.add('drag-over');
+        });
+        
+        parkingTarget.addEventListener('dragleave', () => {
+            parkingTarget.classList.remove('drag-over');
+        });
+        
+        parkingTarget.addEventListener('drop', (e) => {
+            e.preventDefault();
+            parkingTarget.classList.remove('drag-over');
+            
+            if (e.dataTransfer.getData('text/plain') === 'tesla') {
+                carParked = true;
+                teslaCar.style.display = 'none';
+                parkingTarget.innerHTML = '<div class="parked-tesla">🚗 Tesla Parked!</div>';
+                parkingTarget.classList.add('car-parked');
+                checkChargingReady();
+            }
+        });
+        
+        // Charging Handle Drag Events
+        const chargingHandle = document.getElementById('charging-handle');
+        const connectionTarget = document.getElementById('connection-target');
+        
+        chargingHandle.addEventListener('dragstart', (e) => {
+            if (!carParked) {
+                e.preventDefault();
+                alert('Park the Tesla first!');
+                return;
+            }
+            e.dataTransfer.setData('text/plain', 'handle');
+            chargingHandle.classList.add('dragging');
+        });
+        
+        chargingHandle.addEventListener('dragend', () => {
+            chargingHandle.classList.remove('dragging');
+        });
+        
+        connectionTarget.addEventListener('dragover', (e) => {
+            if (carParked) {
+                e.preventDefault();
+                connectionTarget.classList.add('drag-over');
+            }
+        });
+        
+        connectionTarget.addEventListener('dragleave', () => {
+            connectionTarget.classList.remove('drag-over');
+        });
+        
+        connectionTarget.addEventListener('drop', (e) => {
+            e.preventDefault();
+            connectionTarget.classList.remove('drag-over');
+            
+            if (e.dataTransfer.getData('text/plain') === 'handle' && carParked) {
+                handleConnected = true;
+                chargingHandle.style.display = 'none';
+                connectionTarget.innerHTML = '<div class="connected-handle">🔌 Connected!</div>';
+                connectionTarget.classList.add('handle-connected');
+                checkChargingReady();
+            }
+        });
+        
+        function checkChargingReady() {
+            if (carParked && handleConnected) {
+                document.querySelector('.charge-button').disabled = false;
+                document.querySelector('.charge-button').style.opacity = '1';
+                document.querySelector('.charge-button').textContent = 'Start Elite Charging!';
+            }
+        }
+        
+        // Initialize - disable charging until both steps complete
+        document.addEventListener('DOMContentLoaded', () => {
+            const chargeButton = document.querySelector('.charge-button');
+            if (chargeButton) {
+                chargeButton.disabled = true;
+                chargeButton.style.opacity = '0.5';
+                chargeButton.textContent = 'Complete Setup First';
+            }
+        });
+    </script>
+</body>
+</html>
