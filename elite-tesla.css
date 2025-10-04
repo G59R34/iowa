@@ -6,6 +6,46 @@
     box-sizing: border-box;
 }
 
+/* Spinning Cat */
+.spinning-cat {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: none;
+}
+
+.cat-gif {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+    border: 3px solid #f39c12;
+    box-shadow: 0 0 20px rgba(243, 156, 18, 0.5);
+}
+
+.charging-spin .cat-gif {
+    animation: spin 0.3s linear infinite, bounce 1s ease-in-out infinite;
+    border-color: #e74c3c;
+    box-shadow: 0 0 30px rgba(231, 76, 60, 0.8);
+}
+
+.explosion-spin .cat-gif {
+    animation: spin 0.1s linear infinite, shake 0.2s infinite, explode-cat 0.5s infinite;
+    border-color: #ff0000;
+    box-shadow: 0 0 50px rgba(255, 0, 0, 1);
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes explode-cat {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.5) rotate(180deg); }
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
@@ -139,20 +179,22 @@ body {
 .game-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 30px;
-    max-width: 1400px;
+    gap: 20px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    align-items: start;
 }
 
 /* Sections */
 .left-section, .center-section, .right-section {
-    background: rgba(255,255,255,0.05);
+    background: rgba(255,255,255,0.08);
     border-radius: 20px;
-    padding: 25px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.1);
-    min-height: 500px;
+    padding: 20px;
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255,255,255,0.2);
+    min-height: 400px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
 }
 
 .left-section h3, .center-section h3, .right-section h3 {
@@ -181,6 +223,20 @@ body {
     transition: all 0.3s ease;
     position: relative;
     border: 3px solid #fff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    touch-action: none;
+    user-select: none;
+    -webkit-user-drag: element;
+}
+
+.tesla-placeholder:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+}
+
+.tesla-placeholder:active {
+    cursor: grabbing;
+    transform: scale(0.95);
 }
 
 .tesla-placeholder:active {
@@ -220,12 +276,21 @@ body {
     position: relative;
     background: rgba(52, 152, 219, 0.1);
     transition: all 0.3s ease;
+    min-height: 90px;
 }
 
 .parking-space.drag-over {
-    background: rgba(52, 152, 219, 0.3);
+    background: rgba(39, 174, 96, 0.3);
     border-color: #2ecc71;
+    border-style: solid;
     transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(39, 174, 96, 0.5);
+    animation: pulse-green 1s infinite;
+}
+
+@keyframes pulse-green {
+    0%, 100% { box-shadow: 0 0 20px rgba(39, 174, 96, 0.5); }
+    50% { box-shadow: 0 0 30px rgba(39, 174, 96, 0.8); }
 }
 
 .parking-lines {
@@ -256,7 +321,29 @@ body {
     font-size: 1.2rem;
     color: #27ae60;
     font-weight: bold;
-    animation: bounce 0.5s ease;
+    animation: bounce 0.5s ease, glow-green 2s infinite;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.connected-handle {
+    font-size: 1rem;
+    color: #27ae60;
+    font-weight: bold;
+    animation: pulse 1s infinite, glow-green 2s infinite;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+@keyframes glow-green {
+    0%, 100% { text-shadow: 0 2px 4px rgba(0,0,0,0.5), 0 0 10px rgba(39, 174, 96, 0.3); }
+    50% { text-shadow: 0 2px 4px rgba(0,0,0,0.5), 0 0 20px rgba(39, 174, 96, 0.6); }
 }
 
 /* Supercharger Station */
@@ -296,6 +383,20 @@ body {
     cursor: grab;
     transition: all 0.3s ease;
     border: 2px solid #fff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    touch-action: none;
+    user-select: none;
+    -webkit-user-drag: element;
+}
+
+.charging-cable:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(44, 62, 80, 0.4);
+}
+
+.charging-cable:active {
+    cursor: grabbing;
+    transform: scale(0.95);
 }
 
 .charging-cable:active {
@@ -325,11 +426,15 @@ body {
     margin: 0 auto;
     background: rgba(155, 89, 182, 0.1);
     transition: all 0.3s ease;
+    min-height: 60px;
 }
 
 .car-connection-zone.drag-over {
-    background: rgba(155, 89, 182, 0.3);
+    background: rgba(39, 174, 96, 0.3);
     border-color: #27ae60;
+    border-style: solid;
+    box-shadow: 0 0 20px rgba(39, 174, 96, 0.5);
+    animation: pulse-green 1s infinite;
 }
 
 .connection-instruction {
@@ -394,8 +499,41 @@ body {
 .battery-fill {
     height: 100%;
     background: linear-gradient(90deg, #e74c3c, #f39c12, #27ae60);
-    width: 85%;
-    transition: width 2s ease;
+    width: 32%;
+    transition: width 0.5s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.battery-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: batteryGlow 2s infinite;
+}
+
+.charging-active .battery-fill::after {
+    animation: batteryGlow 0.5s infinite;
+}
+
+/* Overcharge battery effects */
+.battery-fill[style*="110"] {
+    animation: overchargePulse 0.3s infinite;
+    box-shadow: 0 0 20px #ff4757;
+}
+
+@keyframes overchargePulse {
+    0%, 100% { box-shadow: 0 0 20px #ff4757; }
+    50% { box-shadow: 0 0 40px #ff4757, 0 0 60px #ff3838; }
+}
+
+@keyframes batteryGlow {
+    0% { left: -100%; }
+    100% { left: 100%; }
 }
 
 .battery-percent {
@@ -418,61 +556,85 @@ body {
 }
 
 .phone-screen {
-    background: #000;
+    background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
     border-radius: 15px;
     height: 100%;
-    padding: 15px;
+    padding: 12px;
     display: flex;
     flex-direction: column;
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow-y: auto;
 }
 
 .phone-header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
-    font-size: 0.8rem;
-    color: #bdc3c7;
+    margin-bottom: 15px;
+    font-size: 0.75rem;
+    color: #ffffff;
+    font-weight: 600;
 }
 
 .banking-app h3 {
-    font-size: 1rem;
-    margin-bottom: 15px;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
     color: #3498db;
+    text-align: center;
+    font-weight: bold;
 }
 
 .balance-amount {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: bold;
     color: #27ae60;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 
 .balance-label {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: #bdc3c7;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .transaction {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
-    font-size: 0.8rem;
+    margin-bottom: 8px;
+    font-size: 0.7rem;
+    padding: 5px 8px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    border-left: 3px solid #e74c3c;
+}
+
+.transaction-desc {
+    color: #ecf0f1;
 }
 
 .transaction-amount {
     color: #e74c3c;
+    font-weight: bold;
 }
 
 .charging-cost {
-    margin-top: 20px;
+    margin-top: 15px;
     text-align: center;
+    background: rgba(52, 152, 219, 0.1);
+    padding: 8px;
+    border-radius: 10px;
+    border: 1px solid rgba(52, 152, 219, 0.3);
 }
 
 .cost-per-minute, .total-cost {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: #f39c12;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
+    font-weight: bold;
 }
 
 /* Controls */
@@ -512,6 +674,26 @@ body {
 .charge-button:not(:disabled):hover {
     transform: translateY(-3px);
     box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+.unpark-button {
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #9b59b6, #8e44ad);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px 20px;
+    font-weight: bold;
+    min-width: 200px;
+}
+
+.unpark-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    background: linear-gradient(135deg, #a569c7, #9f55b8);
 }
 
 /* Setup Status */
@@ -565,8 +747,36 @@ body {
     animation: flashRed 0.5s infinite;
 }
 
+.explosion-overlay.giant-explosion {
+    background: radial-gradient(circle, 
+        rgba(255,255,255,1) 0%, 
+        rgba(255,200,0,0.9) 10%, 
+        rgba(255,100,0,0.8) 30%, 
+        rgba(255,0,0,0.9) 60%, 
+        rgba(0,0,0,0.7) 100%);
+    animation: giantFlash 0.3s infinite, screenFlash 0.1s infinite;
+}
+
+.explosion-overlay.overcharge-explosion {
+    background: radial-gradient(circle, 
+        rgba(255,255,255,1) 0%, 
+        rgba(255,0,255,0.9) 5%, 
+        rgba(255,0,0,0.9) 15%, 
+        rgba(255,100,0,0.8) 40%, 
+        rgba(255,255,0,0.9) 70%, 
+        rgba(0,0,0,0.8) 100%);
+    animation: overchargeFlash 0.2s infinite, screenFlash 0.05s infinite;
+}
+
 .explosion-animation {
     text-align: center;
+    transform: scale(1);
+    transition: transform 0.5s ease;
+}
+
+.giant-explosion .explosion-animation {
+    transform: scale(2);
+    animation: explosionPulse 0.5s infinite;
 }
 
 .explosion-text {
@@ -577,14 +787,34 @@ body {
     margin-top: 20px;
 }
 
+.giant-explosion .explosion-text {
+    font-size: 5rem;
+    color: #ffff00;
+    text-shadow: 
+        0 0 20px #ff0000,
+        0 0 40px #ff4500,
+        0 0 60px #ffff00,
+        3px 3px 6px rgba(0,0,0,0.8);
+    animation: textExplode 0.3s infinite;
+}
+
 .flame {
     font-size: 4rem;
     display: inline-block;
     animation: explode 0.5s infinite alternate;
 }
 
+.giant-explosion .flame {
+    font-size: 8rem;
+    animation: giantExplode 0.2s infinite alternate;
+}
+
 .flame:nth-child(2n) {
     animation-delay: 0.2s;
+}
+
+.giant-explosion .flame:nth-child(2n) {
+    animation-delay: 0.1s;
 }
 
 /* Animations */
@@ -619,8 +849,8 @@ body {
 /* Responsive Design */
 @media (max-width: 1200px) {
     .game-container {
-        grid-template-columns: 1fr;
-        gap: 20px;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
     }
     
     .setup-status {
@@ -630,6 +860,23 @@ body {
     .fake-phone {
         width: 180px;
         height: 350px;
+    }
+}
+
+@media (max-width: 900px) {
+    .game-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .spinning-cat {
+        top: 10px;
+        right: 10px;
+    }
+    
+    .cat-gif {
+        width: 60px;
+        height: 60px;
     }
 }
 
@@ -690,6 +937,38 @@ body {
     }
 }
 
+/* Flying Tesla */
+.flying-tesla {
+    position: fixed;
+    font-size: 3rem;
+    z-index: 9999;
+    pointer-events: none;
+    animation: flyingSpin 0.1s linear infinite;
+    text-shadow: 
+        0 0 10px #e74c3c,
+        0 0 20px #f39c12,
+        0 0 30px #ffffff;
+    filter: drop-shadow(0 0 15px rgba(255,0,0,0.8));
+}
+
+/* Whipping Tesla */
+.whipping-tesla {
+    position: fixed;
+    font-size: 4rem;
+    z-index: 9998;
+    pointer-events: none;
+    animation: whippingSpin 0.05s linear infinite;
+    text-shadow: 
+        0 0 15px #ff00ff,
+        0 0 25px #00ffff,
+        0 0 35px #ffff00,
+        0 0 45px #ff0000;
+    filter: drop-shadow(0 0 25px rgba(255,0,255,1)) 
+            brightness(1.5) 
+            saturate(2);
+    transition: all 0.1s ease-out;
+}
+
 /* Special Effects */
 .charging-active .fake-phone {
     animation: pulse 2s infinite;
@@ -699,13 +978,165 @@ body {
     animation: shake 0.5s infinite;
 }
 
+.giant-explosion-active {
+    animation: giantShake 0.2s infinite;
+}
+
+.overcharge-explosion-active {
+    animation: overchargeShake 0.1s infinite;
+}
+
+.overcharge-explosion .explosion-animation {
+    transform: scale(2.5);
+    animation: overchargeExplosionPulse 0.3s infinite;
+}
+
+.overcharge-explosion .explosion-text {
+    font-size: 4rem;
+    color: #ff00ff;
+    text-shadow: 
+        0 0 20px #ff0000,
+        0 0 40px #ff00ff,
+        0 0 60px #ffff00,
+        0 0 80px #00ffff,
+        3px 3px 6px rgba(0,0,0,0.8);
+    animation: overchargeTextExplode 0.2s infinite;
+}
+
+.overcharge-explosion .flame {
+    font-size: 10rem;
+    animation: overchargeFlameExplode 0.15s infinite alternate;
+}
+
+.screen-shake {
+    animation: screenShake 0.1s infinite;
+}
+
 @keyframes shake {
     0%, 100% { transform: translateX(0); }
     25% { transform: translateX(-5px); }
     75% { transform: translateX(5px); }
 }
 
+@keyframes giantShake {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(-10px, -10px) rotate(-2deg); }
+    50% { transform: translate(10px, -10px) rotate(2deg); }
+    75% { transform: translate(-10px, 10px) rotate(-2deg); }
+    100% { transform: translate(10px, 10px) rotate(2deg); }
+}
+
+@keyframes screenShake {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(-5px, -5px); }
+    50% { transform: translate(5px, -5px); }
+    75% { transform: translate(-5px, 5px); }
+    100% { transform: translate(5px, 5px); }
+}
+
+@keyframes giantFlash {
+    0% { background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,200,0,0.9) 10%, rgba(255,100,0,0.8) 30%, rgba(255,0,0,0.9) 60%, rgba(0,0,0,0.7) 100%); }
+    50% { background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,0,1) 20%, rgba(255,0,0,1) 50%, rgba(255,100,0,0.9) 80%, rgba(0,0,0,0.8) 100%); }
+    100% { background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,200,0,0.9) 10%, rgba(255,100,0,0.8) 30%, rgba(255,0,0,0.9) 60%, rgba(0,0,0,0.7) 100%); }
+}
+
+@keyframes screenFlash {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(2) contrast(1.5) saturate(2); }
+}
+
+@keyframes explosionPulse {
+    0%, 100% { transform: scale(2); }
+    50% { transform: scale(2.5) rotate(5deg); }
+}
+
+@keyframes textExplode {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.2) rotate(-2deg); }
+}
+
+@keyframes giantExplode {
+    0% { transform: scale(1) rotate(0deg); }
+    100% { transform: scale(1.5) rotate(20deg); }
+}
+
+@keyframes flyingSpin {
+    from { transform: rotate(0deg) scale(1); }
+    to { transform: rotate(360deg) scale(1.2); }
+}
+
+@keyframes whippingSpin {
+    0% { 
+        transform: rotate(0deg) scale(1); 
+        filter: drop-shadow(0 0 25px rgba(255,0,255,1)) brightness(1.5) saturate(2) hue-rotate(0deg);
+    }
+    25% { 
+        transform: rotate(90deg) scale(1.3); 
+        filter: drop-shadow(0 0 30px rgba(0,255,255,1)) brightness(2) saturate(3) hue-rotate(90deg);
+    }
+    50% { 
+        transform: rotate(180deg) scale(0.8); 
+        filter: drop-shadow(0 0 35px rgba(255,255,0,1)) brightness(1.8) saturate(2.5) hue-rotate(180deg);
+    }
+    75% { 
+        transform: rotate(270deg) scale(1.5); 
+        filter: drop-shadow(0 0 40px rgba(255,0,0,1)) brightness(2.2) saturate(4) hue-rotate(270deg);
+    }
+    100% { 
+        transform: rotate(360deg) scale(1); 
+        filter: drop-shadow(0 0 25px rgba(255,0,255,1)) brightness(1.5) saturate(2) hue-rotate(360deg);
+    }
+}
+
+@keyframes overchargeFlash {
+    0% { background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,0,255,0.9) 5%, rgba(255,0,0,0.9) 15%, rgba(255,100,0,0.8) 40%, rgba(255,255,0,0.9) 70%, rgba(0,0,0,0.8) 100%); }
+    33% { background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(0,255,255,1) 10%, rgba(255,0,255,1) 25%, rgba(255,255,0,1) 50%, rgba(255,0,0,1) 75%, rgba(0,0,0,0.9) 100%); }
+    66% { background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,0,1) 8%, rgba(0,255,255,1) 20%, rgba(255,0,255,1) 45%, rgba(255,100,0,1) 80%, rgba(0,0,0,0.9) 100%); }
+    100% { background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,0,255,0.9) 5%, rgba(255,0,0,0.9) 15%, rgba(255,100,0,0.8) 40%, rgba(255,255,0,0.9) 70%, rgba(0,0,0,0.8) 100%); }
+}
+
+@keyframes overchargeShake {
+    0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+    20% { transform: translate(-15px, -15px) rotate(-3deg) scale(1.02); }
+    40% { transform: translate(15px, -15px) rotate(3deg) scale(0.98); }
+    60% { transform: translate(-15px, 15px) rotate(-3deg) scale(1.02); }
+    80% { transform: translate(15px, 15px) rotate(3deg) scale(0.98); }
+    100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+}
+
+@keyframes overchargeExplosionPulse {
+    0%, 100% { transform: scale(2.5) rotate(0deg); }
+    25% { transform: scale(3) rotate(5deg); }
+    50% { transform: scale(2.8) rotate(-5deg); }
+    75% { transform: scale(3.2) rotate(3deg); }
+}
+
+@keyframes overchargeTextExplode {
+    0% { transform: scale(1) rotate(0deg); color: #ff00ff; }
+    25% { transform: scale(1.3) rotate(-3deg); color: #00ffff; }
+    50% { transform: scale(1.1) rotate(3deg); color: #ffff00; }
+    75% { transform: scale(1.4) rotate(-2deg); color: #ff0000; }
+    100% { transform: scale(1) rotate(0deg); color: #ff00ff; }
+}
+
+@keyframes overchargeFlameExplode {
+    0% { transform: scale(1) rotate(0deg); }
+    100% { transform: scale(2) rotate(30deg); }
+}
+
 /* Smooth Transitions */
 .dragging {
     pointer-events: none;
+    opacity: 0.8;
+    transform: scale(1.1) rotate(5deg);
+    z-index: 1000;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+}
+
+.tesla-placeholder.dragging {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+}
+
+.charging-cable.dragging {
+    background: linear-gradient(135deg, #3742fa, #2f3542);
 }
