@@ -489,6 +489,12 @@
             <div style="margin-bottom: 15px;"><strong>Elite Access:</strong> 4.67</div>
             <button onclick="document.getElementById('math-answers-popup').style.display='none'" style="background: #ff6b6b; border: none; color: white; padding: 5px 10px; border-radius: 5px; cursor: pointer;">Close</button>
         </div>
+        
+        <!-- Hidden Math Skip Button (Hold for 3 seconds to activate) -->
+        <div class="math-skip-button" onmousedown="startMathSkip()" onmouseup="stopMathSkip()" onmouseleave="stopMathSkip()" ontouchstart="startMathSkip()" ontouchend="stopMathSkip()" style="position: fixed; bottom: 20px; left: 20px; width: 20px; height: 20px; background: rgba(255,107,107,0.1); border: 1px solid rgba(255,107,107,0.2); border-radius: 50%; cursor: pointer; z-index: 100; opacity: 0.2;" title="Hold for 3 seconds to skip math" onmouseover="this.style.opacity='0.8'; this.style.background='rgba(255, 107, 107, 0.3)'; this.style.transform='scale(1.3)'" onmouseout="this.style.opacity='0.2'; this.style.background='rgba(255, 107, 107, 0.1)'; this.style.transform='scale(1)'">
+            <div style="font-size: 10px; text-align: center; color: #ff6b6b; line-height: 20px;">⏭️</div>
+            <div class="skip-progress" style="position: absolute; top: -2px; left: -2px; width: 24px; height: 24px; border: 2px solid transparent; border-radius: 50%; transition: all 0.1s ease;"></div>
+        </div>
 
         <!-- Complex Mathematical Gate -->
         <div class="legendary-gate">
@@ -1615,6 +1621,111 @@
                 showLegendaryNotification('📝 MATH CHEAT ACTIVATED', 'The ancient scrolls reveal their secrets... Use wisely!');
             }
         }
+        
+        // Math Skip System
+        let mathSkipTimer = null;
+        let mathSkipProgress = 0;
+        
+        function startMathSkip() {
+            if (mathCompleted) return; // Already completed
+            
+            mathSkipProgress = 0;
+            const skipButton = document.querySelector('.skip-progress');
+            
+            mathSkipTimer = setInterval(() => {
+                mathSkipProgress += 2; // 2% every 60ms = 3 seconds total
+                
+                // Update visual progress
+                const percentage = (mathSkipProgress / 100) * 360;
+                skipButton.style.border = `2px solid rgba(255, 107, 107, ${mathSkipProgress / 100})`;
+                skipButton.style.borderTop = `2px solid #ff6b6b`;
+                skipButton.style.transform = `rotate(${percentage}deg)`;
+                
+                if (mathSkipProgress >= 100) {
+                    completeMathSkip();
+                }
+            }, 60);
+        }
+        
+        function stopMathSkip() {
+            if (mathSkipTimer) {
+                clearInterval(mathSkipTimer);
+                mathSkipTimer = null;
+                mathSkipProgress = 0;
+                
+                // Reset visual progress
+                const skipButton = document.querySelector('.skip-progress');
+                skipButton.style.border = '2px solid transparent';
+                skipButton.style.transform = 'rotate(0deg)';
+            }
+        }
+        
+        function completeMathSkip() {
+            stopMathSkip();
+            
+            showLegendaryNotification('⏭️ MATH SKIP ACTIVATED', 'The cosmic powers grant you passage without mathematical tribulation!');
+            
+            // Skip all math phases and unlock legendary interface
+            mathCompleted = true;
+            currentPhase = 4; // Beyond all phases
+            
+            // Mark all steps as completed
+            document.getElementById('step1').classList.add('completed');
+            document.getElementById('step1').classList.remove('current');
+            document.getElementById('step2').classList.add('completed');
+            document.getElementById('step2').classList.remove('current');
+            document.getElementById('step3').classList.add('completed');
+            document.getElementById('step3').classList.remove('current');
+            
+            // Hide all math phases
+            document.getElementById('phase1').style.display = 'none';
+            const phase2 = document.getElementById('phase2');
+            const phase3 = document.getElementById('phase3');
+            if (phase2) phase2.style.display = 'none';
+            if (phase3) phase3.style.display = 'none';
+            
+            // Show completion message
+            const feedback = document.getElementById('math-feedback');
+            if (feedback) {
+                feedback.innerHTML = '<div style="color: #ffd700; font-weight: bold; font-size: 1.3rem; text-align: center;">🎯 MATHEMATICAL MASTERY BYPASSED! 🎯<br><span style="font-size: 1rem; margin-top: 10px; display: block;">The universe acknowledges your impatience and grants access!</span></div>';
+            }
+            
+            // Unlock legendary interface after a short delay
+            setTimeout(() => {
+                unlockLegendaryInterface();
+            }, 2000);
+            
+            // Add skip celebration effects
+            celebrateSkip();
+        }
+        
+        function celebrateSkip() {
+            // Create skip celebration particles
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const particle = document.createElement('div');
+                    particle.textContent = ['⏭️', '🚀', '⚡', '🎯', '✨'][Math.floor(Math.random() * 5)];
+                    particle.style.cssText = `
+                        position: fixed;
+                        bottom: 20px;
+                        left: 20px;
+                        font-size: ${Math.random() * 20 + 15}px;
+                        z-index: 10001;
+                        pointer-events: none;
+                        animation: skipCelebrate ${Math.random() * 2 + 1}s ease-out forwards;
+                    `;
+                    document.body.appendChild(particle);
+                    
+                    setTimeout(() => particle.remove(), 3000);
+                }, i * 100);
+            }
+            
+            // Screen flash effect
+            document.body.style.animation = 'skipFlash 1s ease-in-out';
+            setTimeout(() => {
+                document.body.style.animation = 'none';
+            }, 1000);
+        }
 
         function startAmbientEffects() {
             // Subtle ambient animations
@@ -2294,6 +2405,26 @@
                     transform: scale(4);
                     opacity: 0;
                 }
+            }
+            
+            @keyframes skipCelebrate {
+                0% {
+                    transform: translate(0px, 0px) scale(0) rotate(0deg);
+                    opacity: 0;
+                }
+                50% {
+                    transform: translate(100px, -100px) scale(1.5) rotate(180deg);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translate(200px, -200px) scale(0.5) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+            
+            @keyframes skipFlash {
+                0%, 100% { background-color: transparent; }
+                50% { background-color: rgba(255, 107, 107, 0.3); }
             }
         `;
         document.head.appendChild(style);
