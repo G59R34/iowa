@@ -148,17 +148,38 @@
         };
 
         function updateMotd() {
+            console.log('🔥 Initializing Tesla Firebase Remote Config...');
+            
             remoteConfig.fetchAndActivate()
                 .then(() => {
+                    console.log('✅ Tesla Firebase Remote Config fetched successfully');
                     const motd = remoteConfig.getString('msg');
+                    console.log('📝 Tesla retrieved message:', motd);
+                    
                     const banner = document.getElementById('motd-banner');
-                    banner.textContent = motd || remoteConfig.defaultConfig.msg;
-                    banner.style.display = 'block';
+                    if (banner) {
+                        if (motd && motd.trim() !== '') {
+                            banner.textContent = motd;
+                            banner.style.display = 'block';
+                            console.log('🎉 Tesla banner displayed with remote message');
+                        } else {
+                            // Show default message if remote message is empty
+                            banner.textContent = remoteConfig.defaultConfig.msg;
+                            banner.style.display = 'block';
+                            console.log('📢 Tesla banner displayed with default message');
+                        }
+                    } else {
+                        console.error('❌ Tesla banner element not found!');
+                    }
                 })
-                .catch(() => {
+                .catch((err) => {
+                    console.error('❌ Tesla Firebase Remote Config failed:', err);
                     const banner = document.getElementById('motd-banner');
-                    banner.textContent = remoteConfig.defaultConfig.msg;
-                    banner.style.display = 'block';
+                    if (banner) {
+                        banner.textContent = remoteConfig.defaultConfig.msg;
+                        banner.style.display = 'block';
+                        console.log('🔄 Tesla banner displayed with fallback message due to error');
+                    }
                 });
         }
         updateMotd();

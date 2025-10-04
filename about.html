@@ -262,21 +262,51 @@ img:nth-child(2) { top: 50%; left: 50%; animation-delay: 5s; }
     msg: "Welcome to the Anti-Iowa Cult! (Default message)",
   };
 
+  // Enhanced Firebase Remote Config with better debugging
+  console.log('🔥 Initializing Firebase Remote Config...');
+  
   remoteConfig.fetchAndActivate()
     .then(() => {
+      console.log('✅ Firebase Remote Config fetched successfully');
       const motd = remoteConfig.getString('msg');
-      if (motd) {
-        const banner = document.getElementById('motd-banner');
-        banner.textContent = motd;
-        banner.style.display = 'block';
+      console.log('📝 Retrieved message:', motd);
+      
+      const banner = document.getElementById('motd-banner');
+      if (banner) {
+        if (motd && motd.trim() !== '') {
+          banner.textContent = motd;
+          banner.style.display = 'block';
+          console.log('🎉 Banner displayed with remote message');
+        } else {
+          // Show default message if remote message is empty
+          banner.textContent = remoteConfig.defaultConfig.msg;
+          banner.style.display = 'block';
+          console.log('📢 Banner displayed with default message');
+        }
+      } else {
+        console.error('❌ Banner element not found!');
       }
     })
     .catch((err) => {
+      console.error('❌ Firebase Remote Config failed:', err);
       // Show default message if fetch fails
       const banner = document.getElementById('motd-banner');
+      if (banner) {
+        banner.textContent = remoteConfig.defaultConfig.msg;
+        banner.style.display = 'block';
+        console.log('🔄 Banner displayed with fallback message due to error');
+      }
+    });
+
+  // Also add a timeout fallback in case Firebase takes too long
+  setTimeout(() => {
+    const banner = document.getElementById('motd-banner');
+    if (banner && banner.style.display === 'none') {
+      console.log('⏰ Timeout reached, showing default message');
       banner.textContent = remoteConfig.defaultConfig.msg;
       banner.style.display = 'block';
-    });
+    }
+  }, 5000); // 5 second timeout
 </script>
 </body>
 </html>

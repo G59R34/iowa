@@ -13,6 +13,9 @@ class GlobalNavigation {
         this.navVisible = false;
         this.hideTimeout = null;
         this.apiTested = false;
+        this.firebaseInitialized = false;
+        this.audioContext = null;
+        this.sounds = {};
         this.init();
     }
 
@@ -30,11 +33,346 @@ class GlobalNavigation {
         }
     }
 
+    // Initialize Firebase and show the MOTD banner
+    initializeFirebase() {
+        if (this.firebaseInitialized) return;
+        
+        console.log('🔥 Initializing Firebase for global navigation...');
+        
+        // Check if Firebase is already loaded
+        if (typeof firebase === 'undefined') {
+            console.log('📦 Loading Firebase scripts...');
+            this.loadFirebaseScripts().then(() => {
+                this.setupFirebaseConfig();
+            }).catch((error) => {
+                console.error('❌ Failed to load Firebase:', error);
+                this.showDefaultBanner();
+            });
+        } else {
+            this.setupFirebaseConfig();
+        }
+    }
+
+    // Load Firebase scripts dynamically
+    async loadFirebaseScripts() {
+        const scripts = [
+            'https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js',
+            'https://www.gstatic.com/firebasejs/10.12.2/firebase-remote-config-compat.js'
+        ];
+
+        for (const scriptUrl of scripts) {
+            await new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = scriptUrl;
+                script.onload = resolve;
+                script.onerror = reject;
+                document.head.appendChild(script);
+            });
+        }
+    }
+
+    // Setup Firebase configuration and Remote Config
+    setupFirebaseConfig() {
+        try {
+            const firebaseConfig = {
+                apiKey: "AIzaSyBojUvZXxV6JMWrPUA95Palrt73jEgrEqo",
+                authDomain: "iowa-e875b.firebaseapp.com",
+                projectId: "iowa-e875b",
+                storageBucket: "iowa-e875b.firebasestorage.app",
+                messagingSenderId: "826589602144",
+                appId: "1:826589602144:web:e8a9c1b27b4ebcb9cf3e05",
+                measurementId: "G-6RQCYY8Y3X"
+            };
+
+            // Initialize Firebase only once
+            if (!window.firebaseApp) {
+                window.firebaseApp = firebase.initializeApp(firebaseConfig);
+            }
+
+            const remoteConfig = firebase.remoteConfig();
+            remoteConfig.settings = {
+                minimumFetchIntervalMillis: 3600000, // 1 hour
+            };
+            remoteConfig.defaultConfig = {
+                msg: "🌽 Welcome to CornClub - The Anti-Iowa Experience! 🌽",
+            };
+
+            this.fetchFirebaseMessage(remoteConfig);
+            this.firebaseInitialized = true;
+
+        } catch (error) {
+            console.error('❌ Firebase setup failed:', error);
+            this.showDefaultBanner();
+        }
+    }
+
+    // Fetch message from Firebase Remote Config
+    fetchFirebaseMessage(remoteConfig) {
+        console.log('📡 Fetching Firebase Remote Config...');
+        
+        remoteConfig.fetchAndActivate()
+            .then(() => {
+                console.log('✅ Firebase Remote Config fetched successfully');
+                const motd = remoteConfig.getString('msg');
+                console.log('📝 Retrieved message:', motd);
+                
+                if (motd && motd.trim() !== '') {
+                    this.showBanner(motd);
+                    console.log('🎉 Banner displayed with remote message');
+                } else {
+                    this.showBanner(remoteConfig.defaultConfig.msg);
+                    console.log('📢 Banner displayed with default message');
+                }
+            })
+            .catch((err) => {
+                console.error('❌ Firebase Remote Config failed:', err);
+                this.showBanner(remoteConfig.defaultConfig.msg);
+                console.log('🔄 Banner displayed with fallback message');
+            });
+
+        // Timeout fallback
+        setTimeout(() => {
+            const banner = document.getElementById('motd-banner');
+            if (!banner || banner.style.display === 'none') {
+                console.log('⏰ Timeout reached, showing default message');
+                this.showBanner(remoteConfig.defaultConfig.msg);
+            }
+        }, 5000);
+    }
+
+    // Show the MOTD banner
+    showBanner(message) {
+        let banner = document.getElementById('motd-banner');
+        
+        if (!banner) {
+            // Create banner if it doesn't exist
+            banner = document.createElement('div');
+            banner.id = 'motd-banner';
+            banner.style.cssText = `
+                width: 100vw;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 100000;
+                background: linear-gradient(90deg, #ff00cc, #1bffff);
+                color: #fff;
+                font-family: 'Orbitron', 'Inter', sans-serif;
+                font-size: 1.1em;
+                font-weight: 600;
+                text-align: center;
+                padding: 0.8em 1em;
+                box-shadow: 0 4px 32px rgba(255, 0, 204, 0.5);
+                display: none;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            `;
+            
+            // Add click to dismiss functionality
+            banner.addEventListener('click', () => {
+                this.playSound('banner', 0.15);
+                banner.style.transform = 'translateY(-100%)';
+                setTimeout(() => {
+                    banner.style.display = 'none';
+                    // Remove banner class from nav
+                    const nav = document.getElementById('global-nav');
+                    if (nav) nav.classList.remove('with-banner');
+                }, 300);
+            });
+
+            // Add hover effect
+            banner.addEventListener('mouseenter', () => {
+                this.playSound('hover', 0.08);
+                banner.style.background = 'linear-gradient(90deg, #ff00cc, #00ff88)';
+            });
+            
+            banner.addEventListener('mouseleave', () => {
+                banner.style.background = 'linear-gradient(90deg, #ff00cc, #1bffff)';
+            });
+
+            document.body.appendChild(banner);
+        }
+
+        banner.textContent = message;
+        banner.style.display = 'block';
+        banner.style.transform = 'translateY(0)';
+        
+        // Add banner class to nav to adjust its position
+        const nav = document.getElementById('global-nav');
+        if (nav) {
+            nav.classList.add('with-banner');
+        }
+    }
+
+    // Show default banner when Firebase fails
+    showDefaultBanner() {
+        this.showBanner('🌽 Welcome to CornClub - The Anti-Iowa Experience! 🌽');
+    }
+
+    // Initialize audio context and create sound effects
+    initializeAudio() {
+        try {
+            this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            this.createSoundEffects();
+            console.log('🔊 Audio system initialized');
+        } catch (error) {
+            console.log('🔇 Audio not available:', error);
+        }
+    }
+
+    // Create various bloop and interaction sounds
+    createSoundEffects() {
+        if (!this.audioContext) return;
+
+        // Different sound frequencies for different interactions
+        this.sounds = {
+            hover: { frequency: 800, duration: 0.1, type: 'sine' },
+            click: { frequency: 600, duration: 0.15, type: 'square' },
+            dropdown: { frequency: 400, duration: 0.2, type: 'triangle' },
+            chat: { frequency: 1000, duration: 0.25, type: 'sawtooth' },
+            banner: { frequency: 500, duration: 0.3, type: 'sine' },
+            nav_show: { frequency: 700, duration: 0.2, type: 'triangle' },
+            nav_hide: { frequency: 300, duration: 0.15, type: 'sine' }
+        };
+    }
+
+    // Play a bloop sound effect
+    playSound(soundType, volume = 0.1) {
+        if (!this.audioContext || !this.sounds[soundType]) return;
+
+        try {
+            // Resume audio context if suspended (required by browsers)
+            if (this.audioContext.state === 'suspended') {
+                this.audioContext.resume();
+            }
+
+            const sound = this.sounds[soundType];
+            const oscillator = this.audioContext.createOscillator();
+            const gainNode = this.audioContext.createGain();
+
+            // Configure oscillator
+            oscillator.type = sound.type;
+            oscillator.frequency.setValueAtTime(sound.frequency, this.audioContext.currentTime);
+
+            // Create envelope for natural sound
+            gainNode.gain.setValueAtTime(0, this.audioContext.currentTime);
+            gainNode.gain.linearRampToValueAtTime(volume, this.audioContext.currentTime + 0.01);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, this.audioContext.currentTime + sound.duration);
+
+            // Connect and play
+            oscillator.connect(gainNode);
+            gainNode.connect(this.audioContext.destination);
+            
+            oscillator.start(this.audioContext.currentTime);
+            oscillator.stop(this.audioContext.currentTime + sound.duration);
+
+        } catch (error) {
+            console.log('🔇 Sound playback failed:', error);
+        }
+    }
+
+    // Play a more complex bloop with pitch sweep
+    playBloop(startFreq = 400, endFreq = 800, duration = 0.2, volume = 0.1) {
+        if (!this.audioContext) return;
+
+        try {
+            if (this.audioContext.state === 'suspended') {
+                this.audioContext.resume();
+            }
+
+            const oscillator = this.audioContext.createOscillator();
+            const gainNode = this.audioContext.createGain();
+
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(startFreq, this.audioContext.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(endFreq, this.audioContext.currentTime + duration * 0.7);
+
+            gainNode.gain.setValueAtTime(0, this.audioContext.currentTime);
+            gainNode.gain.linearRampToValueAtTime(volume, this.audioContext.currentTime + 0.01);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, this.audioContext.currentTime + duration);
+
+            oscillator.connect(gainNode);
+            gainNode.connect(this.audioContext.destination);
+            
+            oscillator.start(this.audioContext.currentTime);
+            oscillator.stop(this.audioContext.currentTime + duration);
+
+        } catch (error) {
+            console.log('🔇 Bloop playback failed:', error);
+        }
+    }
+
+    // Add sound effects to navigation elements
+    addSoundEffectsToNav() {
+        const nav = document.getElementById('global-nav');
+        if (!nav) return;
+
+        // Add sounds to navigation links
+        const navLinks = nav.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            // Hover sound
+            link.addEventListener('mouseenter', () => {
+                this.playSound('hover', 0.06);
+            });
+
+            // Click sound
+            link.addEventListener('click', () => {
+                this.playSound('click', 0.1);
+            });
+        });
+
+        // Add sounds to dropdown items
+        const dropdownLinks = nav.querySelectorAll('.dropdown-content a');
+        dropdownLinks.forEach(link => {
+            // Hover sound for dropdown items
+            link.addEventListener('mouseenter', () => {
+                this.playSound('dropdown', 0.05);
+            });
+
+            // Click sound for dropdown items
+            link.addEventListener('click', () => {
+                this.playBloop(500, 800, 0.18, 0.08);
+            });
+        });
+
+        // Add special sound for AI chat link
+        const aiChatLink = nav.querySelector('.ai-chat-link');
+        if (aiChatLink) {
+            aiChatLink.addEventListener('click', () => {
+                this.playSound('chat', 0.12);
+            });
+        }
+
+        // Add sounds to dropdown show/hide
+        const dropdowns = nav.querySelectorAll('.dropdown');
+        dropdowns.forEach(dropdown => {
+            const dropdownContent = dropdown.querySelector('.dropdown-content');
+            
+            dropdown.addEventListener('mouseenter', () => {
+                if (dropdownContent) {
+                    this.playBloop(400, 700, 0.1, 0.04);
+                }
+            });
+
+            dropdown.addEventListener('mouseleave', () => {
+                if (dropdownContent) {
+                    this.playBloop(700, 400, 0.08, 0.03);
+                }
+            });
+        });
+    }
+
     init() {
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => this.createNav());
+            document.addEventListener('DOMContentLoaded', () => {
+                this.createNav();
+                this.initializeFirebase();
+                this.initializeAudio();
+            });
         } else {
             this.createNav();
+            this.initializeFirebase();
+            this.initializeAudio();
         }
     }
 
@@ -179,6 +517,11 @@ class GlobalNavigation {
                 transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
                 border-radius: 0 0 32px 32px;
                 overflow: visible;
+            }
+
+            /* Adjust nav position when banner is visible */
+            .global-nav.with-banner {
+                top: 60px;
             }
 
             .global-nav::before {
@@ -616,6 +959,7 @@ class GlobalNavigation {
 
         // Bind events
         this.bindEvents();
+        this.addSoundEffectsToNav();
 
         console.log('Global navigation initialized successfully');
     }
@@ -628,6 +972,7 @@ class GlobalNavigation {
         const showNav = () => {
             clearTimeout(this.hideTimeout);
             if (!this.navVisible) {
+                this.playBloop(300, 600, 0.15, 0.06);
                 nav.classList.add('show');
                 this.navVisible = true;
             }
@@ -636,6 +981,7 @@ class GlobalNavigation {
         const hideNav = () => {
             this.hideTimeout = setTimeout(() => {
                 if (this.navVisible && !this.chatVisible) {
+                    this.playBloop(600, 300, 0.12, 0.05);
                     nav.classList.remove('show');
                     this.navVisible = false;
                 }
@@ -728,6 +1074,7 @@ class GlobalNavigation {
 
         if (sendButton) {
             sendButton.addEventListener('click', () => {
+                this.playSound('click', 0.1);
                 this.sendMessage();
             });
         }
@@ -735,8 +1082,14 @@ class GlobalNavigation {
         if (chatInput) {
             chatInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
+                    this.playSound('click', 0.1);
                     this.sendMessage();
                 }
+            });
+
+            // Add typing sounds
+            chatInput.addEventListener('input', () => {
+                this.playSound('hover', 0.03);
             });
         }
     }
@@ -747,6 +1100,14 @@ class GlobalNavigation {
         
         if (chatPanel) {
             this.chatVisible = !this.chatVisible;
+            
+            // Play sound based on chat state
+            if (this.chatVisible) {
+                this.playBloop(300, 900, 0.3, 0.1);
+            } else {
+                this.playBloop(900, 300, 0.2, 0.08);
+            }
+            
             chatPanel.classList.toggle('open', this.chatVisible);
             
             // Test API connection when chat is first opened
@@ -812,6 +1173,13 @@ class GlobalNavigation {
         
         chatMessages.appendChild(messageDiv);
         chatMessages.scrollTop = chatMessages.scrollHeight;
+
+        // Play different sounds for different message types
+        if (sender === 'user') {
+            this.playBloop(600, 400, 0.15, 0.06);
+        } else {
+            this.playBloop(400, 600, 0.2, 0.07);
+        }
     }
 
     async getAIResponse(message) {
