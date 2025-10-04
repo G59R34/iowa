@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BELTLOADER Game - Load the Bags!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&family=Roboto:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="beltloader-game.css">
+    <script src="global-nav.js"></script>
+</head>
+<body>
+    <!-- Game Header -->
+    <header class="game-header">
+        <div class="header-container">
+            <div class="game-logo">
+                <div class="logo-icon">🚛</div>
+                <div class="logo-text">
+                    <h1>BELTLOADER</h1>
+                    <span>The Ultimate Baggage Loading Game</span>
+                </div>
+            </div>
+            <div class="game-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Bags Loaded:</span>
+                    <span class="stat-value" id="bags-counter">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Level:</span>
+                    <span class="stat-value">Airport Pro</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Game Arena -->
+    <main class="game-arena">
+        <!-- Instructions Panel -->
+        <div class="instructions-panel">
+            <h2>🎯 How to Play BELTLOADER</h2>
+            <div class="instruction-steps">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <p>Hover over baggage items to "grab" them</p>
+                </div>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <p>Click on the BELTLOADER conveyor to load bags</p>
+                </div>
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <p>Watch bags travel up the belt to the aircraft</p>
+                </div>
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <p>Load all bags to complete the flight!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Board -->
+        <div class="game-board">
+            <!-- Aircraft -->
+            <div class="aircraft">
+                <div class="aircraft-body">
+                    <div class="aircraft-nose"></div>
+                    <div class="aircraft-fuselage">
+                        <div class="aircraft-window"></div>
+                        <div class="aircraft-window"></div>
+                        <div class="aircraft-window"></div>
+                    </div>
+                    <div class="aircraft-tail">
+                        <div class="tail-fin"></div>
+                    </div>
+                    <div class="aircraft-wing"></div>
+                    <div class="cargo-door">
+                        <div class="door-frame"></div>
+                        <div class="loaded-bags" id="loaded-bags-area">
+                            <!-- Loaded bags will appear here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BELTLOADER -->
+            <div class="beltloader-machine">
+                <div class="loader-chassis">
+                    <div class="front-wheel"></div>
+                    <div class="rear-wheel"></div>
+                    <div class="operator-cab"></div>
+                </div>
+                
+                <div class="conveyor-system">
+                    <div class="belt-track">
+                        <div class="belt-surface">
+                            <!-- Belt segments for animation -->
+                            <div class="belt-segment"></div>
+                            <div class="belt-segment"></div>
+                            <div class="belt-segment"></div>
+                            <div class="belt-segment"></div>
+                            <div class="belt-segment"></div>
+                            <div class="belt-segment"></div>
+                            <div class="belt-segment"></div>
+                            <div class="belt-segment"></div>
+                        </div>
+                        
+                        <!-- Traveling bags on belt -->
+                        <div class="traveling-bags">
+                            <div class="traveling-bag bag-1"></div>
+                            <div class="traveling-bag bag-2"></div>
+                            <div class="traveling-bag bag-3"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="hydraulic-arm">
+                        <div class="arm-base"></div>
+                        <div class="arm-extension"></div>
+                        <div class="arm-joint"></div>
+                    </div>
+                </div>
+                
+                <!-- Loading Area - Click target -->
+                <div class="loading-area" title="Click to load bags!">
+                    <div class="loading-indicator">📦 LOAD HERE</div>
+                </div>
+            </div>
+
+            <!-- Baggage Collection Area -->
+            <div class="baggage-area">
+                <h3>🧳 Available Baggage</h3>
+                <div class="baggage-collection">
+                    <!-- Interactive baggage items -->
+                    <div class="baggage-item suitcase" data-bag-type="suitcase">
+                        <div class="bag-icon">🧳</div>
+                        <div class="bag-label">Suitcase</div>
+                        <div class="grab-indicator">Hover to Grab!</div>
+                    </div>
+                    
+                    <div class="baggage-item backpack" data-bag-type="backpack">
+                        <div class="bag-icon">🎒</div>
+                        <div class="bag-label">Backpack</div>
+                        <div class="grab-indicator">Hover to Grab!</div>
+                    </div>
+                    
+                    <div class="baggage-item briefcase" data-bag-type="briefcase">
+                        <div class="bag-icon">💼</div>
+                        <div class="bag-label">Briefcase</div>
+                        <div class="grab-indicator">Hover to Grab!</div>
+                    </div>
+                    
+                    <div class="baggage-item package" data-bag-type="package">
+                        <div class="bag-icon">📦</div>
+                        <div class="bag-label">Package</div>
+                        <div class="grab-indicator">Hover to Grab!</div>
+                    </div>
+                    
+                    <div class="baggage-item duffle" data-bag-type="duffle">
+                        <div class="bag-icon">🛍️</div>
+                        <div class="bag-label">Duffle Bag</div>
+                        <div class="grab-indicator">Hover to Grab!</div>
+                    </div>
+                    
+                    <div class="baggage-item gift" data-bag-type="gift">
+                        <div class="bag-icon">🎁</div>
+                        <div class="bag-label">Gift Box</div>
+                        <div class="grab-indicator">Hover to Grab!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Status Panel -->
+        <div class="status-panel">
+            <div class="mission-status">
+                <h3>🎯 Mission Status</h3>
+                <div class="mission-details">
+                    <div class="mission-item">
+                        <span class="mission-label">Flight:</span>
+                        <span class="mission-value">IOWA-001</span>
+                    </div>
+                    <div class="mission-item">
+                        <span class="mission-label">Destination:</span>
+                        <span class="mission-value">Fictional Airport</span>
+                    </div>
+                    <div class="mission-item">
+                        <span class="mission-label">Bags Required:</span>
+                        <span class="mission-value">6/6</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="achievements">
+                <h3>🏆 Achievements</h3>
+                <div class="achievement-badges">
+                    <div class="badge earned">
+                        <div class="badge-icon">🥇</div>
+                        <div class="badge-name">Speed Loader</div>
+                    </div>
+                    <div class="badge locked">
+                        <div class="badge-icon">🥈</div>
+                        <div class="badge-name">Precision Pro</div>
+                    </div>
+                    <div class="badge locked">
+                        <div class="badge-icon">🥉</div>
+                        <div class="badge-name">Belt Master</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="game-tips">
+                <h3>💡 Pro Tips</h3>
+                <div class="tips-list">
+                    <p>• Hover over bags to see loading animation</p>
+                    <p>• Click the belt loading area to activate</p>
+                    <p>• Watch the hydraulic arm extend and retract</p>
+                    <p>• See bags travel up the conveyor belt</p>
+                    <p>• Complete all baggage loading for victory!</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Success Modal (CSS-only) -->
+    <input type="checkbox" id="success-modal-toggle" class="modal-toggle">
+    <div class="success-modal">
+        <div class="modal-content">
+            <label for="success-modal-toggle" class="modal-close">&times;</label>
+            <div class="success-animation">
+                <div class="success-icon">🎉</div>
+                <h2>Flight Loading Complete!</h2>
+                <p>Excellent work! All baggage has been successfully loaded onto Flight IOWA-001.</p>
+                <div class="success-stats">
+                    <div class="success-stat">
+                        <span class="stat-number">6</span>
+                        <span class="stat-text">Bags Loaded</span>
+                    </div>
+                    <div class="success-stat">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-text">Efficiency</span>
+                    </div>
+                    <div class="success-stat">
+                        <span class="stat-number">A+</span>
+                        <span class="stat-text">Grade</span>
+                    </div>
+                </div>
+                <label for="success-modal-toggle" class="play-again-btn">Load Another Flight</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Footer -->
+    <footer class="game-footer">
+        <div class="footer-content">
+            <p>🚛 BELTLOADER Game - Experience the thrill of airport ground operations!</p>
+            <div class="footer-links">
+                <a href="index.html">🏠 Home</a>
+                <a href="belt-loader-wiki.html">📖 Learn About BELTLOADERs</a>
+                <a href="belt-loader.html">🌟 BELTLOADER Fan Page</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

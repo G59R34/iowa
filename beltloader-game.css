@@ -1,0 +1,1004 @@
+/* BELTLOADER Game Stylesheet */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #87CEEB 0%, #E0F6FF 50%, #98FB98 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Game Header */
+.game-header {
+    background: linear-gradient(135deg, #2C3E50 0%, #34495E 100%);
+    color: white;
+    padding: 20px 0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    position: relative;
+    z-index: 100;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.game-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-icon {
+    font-size: 3em;
+    animation: truck-bounce 2s ease-in-out infinite;
+}
+
+@keyframes truck-bounce {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.logo-text h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2.2em;
+    color: #F39C12;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.logo-text span {
+    font-size: 0.9em;
+    color: #BDC3C7;
+    font-weight: 300;
+}
+
+.game-stats {
+    display: flex;
+    gap: 30px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.8em;
+    color: #BDC3C7;
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.4em;
+    font-weight: 700;
+    color: #F39C12;
+}
+
+/* Game Arena */
+.game-arena {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    display: grid;
+    grid-template-columns: 300px 1fr 350px;
+    gap: 30px;
+    min-height: calc(100vh - 160px);
+}
+
+/* Instructions Panel */
+.instructions-panel {
+    background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    height: fit-content;
+    border: 3px solid #3498DB;
+}
+
+.instructions-panel h2 {
+    color: #2C3E50;
+    font-size: 1.3em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.instruction-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.step {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px;
+    background: linear-gradient(135deg, #EBF3FD 0%, #FFFFFF 100%);
+    border-radius: 10px;
+    border-left: 4px solid #3498DB;
+}
+
+.step-number {
+    background: linear-gradient(135deg, #3498DB, #2980B9);
+    color: white;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9em;
+    flex-shrink: 0;
+}
+
+.step p {
+    font-size: 0.9em;
+    line-height: 1.4;
+    color: #34495E;
+    margin: 0;
+}
+
+/* Game Board */
+.game-board {
+    background: linear-gradient(135deg, #F0F8FF 0%, #E6F3FF 100%);
+    border-radius: 20px;
+    padding: 30px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    border: 3px solid #2ECC71;
+    overflow: hidden;
+}
+
+/* Aircraft Design */
+.aircraft {
+    position: absolute;
+    top: 40px;
+    right: 50px;
+    width: 300px;
+    height: 80px;
+}
+
+.aircraft-body {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.aircraft-nose {
+    position: absolute;
+    left: 0;
+    top: 20px;
+    width: 60px;
+    height: 40px;
+    background: linear-gradient(135deg, #3498DB, #2980B9);
+    border-radius: 20px 0 0 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.aircraft-fuselage {
+    position: absolute;
+    left: 40px;
+    top: 15px;
+    width: 180px;
+    height: 50px;
+    background: linear-gradient(135deg, #FFFFFF, #ECF0F1);
+    border-radius: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    border: 2px solid #BDC3C7;
+}
+
+.aircraft-window {
+    position: absolute;
+    width: 12px;
+    height: 8px;
+    background: linear-gradient(135deg, #85C1E9, #5DADE2);
+    border-radius: 2px;
+    top: 8px;
+}
+
+.aircraft-window:nth-child(1) { left: 30px; }
+.aircraft-window:nth-child(2) { left: 50px; }
+.aircraft-window:nth-child(3) { left: 70px; }
+
+.aircraft-tail {
+    position: absolute;
+    right: 0;
+    top: 25px;
+    width: 40px;
+    height: 30px;
+    background: linear-gradient(135deg, #E74C3C, #C0392B);
+    border-radius: 0 15px 15px 0;
+}
+
+.tail-fin {
+    position: absolute;
+    right: 5px;
+    top: -20px;
+    width: 25px;
+    height: 25px;
+    background: linear-gradient(135deg, #E74C3C, #C0392B);
+    border-radius: 0 10px 0 0;
+}
+
+.aircraft-wing {
+    position: absolute;
+    left: 90px;
+    top: 45px;
+    width: 80px;
+    height: 20px;
+    background: linear-gradient(135deg, #95A5A6, #7F8C8D);
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+.cargo-door {
+    position: absolute;
+    left: 120px;
+    top: 50px;
+    width: 50px;
+    height: 40px;
+    background: linear-gradient(135deg, #F39C12, #E67E22);
+    border-radius: 5px;
+    border: 2px solid #D35400;
+}
+
+.door-frame {
+    position: absolute;
+    inset: 3px;
+    background: linear-gradient(135deg, #2C3E50, #34495E);
+    border-radius: 3px;
+}
+
+.loaded-bags {
+    position: absolute;
+    inset: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    align-items: center;
+    justify-content: center;
+}
+
+/* BELTLOADER Machine */
+.beltloader-machine {
+    position: absolute;
+    bottom: 80px;
+    right: 120px;
+    width: 250px;
+    height: 200px;
+}
+
+.loader-chassis {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 120px;
+    height: 60px;
+    background: linear-gradient(135deg, #F39C12, #E67E22);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.front-wheel, .rear-wheel {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background: linear-gradient(135deg, #2C3E50, #34495E);
+    border-radius: 50%;
+    bottom: -10px;
+    border: 3px solid #1A252F;
+    animation: wheel-spin 3s linear infinite;
+}
+
+.front-wheel { left: 15px; }
+.rear-wheel { right: 15px; }
+
+@keyframes wheel-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.operator-cab {
+    position: absolute;
+    top: -30px;
+    left: 10px;
+    width: 40px;
+    height: 35px;
+    background: linear-gradient(135deg, #3498DB, #2980B9);
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+.operator-cab::after {
+    content: '👷';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2em;
+}
+
+.conveyor-system {
+    position: absolute;
+    bottom: 40px;
+    right: 0;
+    width: 200px;
+    height: 120px;
+}
+
+.belt-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #34495E, #2C3E50);
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    overflow: hidden;
+    transform: rotate(25deg);
+    transform-origin: bottom left;
+}
+
+.belt-surface {
+    position: absolute;
+    inset: 8px;
+    background: linear-gradient(135deg, #1A1A1A, #2C2C2C);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 5px;
+}
+
+.belt-segment {
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(90deg, #444444, #666666, #444444);
+    border-radius: 2px;
+    animation: belt-move 2s linear infinite;
+}
+
+.belt-segment:nth-child(even) {
+    animation-delay: -0.25s;
+}
+
+@keyframes belt-move {
+    0% { 
+        background-position: 0% 50%;
+        box-shadow: inset 0 2px 4px rgba(255,255,255,0.1);
+    }
+    50% { 
+        background-position: 100% 50%;
+        box-shadow: inset 0 -2px 4px rgba(0,0,0,0.3);
+    }
+    100% { 
+        background-position: 0% 50%;
+        box-shadow: inset 0 2px 4px rgba(255,255,255,0.1);
+    }
+}
+
+.traveling-bags {
+    position: absolute;
+    inset: 8px;
+    pointer-events: none;
+}
+
+.traveling-bag {
+    position: absolute;
+    width: 20px;
+    height: 15px;
+    border-radius: 3px;
+    opacity: 0;
+}
+
+.traveling-bag.bag-1 {
+    background: #E74C3C;
+    left: 20px;
+    bottom: 10px;
+    animation: bag-travel-1 4s ease-in-out infinite;
+}
+
+.traveling-bag.bag-2 {
+    background: #3498DB;
+    left: 50px;
+    bottom: 25px;
+    animation: bag-travel-2 4s ease-in-out infinite 1.5s;
+}
+
+.traveling-bag.bag-3 {
+    background: #2ECC71;
+    left: 80px;
+    bottom: 40px;
+    animation: bag-travel-3 4s ease-in-out infinite 3s;
+}
+
+@keyframes bag-travel-1 {
+    0%, 90%, 100% { opacity: 0; transform: translateY(0); }
+    10%, 80% { opacity: 1; }
+    50% { transform: translateY(-60px); }
+}
+
+@keyframes bag-travel-2 {
+    0%, 90%, 100% { opacity: 0; transform: translateY(0); }
+    10%, 80% { opacity: 1; }
+    50% { transform: translateY(-40px); }
+}
+
+@keyframes bag-travel-3 {
+    0%, 90%, 100% { opacity: 0; transform: translateY(0); }
+    10%, 80% { opacity: 1; }
+    50% { transform: translateY(-20px); }
+}
+
+.hydraulic-arm {
+    position: absolute;
+    bottom: -20px;
+    left: 20px;
+    width: 60px;
+    height: 80px;
+}
+
+.arm-base {
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    width: 20px;
+    height: 30px;
+    background: linear-gradient(135deg, #95A5A6, #7F8C8D);
+    border-radius: 5px;
+}
+
+.arm-extension {
+    position: absolute;
+    bottom: 25px;
+    left: 15px;
+    width: 30px;
+    height: 8px;
+    background: linear-gradient(135deg, #F39C12, #E67E22);
+    border-radius: 4px;
+    transform-origin: left center;
+    animation: arm-extend 3s ease-in-out infinite;
+}
+
+@keyframes arm-extend {
+    0%, 70%, 100% { transform: scaleX(1); }
+    35% { transform: scaleX(1.8); }
+}
+
+.arm-joint {
+    position: absolute;
+    bottom: 27px;
+    left: 25px;
+    width: 6px;
+    height: 6px;
+    background: #34495E;
+    border-radius: 50%;
+}
+
+.loading-area {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 180px;
+    height: 50px;
+    background: linear-gradient(135deg, rgba(46, 204, 113, 0.3), rgba(39, 174, 96, 0.3));
+    border: 3px dashed #27AE60;
+    border-radius: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.loading-area:hover {
+    background: linear-gradient(135deg, rgba(46, 204, 113, 0.6), rgba(39, 174, 96, 0.6));
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+}
+
+.loading-indicator {
+    color: #27AE60;
+    font-weight: 700;
+    font-size: 1em;
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { opacity: 0.7; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+}
+
+/* Baggage Collection Area */
+.baggage-area {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 400px;
+    height: 200px;
+    background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    border: 3px solid #E67E22;
+}
+
+.baggage-area h3 {
+    color: #E67E22;
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.baggage-collection {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    height: calc(100% - 50px);
+}
+
+.baggage-item {
+    background: linear-gradient(135deg, #FFFFFF, #F8F9FA);
+    border-radius: 12px;
+    padding: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid #BDC3C7;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.baggage-item:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    border-color: #3498DB;
+    background: linear-gradient(135deg, #EBF3FD, #FFFFFF);
+}
+
+.baggage-item.suitcase:hover { border-color: #E74C3C; background: linear-gradient(135deg, #FDEAEA, #FFFFFF); }
+.baggage-item.backpack:hover { border-color: #2ECC71; background: linear-gradient(135deg, #EAFAF1, #FFFFFF); }
+.baggage-item.briefcase:hover { border-color: #F39C12; background: linear-gradient(135deg, #FEF5E7, #FFFFFF); }
+.baggage-item.package:hover { border-color: #9B59B6; background: linear-gradient(135deg, #F4ECF7, #FFFFFF); }
+.baggage-item.duffle:hover { border-color: #1ABC9C; background: linear-gradient(135deg, #E8F8F5, #FFFFFF); }
+.baggage-item.gift:hover { border-color: #E91E63; background: linear-gradient(135deg, #FCE4EC, #FFFFFF); }
+
+.bag-icon {
+    font-size: 2em;
+    margin-bottom: 5px;
+    animation: bag-float 3s ease-in-out infinite;
+}
+
+@keyframes bag-float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-3px); }
+}
+
+.bag-label {
+    font-size: 0.7em;
+    color: #34495E;
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
+.grab-indicator {
+    font-size: 0.6em;
+    color: #7F8C8D;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.baggage-item:hover .grab-indicator {
+    opacity: 1;
+    color: #2ECC71;
+    font-weight: 600;
+}
+
+/* Clicked/Loading effect */
+.baggage-item:active {
+    transform: scale(0.95);
+    background: linear-gradient(135deg, #D5DBDB, #AEB6BF);
+}
+
+.baggage-item:active::after {
+    content: '✓ Grabbed!';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #2ECC71, #27AE60);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.7em;
+    font-weight: 700;
+    z-index: 10;
+    animation: grab-confirm 0.5s ease-out;
+}
+
+@keyframes grab-confirm {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+    100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Status Panel */
+.status-panel {
+    background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    height: fit-content;
+    border: 3px solid #9B59B6;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.mission-status h3,
+.achievements h3,
+.game-tips h3 {
+    color: #2C3E50;
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ECF0F1;
+    padding-bottom: 8px;
+}
+
+.mission-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.mission-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: linear-gradient(135deg, #F8F9FA, #FFFFFF);
+    border-radius: 8px;
+    border-left: 4px solid #9B59B6;
+}
+
+.mission-label {
+    font-weight: 600;
+    color: #34495E;
+    font-size: 0.9em;
+}
+
+.mission-value {
+    font-weight: 700;
+    color: #9B59B6;
+    font-size: 0.9em;
+}
+
+.achievement-badges {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.badge {
+    text-align: center;
+    padding: 10px 5px;
+    border-radius: 10px;
+    flex: 1;
+    transition: transform 0.3s ease;
+}
+
+.badge.earned {
+    background: linear-gradient(135deg, #F1C40F, #F39C12);
+    color: white;
+    box-shadow: 0 4px 15px rgba(241, 196, 15, 0.3);
+}
+
+.badge.locked {
+    background: linear-gradient(135deg, #BDC3C7, #95A5A6);
+    color: #7F8C8D;
+}
+
+.badge:hover {
+    transform: translateY(-3px);
+}
+
+.badge-icon {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+}
+
+.badge-name {
+    font-size: 0.7em;
+    font-weight: 600;
+}
+
+.tips-list {
+    background: linear-gradient(135deg, #EBF3FD, #FFFFFF);
+    border-radius: 10px;
+    padding: 15px;
+    border-left: 4px solid #3498DB;
+}
+
+.tips-list p {
+    font-size: 0.8em;
+    color: #34495E;
+    line-height: 1.4;
+    margin-bottom: 8px;
+}
+
+.tips-list p:last-child {
+    margin-bottom: 0;
+}
+
+/* Success Modal */
+.modal-toggle {
+    display: none;
+}
+
+.success-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-toggle:checked + .success-modal {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #FFFFFF, #F8F9FA);
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    transform: scale(0.7);
+    transition: transform 0.3s ease;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.modal-toggle:checked + .success-modal .modal-content {
+    transform: scale(1);
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2em;
+    cursor: pointer;
+    color: #7F8C8D;
+    transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+    color: #E74C3C;
+}
+
+.success-animation {
+    animation: success-bounce 1s ease-out;
+}
+
+@keyframes success-bounce {
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.05); }
+    70% { transform: scale(0.9); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.success-icon {
+    font-size: 4em;
+    margin-bottom: 20px;
+    animation: success-spin 2s ease-in-out infinite;
+}
+
+@keyframes success-spin {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg); }
+    75% { transform: rotate(10deg); }
+}
+
+.success-modal h2 {
+    color: #2ECC71;
+    font-size: 2em;
+    margin-bottom: 15px;
+    font-family: 'Fredoka One', cursive;
+}
+
+.success-modal p {
+    color: #34495E;
+    font-size: 1.1em;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.success-stats {
+    display: flex;
+    justify-content: space-around;
+    margin: 25px 0;
+}
+
+.success-stat {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2em;
+    font-weight: 700;
+    color: #2ECC71;
+}
+
+.stat-text {
+    font-size: 0.9em;
+    color: #7F8C8D;
+    font-weight: 600;
+}
+
+.play-again-btn {
+    background: linear-gradient(135deg, #2ECC71, #27AE60);
+    color: white;
+    padding: 12px 30px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.play-again-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(46, 204, 113, 0.3);
+}
+
+/* Game Footer */
+.game-footer {
+    background: linear-gradient(135deg, #2C3E50 0%, #34495E 100%);
+    color: white;
+    text-align: center;
+    padding: 25px 0;
+    margin-top: 40px;
+}
+
+.footer-content p {
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.footer-links a {
+    color: #3498DB;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #F39C12;
+}
+
+/* Interactive Game Effects */
+.loading-area:active {
+    animation: loading-activate 0.6s ease-out;
+}
+
+@keyframes loading-activate {
+    0% { background: linear-gradient(135deg, rgba(46, 204, 113, 0.6), rgba(39, 174, 96, 0.6)); }
+    50% { 
+        background: linear-gradient(135deg, rgba(241, 196, 15, 0.8), rgba(243, 156, 18, 0.8));
+        transform: scale(1.1);
+    }
+    100% { background: linear-gradient(135deg, rgba(46, 204, 113, 0.6), rgba(39, 174, 96, 0.6)); }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .game-arena {
+        grid-template-columns: 250px 1fr 300px;
+        gap: 20px;
+    }
+    
+    .aircraft {
+        width: 250px;
+    }
+    
+    .beltloader-machine {
+        width: 200px;
+    }
+    
+    .baggage-area {
+        width: 350px;
+    }
+}
+
+@media (max-width: 900px) {
+    .game-arena {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .instructions-panel,
+    .status-panel {
+        order: -1;
+    }
+    
+    .game-board {
+        height: 600px;
+    }
+    
+    .aircraft {
+        top: 20px;
+        right: 20px;
+        width: 200px;
+        height: 60px;
+    }
+    
+    .beltloader-machine {
+        bottom: 40px;
+        right: 60px;
+        width: 180px;
+        height: 160px;
+    }
+    
+    .baggage-area {
+        bottom: 10px;
+        left: 10px;
+        width: 300px;
+        height: 180px;
+    }
+}
+
+@media (max-width: 600px) {
+    .header-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .game-stats {
+        gap: 20px;
+    }
+    
+    .footer-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .baggage-collection {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

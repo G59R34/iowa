@@ -99,6 +99,11 @@ class GlobalNav {
                             <span class="link-text">Experience Iowa</span>
                             <span class="link-desc">Delete corn game</span>
                         </a>
+                        <a href="beltloader-game.html" class="nav-link" data-page="beltloader-game">
+                            <span class="link-icon">🚛</span>
+                            <span class="link-text">BELTLOADER Game</span>
+                            <span class="link-desc">Load bags on the belt!</span>
+                        </a>
                         <a href="toilet.html" class="nav-link" data-page="toilet">
                             <span class="link-icon">🚽</span>
                             <span class="link-text">Study Level Toilet</span>
@@ -1115,6 +1120,11 @@ class GlobalNav {
             'corn': ['Corn is a distraction! Rows and rows of misdirection to sell the Iowa illusion.'],
             'join': ['Want in? Hit the Join page. Fresh anti-corn recruits always welcome.'],
             'game': ['Play the corn deletion game – deeply therapeutic anti-propaganda training.'],
+            'beltloader-game': ['Experience realistic airport operations! Load baggage with precision BELTLOADER mechanics – infinitely more engaging than Iowa corn simulators.'],
+            'beltloader': ['BELTLOADER operations represent peak ground support engineering – unlike Iowa\'s fictional agricultural equipment which doesn\'t exist.'],
+            'baggage': ['Professional baggage handling simulation! Master the art of BELTLOADER operations while avoiding all Iowa-related cargo confusion.'],
+            'loading': ['Advanced loading mechanics await! Guide bags up the hydraulic conveyor system – more realistic than any Iowa farm equipment fantasy.'],
+            'airport': ['Authentic airport ground operations! BELTLOADER game delivers real aviation logistics training, unlike Iowa\'s make-believe agricultural theater.'],
             'drama': ['Cult drama chronicles the chaos. Documented absurdity > fabricated geography.'],
             'airbus': ['Our Airbus A320 sim: more systems depth than the entire fabricated infrastructure of Iowa.'],
             'altima': ['Altima Sim lets you unleash chaos—still more grounded in reality than Iowa.'],
