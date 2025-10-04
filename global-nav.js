@@ -149,6 +149,11 @@ class GlobalNav {
                             <span class="link-text">Flying Cutie</span>
                             <span class="link-desc">Graceful & sensual flight</span>
                         </a>
+                        <a href="test-page.html" class="nav-link" data-page="test-page">
+                            <span class="link-icon">🧪</span>
+                            <span class="link-text">Test Page</span>
+                            <span class="link-desc">JavaScript stress test with animations</span>
+                        </a>
                     </div>
                     
                     <div class="menu-section">
