@@ -76,8 +76,6 @@ class GlobalNavigation {
                         <div class="dropdown-content">
                             <a href="tesla.html">🚗 Tesla Main</a>
                             <a href="tesla-supercharger.html">🔌 Supercharger</a>
-                            <a href="elite-tesla.html">👑 Elite Tesla</a>
-                            <a href="legendary-tesla.html">🏆 Legendary Tesla</a>
                         </div>
                     </div>
                     
@@ -1002,7 +1000,7 @@ class GlobalNavigation {
         }
         
         if (lowerMsg.includes('tesla')) {
-            return "⚡ Our Tesla section is amazing! Check out the Supercharger simulator, Elite Tesla, and Legendary Tesla experiences.";
+            return "⚡ Our Tesla section is amazing! Check out the Tesla Mode and Supercharger simulator for electric vehicle experiences.";
         }
         
         if (lowerMsg.includes('music') || lowerMsg.includes('entertainment')) {
