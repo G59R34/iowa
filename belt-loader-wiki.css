@@ -1,0 +1,3490 @@
+/* Belt Loader Wikipedia CSS - Spectacular Design */
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 14px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Linux Libertine', 'Georgia', serif;
+    line-height: 1.6;
+    color: #202122;
+    background: #ffffff;
+    margin: 0;
+}
+
+/* Wikipedia Header */
+.wiki-header {
+    background: #ffffff;
+    border-bottom: 1px solid #a2a9b1;
+    padding: 0.5rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wiki-logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo-symbol {
+    font-size: 2.5rem;
+    background: linear-gradient(135deg, #0645ad, #36c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: logoGlow 3s ease-in-out infinite;
+}
+
+@keyframes logoGlow {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.2); }
+}
+
+.logo-text h1 {
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: #000;
+    margin: 0;
+}
+
+.logo-text span {
+    font-size: 0.85rem;
+    color: #54595d;
+    font-style: italic;
+}
+
+.wiki-nav {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-link {
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: #0645ad;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+}
+
+.nav-link:hover {
+    background: #eaecf0;
+    color: #0645ad;
+}
+
+.nav-link.active {
+    background: #0645ad;
+    color: white;
+}
+
+/* Main Layout */
+.wiki-body {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+/* Sidebar */
+.wiki-sidebar {
+    background: #f8f9fa;
+    border: 1px solid #a2a9b1;
+    border-radius: 4px;
+    padding: 1rem;
+    height: fit-content;
+    position: sticky;
+    top: 80px;
+}
+
+.sidebar-content h3 {
+    font-size: 1rem;
+    color: #000;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #a2a9b1;
+    padding-bottom: 0.25rem;
+}
+
+.toc {
+    list-style: none;
+    padding: 0;
+}
+
+.toc li {
+    margin: 0.25rem 0;
+}
+
+.toc a {
+    text-decoration: none;
+    color: #0645ad;
+    font-size: 0.85rem;
+    display: block;
+    padding: 0.2rem 0;
+    border-radius: 2px;
+    transition: all 0.2s ease;
+}
+
+.toc a:hover {
+    background: #eaecf0;
+    padding-left: 0.5rem;
+}
+
+.toc ol {
+    margin-left: 1rem;
+    margin-top: 0.25rem;
+}
+
+/* Main Article */
+.wiki-main {
+    background: #ffffff;
+}
+
+.wiki-article {
+    max-width: none;
+}
+
+/* Article Header */
+.article-header {
+    border-bottom: 3px solid #a2a9b1;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+}
+
+.article-title {
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: #000;
+    margin-bottom: 0.25rem;
+    background: linear-gradient(135deg, #000 0%, #333 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.article-meta {
+    font-size: 0.8rem;
+    color: #54595d;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.coordinates {
+    background: #eaecf0;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    font-family: monospace;
+}
+
+/* Infobox */
+.infobox {
+    float: right;
+    width: 300px;
+    background: #f8f9fa;
+    border: 1px solid #a2a9b1;
+    border-radius: 4px;
+    margin: 0 0 1rem 1rem;
+    padding: 0;
+    font-size: 0.85rem;
+}
+
+.infobox-image {
+    background: #ffffff;
+    padding: 1rem;
+    border-bottom: 1px solid #a2a9b1;
+    text-align: center;
+}
+
+/* Belt Loader Visual */
+.belt-loader-visual {
+    position: relative;
+    width: 250px;
+    height: 150px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.loader-chassis {
+    position: absolute;
+    bottom: 30px;
+    left: 50px;
+    width: 150px;
+    height: 40px;
+    background: linear-gradient(135deg, #ff8f00, #ffa000);
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(255,143,0,0.3);
+}
+
+.belt-system {
+    position: absolute;
+    bottom: 70px;
+    left: 30px;
+    width: 190px;
+    height: 15px;
+}
+
+.belt-track {
+    width: 100%;
+    height: 100%;
+    background: #424242;
+    border-radius: 8px;
+}
+
+.belt-segments {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    width: 100%;
+    height: 11px;
+    display: flex;
+    overflow: hidden;
+    border-radius: 6px;
+}
+
+.segment {
+    width: 20%;
+    height: 100%;
+    background: #616161;
+    border-right: 1px solid #424242;
+    animation: beltMove 2s linear infinite;
+}
+
+.segment.active {
+    background: #795548;
+}
+
+@keyframes beltMove {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(100%); }
+}
+
+.hydraulic-arm {
+    position: absolute;
+    bottom: 55px;
+    left: 80px;
+    width: 8px;
+    height: 35px;
+    background: linear-gradient(180deg, #607d8b, #455a64);
+    border-radius: 4px;
+    transform-origin: bottom;
+    animation: hydraulicMove 4s ease-in-out infinite;
+}
+
+@keyframes hydraulicMove {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+}
+
+.wheels {
+    position: absolute;
+    bottom: 20px;
+}
+
+.wheel {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, #424242, #212121);
+    border-radius: 50%;
+    border: 2px solid #616161;
+    animation: wheelSpin 1.5s linear infinite;
+}
+
+.wheel.front {
+    left: 70px;
+}
+
+.wheel.rear {
+    left: 170px;
+}
+
+@keyframes wheelSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.cargo-demo {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.baggage {
+    font-size: 1.5rem;
+    animation: baggageFloat 3s ease-in-out infinite;
+}
+
+.baggage:nth-child(1) { animation-delay: 0s; }
+.baggage:nth-child(2) { animation-delay: 1s; }
+.baggage:nth-child(3) { animation-delay: 2s; }
+
+@keyframes baggageFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-10px) scale(1.1); }
+}
+
+.image-caption {
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: #54595d;
+    font-style: italic;
+    text-align: center;
+}
+
+.infobox-title {
+    background: #eaecf0;
+    margin: 0;
+    padding: 0.75rem 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: center;
+    border-bottom: 1px solid #a2a9b1;
+}
+
+.infobox-data {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.infobox-data th,
+.infobox-data td {
+    padding: 0.5rem;
+    text-align: left;
+    border-bottom: 1px solid #eaecf0;
+}
+
+.infobox-data th {
+    background: #f8f9fa;
+    font-weight: 600;
+    width: 40%;
+    vertical-align: top;
+}
+
+.infobox-data td {
+    vertical-align: top;
+}
+
+.infobox-note {
+    padding: 0.5rem;
+    background: #fff3cd;
+    border-top: 1px solid #a2a9b1;
+    font-style: italic;
+}
+
+/* Article Content */
+section {
+    margin-bottom: 2rem;
+}
+
+h2 {
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: #000;
+    border-bottom: 1px solid #a2a9b1;
+    padding-bottom: 0.25rem;
+    margin: 1.5rem 0 1rem 0;
+}
+
+h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #000;
+    margin: 1rem 0 0.5rem 0;
+}
+
+h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #000;
+    margin: 0.75rem 0 0.5rem 0;
+}
+
+p {
+    margin-bottom: 1rem;
+    text-align: justify;
+}
+
+.lead-paragraph {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #000;
+}
+
+/* Wikipedia Links */
+.wiki-link {
+    color: #0645ad;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+}
+
+.wiki-link:hover {
+    border-bottom-color: #0645ad;
+}
+
+.wiki-link:visited {
+    color: #0b0080;
+}
+
+/* Hatnote */
+.hatnote {
+    background: #f8f9fa;
+    border-left: 4px solid #36c;
+    padding: 0.75rem;
+    margin: 1rem 0;
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+/* Timeline Box */
+.timeline-box {
+    background: #f8f9fa;
+    border: 1px solid #a2a9b1;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.timeline-box h4 {
+    margin-top: 0;
+    color: #0645ad;
+}
+
+.timeline {
+    list-style: none;
+    padding-left: 0;
+}
+
+.timeline li {
+    margin: 0.75rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.timeline li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    width: 8px;
+    height: 8px;
+    background: #36c;
+    border-radius: 50%;
+}
+
+/* Quote */
+.wiki-quote {
+    background: #f8f9fa;
+    border-left: 4px solid #36c;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    position: relative;
+}
+
+.wiki-quote::before {
+    content: '"';
+    font-size: 4rem;
+    color: #36c;
+    position: absolute;
+    top: -0.5rem;
+    left: 1rem;
+    opacity: 0.3;
+}
+
+.wiki-quote footer {
+    margin-top: 0.5rem;
+    font-style: normal;
+    font-size: 0.9rem;
+    text-align: right;
+}
+
+/* Technical Specs */
+.technical-specs {
+    background: #ffffff;
+    border: 1px solid #a2a9b1;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.specs-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.5rem;
+}
+
+.specs-table th,
+.specs-table td {
+    padding: 0.5rem;
+    text-align: left;
+    border-bottom: 1px solid #eaecf0;
+}
+
+.specs-table th {
+    background: #f8f9fa;
+    font-weight: 600;
+}
+
+/* Feature Highlight */
+.feature-highlight {
+    background: linear-gradient(135deg, #e8f5e8, #f1f8e9);
+    border: 1px solid #4caf50;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.feature-highlight h4 {
+    color: #2e7d32;
+    margin-top: 0;
+}
+
+.feature-highlight ul {
+    list-style: none;
+    padding: 0;
+}
+
+.feature-highlight li {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.feature-highlight li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #4caf50;
+    font-weight: bold;
+}
+
+/* System Diagram */
+.system-diagram {
+    background: #ffffff;
+    border: 1px solid #a2a9b1;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.diagram-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.diagram-item {
+    background: #f8f9fa;
+    border: 1px solid #eaecf0;
+    border-radius: 4px;
+    padding: 1rem;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.diagram-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.diagram-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.diagram-item h5 {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    color: #0645ad;
+}
+
+/* Procedure Steps */
+.procedure-steps {
+    background: #ffffff;
+    border: 1px solid #a2a9b1;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.operation-list {
+    counter-reset: step-counter;
+    list-style: none;
+    padding: 0;
+}
+
+.operation-list li {
+    counter-increment: step-counter;
+    margin: 1rem 0;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-left: 4px solid #36c;
+    position: relative;
+}
+
+.operation-list li::before {
+    content: counter(step-counter);
+    position: absolute;
+    left: -15px;
+    top: 1rem;
+    background: #36c;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.operation-list h4 {
+    margin-top: 0;
+    color: #0645ad;
+}
+
+/* Performance Metrics */
+.performance-metrics {
+    background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
+    border: 1px solid #2196f3;
+    border-radius: 4px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.metric-card {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+
+.metric-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+.metric-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2196f3;
+    display: block;
+}
+
+.metric-unit {
+    font-size: 0.8rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.metric-label {
+    font-size: 0.9rem;
+    color: #333;
+    margin-top: 0.5rem;
+}
+
+/* Article Footer */
+.article-footer {
+    border-top: 1px solid #a2a9b1;
+    margin-top: 2rem;
+    padding-top: 1rem;
+}
+
+.categories h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.category-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.category-list li {
+    background: #eaecf0;
+    border: 1px solid #a2a9b1;
+    border-radius: 3px;
+    padding: 0.25rem 0.5rem;
+}
+
+.category-list a {
+    color: #0645ad;
+    text-decoration: none;
+    font-size: 0.8rem;
+}
+
+/* Footer */
+.wiki-footer {
+    background: #eaecf0;
+    border-top: 1px solid #a2a9b1;
+    margin-top: 3rem;
+    padding: 2rem 0;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.footer-links a {
+    color: #0645ad;
+    text-decoration: none;
+    font-size: 0.8rem;
+}
+
+.footer-text {
+    font-size: 0.75rem;
+    color: #54595d;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .wiki-body {
+        grid-template-columns: 1fr;
+    }
+    
+    .wiki-sidebar {
+        order: 2;
+        position: static;
+    }
+    
+    .infobox {
+        float: none;
+        width: 100%;
+        margin: 1rem 0;
+    }
+    
+    .header-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .wiki-nav {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .article-title {
+        font-size: 2rem;
+    }
+    
+    .metrics-grid,
+    .diagram-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 12px;
+    }
+    
+    .wiki-body {
+        padding: 0.5rem;
+    }
+    
+    .article-title {
+        font-size: 1.8rem;
+    }
+    
+    .belt-loader-visual {
+        width: 200px;
+        height: 120px;
+    }
+    
+    .operation-list li {
+        padding: 0.75rem;
+    }
+}
+
+/* Enhanced variant showcase styles */
+.variant-showcase {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 12px;
+    padding: 30px;
+    margin: 25px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border: 1px solid #e9ecef;
+}
+
+.variant-category {
+    margin-bottom: 40px;
+}
+
+.variant-category h3 {
+    font-size: 1.4em;
+    color: #2c3e50;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #3498db;
+    display: inline-block;
+}
+
+/* Aircraft variant animations */
+.aircraft-variants {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.aircraft-variant {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    border: 2px solid transparent;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+    position: relative;
+}
+
+.aircraft-variant::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #3498db, #2ecc71, #f39c12);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.6s ease;
+}
+
+.aircraft-variant:hover::before {
+    transform: scaleX(1);
+}
+
+.aircraft-variant:hover {
+    transform: translateY(-8px) rotateY(5deg);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    border-color: #3498db;
+}
+
+.variant-visual {
+    position: relative;
+    height: 80px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.aircraft-silhouette, .loader-silhouette {
+    position: relative;
+    background: linear-gradient(135deg, #34495e, #2c3e50);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    animation: gentle-float 4s ease-in-out infinite;
+}
+
+.aircraft-silhouette.narrow {
+    width: 80px;
+    height: 20px;
+    border-radius: 10px;
+}
+
+.aircraft-silhouette.wide {
+    width: 100px;
+    height: 25px;
+    border-radius: 15px;
+}
+
+.aircraft-silhouette.cargo-plane {
+    width: 90px;
+    height: 30px;
+    border-radius: 12px;
+}
+
+.loader-silhouette.compact {
+    width: 60px;
+    height: 30px;
+    animation-delay: -1s;
+}
+
+.loader-silhouette.extended {
+    width: 70px;
+    height: 35px;
+    animation-delay: -1.5s;
+}
+
+.loader-silhouette.industrial {
+    width: 75px;
+    height: 40px;
+    animation-delay: -2s;
+}
+
+@keyframes gentle-float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-3px) rotate(1deg); }
+    75% { transform: translateY(3px) rotate(-1deg); }
+}
+
+.connection-line {
+    position: absolute;
+    top: 50%;
+    left: 35%;
+    right: 35%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, #e74c3c 20%, #e74c3c 80%, transparent 100%);
+    animation: pulse-connection 2s ease-in-out infinite;
+}
+
+@keyframes pulse-connection {
+    0%, 100% { opacity: 0.6; transform: scaleX(1); }
+    50% { opacity: 1; transform: scaleX(1.1); }
+}
+
+.variant-info h4 {
+    color: #2c3e50;
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.variant-specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.spec-badge {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+    animation: badge-glow 3s ease-in-out infinite;
+}
+
+@keyframes badge-glow {
+    0%, 100% { box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3); }
+    50% { box-shadow: 0 4px 15px rgba(52, 152, 219, 0.5); }
+}
+
+/* Power variant styles */
+.power-variants {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.power-type {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    border: 2px solid transparent;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.power-type::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.6s ease;
+}
+
+.power-type:hover::after {
+    left: 100%;
+}
+
+.power-type:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+}
+
+.power-type.diesel {
+    border-color: #f39c12;
+}
+
+.power-type.electric {
+    border-color: #2ecc71;
+}
+
+.power-type.hybrid {
+    border-color: #9b59b6;
+}
+
+.power-icon {
+    font-size: 3em;
+    margin-bottom: 15px;
+    animation: icon-bounce 2s ease-in-out infinite;
+}
+
+@keyframes icon-bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(0deg); }
+    40% { transform: translateY(-10px) rotate(5deg); }
+    60% { transform: translateY(-5px) rotate(-3deg); }
+}
+
+.power-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 15px 0;
+}
+
+.stat {
+    background: linear-gradient(90deg, #ecf0f1, #d5dbdb);
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 0.9em;
+    font-weight: 500;
+    color: #2c3e50;
+    border: 1px solid #bdc3c7;
+}
+
+/* Manufacturer showcase styles */
+.manufacturer-landscape {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 15px;
+    padding: 35px;
+    margin: 30px 0;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.manufacturer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 25px;
+}
+
+.manufacturer-card {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border: 3px solid transparent;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.manufacturer-card.leader {
+    background: linear-gradient(145deg, #fff7e6 0%, #ffffff 100%);
+    border-color: #f39c12;
+}
+
+.manufacturer-card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #3498db, #2ecc71, #f39c12, #e74c3c);
+    z-index: -1;
+    border-radius: 20px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.manufacturer-card:hover::before {
+    opacity: 1;
+}
+
+.manufacturer-card:hover {
+    transform: translateY(-12px) rotateX(10deg);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+}
+
+.manufacturer-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.company-logo {
+    font-size: 2.5em;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+    animation: logo-pulse 3s ease-in-out infinite;
+}
+
+@keyframes logo-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.company-info h4 {
+    font-size: 1.4em;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.company-location, .company-founded {
+    display: block;
+    font-size: 0.9em;
+    color: #7f8c8d;
+    margin: 2px 0;
+}
+
+.market-share-bar {
+    position: relative;
+    background: #ecf0f1;
+    height: 25px;
+    border-radius: 15px;
+    overflow: hidden;
+    margin: 15px 0;
+}
+
+.share-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3498db, #2ecc71);
+    border-radius: 15px;
+    animation: fill-animation 2s ease-out;
+    position: relative;
+}
+
+@keyframes fill-animation {
+    from { width: 0 !important; }
+}
+
+.share-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 0.9em;
+}
+
+.company-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 15px 0;
+}
+
+.highlight {
+    background: linear-gradient(135deg, #e8f4f8, #d4edda);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    color: #2c3e50;
+    border: 1px solid #b8daff;
+}
+
+/* Market analysis dashboard */
+.analysis-dashboard {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 15px;
+    padding: 30px;
+    margin: 25px 0;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.market-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-bottom: 35px;
+}
+
+.metric-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+.metric-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.metric-icon {
+    font-size: 2.5em;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+}
+
+.metric-data {
+    display: flex;
+    flex-direction: column;
+}
+
+.metric-value {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #2c3e50;
+    line-height: 1;
+}
+
+.metric-label {
+    font-size: 0.9em;
+    color: #7f8c8d;
+    margin: 3px 0;
+}
+
+.metric-growth {
+    font-size: 0.85em;
+    color: #27ae60;
+    font-weight: 600;
+}
+
+/* Trend analysis */
+.trend-items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.trend-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+
+.trend-progress {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    min-width: 150px;
+}
+
+.progress-bar {
+    width: 100px;
+    height: 12px;
+    background: #ecf0f1;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 10px;
+    animation: progress-animation 2s ease-out;
+}
+
+.progress-fill.electric {
+    background: linear-gradient(90deg, #2ecc71, #27ae60);
+}
+
+.progress-fill.automation {
+    background: linear-gradient(90deg, #3498db, #2980b9);
+}
+
+.progress-fill.connectivity {
+    background: linear-gradient(90deg, #9b59b6, #8e44ad);
+}
+
+@keyframes progress-animation {
+    from { width: 0 !important; }
+}
+
+.progress-label {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 0.9em;
+}
+
+.trend-info h5 {
+    color: #2c3e50;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+}
+
+/* Safety framework styles */
+.safety-framework {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 15px;
+    padding: 35px;
+    margin: 30px 0;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 25px;
+}
+
+.safety-pillar {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    border: 3px solid transparent;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.safety-pillar:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.safety-pillar.personnel {
+    border-color: #e74c3c;
+}
+
+.safety-pillar.equipment {
+    border-color: #f39c12;
+}
+
+.safety-pillar.aircraft {
+    border-color: #3498db;
+}
+
+.pillar-icon {
+    font-size: 3em;
+    text-align: center;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #3498db, #2ecc71);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: icon-shimmer 3s ease-in-out infinite;
+}
+
+@keyframes icon-shimmer {
+    0%, 100% { filter: hue-rotate(0deg); }
+    50% { filter: hue-rotate(90deg); }
+}
+
+.safety-pillar h4 {
+    text-align: center;
+    color: #2c3e50;
+    font-size: 1.4em;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.safety-measures {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.measure {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+    transition: all 0.3s ease;
+}
+
+.measure:hover {
+    transform: translateX(10px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+.measure-icon {
+    font-size: 1.5em;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3);
+}
+
+.measure-content h5 {
+    color: #2c3e50;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.measure-content p {
+    color: #5d6d7e;
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+/* Safety statistics dashboard */
+.safety-statistics-detailed {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 15px;
+    padding: 35px;
+    margin: 30px 0;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.stats-dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 25px;
+}
+
+.safety-stat {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: all 0.4s ease;
+}
+
+.safety-stat:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.circular-progress {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 20px;
+}
+
+.progress-circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 25px rgba(46, 204, 113, 0.3);
+    animation: pulse-circle 3s ease-in-out infinite;
+}
+
+@keyframes pulse-circle {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.progress-center {
+    color: white;
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+.bar-chart {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    height: 80px;
+    margin-bottom: 20px;
+}
+
+.bar-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 5px;
+}
+
+.bar-fill {
+    width: 100%;
+    background: linear-gradient(180deg, #3498db, #2980b9);
+    border-radius: 4px 4px 0 0;
+    transition: height 2s ease-out;
+    animation: bar-grow 2s ease-out;
+}
+
+@keyframes bar-grow {
+    from { height: 0 !important; }
+}
+
+.bar-label {
+    font-size: 0.8em;
+    color: #7f8c8d;
+    margin-top: 5px;
+}
+
+.metric-display {
+    font-size: 3em;
+    font-weight: 700;
+    color: #27ae60;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.metric-number {
+    line-height: 1;
+}
+
+.metric-unit {
+    font-size: 0.5em;
+    color: #7f8c8d;
+    font-weight: 500;
+}
+
+.stat-info h4 {
+    color: #2c3e50;
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.benchmark {
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 500;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.safety-comparison {
+    background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+    border: 2px solid #f39c12;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 25px;
+}
+
+.comparison-note {
+    margin: 0;
+    color: #856404;
+    font-style: italic;
+    font-weight: 500;
+}
+
+.iowa-market-note {
+    background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+    border: 2px solid #f39c12;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 25px 0;
+    box-shadow: 0 4px 15px rgba(243, 156, 18, 0.2);
+}
+
+.iowa-market-note p {
+    margin: 0;
+    color: #856404;
+    font-style: italic;
+    font-weight: 500;
+}
+
+/* Technical specifications deep dive styles */
+.technical-deep-dive {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 15px;
+    padding: 35px;
+    margin: 30px 0;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.specification-categories h3 {
+    font-size: 1.5em;
+    color: #2c3e50;
+    margin-bottom: 25px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid #3498db;
+}
+
+.system-breakdown {
+    margin-bottom: 40px;
+}
+
+.mechanical-system {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    border-left: 4px solid #e74c3c;
+}
+
+.mechanical-system h4 {
+    color: #e74c3c;
+    font-size: 1.3em;
+    margin-bottom: 20px;
+}
+
+.component-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 25px;
+}
+
+.component-item {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    transition: all 0.3s ease;
+}
+
+.component-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+
+.component-icon {
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 15px;
+    color: #3498db;
+}
+
+.component-spec h5 {
+    color: #2c3e50;
+    font-size: 1.1em;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.component-spec p {
+    margin-bottom: 8px;
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+.belt-performance-specs {
+    background: linear-gradient(135deg, #e8f4f8 0%, #d4edda 100%);
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.performance-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.perf-metric {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.metric-title {
+    font-size: 0.9em;
+    color: #7f8c8d;
+    margin-bottom: 5px;
+}
+
+.metric-value {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 3px;
+}
+
+.metric-note {
+    font-size: 0.8em;
+    color: #95a5a6;
+    font-style: italic;
+}
+
+/* Hydraulic specifications */
+.hydraulic-overview {
+    background: linear-gradient(135deg, #fff3e0 0%, #ffecb3 100%);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-left: 4px solid #f39c12;
+}
+
+.hydraulic-components {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.hydraulic-spec {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+}
+
+.hydraulic-spec h5 {
+    color: #f39c12;
+    font-size: 1.1em;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.circuit-details, .cylinder-details, .control-details {
+    font-size: 0.95em;
+    line-height: 1.6;
+}
+
+/* Powerplant specifications */
+.powerplant-specifications {
+    background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+    border-radius: 15px;
+    padding: 30px;
+    margin: 30px 0;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.engine-variants {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px;
+}
+
+.engine-type {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.engine-type::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #2ecc71, #3498db);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.6s ease;
+}
+
+.engine-type:hover::before {
+    transform: scaleX(1);
+}
+
+.diesel-engine {
+    border-left: 4px solid #f39c12;
+}
+
+.electric-engine {
+    border-left: 4px solid #2ecc71;
+}
+
+.engine-type h4 {
+    color: #2c3e50;
+    font-size: 1.3em;
+    margin-bottom: 20px;
+}
+
+.engine-model, .battery-system, .motor-system, .transmission-system {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 18px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+
+.engine-model h5, .battery-system h5, .motor-system h5, .transmission-system h5 {
+    color: #34495e;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+
+/* Electronic systems styling */
+.electronic-systems {
+    background: linear-gradient(135deg, #f5f0ff 0%, #ede7f6 100%);
+    border-radius: 15px;
+    padding: 30px;
+    margin: 30px 0;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.control-architecture {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+}
+
+.primary-control, .sensor-network {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.primary-control {
+    border-left: 4px solid #9b59b6;
+}
+
+.sensor-network {
+    border-left: 4px solid #3498db;
+}
+
+.pcu-specs {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 15px;
+}
+
+.sensor-categories {
+    margin-top: 20px;
+}
+
+.sensor-group {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 18px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+
+.sensor-group h5 {
+    color: #3498db;
+    font-size: 1.1em;
+    margin-bottom: 12px;
+}
+
+.sensor-group ul {
+    margin-left: 20px;
+}
+
+.sensor-group li {
+    margin-bottom: 8px;
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+/* Operational procedures styling */
+.operational-framework {
+    background: linear-gradient(135deg, #f0fff0 0%, #e8f5e8 100%);
+    border-radius: 15px;
+    padding: 35px;
+    margin: 30px 0;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.procedure-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.procedure-category {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.procedure-category.pre-operation {
+    border-left: 4px solid #27ae60;
+}
+
+.procedure-category.aircraft-approach {
+    border-left: 4px solid #3498db;
+}
+
+.procedure-category.loading-operations {
+    border-left: 4px solid #f39c12;
+}
+
+.procedure-category.post-operation {
+    border-left: 4px solid #e74c3c;
+}
+
+.procedure-category h3 {
+    color: #2c3e50;
+    font-size: 1.4em;
+    margin-bottom: 25px;
+}
+
+.inspection-checklist, .approach-procedures, .loading-protocols, .shutdown-protocols {
+    margin-top: 20px;
+}
+
+.checklist-section, .approach-phase, .loading-phase, .shutdown-sequence {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+}
+
+.checklist-section h4, .approach-phase h4, .loading-phase h4, .shutdown-sequence h4 {
+    color: #34495e;
+    font-size: 1.2em;
+    margin-bottom: 18px;
+}
+
+.inspection-items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.inspection-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+}
+
+.item-number {
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.item-content {
+    flex: 1;
+}
+
+.item-content strong {
+    color: #2c3e50;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.testing-procedures, .positioning-steps, .handling-procedures, .shutdown-steps {
+    margin-top: 15px;
+}
+
+.test-item, .step-detail, .baggage-category, .shutdown-group {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 18px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+
+.test-item strong, .step-detail h5, .baggage-category h5, .shutdown-group h5 {
+    color: #3498db;
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.05em;
+}
+
+.test-item ol {
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.test-item ol li {
+    margin-bottom: 6px;
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+/* Maintenance framework styling */
+.maintenance-framework {
+    background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+    border-radius: 15px;
+    padding: 35px;
+    margin: 30px 0;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.maintenance-levels {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.maintenance-level {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.maintenance-level.preventive {
+    border-left: 4px solid #f39c12;
+}
+
+.maintenance-level.predictive {
+    border-left: 4px solid #9b59b6;
+}
+
+.maintenance-intervals {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 25px;
+}
+
+.interval-category {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.interval-category.daily {
+    border-top: 4px solid #27ae60;
+}
+
+.interval-category.weekly {
+    border-top: 4px solid #3498db;
+}
+
+.interval-category.monthly {
+    border-top: 4px solid #f39c12;
+}
+
+.interval-category.annual {
+    border-top: 4px solid #e74c3c;
+}
+
+.interval-category h4 {
+    color: #2c3e50;
+    font-size: 1.3em;
+    margin-bottom: 20px;
+}
+
+.daily-tasks, .weekly-procedures, .monthly-services, .annual-service {
+    margin-top: 15px;
+}
+
+.task-group, .procedure-group, .service-category, .major-service-components {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+
+.maintenance-task, .weekly-task {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+.maintenance-task:last-child, .weekly-task:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.maintenance-task strong, .weekly-task strong {
+    color: #34495e;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1.05em;
+}
+
+/* Predictive maintenance styling */
+.predictive-systems {
+    margin-top: 25px;
+}
+
+.monitoring-technology {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.technology-implementations {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.monitoring-system {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+}
+
+.monitoring-system.vibration {
+    border-left: 4px solid #e74c3c;
+}
+
+.monitoring-system.thermal {
+    border-left: 4px solid #f39c12;
+}
+
+.monitoring-system.fluid {
+    border-left: 4px solid #3498db;
+}
+
+.monitoring-system h5 {
+    color: #2c3e50;
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
+
+/* Environmental impact styling */
+.environmental-analysis {
+    background: linear-gradient(135deg, #e8f5e8 0%, #d4edda 100%);
+    border-radius: 15px;
+    padding: 35px;
+    margin: 30px 0;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.impact-assessment {
+    margin-bottom: 40px;
+}
+
+.impact-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    margin-top: 25px;
+}
+
+.impact-category {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.impact-category.emissions {
+    border-left: 4px solid #e74c3c;
+}
+
+.impact-category.resource-consumption {
+    border-left: 4px solid #f39c12;
+}
+
+.emissions-breakdown, .resource-analysis {
+    margin-top: 20px;
+}
+
+.emissions-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.emission-metric {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+
+.metric-label {
+    font-size: 0.9em;
+    color: #7f8c8d;
+    margin-bottom: 5px;
+}
+
+.metric-value {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 3px;
+}
+
+.metric-context {
+    font-size: 0.8em;
+    color: #95a5a6;
+    font-style: italic;
+}
+
+.annual-impact {
+    background: linear-gradient(135deg, #fff3e0 0%, #ffecb3 100%);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    border-left: 4px solid #f39c12;
+}
+
+.resource-breakdown, .waste-streams {
+    margin-top: 20px;
+}
+
+.resource-item, .waste-category {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+}
+
+.resource-item strong, .waste-category strong {
+    color: #34495e;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Sustainability initiatives */
+.sustainability-initiatives {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 15px;
+    padding: 30px;
+    margin-top: 30px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.initiative-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    margin-top: 25px;
+}
+
+.initiative-category {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.initiative-category.electrification {
+    border-left: 4px solid #2ecc71;
+}
+
+.initiative-category.circular-economy {
+    border-left: 4px solid #9b59b6;
+}
+
+.electrification-programs, .circular-programs {
+    margin-top: 20px;
+}
+
+.benefit-metrics, .fuel-alternatives, .design-approaches, .remanufacturing-initiatives {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.benefit-item, .fuel-option, .design-approach, .program-type {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+
+.benefit-item strong, .fuel-option strong, .design-approach strong, .program-type strong {
+    color: #2c3e50;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Regulatory compliance styling */
+.regulatory-framework {
+    background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+    border-radius: 15px;
+    padding: 35px;
+    margin: 30px 0;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.regulatory-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 25px;
+}
+
+.regulatory-category {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.regulatory-category.safety-standards {
+    border-left: 4px solid #3498db;
+}
+
+.regulatory-category.environmental-regulations {
+    border-left: 4px solid #27ae60;
+}
+
+.regulatory-category.operational-regulations {
+    border-left: 4px solid #f39c12;
+}
+
+.safety-regulations, .emissions-regulations, .operational-compliance {
+    margin-top: 25px;
+}
+
+.standards-organization, .regulatory-authority, .aviation-authorities {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.standards-organization h4, .regulatory-authority h4, .aviation-authorities h4 {
+    color: #2c3e50;
+    font-size: 1.3em;
+    margin-bottom: 20px;
+}
+
+.iso-standards, .sae-standards, .epa-regulations, .eu-regulations, .carb-regulations, .authority-requirements {
+    margin-top: 15px;
+}
+
+.standard-detail, .regulation-detail, .authority-detail {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+}
+
+.standard-detail h5, .regulation-detail h5, .authority-detail h5 {
+    color: #3498db;
+    font-size: 1.1em;
+    margin-bottom: 12px;
+}
+
+.standard-detail ul, .regulation-detail ul, .authority-detail ul {
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.standard-detail li, .regulation-detail li, .authority-detail li {
+    margin-bottom: 6px;
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+/* Economic analysis styling */
+.economic-framework {
+    background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+    border-radius: 15px;
+    padding: 35px;
+    margin: 30px 0;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.cost-analysis, .economic-impact {
+    margin-bottom: 40px;
+}
+
+.cost-categories, .economic-metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    margin-top: 25px;
+}
+
+.cost-category {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.cost-category.capital {
+    border-left: 4px solid #e74c3c;
+}
+
+.cost-category.operational {
+    border-left: 4px solid #3498db;
+}
+
+.cost-category.lifecycle {
+    border-left: 4px solid #27ae60;
+}
+
+.capital-costs, .operational-costs, .lifecycle-analysis {
+    margin-top: 20px;
+}
+
+.pricing-tiers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.price-tier {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+.price-tier:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+}
+
+.price-tier.basic {
+    border-top: 4px solid #95a5a6;
+}
+
+.price-tier.standard {
+    border-top: 4px solid #3498db;
+}
+
+.price-tier.premium {
+    border-top: 4px solid #f39c12;
+}
+
+.price-tier h6 {
+    color: #2c3e50;
+    font-size: 1.2em;
+    margin-bottom: 15px;
+}
+
+.price-details ul {
+    margin-left: 20px;
+    margin: 10px 0;
+}
+
+.financing-methods, .energy-analysis, .maintenance-analysis {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.financing-option, .diesel-costs, .electric-costs, .maintenance-categories {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+}
+
+.financing-option strong, .diesel-costs h6, .electric-costs h6 {
+    color: #34495e;
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.05em;
+}
+
+.maintenance-item {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+}
+
+.maintenance-item strong {
+    color: #2c3e50;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Employment and market styling */
+.employment-impact, .market-size {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.workforce-data, .market-data {
+    margin-top: 20px;
+}
+
+.employment-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.employment-sector {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+
+.employment-sector strong {
+    color: #34495e;
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.05em;
+}
+
+.current-market, .growth-projections {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+
+.growth-factors {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.growth-driver {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+}
+
+.growth-driver strong {
+    color: #2c3e50;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Historical timeline styling */
+.historical-timeline {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 15px;
+    padding: 35px;
+    margin: 30px 0;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.timeline-periods {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.timeline-period {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.timeline-period::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    background: linear-gradient(180deg, #3498db, #2ecc71);
+}
+
+.timeline-period.early-development::before {
+    background: linear-gradient(180deg, #e74c3c, #f39c12);
+}
+
+.timeline-period.modernization::before {
+    background: linear-gradient(180deg, #f39c12, #3498db);
+}
+
+.timeline-period.digital-revolution::before {
+    background: linear-gradient(180deg, #3498db, #9b59b6);
+}
+
+.timeline-period.modern-era::before {
+    background: linear-gradient(180deg, #2ecc71, #27ae60);
+}
+
+.timeline-period h3 {
+    color: #2c3e50;
+    font-size: 1.5em;
+    margin-bottom: 25px;
+    margin-left: 20px;
+}
+
+.development-milestones, .modernization-developments, .digital-transformation, .current-innovations {
+    margin-top: 20px;
+}
+
+.milestone-events {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 25px;
+}
+
+.milestone-event {
+    display: flex;
+    gap: 20px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    position: relative;
+}
+
+.event-date {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1em;
+    font-weight: 700;
+    flex-shrink: 0;
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.3);
+    animation: date-pulse 3s ease-in-out infinite;
+}
+
+@keyframes date-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.event-content {
+    flex: 1;
+}
+
+.event-content h5 {
+    color: #2c3e50;
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.event-content p {
+    margin-bottom: 8px;
+    font-size: 0.95em;
+    line-height: 1.6;
+}
+
+.period-characteristics {
+    background: linear-gradient(135deg, #e8f4f8 0%, #d4edda 100%);
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 30px;
+    border-left: 4px solid #3498db;
+}
+
+.characteristic-analysis {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.tech-characteristic {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+
+.tech-characteristic strong {
+    color: #34495e;
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.05em;
+}
+
+/* Development phases styling */
+.development-phases {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.development-phase {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.development-phase h5 {
+    color: #3498db;
+    font-size: 1.2em;
+    margin-bottom: 18px;
+    font-weight: 600;
+}
+
+.phase-innovations {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.innovation-item {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+}
+
+.innovation-item strong {
+    color: #2c3e50;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Industry consolidation */
+.industry-consolidation {
+    background: linear-gradient(135deg, #fff3e0 0%, #ffecb3 100%);
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 30px;
+    border-left: 4px solid #f39c12;
+}
+
+.consolidation-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.consolidation-event {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+}
+
+.consolidation-event strong {
+    color: #f39c12;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Digital milestones */
+.digital-milestones {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 25px;
+}
+
+.digital-milestone {
+    display: flex;
+    align-items: flex-start;
+    gap: 25px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.milestone-year {
+    background: linear-gradient(135deg, #9b59b6, #8e44ad);
+    color: white;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
+    font-weight: 700;
+    flex-shrink: 0;
+    box-shadow: 0 4px 15px rgba(155, 89, 182, 0.3);
+}
+
+.milestone-content {
+    flex: 1;
+}
+
+.milestone-content h5 {
+    color: #2c3e50;
+    font-size: 1.2em;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+/* Performance evolution */
+.performance-evolution {
+    background: linear-gradient(135deg, #e8f5e8 0%, #d4edda 100%);
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 30px;
+    border-left: 4px solid #27ae60;
+}
+
+.performance-metrics {
+    margin-top: 20px;
+}
+
+.metric-category {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+}
+
+.metric-category h5 {
+    color: #27ae60;
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
+
+.metric-comparison {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.comparison-item {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+}
+
+.comparison-item strong {
+    color: #34495e;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.reliability-data {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.reliability-metric {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.reliability-metric strong {
+    color: #2c3e50;
+    display: block;
+    margin-bottom: 6px;
+}
+
+/* Current innovations styling */
+.innovation-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 25px;
+}
+
+.innovation-category {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.innovation-category.electrification-trend {
+    border-left: 4px solid #2ecc71;
+}
+
+.innovation-category.automation-advancement {
+    border-left: 4px solid #9b59b6;
+}
+
+.innovation-category h5 {
+    color: #2c3e50;
+    font-size: 1.2em;
+    margin-bottom: 18px;
+}
+
+.electrification-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.electrification-event {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+
+.electrification-event strong {
+    color: #2ecc71;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.automation-developments {
+    margin-top: 15px;
+}
+
+.automation-level {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+
+.automation-level strong {
+    color: #9b59b6;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Future technologies */
+.future-technologies {
+    background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 30px;
+    border-left: 4px solid #3498db;
+}
+
+.future-tech-areas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.tech-area {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+}
+
+.tech-area.ai-integration {
+    border-top: 4px solid #e74c3c;
+}
+
+.tech-area.connectivity-iot {
+    border-top: 4px solid #3498db;
+}
+
+.tech-area h5 {
+    color: #2c3e50;
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
+
+.ai-applications, .connectivity-capabilities {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.ai-application, .connectivity-feature {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+}
+
+.ai-application strong, .connectivity-feature strong {
+    color: #34495e;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Technological impact analysis */
+.technological-impact-analysis {
+    background: linear-gradient(135deg, #e8f4f8 0%, #d4edda 100%);
+    border-radius: 15px;
+    padding: 30px;
+    margin-top: 40px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.impact-metrics {
+    margin-top: 25px;
+}
+
+.productivity-gains, .safety-improvements {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.productivity-data, .safety-data {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.productivity-metric, .safety-metric {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+
+.productivity-metric strong, .safety-metric strong {
+    color: #2c3e50;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Global operations styling */
+.global-operations-analysis {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 15px;
+    padding: 35px;
+    margin: 30px 0;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.regional-breakdown {
+    margin-bottom: 40px;
+}
+
+.region-profiles {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 25px;
+}
+
+.region-profile {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.region-profile.north-america {
+    border-left: 4px solid #e74c3c;
+}
+
+.region-profile.europe {
+    border-left: 4px solid #3498db;
+}
+
+.region-profile.asia-pacific {
+    border-left: 4px solid #f39c12;
+}
+
+.region-profile.middle-east-africa {
+    border-left: 4px solid #9b59b6;
+}
+
+.region-profile.latin-america {
+    border-left: 4px solid #27ae60;
+}
+
+.region-profile h4 {
+    color: #2c3e50;
+    font-size: 1.4em;
+    margin-bottom: 25px;
+}
+
+.regional-characteristics {
+    margin-top: 20px;
+}
+
+.operational-environment, .regulatory-landscape, .operational-statistics {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.environment-factors, .regulatory-specifics, .statistics-breakdown {
+    margin-top: 15px;
+}
+
+.factor-category, .regulatory-aspect, .stat-category {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 18px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+
+.factor-category h6, .regulatory-aspect strong, .stat-category h6 {
+    color: #34495e;
+    font-size: 1.05em;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.fleet-stats, .performance-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.stat-item, .metric-item {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.stat-item strong, .metric-item strong {
+    color: #2c3e50;
+    display: inline;
+    margin-right: 8px;
+}
+
+/* Training certification styling */
+.training-framework {
+    background: linear-gradient(135deg, #f0fff0 0%, #e8f5e8 100%);
+    border-radius: 15px;
+    padding: 35px;
+    margin: 30px 0;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.certification-programs, .workforce-development {
+    margin-bottom: 40px;
+}
+
+.certification-levels {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    margin-top: 25px;
+}
+
+.certification-level {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.certification-level.basic-operator {
+    border-left: 4px solid #27ae60;
+}
+
+.certification-level.advanced-operator {
+    border-left: 4px solid #3498db;
+}
+
+.certification-level.maintenance-technician {
+    border-left: 4px solid #f39c12;
+}
+
+.certification-requirements, .advanced-requirements, .technician-requirements {
+    margin-top: 20px;
+}
+
+.prerequisite-requirements, .training-curriculum, .assessment-requirements {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.requirements-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-top: 15px;
+}
+
+.requirement-item {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+
+.requirement-item strong {
+    color: #27ae60;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.curriculum-modules {
+    margin-top: 20px;
+}
+
+.module-category {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+}
+
+.module-category h6 {
+    color: #3498db;
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
+
+.instruction-topics, .practical-components {
+    margin-top: 15px;
+}
+
+.topic-area, .practical-phase {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+}
+
+.topic-area strong, .practical-phase strong {
+    color: #2c3e50;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.topic-area ul {
+    margin-left: 20px;
+    margin-top: 8px;
+}
+
+.topic-area li {
+    margin-bottom: 6px;
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+/* Research and development styling */
+.research-landscape {
+    background: linear-gradient(135deg, #f5f0ff 0%, #ede7f6 100%);
+    border-radius: 15px;
+    padding: 35px;
+    margin: 30px 0;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.active-research-programs, .future-technology-roadmap {
+    margin-bottom: 40px;
+}
+
+.research-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    margin-top: 25px;
+}
+
+.research-category {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.research-category.autonomous-systems {
+    border-left: 4px solid #9b59b6;
+}
+
+.research-category.advanced-powertrains {
+    border-left: 4px solid #2ecc71;
+}
+
+.research-category.materials-engineering {
+    border-left: 4px solid #f39c12;
+}
+
+.autonomous-projects, .powertrain-research, .materials-research {
+    margin-top: 25px;
+}
+
+.research-project {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.research-project h5 {
+    color: #9b59b6;
+    font-size: 1.2em;
+    margin-bottom: 15px;
+}
+
+.project-details {
+    margin-top: 15px;
+}
+
+.project-details ul {
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.project-details li {
+    margin-bottom: 8px;
+    font-size: 0.95em;
+    line-height: 1.6;
+}
+
+/* Technology roadmap styling */
+.roadmap-timeline {
+    margin-top: 25px;
+}
+
+.timeline-horizon {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.timeline-horizon.near-term {
+    border-left: 4px solid #27ae60;
+}
+
+.timeline-horizon.medium-term {
+    border-left: 4px solid #f39c12;
+}
+
+.timeline-horizon.long-term {
+    border-left: 4px solid #9b59b6;
+}
+
+.near-term-goals, .medium-term-projections, .long-term-vision {
+    margin-top: 20px;
+}
+
+.development-area, .innovation-theme, .visionary-concept {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+}
+
+.development-area h5, .innovation-theme h5, .visionary-concept h5 {
+    color: #2c3e50;
+    font-size: 1.1em;
+    margin-bottom: 12px;
+}
+
+.development-area ul, .innovation-theme ul, .visionary-concept ul {
+    margin-left: 20px;
+}
+
+.development-area li, .innovation-theme li, .visionary-concept li {
+    margin-bottom: 8px;
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+/* Print Styles */
+@media print {
+    .wiki-header,
+    .wiki-sidebar,
+    .wiki-footer {
+        display: none;
+    }
+    
+    .wiki-body {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+    }
+    
+    .infobox {
+        float: right;
+        width: 250px;
+    }
+    
+    * {
+        background: white !important;
+        color: black !important;
+    }
+}

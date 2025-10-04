@@ -224,6 +224,11 @@ class GlobalNav {
                             <span class="link-text">Belt Loader Paradise</span>
                             <span class="link-desc">Aviation ground support excellence</span>
                         </a>
+                        <a href="belt-loader-wiki.html" class="nav-link" data-page="belt-loader-wiki">
+                            <span class="link-icon">📚</span>
+                            <span class="link-text">BELTLOADER Wikipedia</span>
+                            <span class="link-desc">Complete encyclopedia entry</span>
+                        </a>
                     </div>
                     
                     <div class="menu-section">
