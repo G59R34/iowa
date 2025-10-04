@@ -213,11 +213,16 @@ class GlobalNav {
                     </div>
                     
                     <div class="menu-section">
-                        <h3 class="section-title">� Software</h3>
+                        <h3 class="section-title">🐧 Software</h3>
                         <a href="linux.html" class="nav-link" data-page="linux">
                             <span class="link-icon">🐧</span>
                             <span class="link-text">Linux Development</span>
                             <span class="link-desc">Master the penguin's domain</span>
+                        </a>
+                        <a href="belt-loader.html" class="nav-link" data-page="belt-loader">
+                            <span class="link-icon">🚛</span>
+                            <span class="link-text">Belt Loader Paradise</span>
+                            <span class="link-desc">Aviation ground support excellence</span>
                         </a>
                     </div>
                     
