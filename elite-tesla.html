@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta                    <div class="tesla-fallback">🚗 TESLA</div>charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elite Tesla Supercharger - Study Level</title>
     <link rel="stylesheet" href="elite-tesla.css">
@@ -13,15 +13,16 @@
         <h2>🧮 Elite Access Math Challenge</h2>
         <div class="equation-display">
             <p class="equation-text">Solve: ∫(3x² + 2x - 5)dx from 0 to 4 = ?</p>
-            <input type="number" id="math-answer" class="answer-input" placeholder="Enter answer (68)">
-            <input type="radio" id="wrong-answer" name="math-result" class="hidden-radio">
-            <input type="radio" id="correct-answer" name="math-result" class="hidden-radio">
-            <label for="wrong-answer" class="submit-btn" onclick="checkAnswer()">Submit Answer</label>
+            <div class="answer-section">
+                <input type="number" id="math-answer" class="answer-input" placeholder="Enter answer">
+                <button class="submit-btn" onclick="checkAnswer()">Submit Answer</button>
+            </div>
+            <div class="answer-feedback" id="answer-feedback"></div>
         </div>
         
         <!-- Hidden Elite Access Button -->
-        <div class="elite-access">
-            <a href="#elite-section" class="elite-btn">🏆 Access Elite Supercharger</a>
+        <div class="elite-access" id="elite-access" style="display: none;">
+            <button class="elite-btn" onclick="showEliteSection()">🏆 Access Elite Supercharger</button>
         </div>
     </div>
 
@@ -32,7 +33,7 @@
             <p class="elite-subtitle">Study Level - Ultra Premium Experience</p>
         </header>
 
-        <div class="charging-arena">
+        <div class="game-container">
             <!-- Parking Lot Area -->
             <div class="parking-lot">
                 <h3>🅿️ Tesla Parking</h3>
@@ -86,10 +87,12 @@
                         <div class="battery-percent">85%</div>
                     </div>
                 </div>
+                </div>
             </div>
-
-            <!-- Fake Phone with Bank Account -->
-            <div class="fake-phone">
+            
+            <!-- Right Section: Phone -->
+            <div class="right-section">
+                <div class="fake-phone">
                 <div class="phone-screen">
                     <div class="phone-header">
                         <div class="phone-time">2:47 PM</div>
@@ -116,29 +119,28 @@
                         <div class="total-cost">Total: $0.00</div>
                     </div>
                 </div>
+                </div>
             </div>
         </div>
 
         <!-- Charging Controls -->
         <div class="elite-controls">
-            <input type="checkbox" id="charging-toggle" class="charging-checkbox">
-            <label for="charging-toggle" class="charge-button">
-                <span class="charge-text">Start Elite Charging</span>
-                <span class="stop-text">Stop Charging</span>
-            </label>
+            <button class="charge-button" id="charge-button" disabled>
+                <span class="charge-text">Complete Setup First</span>
+            </button>
             
-            <div class="elite-stats">
-                <div class="stat-item">
-                    <div class="stat-label">Session Time</div>
-                    <div class="stat-value">0:00</div>
+            <div class="setup-status">
+                <div class="status-item" id="parking-status">
+                    <span class="status-icon">⭕</span>
+                    <span class="status-text">Park Tesla</span>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-label">Energy Added</div>
-                    <div class="stat-value">0 kWh</div>
+                <div class="status-item" id="connection-status">
+                    <span class="status-icon">⭕</span>
+                    <span class="status-text">Connect Handle</span>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-label">Cost</div>
-                    <div class="stat-value">$0.00</div>
+                <div class="status-item" id="charging-status">
+                    <span class="status-icon">⭕</span>
+                    <span class="status-text">Start Charging</span>
                 </div>
             </div>
         </div>
@@ -258,119 +260,188 @@
     </audio>
     
     <script>
+        // Game state
+        let mathSolved = false;
+        let carParked = false;
+        let handleConnected = false;
+        let charging = false;
+        
         // Math Challenge Function
         function checkAnswer() {
             const answer = document.getElementById('math-answer').value;
             const correctAnswer = 68; // ∫(3x² + 2x - 5)dx from 0 to 4
+            const feedback = document.getElementById('answer-feedback');
             
             if (parseInt(answer) === correctAnswer) {
-                document.getElementById('correct-answer').checked = true;
-                document.querySelector('.elite-supercharger').classList.remove('hidden-section');
-                document.querySelector('.elite-access').style.display = 'block';
+                mathSolved = true;
+                feedback.innerHTML = '<div class="correct-answer">✅ Correct! Elite access granted.</div>';
+                document.getElementById('elite-access').style.display = 'block';
             } else {
-                document.getElementById('wrong-answer').checked = true;
-                alert('Incorrect! Try again. Hint: Integrate 3x² + 2x - 5 from 0 to 4');
+                feedback.innerHTML = '<div class="wrong-answer">❌ Incorrect. Hint: ∫(3x² + 2x - 5)dx = x³ + x² - 5x</div>';
             }
         }
         
-        // Drag and Drop Functionality
-        let carParked = false;
-        let handleConnected = false;
-        
-        // Tesla Car Drag Events
-        const teslaCar = document.getElementById('tesla-car');
-        const parkingTarget = document.getElementById('parking-target');
-        
-        teslaCar.addEventListener('dragstart', (e) => {
-            e.dataTransfer.setData('text/plain', 'tesla');
-            teslaCar.classList.add('dragging');
-        });
-        
-        teslaCar.addEventListener('dragend', () => {
-            teslaCar.classList.remove('dragging');
-        });
-        
-        parkingTarget.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            parkingTarget.classList.add('drag-over');
-        });
-        
-        parkingTarget.addEventListener('dragleave', () => {
-            parkingTarget.classList.remove('drag-over');
-        });
-        
-        parkingTarget.addEventListener('drop', (e) => {
-            e.preventDefault();
-            parkingTarget.classList.remove('drag-over');
-            
-            if (e.dataTransfer.getData('text/plain') === 'tesla') {
-                carParked = true;
-                teslaCar.style.display = 'none';
-                parkingTarget.innerHTML = '<div class="parked-tesla">🚗 Tesla Parked!</div>';
-                parkingTarget.classList.add('car-parked');
-                checkChargingReady();
-            }
-        });
-        
-        // Charging Handle Drag Events
-        const chargingHandle = document.getElementById('charging-handle');
-        const connectionTarget = document.getElementById('connection-target');
-        
-        chargingHandle.addEventListener('dragstart', (e) => {
-            if (!carParked) {
-                e.preventDefault();
-                alert('Park the Tesla first!');
-                return;
-            }
-            e.dataTransfer.setData('text/plain', 'handle');
-            chargingHandle.classList.add('dragging');
-        });
-        
-        chargingHandle.addEventListener('dragend', () => {
-            chargingHandle.classList.remove('dragging');
-        });
-        
-        connectionTarget.addEventListener('dragover', (e) => {
-            if (carParked) {
-                e.preventDefault();
-                connectionTarget.classList.add('drag-over');
-            }
-        });
-        
-        connectionTarget.addEventListener('dragleave', () => {
-            connectionTarget.classList.remove('drag-over');
-        });
-        
-        connectionTarget.addEventListener('drop', (e) => {
-            e.preventDefault();
-            connectionTarget.classList.remove('drag-over');
-            
-            if (e.dataTransfer.getData('text/plain') === 'handle' && carParked) {
-                handleConnected = true;
-                chargingHandle.style.display = 'none';
-                connectionTarget.innerHTML = '<div class="connected-handle">🔌 Connected!</div>';
-                connectionTarget.classList.add('handle-connected');
-                checkChargingReady();
-            }
-        });
-        
-        function checkChargingReady() {
-            if (carParked && handleConnected) {
-                document.querySelector('.charge-button').disabled = false;
-                document.querySelector('.charge-button').style.opacity = '1';
-                document.querySelector('.charge-button').textContent = 'Start Elite Charging!';
+        function showEliteSection() {
+            if (mathSolved) {
+                document.querySelector('.elite-supercharger').classList.remove('hidden-section');
+                document.querySelector('.math-challenge').style.display = 'none';
             }
         }
         
-        // Initialize - disable charging until both steps complete
+        // Initialize when page loads
         document.addEventListener('DOMContentLoaded', () => {
-            const chargeButton = document.querySelector('.charge-button');
-            if (chargeButton) {
-                chargeButton.disabled = true;
-                chargeButton.style.opacity = '0.5';
-                chargeButton.textContent = 'Complete Setup First';
-            }
+            setupDragAndDrop();
         });
+        
+        function setupDragAndDrop() {
+            const teslaCar = document.getElementById('tesla-car');
+            const parkingTarget = document.getElementById('parking-target');
+            const chargingHandle = document.getElementById('charging-handle');
+            const connectionTarget = document.getElementById('connection-target');
+            
+            // Tesla Car Drag Events
+            teslaCar.addEventListener('dragstart', (e) => {
+                e.dataTransfer.setData('text/plain', 'tesla');
+                teslaCar.classList.add('dragging');
+            });
+            
+            teslaCar.addEventListener('dragend', () => {
+                teslaCar.classList.remove('dragging');
+            });
+            
+            // Parking Target Events
+            parkingTarget.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                parkingTarget.classList.add('drag-over');
+            });
+            
+            parkingTarget.addEventListener('dragleave', () => {
+                parkingTarget.classList.remove('drag-over');
+            });
+            
+            parkingTarget.addEventListener('drop', (e) => {
+                e.preventDefault();
+                parkingTarget.classList.remove('drag-over');
+                
+                if (e.dataTransfer.getData('text/plain') === 'tesla') {
+                    parkTesla();
+                }
+            });
+            
+            // Charging Handle Events
+            chargingHandle.addEventListener('dragstart', (e) => {
+                if (!carParked) {
+                    e.preventDefault();
+                    showMessage('Park the Tesla first!');
+                    return;
+                }
+                e.dataTransfer.setData('text/plain', 'handle');
+                chargingHandle.classList.add('dragging');
+            });
+            
+            chargingHandle.addEventListener('dragend', () => {
+                chargingHandle.classList.remove('dragging');
+            });
+            
+            // Connection Target Events
+            connectionTarget.addEventListener('dragover', (e) => {
+                if (carParked) {
+                    e.preventDefault();
+                    connectionTarget.classList.add('drag-over');
+                }
+            });
+            
+            connectionTarget.addEventListener('dragleave', () => {
+                connectionTarget.classList.remove('drag-over');
+            });
+            
+            connectionTarget.addEventListener('drop', (e) => {
+                e.preventDefault();
+                connectionTarget.classList.remove('drag-over');
+                
+                if (e.dataTransfer.getData('text/plain') === 'handle' && carParked) {
+                    connectHandle();
+                }
+            });
+        }
+        
+        function parkTesla() {
+            carParked = true;
+            document.getElementById('tesla-car').style.display = 'none';
+            document.getElementById('parking-target').innerHTML = '<div class="parked-tesla">🚗 Parked!</div>';
+            document.getElementById('parking-status').innerHTML = '<span class="status-icon">✅</span><span class="status-text">Tesla Parked</span>';
+            checkProgress();
+        }
+        
+        function connectHandle() {
+            handleConnected = true;
+            document.getElementById('charging-handle').style.display = 'none';
+            document.getElementById('connection-target').innerHTML = '<div class="connected-handle">🔌 Connected!</div>';
+            document.getElementById('connection-status').innerHTML = '<span class="status-icon">✅</span><span class="status-text">Handle Connected</span>';
+            checkProgress();
+        }
+        
+        function checkProgress() {
+            const chargeButton = document.getElementById('charge-button');
+            if (carParked && handleConnected) {
+                chargeButton.disabled = false;
+                chargeButton.innerHTML = '<span class="charge-text">Start Elite Charging!</span>';
+                chargeButton.onclick = startCharging;
+            }
+        }
+        
+        function startCharging() {
+            if (!charging) {
+                charging = true;
+                document.getElementById('charging-status').innerHTML = '<span class="status-icon">⚡</span><span class="status-text">Charging Active</span>';
+                document.getElementById('charge-button').innerHTML = '<span class="charge-text">Charging... (Click to Stop)</span>';
+                document.getElementById('charge-button').onclick = stopCharging;
+                
+                // Start charging effects
+                document.querySelector('.fake-phone').classList.add('charging-active');
+                
+                // Random explosion chance
+                setTimeout(() => {
+                    if (charging && Math.random() < 0.3) {
+                        triggerExplosion();
+                    }
+                }, 3000 + Math.random() * 5000);
+            }
+        }
+        
+        function stopCharging() {
+            charging = false;
+            document.getElementById('charging-status').innerHTML = '<span class="status-icon">⭕</span><span class="status-text">Stopped</span>';
+            document.getElementById('charge-button').innerHTML = '<span class="charge-text">Start Elite Charging!</span>';
+            document.getElementById('charge-button').onclick = startCharging;
+            document.querySelector('.fake-phone').classList.remove('charging-active');
+        }
+        
+        function triggerExplosion() {
+            charging = false;
+            document.body.classList.add('explosion-active');
+            document.getElementById('charging-status').innerHTML = '<span class="status-icon">💥</span><span class="status-text">EXPLODED!</span>';
+            document.querySelector('.balance-amount').textContent = '-$' + (Math.random() * 10000 + 5000).toFixed(2);
+            
+            // Play explosion sound
+            const audio = document.getElementById('explosion-sound');
+            if (audio) {
+                audio.currentTime = 0;
+                audio.play().catch(() => {});
+            }
+            
+            setTimeout(() => {
+                document.body.classList.remove('explosion-active');
+            }, 3000);
+        }
+        
+        function showMessage(text) {
+            const feedback = document.getElementById('answer-feedback');
+            feedback.innerHTML = `<div class="info-message">${text}</div>`;
+            setTimeout(() => {
+                feedback.innerHTML = '';
+            }, 3000);
+        }
     </script>
 </body>
 </html>
