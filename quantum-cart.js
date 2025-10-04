@@ -711,9 +711,8 @@ class QuantumCart {
 }
 
 // Initialize cart when DOM is loaded
-let quantumCart;
 document.addEventListener('DOMContentLoaded', () => {
-    quantumCart = new QuantumCart();
+    window.quantumCart = new QuantumCart();
 });
 
 // Export for use in other scripts

@@ -114,6 +114,22 @@
             text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
         }
 
+        .cart-icon {
+            position: relative;
+        }
+
+        .cart-counter {
+            background: #ff4757;
+            color: white;
+            border-radius: 50%;
+            padding: 0.2rem 0.5rem;
+            font-size: 0.7rem;
+            margin-left: 0.3rem;
+            min-width: 1.2rem;
+            display: inline-block;
+            text-align: center;
+        }
+
         /* Hero Section */
         .hero {
             height: 100vh;
@@ -560,12 +576,15 @@
     <!-- Header -->
     <header class="header">
         <nav class="nav">
-            <a href="#" class="logo">QuantumHeat</a>
+            <a href="quantum-microwave.html" class="logo">QuantumHeat</a>
             <ul class="nav-links">
-                <li><a href="#features">Features</a></li>
-                <li><a href="#comparison">Compare</a></li>
-                <li><a href="#testimonials">Reviews</a></li>
-                <li><a href="#preorder">Pre-Order</a></li>
+                <li><a href="quantum-products.html">Products</a></li>
+                <li><a href="quantum-configurator.html">Configurator</a></li>
+                <li><a href="quantum-checkout.html">Checkout</a></li>
+                <li><a href="quantum-support.html">Support</a></li>
+                <li><a href="quantum-account.html">Account</a></li>
+                <li><a href="quantum-about.html">About</a></li>
+                <li><a href="#" onclick="if(window.quantumCart){window.quantumCart.showCart();}else{console.log('Cart not ready yet');} return false;" class="cart-icon">🛒 <span class="cart-counter">0</span></a></li>
             </ul>
         </nav>
     </header>
@@ -575,6 +594,9 @@
         <div class="hero-content">
             <h1 class="hero-title">REHEAT THE FUTURE</h1>
             <p class="hero-subtitle">Experience the next evolution in cooking technology with AI-powered precision</p>
+            <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 1rem;">
+                🎵 <em>Find us in Entertainment → QuantumHeat Store via the top navigation</em>
+            </p>
             <a href="#preorder" class="cta-button">Discover QuantumHeat Pro</a>
             <button class="cta-button add-to-cart-btn" id="heroAddToCart" style="margin-left: 1rem; border: none; cursor: pointer;">
                 🛒 Add to Cart - $2,499
@@ -693,6 +715,7 @@
 
     <script src="quantum-cart.js"></script>
     <script src="quantum-audio.js"></script>
+    <script src="global-nav.js"></script>
     <script>
         // Particle animation
         function createParticles() {
@@ -790,7 +813,10 @@
         function setupAddToCart() {
             const heroAddToCart = document.getElementById('heroAddToCart');
             if (heroAddToCart) {
-                heroAddToCart.addEventListener('click', () => {
+                heroAddToCart.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    console.log('Add to cart clicked!');
+                    
                     const product = {
                         id: 'qh-pro',
                         name: 'QuantumHeat Pro',
@@ -801,9 +827,22 @@
                     };
                     
                     if (window.quantumCart) {
+                        console.log('Cart found, adding product:', product);
                         window.quantumCart.addItem(product);
+                    } else {
+                        console.log('Cart not found, trying to initialize...');
+                        // Try to wait for cart to initialize
+                        setTimeout(() => {
+                            if (window.quantumCart) {
+                                window.quantumCart.addItem(product);
+                            } else {
+                                console.error('QuantumCart still not available');
+                            }
+                        }, 500);
                     }
                 });
+            } else {
+                console.log('Add to cart button not found');
             }
         }
 
@@ -926,8 +965,15 @@
                 });
             });
 
-            // Cart interactions
+            // Cart interactions and counter updates
             document.addEventListener('cartUpdated', (event) => {
+                // Update cart counter
+                const cartCounter = document.querySelector('.cart-counter');
+                if (cartCounter && window.quantumCart) {
+                    cartCounter.textContent = window.quantumCart.getItemCount();
+                }
+                
+                // Audio feedback
                 if (window.quantumAudio) {
                     if (event.detail && event.detail.action === 'add') {
                         window.quantumAudio.playCartSequence();
@@ -936,6 +982,14 @@
                     }
                 }
             });
+
+            // Initialize cart counter
+            setTimeout(() => {
+                const cartCounter = document.querySelector('.cart-counter');
+                if (cartCounter && window.quantumCart) {
+                    cartCounter.textContent = window.quantumCart.getItemCount();
+                }
+            }, 100);
 
             // Navigation hover effects
             document.querySelectorAll('.nav-links a').forEach(link => {

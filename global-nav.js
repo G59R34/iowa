@@ -437,21 +437,10 @@ class GlobalNavigation {
                             <a href="sniffles.html">👃 Sniffles</a>
                             <a href="porcupine-hype.html">🦔 Porcupine Hype</a>
                             <a href="sink-hype.html">🚿 Sink Hype</a>
+                            <a href="quantum-microwave.html">🌀 QuantumHeat Store</a>
                         </div>
                     </div>
-                    
-                    <div class="nav-item dropdown">
-                        <span class="nav-link">🌀 QuantumHeat Store</span>
-                        <div class="dropdown-content">
-                            <a href="quantum-microwave.html">🏠 Home</a>
-                            <a href="quantum-products.html">🛍️ Products</a>
-                            <a href="quantum-configurator.html">⚙️ Configurator</a>
-                            <a href="quantum-checkout.html">� Checkout</a>
-                            <a href="quantum-support.html">�️ Support</a>
-                            <a href="quantum-account.html">� My Account</a>
-                            <a href="quantum-about.html">ℹ️ About Us</a>
-                        </div>
-                    </div>
+
 
                     <div class="nav-item dropdown">
                         <span class="nav-link">🔧 Tools & Utilities</span>
