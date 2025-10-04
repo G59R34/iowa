@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartToast Platinum Elite - Luxury Redefined</title>
+    <link rel="icon" type="image/png" href="cornclubfavicon.png">
+    <script src="global-nav.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            color: #e8e3d3;
+            background: 
+                radial-gradient(circle at 25% 25%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(255, 215, 0, 0.08) 0%, transparent 50%),
+                linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2a2a2a 100%);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><filter id="noise"><feTurbulence baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 0.8 0 0 0 0 0.7 0 0 0 0 0.4 0 0 0 0.05 0"/></filter></defs><rect width="200" height="200" filter="url(%23noise)"/></svg>');
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        /* Luxury Cursor */
+        .luxury-cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #d4af37;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transition: all 0.1s ease;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .luxury-cursor.hover {
+            transform: scale(1.5);
+            background: rgba(212, 175, 55, 0.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: 
+                radial-gradient(ellipse at top, rgba(212, 175, 55, 0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at bottom, rgba(255, 215, 0, 0.1) 0%, transparent 60%),
+                linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0a0a0a 100%);
+            position: relative;
+            overflow: hidden;
+            padding-top: 120px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(45deg, transparent 49%, rgba(212, 175, 55, 0.02) 50%, transparent 51%),
+                linear-gradient(-45deg, transparent 49%, rgba(255, 215, 0, 0.02) 50%, transparent 51%);
+            background-size: 100px 100px;
+            animation: luxuryPattern 20s linear infinite;
+        }
+
+        @keyframes luxuryPattern {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(100px) translateY(100px); }
+        }
+
+        .floating-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, #d4af37 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) scale(1); opacity: 0.3; }
+            50% { transform: translateY(-30px) scale(1.2); opacity: 0.8; }
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text {
+            animation: slideInLeft 1.2s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-80px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .luxury-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: #d4af37;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        .hero-text h1 {
+            font-size: 4.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #d4af37 0%, #ffd700 30%, #ffed4e 60%, #d4af37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            letter-spacing: -3px;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+            animation: goldShimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes goldShimmer {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.2); }
+        }
+
+        .hero-text .tagline {
+            font-size: 1.8rem;
+            color: rgba(232, 227, 211, 0.9);
+            margin-bottom: 30px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .hero-text .description {
+            font-size: 1.2rem;
+            color: rgba(232, 227, 211, 0.7);
+            margin-bottom: 50px;
+            line-height: 1.9;
+            max-width: 500px;
+        }
+
+        .luxury-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 25px 50px;
+            background: 
+                linear-gradient(135deg, #d4af37 0%, #ffd700 50%, #d4af37 100%),
+                linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, transparent 100%);
+            background-blend-mode: overlay;
+            color: #000;
+            text-decoration: none;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 
+                0 15px 40px rgba(212, 175, 55, 0.4),
+                inset 0 2px 0 rgba(255, 255, 255, 0.3),
+                0 0 0 1px rgba(212, 175, 55, 0.5);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .luxury-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.8s ease;
+        }
+
+        .luxury-cta:hover::before {
+            left: 100%;
+        }
+
+        .luxury-cta:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 
+                0 25px 60px rgba(212, 175, 55, 0.6),
+                inset 0 2px 0 rgba(255, 255, 255, 0.4),
+                0 0 0 1px rgba(212, 175, 55, 0.8);
+        }
+
+        /* Premium Toaster */
+        .toaster-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: slideInRight 1.2s ease-out;
+            perspective: 1000px;
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(80px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .toaster-platform {
+            width: 500px;
+            height: 400px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: luxuryFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes luxuryFloat {
+            0%, 100% { transform: translateY(0px) rotateY(0deg); }
+            25% { transform: translateY(-10px) rotateY(5deg); }
+            50% { transform: translateY(0px) rotateY(10deg); }
+            75% { transform: translateY(-10px) rotateY(5deg); }
+        }
+
+        .toaster {
+            width: 450px;
+            height: 350px;
+            background: 
+                linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 30%, #2a2a2a 70%, #1a1a1a 100%);
+            border-radius: 30px;
+            position: relative;
+            box-shadow: 
+                0 40px 80px rgba(0, 0, 0, 0.8),
+                0 0 0 2px rgba(212, 175, 55, 0.3),
+                inset 0 2px 0 rgba(255, 255, 255, 0.1),
+                inset 0 -2px 0 rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+
+        .toaster:hover {
+            transform: scale(1.02);
+            box-shadow: 
+                0 50px 100px rgba(0, 0, 0, 0.9),
+                0 0 50px rgba(212, 175, 55, 0.4),
+                inset 0 2px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .toaster::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 40px;
+            right: 40px;
+            height: 250px;
+            background: 
+                linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            border-radius: 20px;
+            border: 3px solid rgba(212, 175, 55, 0.2);
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8);
+        }
+
+        .toaster::after {
+            content: '';
+            position: absolute;
+            top: 60px;
+            left: 70px;
+            right: 70px;
+            height: 180px;
+            background: 
+                radial-gradient(ellipse at center, #000 0%, #0a0a0a 100%);
+            border-radius: 15px;
+            box-shadow: 
+                inset 0 0 40px rgba(0, 0, 0, 0.9),
+                0 0 20px rgba(212, 175, 55, 0.1);
+        }
+
+        .premium-led {
+            position: absolute;
+            top: 50px;
+            right: 50px;
+            width: 16px;
+            height: 16px;
+            background: 
+                radial-gradient(circle, #d4af37 0%, #ffd700 70%, transparent 100%);
+            border-radius: 50%;
+            box-shadow: 
+                0 0 30px #d4af37,
+                inset 0 2px 0 rgba(255, 255, 255, 0.3);
+            animation: premiumPulse 2.5s ease-in-out infinite;
+        }
+
+        @keyframes premiumPulse {
+            0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 30px #d4af37; }
+            50% { opacity: 0.7; transform: scale(1.3); box-shadow: 0 0 50px #d4af37; }
+        }
+
+        .luxury-controls {
+            position: absolute;
+            bottom: 50px;
+            right: 50px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .control-element {
+            width: 60px;
+            height: 60px;
+            background: 
+                linear-gradient(135deg, #d4af37 0%, #ffd700 50%, #d4af37 100%);
+            border-radius: 50%;
+            box-shadow: 
+                0 8px 25px rgba(212, 175, 55, 0.4),
+                inset 0 3px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -3px 0 rgba(0, 0, 0, 0.2);
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .control-element:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 
+                0 15px 35px rgba(212, 175, 55, 0.6),
+                inset 0 3px 0 rgba(255, 255, 255, 0.5);
+        }
+
+        .control-element::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 2px;
+        }
+
+        .bread-chamber {
+            position: absolute;
+            top: 35px;
+            left: 80px;
+            right: 80px;
+            height: 30px;
+            background: 
+                linear-gradient(135deg, #000 0%, #0a0a0a 100%);
+            border-radius: 15px;
+            box-shadow: 
+                inset 0 3px 15px rgba(0, 0, 0, 0.9),
+                0 0 20px rgba(212, 175, 55, 0.1);
+            position: relative;
+        }
+
+        .chamber-divider {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 3px;
+            height: 15px;
+            background: rgba(212, 175, 55, 0.3);
+            border-radius: 2px;
+        }
+
+        /* Digital Display */
+        .digital-display {
+            position: absolute;
+            top: 80px;
+            left: 50px;
+            width: 100px;
+            height: 40px;
+            background: #000;
+            border-radius: 8px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Courier New', monospace;
+            color: #d4af37;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-shadow: 0 0 10px #d4af37;
+            animation: displayGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes displayGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(212, 175, 55, 0.6); }
+        }
+
+        /* Luxury Features Section */
+        .features {
+            padding: 150px 0;
+            background: 
+                radial-gradient(ellipse at top, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
+                linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 50%, #2a2a2a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #d4af37 0%, #ffd700 50%, #d4af37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 80px;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 6px;
+            background: linear-gradient(90deg, #d4af37, #ffd700, #d4af37);
+            border-radius: 3px;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 50px;
+            margin-bottom: 100px;
+        }
+
+        .feature-card {
+            background: 
+                linear-gradient(135deg, rgba(26, 26, 26, 0.8) 0%, rgba(15, 15, 15, 0.9) 100%);
+            padding: 50px;
+            border-radius: 25px;
+            border: 2px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #d4af37, #ffd700, #d4af37);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: rgba(212, 175, 55, 0.5);
+            box-shadow: 
+                0 30px 80px rgba(0, 0, 0, 0.6),
+                0 0 40px rgba(212, 175, 55, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: 
+                linear-gradient(135deg, #d4af37 0%, #ffd700 50%, #d4af37 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 10px 30px rgba(212, 175, 55, 0.4),
+                inset 0 2px 0 rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: rotateY(180deg);
+            box-shadow: 
+                0 15px 40px rgba(212, 175, 55, 0.6),
+                inset 0 2px 0 rgba(255, 255, 255, 0.4);
+        }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #e8e3d3;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .feature-card p {
+            color: rgba(232, 227, 211, 0.8);
+            line-height: 1.9;
+            font-size: 1.1rem;
+        }
+
+        /* Premium Food Icons */
+        .food-icons {
+            display: flex;
+            justify-content: center;
+            gap: 100px;
+            margin-top: 80px;
+        }
+
+        .food-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .food-icon:hover {
+            transform: scale(1.15) translateY(-10px);
+        }
+
+        .food-icon-circle {
+            width: 100px;
+            height: 100px;
+            background: 
+                linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%);
+            border: 3px solid rgba(212, 175, 55, 0.4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 
+                0 15px 40px rgba(212, 175, 55, 0.3),
+                inset 0 2px 0 rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .food-icon:hover .food-icon-circle {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.4) 0%, rgba(255, 215, 0, 0.2) 100%);
+            border-color: rgba(212, 175, 55, 0.8);
+            box-shadow: 
+                0 20px 50px rgba(212, 175, 55, 0.5),
+                0 0 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .food-icon span {
+            font-weight: 700;
+            color: #e8e3d3;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Luxury Reviews Section */
+        .reviews {
+            padding: 150px 0;
+            background: 
+                linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0a0a0a 100%);
+            position: relative;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .review-card {
+            background: 
+                linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(15, 15, 15, 0.9) 100%);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 
+                0 15px 50px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .review-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 49%, rgba(212, 175, 55, 0.05) 50%, transparent 51%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .review-card:hover::before {
+            opacity: 1;
+        }
+
+        .review-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(212, 175, 55, 0.4);
+            box-shadow: 
+                0 25px 70px rgba(0, 0, 0, 0.6),
+                0 0 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .stars {
+            color: #d4af37;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        .review-text {
+            font-style: italic;
+            color: rgba(232, 227, 211, 0.9);
+            line-height: 1.7;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+
+        .reviewer-name {
+            font-weight: 700;
+            color: #d4af37;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Ultimate Luxury CTA Section */
+        .cta-section {
+            padding: 180px 0;
+            background: 
+                radial-gradient(ellipse at center, rgba(212, 175, 55, 0.15) 0%, transparent 70%),
+                linear-gradient(135deg, #d4af37 0%, #ffd700 25%, #d4af37 50%, #ffd700 75%, #d4af37 100%);
+            text-align: center;
+            color: #000;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(45deg, transparent 49%, rgba(255, 255, 255, 0.1) 50%, transparent 51%),
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            background-size: 60px 60px, 200px 200px;
+            animation: luxurySparkle 20s linear infinite;
+        }
+
+        @keyframes luxurySparkle {
+            0% { transform: translateX(0) translateY(0) rotate(0deg); }
+            100% { transform: translateX(60px) translateY(60px) rotate(360deg); }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-section h2 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-section .luxury-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 50px;
+            opacity: 0.8;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .ultimate-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            padding: 30px 70px;
+            background: 
+                linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            color: #d4af37;
+            text-decoration: none;
+            border-radius: 80px;
+            font-weight: 900;
+            font-size: 1.4rem;
+            border: 3px solid #d4af37;
+            box-shadow: 
+                0 25px 60px rgba(0, 0, 0, 0.6),
+                inset 0 2px 0 rgba(255, 255, 255, 0.1),
+                0 0 40px rgba(212, 175, 55, 0.4);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ultimate-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+            transition: left 1s ease;
+        }
+
+        .ultimate-cta:hover::before {
+            left: 100%;
+        }
+
+        .ultimate-cta:hover {
+            transform: translateY(-8px) scale(1.05);
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
+            border-color: #ffd700;
+            box-shadow: 
+                0 35px 80px rgba(0, 0, 0, 0.8),
+                inset 0 2px 0 rgba(255, 255, 255, 0.2),
+                0 0 60px rgba(212, 175, 55, 0.6);
+        }
+
+        .price-luxury {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-top: 40px;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .original-price {
+            font-size: 1.8rem;
+            text-decoration: line-through;
+            opacity: 0.6;
+            margin-right: 20px;
+        }
+
+        .luxury-guarantee {
+            margin-top: 30px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 40px;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .toaster {
+                width: 300px;
+                height: 225px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .food-icons {
+                gap: 40px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Luxury Cursor -->
+    <div class="luxury-cursor"></div>
+    
+    <!-- Floating Particles -->
+    <div class="floating-particles"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="luxury-badge">Limited Platinum Edition</div>
+                    <h1>SmartToast Platinum Elite</h1>
+                    <p class="tagline">Luxury Redefined. Perfection Delivered.</p>
+                    <p class="description">
+                        The pinnacle of culinary sophistication. Hand-crafted with aerospace-grade 
+                        materials, AI quantum processing, and exclusive concierge service. 
+                        Own the future of luxury breakfast.
+                    </p>
+                    <a href="#cta" class="luxury-cta">
+                        � Acquire Excellence - $2,999
+                    </a>
+                </div>
+                <div class="toaster-container">
+                    <div class="toaster-platform">
+                        <div class="toaster" id="luxury-toaster">
+                            <div class="bread-chamber">
+                                <div class="chamber-divider"></div>
+                            </div>
+                            <div class="digital-display" id="toaster-display">07:30</div>
+                            <div class="premium-led"></div>
+                            <div class="luxury-controls">
+                                <div class="control-element" data-control="temp"></div>
+                                <div class="control-element" data-control="time"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Luxury Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Platinum Features</h2>
+            <div class="features-grid">
+                <div class="feature-card" data-feature="ai">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Quantum AI Processing</h3>
+                    <p>Military-grade neural networks analyze 1,247 variables per millisecond, learning your exact preferences through molecular-level bread analysis and quantum taste prediction algorithms.</p>
+                </div>
+                <div class="feature-card" data-feature="materials">
+                    <div class="feature-icon">�</div>
+                    <h3>Aerospace Materials</h3>
+                    <p>Handcrafted from titanium-carbide composite with diamond-infused heating elements. The same materials used in NASA spacecraft and Formula 1 racing.</p>
+                </div>
+                <div class="feature-card" data-feature="connectivity">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Satellite Connectivity</h3>
+                    <p>Direct satellite uplink provides real-time global weather analysis, adjusting toast parameters based on atmospheric pressure, humidity, and electromagnetic fields.</p>
+                </div>
+                <div class="feature-card" data-feature="concierge">
+                    <div class="feature-icon">👨‍💼</div>
+                    <h3>Personal Concierge</h3>
+                    <p>24/7 dedicated toast specialist, artisanal bread sourcing service, and white-glove maintenance. Your personal culinary butler at your service.</p>
+                </div>
+                <div class="feature-card" data-feature="security">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Biometric Security</h3>
+                    <p>Facial recognition, fingerprint scanning, and DNA analysis ensure only authorized users can access your perfect toast settings. Military-grade encryption included.</p>
+                </div>
+                <div class="feature-card" data-feature="exclusivity">
+                    <div class="feature-icon">👑</div>
+                    <h3>Platinum Exclusivity</h3>
+                    <p>Limited to 500 units worldwide. Each toaster is individually numbered, certified, and comes with a lifetime warranty and annual recalibration service.</p>
+                </div>
+            </div>
+
+            <!-- Premium Food Icons -->
+            <div class="food-icons">
+                <div class="food-icon" data-food="artisan">
+                    <div class="food-icon-circle">🥖</div>
+                    <span>Artisan Breads</span>
+                </div>
+                <div class="food-icon" data-food="gourmet">
+                    <div class="food-icon-circle">🥯</div>
+                    <span>Gourmet Bagels</span>
+                </div>
+                <div class="food-icon" data-food="luxury">
+                    <div class="food-icon-circle">🧇</div>
+                    <span>Luxury Pastries</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Luxury Reviews Section -->
+    <section class="reviews">
+        <div class="container">
+            <h2 class="section-title">Elite Testimonials</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="review-text">"As a Michelin 3-star chef, I demand perfection. The SmartToast Platinum Elite exceeds even my impossible standards. It's not just a toaster—it's culinary artistry."</p>
+                    <p class="reviewer-name">- Chef Auguste Laurent, Le Bernardin</p>
+                </div>
+                <div class="review-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="review-text">"I've owned supercars, private jets, and yachts. Nothing compares to the precision engineering of this toaster. It's the Bugatti of breakfast appliances."</p>
+                    <p class="reviewer-name">- Marcus Rothschild III, Billionaire Collector</p>
+                </div>
+                <div class="review-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="review-text">"The quantum AI learned my taste preferences faster than my own sommelier. The concierge service sourced rare heritage grains I didn't know existed. Extraordinary."</p>
+                    <p class="reviewer-name">- Lady Victoria Pemberton, British Aristocrat</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ultimate Luxury CTA Section -->
+    <section class="cta-section" id="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Join The Elite</h2>
+                <p class="luxury-subtitle">Exclusive Access • Limited Availability • Uncompromising Quality</p>
+                <a href="#" class="ultimate-cta" onclick="handleLuxuryReserve()">
+                    � Reserve Your Platinum Elite
+                </a>
+                <p class="price-luxury">
+                    <span class="original-price">$4,999</span>
+                    $2,999 - Limited Launch Price
+                </p>
+                <p class="luxury-guarantee">30-Day Platinum Guarantee • Lifetime Concierge Service • Global VIP Support</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Luxury cursor tracking
+        const cursor = document.querySelector('.luxury-cursor');
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.1;
+            cursorY += (mouseY - cursorY) * 0.1;
+            cursor.style.left = cursorX + 'px';
+            cursor.style.top = cursorY + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Cursor hover effects
+        const hoverElements = document.querySelectorAll('a, button, .toaster, .feature-card, .review-card, .food-icon, .control-element');
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.querySelector('.floating-particles');
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.width = (Math.random() * 4 + 2) + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (Math.random() * 5 + 8) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // Initialize toaster audio system
+        let audioContext = null;
+        let toasterSounds = {};
+        
+        function initializeToasterAudio() {
+            try {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                createToasterSounds();
+                console.log('🔊 Toaster audio system initialized');
+            } catch (error) {
+                console.log('🔇 Audio not available:', error);
+            }
+        }
+
+        // Create toaster-specific sound effects
+        function createToasterSounds() {
+            if (!audioContext) return;
+
+            // Toaster-specific sound library
+            toasterSounds = {
+                button_press: { frequency: 400, duration: 0.1, type: 'square' },
+                toaster_start: { frequency: 200, duration: 0.5, type: 'sawtooth' },
+                heating: { frequency: 150, duration: 2.0, type: 'triangle' },
+                pop_up: { frequency: 800, duration: 0.3, type: 'sine' },
+                control_turn: { frequency: 600, duration: 0.15, type: 'triangle' },
+                luxury_chime: { frequency: 1200, duration: 0.8, type: 'sine' },
+                purchase: { frequency: 2000, duration: 1.0, type: 'square' }
+            };
+        }
+
+        // Play toaster sound effect
+        function playToasterSound(soundType, volume = 0.1) {
+            if (!audioContext || !toasterSounds[soundType]) return;
+
+            try {
+                if (audioContext.state === 'suspended') {
+                    audioContext.resume();
+                }
+
+                const sound = toasterSounds[soundType];
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+
+                oscillator.type = sound.type;
+                oscillator.frequency.setValueAtTime(sound.frequency, audioContext.currentTime);
+
+                // Special envelope for different sounds
+                if (soundType === 'heating') {
+                    // Continuous heating sound with modulation
+                    gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+                    gainNode.gain.linearRampToValueAtTime(volume * 0.3, audioContext.currentTime + 0.1);
+                    gainNode.gain.linearRampToValueAtTime(volume * 0.5, audioContext.currentTime + 1.0);
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + sound.duration);
+                    
+                    // Add frequency modulation for heating effect
+                    oscillator.frequency.setValueAtTime(sound.frequency, audioContext.currentTime);
+                    oscillator.frequency.linearRampToValueAtTime(sound.frequency * 1.2, audioContext.currentTime + sound.duration * 0.5);
+                    oscillator.frequency.linearRampToValueAtTime(sound.frequency, audioContext.currentTime + sound.duration);
+                } else if (soundType === 'luxury_chime') {
+                    // Luxury chime with harmonics
+                    gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+                    gainNode.gain.linearRampToValueAtTime(volume, audioContext.currentTime + 0.05);
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + sound.duration);
+                    
+                    // Create harmonic for richer sound
+                    const harmonic = audioContext.createOscillator();
+                    const harmonicGain = audioContext.createGain();
+                    harmonic.type = 'sine';
+                    harmonic.frequency.setValueAtTime(sound.frequency * 1.5, audioContext.currentTime);
+                    harmonicGain.gain.setValueAtTime(0, audioContext.currentTime);
+                    harmonicGain.gain.linearRampToValueAtTime(volume * 0.3, audioContext.currentTime + 0.05);
+                    harmonicGain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + sound.duration);
+                    
+                    harmonic.connect(harmonicGain);
+                    harmonicGain.connect(audioContext.destination);
+                    harmonic.start(audioContext.currentTime);
+                    harmonic.stop(audioContext.currentTime + sound.duration);
+                } else {
+                    // Standard envelope
+                    gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+                    gainNode.gain.linearRampToValueAtTime(volume, audioContext.currentTime + 0.01);
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + sound.duration);
+                }
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + sound.duration);
+
+            } catch (error) {
+                console.log('🔇 Toaster sound playback failed:', error);
+            }
+        }
+
+        // Play complex toaster sequence
+        function playToasterSequence() {
+            playToasterSound('toaster_start', 0.15);
+            setTimeout(() => playToasterSound('heating', 0.08), 500);
+            setTimeout(() => playToasterSound('pop_up', 0.12), 2800);
+            setTimeout(() => playToasterSound('luxury_chime', 0.1), 3000);
+        }
+
+        // Initialize audio on first user interaction
+        document.addEventListener('click', () => {
+            if (!audioContext) {
+                initializeToasterAudio();
+            }
+        }, { once: true });
+
+        initializeToasterAudio();
+
+        // Smooth scrolling with luxury easing
+        document.querySelector('.luxury-cta').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelector('#cta').scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
+        });
+
+        // Interactive toaster with advanced animations
+        const luxuryToaster = document.getElementById('luxury-toaster');
+        const toasterDisplay = document.getElementById('toaster-display');
+        const controlElements = document.querySelectorAll('.control-element');
+
+        let toasterState = {
+            isActive: false,
+            temperature: 7,
+            timer: 450, // seconds
+            mode: 'artisan'
+        };
+
+        // Toaster click interaction
+        luxuryToaster.addEventListener('click', () => {
+            playToasterSound('button_press', 0.12);
+            if (!toasterState.isActive) {
+                activateToaster();
+            }
+        });
+
+        function activateToaster() {
+            toasterState.isActive = true;
+            
+            // Play toaster sequence
+            playToasterSequence();
+            
+            // Visual effects
+            luxuryToaster.style.transform = 'scale(1.05)';
+            luxuryToaster.style.boxShadow = `
+                0 50px 100px rgba(0, 0, 0, 0.9),
+                0 0 80px rgba(212, 175, 55, 0.8),
+                inset 0 2px 0 rgba(255, 255, 255, 0.3)
+            `;
+
+            // Start countdown
+            startToasterCountdown();
+
+            // Create luxury toast notification
+            createLuxuryNotification();
+
+            // Reset after animation
+            setTimeout(() => {
+                luxuryToaster.style.transform = '';
+                luxuryToaster.style.boxShadow = '';
+                toasterState.isActive = false;
+            }, 3000);
+        }
+
+        function startToasterCountdown() {
+            let timeLeft = 30; // 30 second demo
+            const interval = setInterval(() => {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                toasterDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(interval);
+                    toasterDisplay.textContent = 'DONE';
+                    createToastReadyEffect();
+                    setTimeout(() => {
+                        toasterDisplay.textContent = '07:30';
+                    }, 2000);
+                }
+                timeLeft--;
+            }, 100);
+        }
+
+        function createLuxuryNotification() {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 120px;
+                right: 30px;
+                background: linear-gradient(135deg, rgba(212, 175, 55, 0.95) 0%, rgba(255, 215, 0, 0.9) 100%);
+                color: #000;
+                padding: 20px 30px;
+                border-radius: 15px;
+                font-weight: 700;
+                font-size: 1.1rem;
+                box-shadow: 0 15px 40px rgba(212, 175, 55, 0.6);
+                z-index: 10001;
+                animation: luxurySlideIn 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            `;
+            notification.textContent = '👑 Platinum Toast Sequence Initiated';
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'luxurySlideOut 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards';
+                setTimeout(() => notification.remove(), 800);
+            }, 3000);
+        }
+
+        function createToastReadyEffect() {
+            // Create multiple golden particles
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.style.cssText = `
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    width: 8px;
+                    height: 8px;
+                    background: radial-gradient(circle, #d4af37 0%, #ffd700 70%, transparent 100%);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    animation: explode ${Math.random() * 1 + 1}s ease-out forwards;
+                `;
+                luxuryToaster.appendChild(particle);
+                
+                setTimeout(() => particle.remove(), 1500);
+            }
+
+            // Toast ready notification
+            const readyNotif = document.createElement('div');
+            readyNotif.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: linear-gradient(135deg, #d4af37 0%, #ffd700 100%);
+                color: #000;
+                padding: 30px 50px;
+                border-radius: 20px;
+                font-weight: 900;
+                font-size: 1.5rem;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                box-shadow: 0 25px 60px rgba(212, 175, 55, 0.8);
+                z-index: 10002;
+                animation: luxuryPop 2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+            `;
+            readyNotif.textContent = '🍞 Platinum Toast Ready!';
+            document.body.appendChild(readyNotif);
+
+            setTimeout(() => readyNotif.remove(), 2000);
+        }
+
+        // Control element interactions
+        controlElements.forEach(control => {
+            control.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const controlType = control.dataset.control;
+                
+                // Play control sound
+                playToasterSound('control_turn', 0.08);
+                
+                // Rotation animation
+                control.style.transform = 'rotate(45deg) scale(1.2)';
+                setTimeout(() => {
+                    control.style.transform = '';
+                }, 200);
+
+                // Update toaster state based on control
+                if (controlType === 'temp') {
+                    toasterState.temperature = (toasterState.temperature % 10) + 1;
+                    showControlFeedback(`Temperature: ${toasterState.temperature}/10`);
+                } else if (controlType === 'time') {
+                    toasterState.timer += 30;
+                    if (toasterState.timer > 600) toasterState.timer = 120;
+                    showControlFeedback(`Timer: ${Math.floor(toasterState.timer/60)}:${(toasterState.timer%60).toString().padStart(2, '0')}`);
+                }
+            });
+        });
+
+        function showControlFeedback(message) {
+            const feedback = document.createElement('div');
+            feedback.style.cssText = `
+                position: absolute;
+                top: -60px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(212, 175, 55, 0.9);
+                color: #000;
+                padding: 8px 15px;
+                border-radius: 20px;
+                font-size: 0.9rem;
+                font-weight: 600;
+                white-space: nowrap;
+                animation: controlFeedback 2s ease-out forwards;
+                z-index: 1000;
+            `;
+            feedback.textContent = message;
+            luxuryToaster.appendChild(feedback);
+            setTimeout(() => feedback.remove(), 2000);
+        }
+
+        // Feature card hover effects
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.background = `
+                    linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(26, 26, 26, 0.9) 100%)
+                `;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.background = `
+                    linear-gradient(135deg, rgba(26, 26, 26, 0.8) 0%, rgba(15, 15, 15, 0.9) 100%)
+                `;
+            });
+        });
+
+        // Food icon interactions
+        document.querySelectorAll('.food-icon').forEach(icon => {
+            icon.addEventListener('click', () => {
+                const foodType = icon.dataset.food;
+                toasterState.mode = foodType;
+                
+                // Play button sound
+                playToasterSound('button_press', 0.06);
+                
+                // Visual feedback
+                icon.style.transform = 'scale(1.3) rotateY(360deg)';
+                setTimeout(() => {
+                    icon.style.transform = '';
+                }, 600);
+
+                showControlFeedback(`Mode: ${foodType.charAt(0).toUpperCase() + foodType.slice(1)}`);
+            });
+        });
+
+        // Luxury purchase handler
+        function handleLuxuryPurchase() {
+            // Play luxury purchase sound
+            playToasterSound('purchase', 0.15);
+            
+            // Create diamond confetti
+            createDiamondConfetti();
+            
+            // Redirect to purchase page after short delay
+            setTimeout(() => {
+                window.location.href = 'toaster-purchase.html';
+            }, 1500);
+        }
+
+        // Luxury reserve handler
+        function handleLuxuryReserve() {
+            // Play luxury chime sound
+            playToasterSound('luxury_chime', 0.12);
+            
+            // Create gold confetti
+            createGoldConfetti();
+            
+            // Redirect to reservation page after short delay
+            setTimeout(() => {
+                window.location.href = 'toaster-reserve.html';
+            }, 1500);
+        }
+
+        // Gold confetti for reservation
+        function createGoldConfetti() {
+            const colors = ['#d4af37', '#ffd700', '#ffed4e'];
+            
+            for (let i = 0; i < 60; i++) {
+                const particle = document.createElement('div');
+                particle.style.cssText = `
+                    position: fixed;
+                    top: -20px;
+                    left: ${Math.random() * 100}vw;
+                    width: 12px;
+                    height: 12px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 10000;
+                    animation: goldFall ${Math.random() * 3 + 3}s linear forwards;
+                    box-shadow: 0 0 15px currentColor;
+                `;
+                
+                document.body.appendChild(particle);
+                
+                setTimeout(() => particle.remove(), 6000);
+            }
+        }
+
+        window.handleLuxuryPurchase = handleLuxuryPurchase;
+        window.handleLuxuryReserve = handleLuxuryReserve;
+
+        // Diamond confetti effect
+        function createDiamondConfetti() {
+            const colors = ['#d4af37', '#ffd700', '#ffed4e', '#f1c40f', '#e67e22'];
+            
+            for (let i = 0; i < 80; i++) {
+                const diamond = document.createElement('div');
+                diamond.style.cssText = `
+                    position: fixed;
+                    top: -20px;
+                    left: ${Math.random() * 100}vw;
+                    width: 15px;
+                    height: 15px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    clip-path: polygon(50% 0%, 0% 50%, 50% 100%, 100% 50%);
+                    pointer-events: none;
+                    z-index: 10000;
+                    animation: diamondFall ${Math.random() * 3 + 3}s linear forwards;
+                    box-shadow: 0 0 20px currentColor;
+                `;
+                
+                document.body.appendChild(diamond);
+                
+                setTimeout(() => diamond.remove(), 6000);
+            }
+        }
+
+        // Advanced scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'luxuryFadeInUp 1s cubic-bezier(0.23, 1, 0.32, 1) forwards';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animatable elements
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatableElements = document.querySelectorAll('.feature-card, .review-card, .food-icon');
+            animatableElements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(60px)';
+                el.style.animationDelay = `${index * 0.1}s`;
+                observer.observe(el);
+            });
+        });
+
+        // Add all luxury animations to stylesheet
+        const luxuryAnimations = document.createElement('style');
+        luxuryAnimations.textContent = `
+            @keyframes luxurySlideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            
+            @keyframes luxurySlideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+            
+            @keyframes luxuryPop {
+                0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+                50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+                100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+            }
+            
+            @keyframes explode {
+                0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+                100% { 
+                    transform: translate(-50%, -50%) translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px) scale(1); 
+                    opacity: 0; 
+                }
+            }
+            
+            @keyframes controlFeedback {
+                0% { transform: translateX(-50%) translateY(20px); opacity: 0; }
+                50% { transform: translateX(-50%) translateY(0); opacity: 1; }
+                100% { transform: translateX(-50%) translateY(-20px); opacity: 0; }
+            }
+            
+            @keyframes diamondFall {
+                to {
+                    transform: translateY(100vh) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+
+            @keyframes goldFall {
+                to {
+                    transform: translateY(100vh) rotate(180deg);
+                    opacity: 0;
+                }
+            }
+            
+            @keyframes luxuryFadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(60px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            @keyframes modalFadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+        `;
+        document.head.appendChild(luxuryAnimations);
+    </script>
+</body>
+</html>

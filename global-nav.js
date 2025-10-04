@@ -92,7 +92,7 @@ class GlobalNavigation {
 
             const remoteConfig = firebase.remoteConfig();
             remoteConfig.settings = {
-                minimumFetchIntervalMillis: 3600000, // 1 hour
+                minimumFetchIntervalMillis: 120000, // 2 minutes
             };
             remoteConfig.defaultConfig = {
                 msg: "🌽 Welcome to CornClub - The Anti-Iowa Experience! 🌽",
@@ -450,6 +450,7 @@ class GlobalNavigation {
                             <a href="clock.html">🕐 Clock</a>
                             <a href="linux.html">🐧 Linux</a>
                             <a href="walmart.html">🛒 Walmart</a>
+                            <a href="smart-toaster.html">🍞 Smart Toaster</a>
                             <a href="download-waterstream.html">💧 Waterstream</a>
                             <a href="belt-loader-wiki.html">📚 Belt Loader Wiki</a>
                         </div>
