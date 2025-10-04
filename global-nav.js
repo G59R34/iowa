@@ -2176,3 +2176,51 @@ class GlobalNavigation {
 
 // Initialize the global navigation
 new GlobalNavigation();
+
+// Disable live chat system if it gets loaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Remove live chat widget if it exists
+    const removeLiveChat = () => {
+        const chatWidget = document.getElementById('chat-widget');
+        if (chatWidget) {
+            chatWidget.remove();
+            console.log('🚫 Live chat widget removed by global navigation');
+        }
+    };
+
+    // Remove immediately if already present
+    removeLiveChat();
+
+    // Watch for live chat widget being added and remove it
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            mutation.addedNodes.forEach((node) => {
+                if (node.nodeType === 1) { // Element node
+                    if (node.id === 'chat-widget' || node.querySelector && node.querySelector('#chat-widget')) {
+                        removeLiveChat();
+                    }
+                }
+            });
+        });
+    });
+
+    // Start observing
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+
+    // Disable window.liveChat if it exists
+    if (window.liveChat) {
+        window.liveChat = null;
+        console.log('🚫 Live chat instance disabled by global navigation');
+    }
+
+    // Prevent LiveChat class from initializing
+    window.LiveChat = class {
+        constructor() {
+            console.log('🚫 Live chat initialization blocked by global navigation');
+            return null;
+        }
+    };
+});
