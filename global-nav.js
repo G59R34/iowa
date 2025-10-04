@@ -1011,6 +1011,7 @@ class GlobalNavigation {
         // Set initial hidden state
         nav.style.transform = 'translateY(-100%)';
         nav.style.opacity = '0';
+        nav.style.pointerEvents = 'none';
 
         // Bind events
         this.bindEvents();
@@ -1031,10 +1032,12 @@ class GlobalNavigation {
             if (this.navVisible) {
                 nav.style.transform = 'translateY(0)';
                 nav.style.opacity = '1';
+                nav.style.pointerEvents = 'auto';
                 this.playBloop && this.playBloop(300, 600, 0.1, 0.05);
             } else {
                 nav.style.transform = 'translateY(-100%)';
                 nav.style.opacity = '0';
+                nav.style.pointerEvents = 'none';
                 this.closeAllDropdowns();
                 this.playBloop && this.playBloop(600, 300, 0.08, 0.04);
             }
@@ -1090,6 +1093,7 @@ class GlobalNavigation {
                     this.navVisible = false;
                     nav.style.transform = 'translateY(-100%)';
                     nav.style.opacity = '0';
+                    nav.style.pointerEvents = 'none';
                 }
             }
         });
@@ -1102,6 +1106,7 @@ class GlobalNavigation {
                     this.navVisible = false;
                     nav.style.transform = 'translateY(-100%)';
                     nav.style.opacity = '0';
+                    nav.style.pointerEvents = 'none';
                 }
             }
         });

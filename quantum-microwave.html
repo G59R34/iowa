@@ -59,7 +59,7 @@
             background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(0, 212, 255, 0.2);
-            z-index: 1000;
+            z-index: 100001;
             transition: all 0.3s ease;
         }
 
@@ -69,6 +69,8 @@
             align-items: center;
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
+            pointer-events: auto;
         }
 
         .logo {
@@ -84,6 +86,9 @@
             display: flex;
             gap: 2rem;
             list-style: none;
+            align-items: center;
+            margin: 0;
+            padding: 0;
         }
 
         .nav-links a {
@@ -92,6 +97,8 @@
             font-weight: 500;
             transition: all 0.3s ease;
             position: relative;
+            pointer-events: auto;
+            z-index: 100002;
         }
 
         .nav-links a::after {
@@ -130,6 +137,23 @@
             text-align: center;
         }
 
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: 2px solid #00d4ff;
+            color: #00d4ff;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-toggle:hover {
+            background: #00d4ff;
+            color: #0a0a0a;
+        }
+
         /* Hero Section */
         .hero {
             height: 100vh;
@@ -139,6 +163,7 @@
             position: relative;
             background: radial-gradient(ellipse at center, rgba(0, 212, 255, 0.1) 0%, rgba(10, 10, 10, 0.9) 70%);
             overflow: hidden;
+            padding-top: 80px; /* Account for fixed header */
         }
 
         .hero-content {
@@ -146,6 +171,7 @@
             z-index: 10;
             max-width: 800px;
             padding: 0 2rem;
+            margin-top: -40px; /* Adjust for better vertical centering */
         }
 
         .hero-title {
@@ -251,7 +277,7 @@
 
         /* Features Section */
         .features {
-            padding: 8rem 2rem;
+            padding: 6rem 2rem 8rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
             position: relative;
@@ -516,10 +542,42 @@
             .hero {
                 text-align: center;
                 flex-direction: column;
+                padding-top: 100px;
+            }
+            
+            .hero-content {
+                margin-top: 0;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
             }
 
             .nav-links {
                 display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.98);
+                flex-direction: column;
+                gap: 0;
+                padding: 1rem 0;
+                border-top: 1px solid rgba(0, 212, 255, 0.2);
+            }
+
+            .nav-links.mobile-open {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 1rem 2rem;
+                border-bottom: 1px solid rgba(0, 212, 255, 0.1);
             }
 
             .comparison-grid {
@@ -577,7 +635,8 @@
     <header class="header">
         <nav class="nav">
             <a href="quantum-microwave.html" class="logo">QuantumHeat</a>
-            <ul class="nav-links">
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">☰ Menu</button>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="quantum-products.html">Products</a></li>
                 <li><a href="quantum-configurator.html">Configurator</a></li>
                 <li><a href="quantum-checkout.html">Checkout</a></li>
@@ -900,6 +959,35 @@
             }
         }
 
+        // Mobile menu toggle
+        function setupMobileMenu() {
+            const mobileToggle = document.getElementById('mobileMenuToggle');
+            const navLinks = document.getElementById('navLinks');
+            
+            if (mobileToggle && navLinks) {
+                mobileToggle.addEventListener('click', () => {
+                    navLinks.classList.toggle('mobile-open');
+                    if (window.quantumAudio) {
+                        window.quantumAudio.click();
+                    }
+                });
+                
+                // Close mobile menu when clicking on a link
+                navLinks.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        navLinks.classList.remove('mobile-open');
+                    });
+                });
+                
+                // Close mobile menu when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!mobileToggle.contains(e.target) && !navLinks.contains(e.target)) {
+                        navLinks.classList.remove('mobile-open');
+                    }
+                });
+            }
+        }
+
         // Initialize everything
         document.addEventListener('DOMContentLoaded', () => {
             createParticles();
@@ -907,6 +995,7 @@
             setupScrollAnimations();
             setupPreOrderButton();
             setupAddToCart();
+            setupMobileMenu();
 
             // Smooth scroll for navigation links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
