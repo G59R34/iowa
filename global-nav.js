@@ -443,6 +443,7 @@ class GlobalNavigation {
                             <a href="sniffles.html">👃 Sniffles</a>
                             <a href="porcupine-hype.html">🦔 Porcupine Hype</a>
                             <a href="sink-hype.html">🚿 Sink Hype</a>
+                            <a href="study-microwave.html">📚 Study Microwave</a>
                             <a href="quantum-microwave.html">🌀 QuantumHeat Store</a>
                         </div>
                     </div>
@@ -1431,7 +1432,7 @@ class GlobalNavigation {
         }
         
         if (lowerMsg.includes('music') || lowerMsg.includes('entertainment')) {
-            return "🎵 For entertainment, we have Magnitunes, Flying Cutie, Mrs. Sniffles, and more fun content!";
+            return "🎵 For entertainment, we have Magnitunes, Flying Cutie, Mrs. Sniffles, Study Microwave, QuantumHeat Store, and more fun content!";
         }
 
         if (lowerMsg.includes('hello') || lowerMsg.includes('hi') || lowerMsg.includes('hey')) {
@@ -1444,6 +1445,11 @@ class GlobalNavigation {
 
         if (lowerMsg.includes('thank') || lowerMsg.includes('thanks')) {
             return "You're welcome! 😊 Happy to help you explore the Iowa website. Is there anything else you'd like to know about?";
+        }
+
+        // Check for microwave-related questions
+        if (lowerMsg.includes('microwave') || lowerMsg.includes('cooking') || lowerMsg.includes('study')) {
+            return "🍳 We have both educational and commercial microwave content! Check out the Study Microwave for learning about microwave technology, or visit the QuantumHeat Store for our futuristic microwave products! Both are in Entertainment.";
         }
 
         // Massive collection of 500+ AI responses about website and random topics

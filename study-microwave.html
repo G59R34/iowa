@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Microwave - Learn Microwave Technology</title>
+    <link rel="icon" type="image/png" href="cornclubfavicon.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .microwave-simulator {
+            background: #2d3748;
+            border-radius: 15px;
+            padding: 2rem;
+            color: white;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .microwave-display {
+            background: #1a202c;
+            border: 3px solid #4a5568;
+            border-radius: 10px;
+            height: 300px;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .display-screen {
+            background: #000;
+            color: #00ff41;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 500;
+            padding: 1rem;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 2px solid #4a5568;
+            letter-spacing: 2px;
+        }
+
+        .cooking-chamber {
+            background: #2d3748;
+            height: 220px;
+            position: relative;
+            border-radius: 0 0 7px 7px;
+        }
+
+        .cooking-light {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            background: #ffd700;
+            border-radius: 50%;
+            box-shadow: 0 0 20px #ffd700;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .cooking-light.on {
+            opacity: 1;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .food-item {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 60px;
+            background: #8b4513;
+            border-radius: 10px;
+            display: none;
+            transition: all 0.3s ease;
+        }
+
+        .food-item.cooking {
+            animation: rotate 2s infinite linear;
+        }
+
+        @keyframes rotate {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .turntable {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 150px;
+            border: 3px solid #4a5568;
+            border-radius: 50%;
+            background: rgba(74, 85, 104, 0.3);
+        }
+
+        .turntable.spinning {
+            animation: spin 3s infinite linear;
+        }
+
+        @keyframes spin {
+            0% { transform: translateX(-50%) rotate(0deg); }
+            100% { transform: translateX(-50%) rotate(360deg); }
+        }
+
+        .control-panel {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .control-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .control-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .control-button:active {
+            transform: translateY(0);
+        }
+
+        .control-button.number {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        }
+
+        .control-button.function {
+            background: linear-gradient(135deg, #059669, #047857);
+        }
+
+        .control-button.start {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            grid-column: span 2;
+        }
+
+        .control-button.stop {
+            background: linear-gradient(135deg, #6b7280, #4b5563);
+        }
+
+        .power-level {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .power-slider {
+            flex: 1;
+            height: 8px;
+            background: #4a5568;
+            border-radius: 4px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .power-display {
+            background: #1a202c;
+            color: #00ff41;
+            font-family: 'JetBrains Mono', monospace;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .education-section {
+            padding: 0;
+        }
+
+        .info-tabs {
+            display: flex;
+            background: #f7fafc;
+            border-radius: 10px 10px 0 0;
+            overflow: hidden;
+        }
+
+        .tab {
+            flex: 1;
+            background: #e2e8f0;
+            border: none;
+            padding: 1rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab.active {
+            background: white;
+            color: #4f46e5;
+            border-bottom-color: #4f46e5;
+        }
+
+        .tab-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 0 0 10px 10px;
+            min-height: 400px;
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .science-diagram {
+            width: 100%;
+            height: 200px;
+            background: #f7fafc;
+            border: 2px dashed #cbd5e0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4a5568;
+            margin: 1rem 0;
+            position: relative;
+        }
+
+        .wave-animation {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(79, 70, 229, 0.1) 10px,
+                rgba(79, 70, 229, 0.1) 20px
+            );
+            animation: waveMove 2s infinite linear;
+            opacity: 0;
+        }
+
+        .wave-animation.active {
+            opacity: 1;
+        }
+
+        @keyframes waveMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 40px 40px; }
+        }
+
+        .status-indicator {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #f7fafc;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #cbd5e0;
+        }
+
+        .status-dot.active {
+            background: #10b981;
+            box-shadow: 0 0 10px #10b981;
+        }
+
+        .timer-display {
+            background: #1a202c;
+            color: #00ff41;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 600;
+            text-align: center;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+        }
+
+        .recipe-card {
+            background: #f7fafc;
+            border-left: 4px solid #4f46e5;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .recipe-card h4 {
+            color: #4f46e5;
+            margin-bottom: 0.5rem;
+        }
+
+        .safety-warning {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid #f59e0b;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+
+        .safety-warning h4 {
+            color: #92400e;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .control-panel {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .timer-display {
+                font-size: 1.5rem;
+            }
+
+            .info-tabs {
+                flex-direction: column;
+            }
+
+            .tab {
+                border-bottom: none;
+                border-left: 3px solid transparent;
+            }
+
+            .tab.active {
+                border-left-color: #4f46e5;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>📚 Study Microwave</h1>
+            <p>Learn how microwave technology works through interactive simulation and educational content</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Microwave Simulator -->
+            <div class="microwave-simulator">
+                <h2 style="margin-bottom: 1rem; text-align: center;">🔬 Interactive Simulator</h2>
+                
+                <div class="microwave-display">
+                    <div class="display-screen" id="displayScreen">00:00</div>
+                    <div class="cooking-chamber">
+                        <div class="cooking-light" id="cookingLight"></div>
+                        <div class="food-item" id="foodItem"></div>
+                        <div class="turntable" id="turntable"></div>
+                    </div>
+                </div>
+
+                <div class="timer-display" id="timerDisplay">00:00</div>
+
+                <div class="power-level">
+                    <label>Power Level:</label>
+                    <input type="range" class="power-slider" id="powerSlider" min="10" max="100" value="100" step="10">
+                    <div class="power-display" id="powerDisplay">100%</div>
+                </div>
+
+                <div class="control-panel">
+                    <button class="control-button number" onclick="inputNumber('1')">1</button>
+                    <button class="control-button number" onclick="inputNumber('2')">2</button>
+                    <button class="control-button number" onclick="inputNumber('3')">3</button>
+                    <button class="control-button number" onclick="inputNumber('4')">4</button>
+                    <button class="control-button number" onclick="inputNumber('5')">5</button>
+                    <button class="control-button number" onclick="inputNumber('6')">6</button>
+                    <button class="control-button number" onclick="inputNumber('7')">7</button>
+                    <button class="control-button number" onclick="inputNumber('8')">8</button>
+                    <button class="control-button number" onclick="inputNumber('9')">9</button>
+                    <button class="control-button function" onclick="addTime(30)">+30s</button>
+                    <button class="control-button number" onclick="inputNumber('0')">0</button>
+                    <button class="control-button function" onclick="addTime(60)">+1m</button>
+                    <button class="control-button function" onclick="setPreset('popcorn')">🍿 Popcorn</button>
+                    <button class="control-button function" onclick="setPreset('reheat')">♨️ Reheat</button>
+                    <button class="control-button function" onclick="setPreset('defrost')">❄️ Defrost</button>
+                    <button class="control-button start" onclick="startCooking()">▶️ START</button>
+                    <button class="control-button stop" onclick="stopCooking()">⏹️ STOP</button>
+                </div>
+
+                <div class="status-indicator">
+                    <div class="status-item">
+                        <div class="status-dot" id="powerStatus"></div>
+                        <span>Power On</span>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-dot" id="cookingStatus"></div>
+                        <span>Cooking</span>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-dot" id="turntableStatus"></div>
+                        <span>Turntable</span>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-dot" id="lightStatus"></div>
+                        <span>Interior Light</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Educational Content -->
+            <div class="education-section">
+                <div class="info-tabs">
+                    <button class="tab active" onclick="showTab('science')">🔬 Science</button>
+                    <button class="tab" onclick="showTab('safety')">⚠️ Safety</button>
+                    <button class="tab" onclick="showTab('cooking')">👨‍🍳 Cooking</button>
+                    <button class="tab" onclick="showTab('history')">📜 History</button>
+                </div>
+
+                <div class="tab-content">
+                    <div class="tab-panel active" id="science">
+                        <h3>🧪 How Microwaves Work</h3>
+                        <div class="science-diagram">
+                            <div class="wave-animation" id="waveAnimation"></div>
+                            <div>Microwave Radiation Visualization</div>
+                        </div>
+                        <p><strong>Frequency:</strong> Microwave ovens operate at 2.45 GHz, which causes water molecules to vibrate rapidly.</p>
+                        <p><strong>Heat Generation:</strong> The vibration of water molecules creates friction, generating heat that cooks the food from the inside out.</p>
+                        
+                        <h4 style="margin-top: 2rem; color: #4f46e5;">Key Components:</h4>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li><strong>Magnetron:</strong> Generates the microwave radiation</li>
+                            <li><strong>Waveguide:</strong> Directs microwaves into the cooking chamber</li>
+                            <li><strong>Turntable:</strong> Ensures even heating distribution</li>
+                            <li><strong>Metal Mesh:</strong> Prevents radiation from escaping</li>
+                        </ul>
+
+                        <div class="recipe-card">
+                            <h4>🎓 Learning Activity</h4>
+                            <p>Try different power levels and observe how cooking time affects food. Lower power levels cook more evenly but take longer.</p>
+                        </div>
+                    </div>
+
+                    <div class="tab-panel" id="safety">
+                        <h3>⚠️ Microwave Safety</h3>
+                        
+                        <div class="safety-warning">
+                            <h4>⚡ Important Safety Rules</h4>
+                            <p>Always follow these guidelines when using a microwave oven.</p>
+                        </div>
+
+                        <h4 style="color: #dc2626;">Never Put These Items in a Microwave:</h4>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>❌ Metal objects (forks, aluminum foil, metal containers)</li>
+                            <li>❌ Eggs in shells (they can explode)</li>
+                            <li>❌ Sealed containers (pressure can build up)</li>
+                            <li>❌ Styrofoam (can melt and release toxins)</li>
+                            <li>❌ Paper bags (fire hazard)</li>
+                        </ul>
+
+                        <h4 style="color: #059669; margin-top: 2rem;">Safe Practices:</h4>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>✅ Use microwave-safe containers only</li>
+                            <li>✅ Pierce foods with skins (potatoes, sausages)</li>
+                            <li>✅ Use oven mitts for hot containers</li>
+                            <li>✅ Let food stand after heating (continues cooking)</li>
+                            <li>✅ Clean spills immediately</li>
+                        </ul>
+
+                        <div class="recipe-card">
+                            <h4>🌡️ Temperature Testing</h4>
+                            <p>Always test food temperature before eating. Microwaves can heat unevenly, creating hot spots.</p>
+                        </div>
+                    </div>
+
+                    <div class="tab-panel" id="cooking">
+                        <h3>👨‍🍳 Cooking Techniques</h3>
+                        
+                        <div class="recipe-card">
+                            <h4>🍿 Popcorn (3 minutes)</h4>
+                            <p>Use microwave-safe popcorn bags. Listen for popping to slow to 2-3 seconds between pops.</p>
+                        </div>
+
+                        <div class="recipe-card">
+                            <h4>♨️ Reheating Leftovers (1-3 minutes)</h4>
+                            <p>Use 70% power, cover food, stir halfway through. Add a damp paper towel to prevent drying.</p>
+                        </div>
+
+                        <div class="recipe-card">
+                            <h4>❄️ Defrosting (30% power)</h4>
+                            <p>Use defrost setting or 30% power. Turn food every 2-3 minutes for even thawing.</p>
+                        </div>
+
+                        <div class="recipe-card">
+                            <h4>🥔 Baked Potato (5-8 minutes)</h4>
+                            <p>Pierce skin with fork, microwave 5 minutes, flip, cook 3 more minutes. Let stand 2 minutes.</p>
+                        </div>
+
+                        <h4 style="color: #4f46e5; margin-top: 2rem;">Power Level Guide:</h4>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li><strong>100% (High):</strong> Boiling water, cooking vegetables</li>
+                            <li><strong>70% (Medium-High):</strong> Reheating, quick cooking</li>
+                            <li><strong>50% (Medium):</strong> Slow cooking, braising</li>
+                            <li><strong>30% (Low):</strong> Defrosting, melting chocolate</li>
+                        </ul>
+                    </div>
+
+                    <div class="tab-panel" id="history">
+                        <h3>📜 History of Microwaves</h3>
+                        
+                        <div class="recipe-card">
+                            <h4>🎯 1945 - Accidental Discovery</h4>
+                            <p>Percy Spencer noticed a chocolate bar melted in his pocket while working with radar technology at Raytheon.</p>
+                        </div>
+
+                        <div class="recipe-card">
+                            <h4>🏭 1947 - First Commercial Unit</h4>
+                            <p>The "Radarange" weighed 750 pounds and cost $5,000 (equivalent to $60,000 today).</p>
+                        </div>
+
+                        <div class="recipe-card">
+                            <h4>🏠 1967 - Home Countertop Model</h4>
+                            <p>Amana introduced the first countertop microwave for $495, making it accessible to households.</p>
+                        </div>
+
+                        <div class="recipe-card">
+                            <h4>📈 1970s-1980s - Mass Adoption</h4>
+                            <p>Prices dropped and features improved, leading to widespread home adoption across America.</p>
+                        </div>
+
+                        <h4 style="color: #4f46e5; margin-top: 2rem;">Fun Facts:</h4>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>🎭 Originally called "electronic ovens"</li>
+                            <li>🚀 Used in space missions for astronaut meals</li>
+                            <li>📊 Over 90% of American homes have a microwave</li>
+                            <li>🌍 Different countries use different frequencies (2.45 GHz in most places)</li>
+                            <li>⚡ A microwave uses about the same power as a hairdryer</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="global-nav.js"></script>
+    <script>
+        // Microwave Simulator Logic
+        let timeSeconds = 0;
+        let powerLevel = 100;
+        let isRunning = false;
+        let cookingTimer = null;
+        let displayTimer = null;
+        let currentInput = '';
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updatePowerDisplay();
+            updateDisplay();
+            
+            // Power slider event
+            document.getElementById('powerSlider').addEventListener('input', function(e) {
+                powerLevel = parseInt(e.target.value);
+                updatePowerDisplay();
+            });
+        });
+
+        function updatePowerDisplay() {
+            document.getElementById('powerDisplay').textContent = powerLevel + '%';
+        }
+
+        function updateDisplay() {
+            const minutes = Math.floor(timeSeconds / 60);
+            const seconds = timeSeconds % 60;
+            const timeStr = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            document.getElementById('displayScreen').textContent = timeStr;
+            document.getElementById('timerDisplay').textContent = timeStr;
+        }
+
+        function inputNumber(num) {
+            if (!isRunning) {
+                playBeep();
+                currentInput += num;
+                if (currentInput.length <= 4) {
+                    // Parse input as MMSS format
+                    let inputTime = currentInput.padStart(4, '0');
+                    let minutes = parseInt(inputTime.slice(0, 2));
+                    let seconds = parseInt(inputTime.slice(2, 4));
+                    
+                    // Validate seconds
+                    if (seconds >= 60) {
+                        seconds = 59;
+                    }
+                    
+                    timeSeconds = minutes * 60 + seconds;
+                    updateDisplay();
+                }
+            }
+        }
+
+        function addTime(seconds) {
+            if (!isRunning) {
+                playBeep();
+                timeSeconds += seconds;
+                if (timeSeconds > 5999) timeSeconds = 5999; // Max 99:59
+                updateDisplay();
+            }
+        }
+
+        function setPreset(type) {
+            if (!isRunning) {
+                playBeep();
+                currentInput = '';
+                
+                switch(type) {
+                    case 'popcorn':
+                        timeSeconds = 180; // 3 minutes
+                        powerLevel = 100;
+                        break;
+                    case 'reheat':
+                        timeSeconds = 120; // 2 minutes  
+                        powerLevel = 70;
+                        break;
+                    case 'defrost':
+                        timeSeconds = 300; // 5 minutes
+                        powerLevel = 30;
+                        break;
+                }
+                
+                document.getElementById('powerSlider').value = powerLevel;
+                updatePowerDisplay();
+                updateDisplay();
+            }
+        }
+
+        function startCooking() {
+            if (timeSeconds > 0 && !isRunning) {
+                isRunning = true;
+                currentInput = '';
+                
+                playStartSound();
+                
+                // Show visual indicators
+                document.getElementById('cookingLight').classList.add('on');
+                document.getElementById('turntable').classList.add('spinning');
+                document.getElementById('foodItem').style.display = 'block';
+                document.getElementById('foodItem').classList.add('cooking');
+                document.getElementById('waveAnimation').classList.add('active');
+                
+                // Update status indicators
+                document.getElementById('powerStatus').classList.add('active');
+                document.getElementById('cookingStatus').classList.add('active');
+                document.getElementById('turntableStatus').classList.add('active');
+                document.getElementById('lightStatus').classList.add('active');
+                
+                // Start countdown timer
+                cookingTimer = setInterval(() => {
+                    timeSeconds--;
+                    updateDisplay();
+                    
+                    if (timeSeconds <= 0) {
+                        stopCooking();
+                        playCompleteSound();
+                    }
+                }, 1000);
+            }
+        }
+
+        function stopCooking() {
+            isRunning = false;
+            
+            if (cookingTimer) {
+                clearInterval(cookingTimer);
+                cookingTimer = null;
+            }
+            
+            // Hide visual indicators
+            document.getElementById('cookingLight').classList.remove('on');
+            document.getElementById('turntable').classList.remove('spinning');
+            document.getElementById('foodItem').style.display = 'none';
+            document.getElementById('foodItem').classList.remove('cooking');
+            document.getElementById('waveAnimation').classList.remove('active');
+            
+            // Update status indicators
+            document.getElementById('cookingStatus').classList.remove('active');
+            document.getElementById('turntableStatus').classList.remove('active');
+            document.getElementById('lightStatus').classList.remove('active');
+            
+            // Reset time if cooking completed
+            if (timeSeconds <= 0) {
+                timeSeconds = 0;
+                updateDisplay();
+            }
+            
+            playBeep();
+        }
+
+        // Tab functionality
+        function showTab(tabName) {
+            // Hide all panels
+            document.querySelectorAll('.tab-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected panel and activate tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Sound effects
+        function playBeep() {
+            // Create a simple beep sound
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+            gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.1);
+        }
+
+        function playStartSound() {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(600, audioContext.currentTime + 0.2);
+            gainNode.gain.setValueAtTime(0.15, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.2);
+        }
+
+        function playCompleteSound() {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            
+            // Three beeps
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+                    
+                    oscillator.frequency.setValueAtTime(1000, audioContext.currentTime);
+                    gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                    
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + 0.3);
+                }, i * 400);
+            }
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (!isRunning) {
+                if (e.key >= '0' && e.key <= '9') {
+                    inputNumber(e.key);
+                } else if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    if (timeSeconds > 0) {
+                        startCooking();
+                    }
+                } else if (e.key === 'Escape') {
+                    stopCooking();
+                }
+            } else if (e.key === 'Escape' || e.key === ' ') {
+                e.preventDefault();
+                stopCooking();
+            }
+        });
+
+        // Educational interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add hover effects to recipe cards
+            document.querySelectorAll('.recipe-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateX(5px)';
+                    this.style.transition = 'transform 0.3s ease';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateX(0)';
+                });
+            });
+            
+            // Add click-to-copy functionality for cooking times
+            document.querySelectorAll('.recipe-card h4').forEach(header => {
+                if (header.textContent.includes('minutes') || header.textContent.includes('seconds')) {
+                    header.style.cursor = 'pointer';
+                    header.title = 'Click to set this time on the microwave';
+                    
+                    header.addEventListener('click', function() {
+                        const text = this.textContent;
+                        let timeMatch = text.match(/(\d+)\s*(?:minutes?|mins?)/);
+                        if (timeMatch) {
+                            let minutes = parseInt(timeMatch[1]);
+                            timeSeconds = minutes * 60;
+                            updateDisplay();
+                            playBeep();
+                            
+                            // Visual feedback
+                            this.style.color = '#10b981';
+                            setTimeout(() => {
+                                this.style.color = '#4f46e5';
+                            }, 1000);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
